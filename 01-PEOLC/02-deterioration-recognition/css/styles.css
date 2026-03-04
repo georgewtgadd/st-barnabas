@@ -1261,80 +1261,121 @@ footer {
     @media(max-width:640px){ .mcq-wrap{padding:24px 16px 40px;} }
 
     
-/* ─── FIVE PRIORITIES FLIPCARD (Page 11) ────────────────── */
-.priorities-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
-.flipcard-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:32px; }
-.flipcard { perspective:800px; height:240px; cursor:pointer; }
-
-.flipcard-inner {
-  position:relative; width:100%; height:100%;
-  transform-style:preserve-3d; -webkit-transform-style:preserve-3d; 
-  transition:transform 0.55s cubic-bezier(0.4,0.2,0.2,1);
-  border-radius:14px;
-  /* Added a subtle shadow to make the solid blocks pop off the page */
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+/* ─── FIVE PRIORITIES FLIPCARD ───────────────────────────────── */
+.priorities-wrap { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+  padding: 40px 48px 64px; 
 }
 
-.flipcard.flipped .flipcard-inner { transform:rotateY(180deg); }
+.flipcard-grid { 
+  display: grid; 
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 16px; 
+  margin-bottom: 32px; 
+}
+
+.flipcard { 
+  perspective: 800px; 
+  height: 340px; /* Increased height to accommodate detailed text */
+  cursor: pointer; 
+}
+
+.flipcard-inner {
+  position: relative; 
+  width: 100%; 
+  height: 100%;
+  transform-style: preserve-3d; 
+  -webkit-transform-style: preserve-3d; 
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for the solid blocks */
+}
+
+.flipcard.flipped .flipcard-inner { 
+  transform: rotateY(180deg); 
+}
 
 .flipcard-front, .flipcard-back {
-  position:absolute; inset:0; backface-visibility:hidden;
-  border-radius:14px; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; padding:24px; text-align:center;
-  /* Removed the borders to create a clean, solid block effect */
+  position: absolute; 
+  inset: 0; 
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 14px; 
+  display: flex; 
+  flex-direction: column;
+  padding: 20px; 
+  text-align: center;
   border: none; 
+  background: #2b529f; /* Unified NHS-style blue block colour */
 }
 
 .flipcard-front { 
-  background:var(--surface); /* Default fallback, overridden by inline styles */
-  -webkit-backface-visibility:hidden; 
-  backface-visibility:hidden; 
+  align-items: center; 
+  justify-content: center; 
 }
 
 .flipcard-back { 
-  transform:rotateY(180deg); 
-  -webkit-backface-visibility:hidden; 
-  backface-visibility:hidden; 
+  transform: rotateY(180deg); 
+  align-items: center;
+  justify-content: flex-start; /* Pushes content to the top */
+  overflow-y: auto; /* Safety net: allows scrolling if text gets too long on small screens */
 }
 
-/* Typography bumped up to fill the empty space */
+/* Typography for the cards */
 .fc-title { 
-  font-family:'Merriweather',serif; 
-  font-size:1.4rem; 
-  font-weight:700; 
-  color:var(--white); 
-  line-height:1.3; 
+  font-family: 'Merriweather', serif; 
+  font-size: 1.4rem; 
+  font-weight: 700; 
+  color: var(--white, #ffffff); 
+  line-height: 1.3; 
 }
 
 .fc-hint { 
-  font-size:0.75rem; 
-  color:rgba(255,255,255,0.75); /* Brightened to contrast against solid blocks */
-  margin-top:12px; 
-  letter-spacing:0.06em; 
-  text-transform:uppercase; 
+  font-size: 0.75rem; 
+  color: rgba(255, 255, 255, 0.75); 
+  margin-top: 12px; 
+  letter-spacing: 0.06em; 
+  text-transform: uppercase; 
 }
 
 .fc-back-title { 
-  font-family:'Merriweather',serif; 
-  font-size:1.1rem; 
-  font-weight:700; 
-  color:var(--white); /* Forced to white to contrast against solid backgrounds */
-  margin-bottom:12px; 
+  font-family: 'Merriweather', serif; 
+  font-size: 1.1rem; 
+  font-weight: 700; 
+  color: #ffffff; 
+  margin-bottom: 12px; 
 }
 
 .fc-back-body { 
-  font-size:0.85rem; 
-  color:rgba(255,255,255,0.95); /* High opacity for legibility on block colours */
-  line-height:1.65; 
+  font-size: 0.8rem; 
+  color: rgba(255, 255, 255, 0.95); 
+  line-height: 1.5; 
+  margin: 0;
 }
 
-.priorities-instruction { text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); margin-bottom:24px; letter-spacing:0.04em; }
+.priorities-instruction { 
+  text-align: center; 
+  font-size: 0.8rem; 
+  color: rgba(255, 255, 255, 0.5); 
+  margin-bottom: 24px; 
+  letter-spacing: 0.04em; 
+}
 
-@media(max-width:900px){ .flipcard-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:480px){ 
-  .flipcard-grid{grid-template-columns:1fr;} 
-  /* Made slightly taller on mobile to accommodate the larger text */
-  .flipcard{height:180px;} 
+/* Responsive adjustments */
+@media (max-width: 900px) { 
+  .flipcard-grid { 
+    grid-template-columns: 1fr 1fr; 
+  } 
+}
+
+@media (max-width: 480px) { 
+  .flipcard-grid { 
+    grid-template-columns: 1fr; 
+  } 
+  .flipcard { 
+    height: 260px; /* Reduced height for stacked mobile view, but still tall enough for text */
+  } 
 }
 
 /* ── PAGE 2: Recognising Deterioration — light bg needs navy text ── */
