@@ -683,7 +683,18 @@
 
 <!-- PAGE 7 -->
 
-<div class="flipcard-grid" role="list">
+<section class="page" id="page-7" aria-label="Five priorities of care — flipcard activity">
+  <div class="priorities-wrap">
+    
+    <div class="outcomes-title-area">
+      <div class="outcomes-eyebrow" style="background:var(--yellow);color:var(--navy);">National End of Life Care Programme</div>
+      <h2>Five Priorities of Care</h2>
+      <p>These five priorities are the foundation of uncompromising, compassionate end-of-life care across the UK. Click each card to discover how they ensure a person's values, preferences, and Advance Care Plans are honoured when it matters most.</p>
+    </div>
+    
+    <div class="priorities-instruction" aria-hidden="true">↓ Click any card to flip it</div>
+    
+    <div class="flipcard-grid" role="list">
 
       <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 1: Recognise — click to flip">
         <div class="flipcard-inner">
@@ -777,6 +788,26 @@
 
     </div>
 
+    <div class="definition-not" style="margin-top:8px;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);" role="note">
+      <div class="definition-not-title" style="color:#ffffff;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Source: NHS Funded Training — Advance Care Planning
+      </div>
+      <div class="definition-not-grid">
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#ffffff;"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>These priorities apply in <strong style="color:#ffffff;">every setting</strong> — hospital, hospice, care home, and home</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#ffffff;"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>They apply to <strong style="color:#ffffff;">all members of the MDT</strong>, not just medical staff</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#ffffff;"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>Failure to meet any priority can cause lasting harm to patients and families</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#ffffff;"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>Full guidance: <strong><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener" style="color:var(--yellow);">www.nhft.nhs.uk/acp/</a></strong></span></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(8)">✓ Next Section →</button>
+    </div>
+    
+  </div>
+</section>
 
 <!-- ════════════════════════════════════════════
      PAGE 8 — BOB EVANS CASE STUDY: MEET BOB (Medical)
