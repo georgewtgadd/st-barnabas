@@ -8,601 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* ─── PDF TOOL VIEWER (Page 3) ──────────────────────────── */
-    .pdfv-wrap { max-width:1200px; margin:0 auto; padding:40px 48px 64px; }
-    .pdfv-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
-    .pdfv-tab {
-      padding:10px 20px; border-radius:10px; border:2px solid var(--border);
-      background:var(--surface); color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600;
-      cursor:pointer; transition:all 0.2s; white-space:nowrap;
-    }
-    .pdfv-tab:hover { border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.1); }
-    .pdfv-tab.active { background:var(--yellow); color:var(--navy); border-color:var(--yellow); }
-    .pdfv-tab:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
-
-    /* Panel show/hide */
-    .pdfv-panel { display:none; }
-    .pdfv-panel.active { display:block; animation:pageIn 0.3s ease; }
-
-    /* Two-column layout: left = image, right = header + why-box */
-    .pdfv-layout {
-      display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start;
-    }
-    @media(max-width:900px){ .pdfv-layout { grid-template-columns:1fr; } }
-
-    /* Left column — image viewer */
-    .pdfv-viewer {}
-
-    /* Zoom controls toolbar */
-    .pdfv-zoom-bar {
-      display:flex; align-items:center; gap:10px; margin-bottom:10px;
-      background:rgba(255,255,255,0.05); border:1px solid var(--border);
-      border-radius:8px; padding:8px 14px; flex-wrap:wrap;
-    }
-    .pdfv-zoom-btn {
-      width:32px; height:32px; border-radius:6px; border:1.5px solid var(--border);
-      background:var(--surface); color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700;
-      cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center;
-      flex-shrink:0; line-height:1;
-    }
-    .pdfv-zoom-btn:hover { border-color:rgba(255,255,255,0.5); background:rgba(255,255,255,0.12); }
-    .pdfv-zoom-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
-    .pdfv-zoom-level {
-      font-size:0.78rem; font-weight:700; color:var(--text-muted);
-      letter-spacing:0.04em; min-width:46px; text-align:center;
-    }
-    .pdfv-zoom-reset {
-      font-size:0.72rem; font-weight:600; color:var(--text-muted);
-      cursor:pointer; background:none; border:none; font-family:'DM Sans',sans-serif;
-      padding:4px 8px; border-radius:4px; transition:color 0.15s;
-    }
-    .pdfv-zoom-reset:hover { color:var(--yellow); }
-    .pdfv-page-nav { display:flex; align-items:center; gap:10px; margin-left:auto; }
-    .pdfv-page-btn {
-      padding:6px 14px; border-radius:6px; border:1.5px solid var(--border);
-      background:var(--surface); color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600;
-      cursor:pointer; transition:all 0.15s;
-    }
-    .pdfv-page-btn:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.1); }
-    .pdfv-page-btn:disabled { opacity:0.3; cursor:not-allowed; }
-    .pdfv-page-indicator { font-size:0.76rem; color:var(--text-muted); white-space:nowrap; }
-
-    /* Scrollable image container */
-    .pdfv-scroll-outer {
-      width:100%; background:rgba(0,0,0,0.45); border-radius:12px;
-      border:1px solid var(--border); overflow:auto;
-      max-height:72vh; cursor:default; position:relative;
-    }
-    /* pdfv-scroll-inner width is set by JS as a % to drive zoom + enable native scroll */
-    .pdfv-scroll-inner {
-      display:block;
-      width:100%; /* JS overrides this on zoom */
-      min-width:100%;
-    }
-    .pdfv-img {
-      display:block; width:100%; height:auto;
-      user-select:none; -webkit-user-drag:none;
-      pointer-events:none;
-    }
-    .pdfv-scroll-hint {
-      text-align:center; font-size:0.7rem; color:rgba(255,255,255,0.28);
-      margin-top:7px; letter-spacing:0.04em;
-    }
-
-    /* Right column — info panel */
-    .pdfv-info {}
-    .pdfv-header {
-      background:rgba(255,255,255,0.04); border:1px solid var(--border);
-      border-left:5px solid var(--blue); border-radius:0 12px 12px 0;
-      padding:18px 22px; margin-bottom:16px;
-    }
-    .pdfv-title { font-family:'Merriweather',serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-    .pdfv-subtitle { font-size:0.72rem; color:var(--yellow); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; }
-    .pdfv-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.7; }
-    .pdfv-meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-    .pdfv-badge {
-      display:inline-flex; align-items:center; gap:5px;
-      background:rgba(253,202,15,0.1); border:1px solid rgba(253,202,15,0.25);
-      color:var(--yellow); padding:4px 11px; border-radius:20px;
-      font-size:0.7rem; font-weight:700; letter-spacing:0.05em;
-    }
-    .pdfv-why-box {
-      background:rgba(1,151,222,0.07); border:1px solid rgba(1,151,222,0.2);
-      border-left:4px solid var(--blue); border-radius:0 12px 12px 0;
-      padding:16px 20px;
-    }
-    .pdfv-why-label { font-size:0.63rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
-    .pdfv-why-grid { display:grid; grid-template-columns:1fr; gap:9px; }
-    .pdfv-why-item { display:flex; align-items:flex-start; gap:9px; font-size:0.84rem; color:var(--text-muted); line-height:1.6; }
-    .pdfv-why-dot { width:6px; height:6px; border-radius:50%; background:var(--blue); flex-shrink:0; margin-top:7px; }
-
-    /* Unavailable document placeholder */
-    .pdfv-unavail {
-      background:rgba(253,202,15,0.06); border:2px dashed rgba(253,202,15,0.28);
-      border-radius:10px; padding:24px 20px; text-align:center; margin-top:16px;
-    }
-    .pdfv-unavail-title { font-family:'Merriweather',serif; font-size:0.95rem; font-weight:700; color:var(--yellow); margin-bottom:8px; }
-    .pdfv-unavail-body  { font-size:0.83rem; color:var(--text-muted); line-height:1.65; }
-
-    /* ─── HORIZONTAL TIMELINE (Page 4) ──────────────────────── */
-    .htl-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
-    .htl-track-outer { overflow-x:auto; padding-bottom:8px; margin-bottom:32px; }
-    .htl-track {
-      display:flex; align-items:flex-start; gap:0;
-      min-width:660px; position:relative; padding-top:20px;
-    }
-    .htl-connector {
-      flex:1; height:4px; margin-top:44px; position:relative;
-    }
-    .htl-connector-months { background:linear-gradient(90deg,var(--blue),var(--yellow)); }
-    .htl-connector-days   { background:linear-gradient(90deg,var(--yellow),#ef4444); }
-    .htl-phase { display:flex; flex-direction:column; align-items:center; gap:0; flex:0 0 auto; width:200px; }
-    .htl-node {
-      width:88px; height:88px; border-radius:50%; border:3px solid;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      font-family:'Merriweather',serif; font-weight:700; cursor:pointer;
-      transition:transform 0.2s, box-shadow 0.2s;
-      box-shadow:0 0 0 6px var(--navy-dark);
-      position:relative; z-index:2;
-    }
-    .htl-node:hover, .htl-node.active { transform:scale(1.1); box-shadow:0 0 0 6px var(--navy-dark), 0 0 24px rgba(255,255,255,0.2); }
-    .htl-node:focus-visible { outline:3px solid var(--yellow); outline-offset:4px; }
-    .htl-node .hn-icon  { font-size:1.5rem; margin-bottom:2px; }
-    .htl-node .hn-label { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-align:center; line-height:1.2; }
-    .htl-node.months { background:rgba(1,151,222,0.12); border-color:var(--blue); color:var(--blue); }
-    .htl-node.days   { background:rgba(253,202,15,0.1); border-color:var(--yellow); color:var(--yellow); }
-    .htl-node.hours  { background:rgba(239,68,68,0.12); border-color:#ef4444; color:#fca5a5; }
-    .htl-node.months.active { background:rgba(1,151,222,0.25); }
-    .htl-node.days.active   { background:rgba(253,202,15,0.2); }
-    .htl-node.hours.active  { background:rgba(239,68,68,0.25); }
-    .htl-node-label { font-family:'Merriweather',serif; font-size:0.88rem; font-weight:700; color:var(--white); text-align:center; margin-top:10px; margin-bottom:3px; }
-    .htl-node-sub   { font-size:0.72rem; color:var(--text-muted); text-align:center; }
-    .htl-hint { text-align:center; font-size:0.76rem; color:rgba(255,255,255,0.3); margin-bottom:24px; letter-spacing:0.04em; animation:hintfade 3s ease infinite; }
-    .htl-content {
-      background:rgba(255,255,255,0.04); border:1px solid var(--border);
-      border-radius:14px; padding:24px 28px; display:none; animation:pageIn 0.35s ease;
-    }
-    .htl-content.active { display:block; }
-    .htl-content.months { border-left:5px solid var(--blue); }
-    .htl-content.days   { border-left:5px solid var(--yellow); }
-    .htl-content.hours  { border-left:5px solid #ef4444; }
-    .htl-content-heading { font-family:'Merriweather',serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-    .htl-content-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:16px; }
-    .htl-points { list-style:none; display:flex; flex-direction:column; gap:10px; }
-    .htl-points li { display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--text-muted); line-height:1.65; }
-    .htl-bullet { width:7px; height:7px; border-radius:50%; flex-shrink:0; margin-top:7px; }
-    @media(max-width:700px){ .htl-wrap{padding:28px 16px 40px;} }
-
-    /* ─── TRAJECTORIES INTERACTIVE (Page 6) ──────────────────── */
-    .traj-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
-    .traj-select-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; justify-content:center; }
-    .traj-select-btn {
-      display:flex; align-items:center; gap:10px;
-      padding:14px 22px; border-radius:12px; border:2px solid var(--border);
-      background:var(--surface); color:var(--white);
-      font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600;
-      cursor:pointer; transition:all 0.25s; min-width:200px; text-align:left;
-    }
-    .traj-select-btn:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.35); }
-    .traj-select-btn.active-cancer  { background:rgba(1,151,222,0.15); border-color:var(--blue); }
-    .traj-select-btn.active-organ   { background:rgba(253,202,15,0.1); border-color:var(--yellow); }
-    .traj-select-btn.active-frailty { background:rgba(46,204,142,0.1); border-color:#2ecc8e; }
-    .traj-select-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
-    .tsb-icon { font-size:1.4rem; flex-shrink:0; }
-    .tsb-text .tsb-title { font-family:'Merriweather',serif; font-size:0.9rem; font-weight:700; color:var(--white); }
-    .tsb-text .tsb-sub   { font-size:0.72rem; color:var(--text-muted); }
-    .traj-detail { display:none; animation:pageIn 0.35s ease; }
-    .traj-detail.active { display:grid; grid-template-columns:1fr 340px; gap:24px; }
-    .traj-detail-text {}
-    .traj-eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; margin-bottom:4px; }
-    .traj-title { font-family:'Merriweather',serif; font-size:1.5rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-    .traj-example { font-size:0.78rem; color:var(--text-muted); font-style:italic; margin-bottom:16px; }
-    .traj-desc { font-size:0.9rem; color:var(--text-muted); line-height:1.75; margin-bottom:20px; }
-    .traj-points { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
-    .traj-points li { display:flex; align-items:flex-start; gap:10px; font-size:0.86rem; color:var(--text-muted); line-height:1.6; }
-    .traj-pt-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
-    .traj-svg-box {
-      background:rgba(0,0,0,0.3); border:1px solid var(--border);
-      border-radius:12px; padding:16px 16px 10px;
-      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-      height:fit-content;
-    }
-    .traj-svg-title { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px; }
-    .traj-svg-caption { font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px; line-height:1.5; }
-    .traj-not-one-size {
-      background:rgba(253,202,15,0.07); border:1px solid rgba(253,202,15,0.25);
-      border-radius:12px; padding:20px 24px; margin-top:28px;
-    }
-    .traj-not-title { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--yellow); margin-bottom:8px; }
-    .traj-not-body  { font-size:0.88rem; color:var(--text-muted); line-height:1.75; }
-    @media(max-width:800px){ .traj-detail.active{grid-template-columns:1fr;} .traj-select-btn{min-width:0; flex:1 1 140px;} }
-
-    /* ─── DIAGNOSIS OF DYING (Page 5) ───────────────────────── */
-    .dod-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
-    .dod-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
-    .dod-sign {
-      background:var(--white); border-radius:12px; padding:18px 20px;
-      border:1.5px solid #d0daea; box-shadow:0 2px 10px rgba(0,0,0,0.06);
-      display:flex; align-items:flex-start; gap:14px;
-    }
-    .dod-sign-icon { font-size:1.4rem; flex-shrink:0; }
-    .dod-sign-title { font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
-    .dod-sign-body  { font-size:0.83rem; color:#4a5a72; line-height:1.6; }
-    .dod-gsf-banner {
-      background:var(--navy); border-radius:12px; padding:22px 28px;
-      display:flex; align-items:flex-start; gap:16px; margin-bottom:28px;
-    }
-    .dod-gsf-icon  { font-size:1.6rem; flex-shrink:0; }
-    .dod-gsf-title { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--yellow); margin-bottom:6px; }
-    .dod-gsf-body  { font-size:0.87rem; color:var(--text-muted); line-height:1.7; }
-    @media(max-width:640px){ .dod-grid{grid-template-columns:1fr;} }
-
-    /* ─── CLIPBOARD CASE STUDY (Pages 7, 8, 10) ─────────────── */
-    .case-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
-    .clipboard {
-      background:#f5f0e8; border-radius:4px 4px 8px 8px;
-      box-shadow:0 6px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.1);
-      position:relative; overflow:visible;
-    }
-    .clipboard::before {
-      content:''; position:absolute; top:-14px; left:50%; transform:translateX(-50%);
-      width:64px; height:28px; background:#b8a898; border-radius:8px 8px 4px 4px;
-      box-shadow:0 -2px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
-      z-index:2;
-    }
-    .clipboard::after {
-      content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-      width:32px; height:14px; background:#8a7a6a; border-radius:0 0 4px 4px;
-      z-index:3;
-    }
-    .clipboard-header {
-      background:var(--navy); padding:32px 36px 20px;
-      border-radius:0 0 0 0;
-    }
-    .clipboard-label {
-      font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
-      color:var(--yellow); margin-bottom:6px; display:flex; align-items:center; gap:8px;
-    }
-    .clipboard-label::after { content:''; flex:1; height:1px; background:rgba(253,202,15,0.2); }
-    .clipboard-title { font-family:'Merriweather',serif; font-size:1.6rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-    .clipboard-subtitle { font-size:0.85rem; color:var(--text-muted); }
-    .clipboard-body { padding:28px 36px 32px; }
-    .clip-section { margin-bottom:28px; }
-    .clip-section-title {
-      font-size:0.65rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
-      color:#7a6a5a; padding-bottom:8px; border-bottom:2px dashed #c8b89a;
-      margin-bottom:16px; display:flex; align-items:center; gap:8px;
-    }
-    .clip-section-title::before { content:''; width:8px; height:8px; border-radius:50%; background:#7a6a5a; flex-shrink:0; }
-    .clip-field { margin-bottom:12px; }
-    .clip-field-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8a7a6a; margin-bottom:3px; }
-    .clip-field-value { font-size:0.92rem; color:#2a2020; line-height:1.55; }
-    .clip-field-value strong { color:var(--navy); }
-    .clip-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
-    .clip-diagnosis {
-      background:rgba(34,65,126,0.06); border:1.5px solid rgba(34,65,126,0.15);
-      border-radius:8px; padding:10px 14px;
-    }
-    .clip-diagnosis-name  { font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
-    .clip-diagnosis-detail { font-size:0.76rem; color:#5a6a82; line-height:1.45; }
-    .clip-alert {
-      background:#fff3cd; border:1.5px solid #f0c000; border-radius:8px;
-      padding:12px 16px; display:flex; gap:10px; align-items:flex-start; margin-bottom:14px;
-    }
-    .clip-alert-icon { font-size:1.1rem; flex-shrink:0; }
-    .clip-alert-text { font-size:0.84rem; color:#7a5500; line-height:1.55; }
-    .clip-alert-text strong { color:#5a3a00; }
-    .clip-scenario-box {
-      background:#fffef8; border:2px solid #e8d8a0; border-radius:10px;
-      padding:20px 24px; margin-bottom:20px;
-      font-family:'Merriweather',serif; font-size:0.92rem; color:#2a2020; line-height:1.75;
-    }
-    .clip-scenario-box p { margin-bottom:10px; }
-    .clip-scenario-box p:last-child { margin-bottom:0; }
-    .clip-speech {
-      background:#fff; border-left:4px solid var(--navy);
-      border-radius:0 8px 8px 0; padding:14px 18px; margin:12px 0;
-      font-style:italic; color:#2a2020; font-size:0.92rem;
-    }
-    .clip-learning-focus {
-      background:rgba(1,151,222,0.06); border:1px solid rgba(1,151,222,0.2);
-      border-radius:10px; padding:16px 20px; margin-bottom:20px;
-    }
-    .clf-title { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
-    .clf-items { list-style:none; display:flex; flex-direction:column; gap:7px; }
-    .clf-items li { display:flex; align-items:flex-start; gap:8px; font-size:0.84rem; color:#2a4060; line-height:1.5; }
-    .clf-dot { width:6px; height:6px; border-radius:50%; background:var(--blue); flex-shrink:0; margin-top:6px; }
-    .clip-activity-box {
-      background:var(--navy); border-radius:10px; padding:20px 24px;
-    }
-    .cab-label { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--yellow); margin-bottom:12px; }
-    .cab-question { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--white); margin-bottom:14px; line-height:1.5; }
-    .cab-textarea {
-      width:100%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15);
-      border-radius:8px; padding:12px 16px; color:var(--white); font-family:'DM Sans',sans-serif;
-      font-size:0.88rem; line-height:1.6; resize:vertical; min-height:120px;
-    }
-    .cab-textarea:focus { outline:none; border-color:var(--yellow); background:rgba(255,255,255,0.1); }
-    .cab-textarea::placeholder { color:rgba(255,255,255,0.3); }
-    .cab-reveal-btn {
-      display:inline-flex; align-items:center; gap:8px; margin-top:12px;
-      padding:10px 20px; border-radius:8px; border:2px solid rgba(253,202,15,0.5);
-      background:transparent; color:var(--yellow); font-family:'DM Sans',sans-serif;
-      font-size:0.86rem; font-weight:600; cursor:pointer; transition:all 0.2s;
-    }
-    .cab-reveal-btn:hover { background:rgba(253,202,15,0.1); border-color:var(--yellow); }
-    .cab-reveal-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
-    .cab-answer { display:none; margin-top:14px; }
-    .cab-answer.show { display:block; animation:pageIn 0.3s ease; }
-    .cab-answer-inner {
-      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
-      border-radius:8px; padding:16px 20px;
-    }
-    .cab-answer-title { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:#6ee7b7; margin-bottom:10px; }
-    .cab-answer ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
-    .cab-answer li { display:flex; align-items:flex-start; gap:8px; font-size:0.85rem; color:var(--text-muted); line-height:1.55; }
-    .caa-dot { width:6px; height:6px; border-radius:50%; background:#2ecc8e; flex-shrink:0; margin-top:6px; }
-    @media(max-width:640px){ .clip-grid{grid-template-columns:1fr;} .case-wrap{padding:24px 16px 40px;} .clipboard-body{padding:20px 20px 24px;} .clipboard-header{padding:24px 20px 16px;} }
-
-    /* ─── MCQ (Page 9) ──────────────────────────────────────── */
-    .mcq-wrap { max-width:900px; margin:0 auto; padding:40px 48px 64px; }
-    .mcq-header { text-align:center; margin-bottom:36px; }
-    .mcq-eyebrow {
-      display:inline-block; background:var(--navy); color:var(--yellow);
-      font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
-      padding:6px 16px; border-radius:20px; margin-bottom:14px;
-    }
-    .mcq-header h2 { font-family:'Merriweather',serif; font-size:1.8rem; color:var(--navy); margin-bottom:8px; }
-    .mcq-header p  { color:#5a6a82; font-size:0.9rem; }
-    .mcq-progress { display:flex; gap:8px; align-items:center; justify-content:center; margin-bottom:28px; flex-wrap:wrap; }
-    .mcq-dot {
-      width:10px; height:10px; border-radius:50%;
-      background:rgba(34,65,126,0.15); border:2px solid rgba(34,65,126,0.2);
-      transition:all 0.3s;
-    }
-    .mcq-dot.answered { background:var(--navy); border-color:var(--navy); }
-    .mcq-dot.correct  { background:#059669; border-color:#059669; }
-    .mcq-dot.incorrect { background:#dc2626; border-color:#dc2626; }
-    .mcq-q-card {
-      display:none; background:var(--white); border-radius:14px;
-      border:1.5px solid #d0daea; box-shadow:0 4px 20px rgba(0,0,0,0.08);
-      overflow:hidden;
-    }
-    .mcq-q-card.active { display:block; animation:pageIn 0.3s ease; }
-    .mcq-q-header { background:var(--navy); padding:18px 28px; }
-    .mcq-q-num { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--yellow); margin-bottom:6px; }
-    .mcq-q-text { font-family:'Merriweather',serif; font-size:1rem; color:var(--white); line-height:1.6; }
-    .mcq-options { padding:20px 24px; display:flex; flex-direction:column; gap:10px; }
-    .mcq-option {
-      display:flex; align-items:flex-start; gap:12px; padding:14px 18px;
-      border:2px solid #d0daea; border-radius:10px; cursor:pointer;
-      transition:all 0.2s; font-size:0.88rem; color:#2a3a54; line-height:1.5;
-      background:#fafbfd;
-    }
-    .mcq-option:hover:not(.locked) { border-color:var(--navy); background:#f0f4f9; }
-    .mcq-option:focus-visible { outline:3px solid var(--yellow); }
-    .mcq-option.selected  { border-color:var(--navy); background:rgba(34,65,126,0.06); }
-    .mcq-option.correct   { border-color:#059669; background:rgba(5,150,105,0.07); }
-    .mcq-option.incorrect { border-color:#dc2626; background:rgba(220,38,38,0.07); }
-    .mcq-option.locked    { cursor:default; }
-    .mcq-option-letter {
-      width:28px; height:28px; border-radius:50%; border:2px solid #c0cce0;
-      display:flex; align-items:center; justify-content:center;
-      font-size:0.78rem; font-weight:700; color:#5a6a82; flex-shrink:0;
-      transition:all 0.2s;
-    }
-    .mcq-option.selected  .mcq-option-letter { background:var(--navy); border-color:var(--navy); color:var(--white); }
-    .mcq-option.correct   .mcq-option-letter { background:#059669; border-color:#059669; color:var(--white); }
-    .mcq-option.incorrect .mcq-option-letter { background:#dc2626; border-color:#dc2626; color:var(--white); }
-    .mcq-submit-row { padding:0 24px 20px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-    .mcq-submit-btn {
-      padding:12px 28px; border-radius:8px; border:none; background:var(--navy);
-      color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600;
-      cursor:pointer; transition:all 0.2s;
-    }
-    .mcq-submit-btn:hover { background:var(--navy-light); transform:translateY(-1px); }
-    .mcq-submit-btn:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
-    .mcq-submit-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
-    .mcq-nav-row { display:flex; gap:10px; }
-    .mcq-feedback {
-      display:none; margin:0 24px 20px; padding:14px 18px; border-radius:10px;
-      font-size:0.86rem; line-height:1.65;
-    }
-    .mcq-feedback.show { display:block; animation:pageIn 0.25s ease; }
-    .mcq-feedback.correct   { background:rgba(5,150,105,0.1); border:1px solid rgba(5,150,105,0.3); color:#064e3b; }
-    .mcq-feedback.incorrect { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.25); color:#7f1d1d; }
-    .mcq-feedback-badge { font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; display:block; }
-    .mcq-results {
-      display:none; background:var(--white); border-radius:14px;
-      border:1.5px solid #d0daea; text-align:center; padding:40px 28px;
-      box-shadow:0 4px 20px rgba(0,0,0,0.08);
-    }
-    .mcq-results.show { display:block; animation:pageIn 0.35s ease; }
-    .mcq-results-icon  { font-size:3rem; margin-bottom:12px; }
-    .mcq-results-score { font-family:'Merriweather',serif; font-size:3rem; font-weight:700; color:var(--navy); line-height:1; }
-    .mcq-results-label { font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7a8a9e; margin:8px 0 20px; }
-    .mcq-results-msg   { font-size:0.9rem; color:#4a5a72; line-height:1.7; max-width:500px; margin:0 auto 24px; }
-    .mcq-results-breakdown { display:flex; gap:24px; justify-content:center; margin-bottom:24px; }
-    .mcq-result-stat   { text-align:center; }
-    .mcq-result-stat-num { font-family:'Merriweather',serif; font-size:2rem; font-weight:700; }
-    .mcq-result-stat-lbl { font-size:0.72rem; color:#7a8a9e; text-transform:uppercase; letter-spacing:0.07em; }
-    @media(max-width:640px){ .mcq-wrap{padding:24px 16px 40px;} }
-
-    /* ─── FIVE PRIORITIES FLIPCARD (Page 11) ────────────────── */
-    .priorities-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
-    .flipcard-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:32px; }
-    .flipcard { perspective:800px; height:240px; cursor:pointer; }
-    .flipcard-inner {
-      position:relative; width:100%; height:100%;
-      transform-style:preserve-3d; transition:transform 0.55s cubic-bezier(0.4,0.2,0.2,1);
-      border-radius:14px;
-    }
-    .flipcard.flipped .flipcard-inner { transform:rotateY(180deg); }
-    .flipcard-front, .flipcard-back {
-      position:absolute; inset:0; backface-visibility:hidden;
-      border-radius:14px; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; padding:20px; text-align:center;
-    }
-    .flipcard-front { border:2px solid var(--border); background:var(--surface); }
-    .flipcard-back  { transform:rotateY(180deg); padding:16px; }
-    .fc-num   { font-family:'Merriweather',serif; font-size:2rem; font-weight:700; opacity:0.3; margin-bottom:6px; }
-    .fc-icon  { font-size:2.2rem; margin-bottom:10px; }
-    .fc-title { font-family:'Merriweather',serif; font-size:0.9rem; font-weight:700; color:var(--white); line-height:1.3; }
-    .fc-hint  { font-size:0.68rem; color:var(--text-muted); margin-top:8px; letter-spacing:0.05em; }
-    .fc-back-title { font-family:'Merriweather',serif; font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:10px; }
-    .fc-back-body  { font-size:0.76rem; color:var(--text-muted); line-height:1.65; }
-    .priorities-instruction { text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); margin-bottom:24px; letter-spacing:0.04em; }
-    @media(max-width:900px){ .flipcard-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:480px){ .flipcard-grid{grid-template-columns:1fr;} .flipcard{height:160px;} }
-
-    /* ── PAGE BACKGROUND OVERRIDES (fix styles.css conflicts) ── */
-    #page-2  { background: #f0f4f9 !important; }
-    #page-4  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
-    #page-5  { background: #f0f4f9 !important; }
-    #page-6  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
-    #page-7  { background: #f0f4f9 !important; }
-    #page-8  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
-    #page-9  { background: #f0f4f9 !important; }
-    #page-10 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
-    #page-11 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
-
-    /* ── PAGE 2: Recognising Deterioration — light bg needs navy text ── */
-    #page-2 .definition-header h2       { color: var(--navy) !important; }
-    #page-2 .definition-header p        { color: #5a6a82 !important; }
-    #page-2 .intro-eyebrow              { background: var(--navy) !important; color: var(--yellow) !important; border: none !important; animation: none !important; }
-    #page-2 .intro-eyebrow::before      { display: none !important; }
-    #page-2 .definition-lead           { background: var(--navy) !important; color: var(--white) !important; border: none !important; }
-    #page-2 .definition-lead em        { color: var(--yellow) !important; }
-    #page-2 .def-card                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; }
-    #page-2 .def-card-title            { color: var(--navy) !important; }
-    #page-2 .def-card-body             { color: #4a5a72 !important; }
-    #page-2 .definition-not            { background: rgba(34,65,126,0.05) !important; border: 1.5px solid rgba(34,65,126,0.15) !important; }
-    #page-2 .definition-not-title      { color: var(--navy) !important; }
-    #page-2 .definition-not-title svg  { stroke: var(--navy) !important; }
-    #page-2 .not-item                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; color: #3a4a60 !important; }
-    #page-2 .not-item-icon             { color: var(--navy) !important; font-style: normal !important; }
-    #page-2 .not-item strong           { color: var(--navy) !important; }
-    #page-2 .btn-secondary             { color: var(--navy) !important; border-color: rgba(34,65,126,0.3) !important; background: transparent !important; }
-    #page-2 .btn-primary               { background: var(--navy) !important; color: var(--white) !important; border-color: var(--navy) !important; }
-
-    /* ── PAGE 5: Diagnosis of Dying — light bg needs navy text ── */
-    #page-5 .outcomes-eyebrow          { background: var(--navy) !important; color: var(--yellow) !important; }
-    #page-5 .outcomes-title-area h2    { color: var(--navy) !important; }
-    #page-5 .outcomes-title-area p     { color: #5a6a82 !important; }
-    #page-5 .dod-sign                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; }
-    #page-5 .dod-sign-title            { color: var(--navy) !important; }
-    #page-5 .dod-sign-body             { color: #4a5a72 !important; }
-
-    /* ── PAGE 7: Meet Bob — light bg ── */
-    #page-7 .outcomes-eyebrow          { background: var(--navy) !important; color: var(--yellow) !important; }
-    #page-7 .outcomes-title-area h2    { color: var(--navy) !important; }
-    #page-7 .outcomes-title-area p     { color: #5a6a82 !important; }
-
-    /* ── PAGE 9: MCQ — light bg ── */
-    #page-9 .mcq-eyebrow               { color: var(--navy) !important; }
-    #page-9 h2                         { color: var(--navy) !important; }
-    #page-9 p                          { color: #5a6a82 !important; }
-    #page-9 .mcq-q-card                { background: var(--white) !important; border: 1.5px solid #d0daea !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; }
-    #page-9 .mcq-q-num                 { color: var(--blue) !important; }
-    #page-9 .mcq-q-text                { color: var(--navy) !important; }
-    #page-9 .mcq-option                { background: #f8fafb !important; border: 1.5px solid #d0daea !important; color: #2c3e60 !important; }
-    #page-9 .mcq-option:hover          { border-color: var(--navy) !important; background: rgba(34,65,126,0.04) !important; }
-    #page-9 .mcq-option.selected       { border-color: var(--navy) !important; background: rgba(34,65,126,0.08) !important; }
-    #page-9 .mcq-option-letter         { background: rgba(34,65,126,0.1) !important; color: var(--navy) !important; }
-    #page-9 .mcq-option.correct        { border-color: #059669 !important; background: rgba(5,150,105,0.08) !important; }
-    #page-9 .mcq-option.incorrect      { border-color: #dc2626 !important; background: rgba(220,38,38,0.06) !important; }
-    #page-9 .mcq-submit-btn           { background: var(--navy) !important; }
-    #page-9 .mcq-feedback.correct     { background: rgba(5,150,105,0.08) !important; border-color: rgba(5,150,105,0.3) !important; color: #064e3b !important; }
-    #page-9 .mcq-feedback.incorrect   { background: rgba(220,38,38,0.06) !important; border-color: rgba(220,38,38,0.2) !important; color: #7f1d1d !important; }
-    #page-9 .mcq-dot                   { background: rgba(34,65,126,0.15) !important; }
-    #page-9 .mcq-dot.correct           { background: #059669 !important; }
-    #page-9 .mcq-dot.incorrect         { background: #dc2626 !important; }
-
-    /* ── FLIPCARD FIX: hide front when flipped ── */
-    .flipcard-front  { -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important; }
-    .flipcard-back   { -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important; }
-    .flipcard-inner  { -webkit-transform-style: preserve-3d !important; transform-style: preserve-3d !important; }
-
-
-
-    /* ── VIDEO EMBED ── */
-    .video-wrap {
-      background: rgba(0,0,0,0.5); border-radius: 14px; overflow: hidden;
-      border: 1px solid var(--border); margin-bottom: 24px; position: relative;
-    }
-    .video-placeholder {
-      aspect-ratio: 16/9; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px;
-      background: rgba(255,255,255,0.03); padding: 40px;
-    }
-    .video-placeholder-icon  { font-size: 3rem; opacity: 0.5; }
-    .video-placeholder-text  { font-size: 0.88rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
-    .video-placeholder-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 4px; }
-    .video-activity-box {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 14px; padding: 24px 28px; margin-top: 24px;
-    }
-    .vab-label    { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin-bottom: 8px; }
-    .vab-question { font-family: 'Merriweather', serif; font-size: 0.95rem; color: var(--white); line-height: 1.6; margin-bottom: 16px; }
-    .vab-textarea {
-      width: 100%; background: rgba(255,255,255,0.05); border: 2px solid var(--border);
-      border-radius: 8px; padding: 14px 16px; font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem; color: var(--white); line-height: 1.65; resize: vertical;
-      min-height: 130px; transition: border-color 0.2s;
-    }
-    .vab-textarea:focus    { outline: none; border-color: var(--blue); }
-    .vab-textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .vab-reveal-btn {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
-      padding: 10px 20px; border-radius: 8px;
-      background: rgba(253,202,15,0.1); border: 1.5px solid rgba(253,202,15,0.3);
-      color: var(--yellow); font-family: 'DM Sans', sans-serif;
-      font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-    }
-    .vab-reveal-btn:hover { background: rgba(253,202,15,0.18); }
-    .vab-answer { display: none; margin-top: 14px; background: rgba(1,151,222,0.07); border: 1px solid rgba(1,151,222,0.2); border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0; padding: 16px 20px; }
-    .vab-answer.show { display: block; animation: pageIn 0.3s ease; }
-    .vab-answer-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
-    .vab-answer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .vab-answer li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
-    .vab-answer-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 7px; }
-
-    /* ── MED RECORD CARD (Bob page 7) ── */
-    .med-record {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-      border-radius: 16px; overflow: hidden; margin-bottom: 24px;
-    }
-    .med-record-header {
-      background: var(--navy); padding: 20px 28px;
-      border-bottom: 3px solid var(--yellow);
-    }
-    .med-record-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yellow); margin-bottom: 4px; }
-    .med-record-name { font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); }
-    .med-record-sub  { font-size: 0.83rem; color: var(--text-muted); margin-top: 2px; }
-    .med-record-body { padding: 24px 28px; }
-    .med-alert {
-      background: rgba(253,202,15,0.08); border: 1.5px solid rgba(253,202,15,0.3);
-      border-radius: 10px; padding: 14px 18px; display: flex; gap: 12px;
-      align-items: flex-start; margin-bottom: 20px;
-    }
-    .med-alert-icon { font-size: 1.2rem; flex-shrink: 0; }
-    .med-alert-text { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
-    .med-alert-text strong { color: var(--yellow); }
-    .med-diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .med-diag-card {
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 10px; padding: 14px 18px;
-    }
-    .med-diag-name   { font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-    .med-diag-detail { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
-    .med-diag-card.critical { border-color: rgba(220,38,38,0.4); background: rgba(220,38,38,0.06); }
-    .med-diag-card.critical .med-diag-name { color: #fca5a5; }
-    @media(max-width:640px){ .med-diag-grid { grid-template-columns: 1fr; } }
-  </style>
 </head>
 <body>
 
@@ -1276,33 +681,6 @@
   </div>
 </section>
 
-
-<!-- ════════════════════════════════════════════
-     PAGE 7 — BOB EVANS CASE STUDY PART 1
-═════════════════════════════════════════════ -->
-
-
-<!-- ════════════════════════════════════════════
-     PAGE 8 — BOB EVANS PART 2: SCENARIO & ACTIVITY
-═════════════════════════════════════════════ -->
-
-
-<!-- ════════════════════════════════════════════
-     PAGE 9 — MCQ (4 questions, shuffled)
-═════════════════════════════════════════════ -->
-
-
-<!-- ════════════════════════════════════════════
-     PAGE 10 — BOB EVANS PART 4: ACTIVE DYING
-═════════════════════════════════════════════ -->
-
-
-<!-- ════════════════════════════════════════════
-     PAGE 11 — FIVE PRIORITIES OF CARE (Flipcard)
-═════════════════════════════════════════════ -->
-
-
-
 <!-- ════════════════════════════════════════════
      PAGE 7 — FIVE PRIORITIES OF CARE (Flipcard)
 ═════════════════════════════════════════════ -->
@@ -1420,110 +798,186 @@
 <!-- ════════════════════════════════════════════
      PAGE 8 — BOB EVANS CASE STUDY: MEET BOB (Medical)
 ═════════════════════════════════════════════ -->
-<section class="page" id="page-8" aria-label="Bob Evans Case Study — Meet Bob">
-  <div class="definition-wrap" style="max-width:960px;">
-    <div class="definition-header">
-      <div class="intro-eyebrow" style="margin-bottom:0;background:rgba(253,202,15,0.12);border:1px solid rgba(253,202,15,0.3);color:var(--yellow);">Case Study</div>
-      <h2 style="color:var(--white);">Meet Bob Evans</h2>
-      <p style="color:var(--text-muted);">Read Bob's medical background carefully before continuing to his first clinical visit.</p>
-    </div>
+<section class="page" id="page-2" aria-label="Bob's clinical profile">
+    <div class="clipboard-wrap">
 
-    <div class="med-record" role="article" aria-label="Bob Evans medical record">
-      <div class="med-record-header">
-        <div class="med-record-eyebrow">Patient Record — Community Palliative Care</div>
-        <div class="med-record-name">Bob Evans</div>
-        <div class="med-record-sub">Aged 56 · Referred to Community Palliative Care Team</div>
+      <div class="clipboard-title-area">
+        <div class="clipboard-eyebrow">Before Your Visit</div>
+        <h2>Bob's Clinical Profile</h2>
+        <p>Review the information below before making your first home visit.</p>
       </div>
-      <div class="med-record-body">
-        <div class="med-alert">
-          <div class="med-alert-icon">⚠️</div>
-          <div class="med-alert-text">Treatment is currently <strong>palliative in intent</strong>. Bob avoids using this term and focuses instead on "seeing how things go." He tends to <strong>downplay symptoms</strong> and delays seeking help.</div>
+
+      <div class="clipboard" role="document" aria-label="Patient information clipboard">
+
+        <div class="clipboard-header">
+          <div class="clipboard-header-brand">
+            <div class="header-logo-sm" aria-hidden="true">SB</div>
+            <span>St Barnabas Hospice — Patient Record</span>
+          </div>
+          <div class="clipboard-ref" aria-label="Reference number">REF: SBH-2026-0082</div>
         </div>
-        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Confirmed diagnoses</div>
-        <div class="med-diag-grid">
-          <div class="med-diag-card">
-            <div class="med-diag-name">COPD — GOLD Stage III</div>
-            <div class="med-diag-detail">Diagnosed 8 years ago. Three exacerbations in the past 12 months; last admission 3 weeks ago.</div>
+
+        <div class="clipboard-body">
+
+          <div class="patient-header">
+            <div class="patient-photo" aria-label="Photograph of Bob Evans">
+              <img src="images/bob_thumbnail.png" alt="Bob Evans, patient">
+            </div>
+            <div class="patient-meta">
+              <div class="patient-name">Bob Evans</div>
+              <div class="patient-dob">Age: 56 &nbsp;·&nbsp; Male</div>
+              <div class="patient-badges" role="list" aria-label="Patient status indicators">
+                <span class="badge badge-warn"  role="listitem">Palliative Intent</span>
+                <span class="badge badge-navy"  role="listitem">Lives Alone</span>
+                <span class="badge badge-blue"  role="listitem">High Exacerbation Risk</span>
+                <span class="badge badge-green" role="listitem">Financial Stress</span>
+              </div>
+            </div>
           </div>
-          <div class="med-diag-card">
-            <div class="med-diag-name">Chronic Kidney Disease</div>
-            <div class="med-diag-detail">eGFR &lt;40 — Stage 3b. Not on dialysis.</div>
+
+          <div class="clipboard-alert" role="alert">
+            <div class="alert-icon" aria-hidden="true">⚠️</div>
+            <p>
+              <strong>Clinical Alert:</strong> Bob has advanced lung cancer with liver, bone, and brain metastases, complicated by severe COPD (Stage III) and CKD. He has suffered three COPD exacerbations in the past 12 months (last admitted 3 weeks ago). He tends to downplay his symptoms and delays seeking medical help.
+            </p>
           </div>
-          <div class="med-diag-card">
-            <div class="med-diag-name">Hypertension</div>
-            <div class="med-diag-detail">Managed with antihypertensive medication.</div>
-          </div>
-          <div class="med-diag-card">
-            <div class="med-diag-name">Osteoarthritis</div>
-            <div class="med-diag-detail">Knees and hands — affects mobility and daily tasks.</div>
-          </div>
-          <div class="med-diag-card critical" style="grid-column:1/-1;">
-            <div class="med-diag-name">Advanced Lung Cancer</div>
-            <div class="med-diag-detail">Liver metastases · Bone metastases · Brain metastases. Under hospital oncology follow-up. Treatment is palliative in intent.</div>
+
+          <div class="info-grid">
+
+            <div class="info-section">
+              <div class="info-section-title">Clinical Summary</div>
+              <div class="info-row">
+                <span class="info-label">Primary diagnosis</span>
+                <span class="info-value">Advanced Lung Cancer (w/ mets)</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Secondary</span>
+                <span class="info-value">COPD, CKD, HTN, Osteoarthritis</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Treatment intent</span>
+                <span class="info-value alert">Palliative ("seeing how things go")</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Recent admission</span>
+                <span class="info-value">3 weeks ago (COPD exacerbation)</span>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-section-title">Household</div>
+              <div class="info-row">
+                <span class="info-label">Living situation</span>
+                <span class="info-value">Lives alone in own home</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Companionship</span>
+                <span class="info-value">Pet dog</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Family support</span>
+                <span class="info-value alert">None (estranged from son)</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Financial concerns</span>
+                <span class="info-value alert">Struggling post-retirement</span>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-section-title">What Matters to Bob</div>
+              <p class="info-paragraph">
+                Bob's <strong>dog is his main source of companionship</strong> and provides him with his daily routine. His identity was previously heavily tied to his work, and his forced early medical retirement has been deeply distressing. He avoids the term "palliative" and prefers to take things day by day. He values his independence, which frequently leads him to <strong>downplay his symptoms</strong>.
+              </p>
+            </div>
+
+            <div class="info-section">
+              <div class="info-section-title">Social & Family Context</div>
+              <p class="info-paragraph">
+                Bob is divorced and has an adult son, though they have been estranged for four years following a severe relationship breakdown. Bob explicitly states he has <strong>no family</strong> and does not want anyone else involved in his care. He is currently facing significant <strong>financial hardship</strong> adjusting to his reduced income.
+              </p>
+            </div>
+
           </div>
         </div>
+
+        <div class="clipboard-footer">
+          <p>Printed: <strong>Confidential — Clinical Use Only</strong></p>
+          <p>St Barnabas Hospice &nbsp;·&nbsp; <strong>Not for distribution</strong></p>
+        </div>
+
+      </div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
+        <button class="btn btn-secondary" onclick="goToPage(7)" aria-label="Back">
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <button class="btn btn-primary" onclick="goToPage(9)" aria-label="Begin the first visit scenario">
+          Begin the First Visit <span aria-hidden="true">→</span>
+        </button>
       </div>
-    </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
-      <button class="btn btn-primary"   onclick="goToPage(9)">Continue to The Visit →</button>
     </div>
-  </div>
-</section>
-
+  </section>
 
 <!-- ════════════════════════════════════════════
      PAGE 9 — BOB EVANS: THE VISIT (Video + Activity)
 ═════════════════════════════════════════════ -->
-<section class="page" id="page-9" aria-label="Bob Evans — The Visit">
-  <div class="definition-wrap" style="max-width:960px;">
-    <div class="definition-header">
-      <div class="intro-eyebrow" style="margin-bottom:0;background:rgba(253,202,15,0.12);border:1px solid rgba(253,202,15,0.3);color:var(--yellow);">Case Study — Part 2</div>
-      <h2 style="color:var(--white);">The Visit</h2>
-      <p style="color:var(--text-muted);">Watch the video below, then complete the activity. You are visiting Bob for a planned second follow-up.</p>
-    </div>
+<section class="page" id="page-9" aria-label="Follow-up visit">
+    <div class="scenario-wrap">
 
-    <div class="video-wrap">
-      <div class="video-placeholder">
-        <div class="video-placeholder-label">Video</div>
-        <div class="video-placeholder-icon">▶️</div>
-        <div class="video-placeholder-text">
-          <strong style="color:var(--white);display:block;margin-bottom:6px;">The Visit — Bob Evans</strong>
-          Upload your video file to replace this placeholder.<br>
-          Replace this <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;div class="video-placeholder"&gt;</code> with an<br>
-          <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;iframe&gt;</code> or <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;video&gt;</code> element.
+      <div class="scenario-left">
+        <div class="scenario-video" role="figure" aria-label="Scene 1 — arriving at Bob's home">
+          <video src="video/bob1.mp4" 
+                 controls 
+                 aria-label="Bob sitting upright in his living room chair with his dog on his lap"
+                 style="width:100%; height:100%; object-fit:cover; display:block; border-radius:14px;">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <div class="scenario-context">
+          <div class="scenario-context-label" aria-hidden="true">📍 Setting the Scene</div>
+          <p>
+            You are visiting Bob for a planned follow-up visit. This is the second time you have seen him. 
+            Bob answers the door himself and walks slowly to his chair in the living room. He is sitting upright, 
+            with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely. 
+            At first glance, he appears well.
+          </p>
+          <p>
+            While talking to Bob, you notice a yellowish tinge around his eyes, although you briefly wonder 
+            whether this could be due to the lighting in the room. You ask Bob how he has been.
+          </p>
+          <p>
+            <strong>Bob replies:</strong><br>
+            <em>“I’m fine really. You know… plodding along.”</em>
+          </p>
+          <p>
+            He smiles slightly and changes the subject to his dog. Bob does not volunteer any specific concerns.
+          </p>
+
+          <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e2e8f0;">
+
+          <div class="scenario-context-label" aria-hidden="true">💡 Learning Focus</div>
+          <p>
+            This part of the case is about recognising deterioration that is not obvious, and understanding that:
+          </p>
+          <ul style="margin-top: 8px; margin-bottom: 16px; padding-left: 20px; line-height: 1.5;">
+            <li>People often minimise symptoms.</li>
+            <li>“I’m fine” does not equal “nothing is wrong”.</li>
+            <li>Deterioration is frequently uncovered through curiosity, not observation alone.</li>
+          </ul>
+
+          <div style="background-color: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px; border-radius: 4px;">
+            <p style="margin: 0;">
+              <strong>Activity:</strong> You are not allowed to assume Bob is deteriorating. You can only use what you 
+              notice and what Bob tells you. What questions are you going to ask Bob?
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="video-activity-box">
-      <div class="vab-label">Your Turn</div>
-      <div class="vab-question">You are not allowed to assume Bob is deteriorating — you can only use what you notice and what Bob tells you. What questions are you going to ask Bob?</div>
-      <textarea class="vab-textarea" id="bob2-input" placeholder="Think about: the yellowish tinge, his energy levels, pain, bowel habits, medications, his dog, his son…" rows="5" aria-label="Your clinical questions for Bob"></textarea>
-      <button class="vab-reveal-btn" onclick="toggleVabReveal('bob2-answer')">🔍 Reveal suggested questions</button>
-      <div class="vab-answer" id="bob2-answer">
-        <div class="vab-answer-title">Suggested questions to ask Bob</div>
-        <ul>
-          <li><div class="vab-answer-dot"></div>"Bob, I noticed your eyes look a little yellow today — have you noticed that yourself?"</li>
-          <li><div class="vab-answer-dot"></div>"How has your energy been since I last saw you? Are you managing to get around the house?"</li>
-          <li><div class="vab-answer-dot"></div>"Are you having any pain at the moment? Anywhere in particular?"</li>
-          <li><div class="vab-answer-dot"></div>"How has your appetite been? Have you noticed any changes in your weight?"</li>
-          <li><div class="vab-answer-dot"></div>"How have your bowels been? Any nausea or feeling of fullness?"</li>
-          <li><div class="vab-answer-dot"></div>"Are you still managing to take your medications? Any difficulty swallowing them?"</li>
-          <li><div class="vab-answer-dot"></div>"Tell me about your dog — who looks after him when you're unwell?"</li>
-          <li><div class="vab-answer-dot"></div>"Is there anything on your mind you'd like to talk through?"</li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
-      <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
-      <button class="btn btn-primary"   onclick="goToPage(10)">Continue to MCQ →</button>
-    </div>
-  </div>
-</section>
-
+      <div class="choices-panel" id="choices-panel-1" role="region" aria-label="Response options">
+        </div></div>
+  </section>
 
 <!-- ════════════════════════════════════════════
      PAGE 10 — MCQ (4 questions, shuffled)
@@ -1556,13 +1010,13 @@
     </div>
 
     <div class="video-wrap" style="margin-bottom:28px;">
-      <div class="video-placeholder">
-        <div class="video-placeholder-label">Video</div>
-        <div class="video-placeholder-icon">▶️</div>
-        <div class="video-placeholder-text">
-          <strong style="color:var(--white);display:block;margin-bottom:6px;">Bob's Final Visit</strong>
-          Upload your video file to replace this placeholder.
-        </div>
+      <div class="scenario-video" role="figure" aria-label="Bob's Final Visit">
+        <video src="video/bob2.mp4" 
+               controls 
+               aria-label="Bob in bed, appearing very unwell with laboured breathing"
+               style="width:100%; height:100%; object-fit:cover; display:block; border-radius:14px; border: 1px solid var(--border);">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
 
@@ -1591,7 +1045,7 @@
               <div class="cab-answer-inner">
                 <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
                 <ul>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern)</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern) </li>
                   <li><div class="caa-dot"></div><strong style="color:var(--white);">Profound weakness</strong> — bed-bound, unable to lie flat, all care required</li>
                   <li><div class="caa-dot"></div><strong style="color:var(--white);">Diminished oral intake / difficulty taking medications</strong> — unable to swallow, coughing on fluids</li>
                   <li><div class="caa-dot"></div><strong style="color:var(--white);">Drowsy and disorientated</strong> — intermittently drowsy, confused, cannot follow conversation</li>
@@ -1636,7 +1090,6 @@
     </div>
   </div>
 </section>
-
 </main>
 
 <footer role="contentinfo">
