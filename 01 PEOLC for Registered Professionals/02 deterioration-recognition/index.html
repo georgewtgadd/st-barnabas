@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deterioration &amp; Recognition | St Barnabas Hospice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ─── PDF TOOL VIEWER (Page 3) ──────────────────────────── */
+    .pdfv-wrap { max-width:1200px; margin:0 auto; padding:40px 48px 64px; }
+    .pdfv-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+    .pdfv-tab {
+      padding:10px 20px; border-radius:10px; border:2px solid var(--border);
+      background:var(--surface); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600;
+      cursor:pointer; transition:all 0.2s; white-space:nowrap;
+    }
+    .pdfv-tab:hover { border-color:rgba(255,255,255,0.35); background:rgba(255,255,255,0.1); }
+    .pdfv-tab.active { background:var(--yellow); color:var(--navy); border-color:var(--yellow); }
+    .pdfv-tab:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
+
+    /* Panel show/hide */
+    .pdfv-panel { display:none; }
+    .pdfv-panel.active { display:block; animation:pageIn 0.3s ease; }
+
+    /* Two-column layout: left = image, right = header + why-box */
+    .pdfv-layout {
+      display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start;
+    }
+    @media(max-width:900px){ .pdfv-layout { grid-template-columns:1fr; } }
+
+    /* Left column — image viewer */
+    .pdfv-viewer {}
+
+    /* Zoom controls toolbar */
+    .pdfv-zoom-bar {
+      display:flex; align-items:center; gap:10px; margin-bottom:10px;
+      background:rgba(255,255,255,0.05); border:1px solid var(--border);
+      border-radius:8px; padding:8px 14px; flex-wrap:wrap;
+    }
+    .pdfv-zoom-btn {
+      width:32px; height:32px; border-radius:6px; border:1.5px solid var(--border);
+      background:var(--surface); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700;
+      cursor:pointer; transition:all 0.15s; display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; line-height:1;
+    }
+    .pdfv-zoom-btn:hover { border-color:rgba(255,255,255,0.5); background:rgba(255,255,255,0.12); }
+    .pdfv-zoom-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
+    .pdfv-zoom-level {
+      font-size:0.78rem; font-weight:700; color:var(--text-muted);
+      letter-spacing:0.04em; min-width:46px; text-align:center;
+    }
+    .pdfv-zoom-reset {
+      font-size:0.72rem; font-weight:600; color:var(--text-muted);
+      cursor:pointer; background:none; border:none; font-family:'DM Sans',sans-serif;
+      padding:4px 8px; border-radius:4px; transition:color 0.15s;
+    }
+    .pdfv-zoom-reset:hover { color:var(--yellow); }
+    .pdfv-page-nav { display:flex; align-items:center; gap:10px; margin-left:auto; }
+    .pdfv-page-btn {
+      padding:6px 14px; border-radius:6px; border:1.5px solid var(--border);
+      background:var(--surface); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:0.78rem; font-weight:600;
+      cursor:pointer; transition:all 0.15s;
+    }
+    .pdfv-page-btn:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.1); }
+    .pdfv-page-btn:disabled { opacity:0.3; cursor:not-allowed; }
+    .pdfv-page-indicator { font-size:0.76rem; color:var(--text-muted); white-space:nowrap; }
+
+    /* Scrollable image container */
+    .pdfv-scroll-outer {
+      width:100%; background:rgba(0,0,0,0.45); border-radius:12px;
+      border:1px solid var(--border); overflow:auto;
+      max-height:72vh; cursor:default; position:relative;
+    }
+    /* pdfv-scroll-inner width is set by JS as a % to drive zoom + enable native scroll */
+    .pdfv-scroll-inner {
+      display:block;
+      width:100%; /* JS overrides this on zoom */
+      min-width:100%;
+    }
+    .pdfv-img {
+      display:block; width:100%; height:auto;
+      user-select:none; -webkit-user-drag:none;
+      pointer-events:none;
+    }
+    .pdfv-scroll-hint {
+      text-align:center; font-size:0.7rem; color:rgba(255,255,255,0.28);
+      margin-top:7px; letter-spacing:0.04em;
+    }
+
+    /* Right column — info panel */
+    .pdfv-info {}
+    .pdfv-header {
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-left:5px solid var(--blue); border-radius:0 12px 12px 0;
+      padding:18px 22px; margin-bottom:16px;
+    }
+    .pdfv-title { font-family:'Merriweather',serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+    .pdfv-subtitle { font-size:0.72rem; color:var(--yellow); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; }
+    .pdfv-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.7; }
+    .pdfv-meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .pdfv-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(253,202,15,0.1); border:1px solid rgba(253,202,15,0.25);
+      color:var(--yellow); padding:4px 11px; border-radius:20px;
+      font-size:0.7rem; font-weight:700; letter-spacing:0.05em;
+    }
+    .pdfv-why-box {
+      background:rgba(1,151,222,0.07); border:1px solid rgba(1,151,222,0.2);
+      border-left:4px solid var(--blue); border-radius:0 12px 12px 0;
+      padding:16px 20px;
+    }
+    .pdfv-why-label { font-size:0.63rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
+    .pdfv-why-grid { display:grid; grid-template-columns:1fr; gap:9px; }
+    .pdfv-why-item { display:flex; align-items:flex-start; gap:9px; font-size:0.84rem; color:var(--text-muted); line-height:1.6; }
+    .pdfv-why-dot { width:6px; height:6px; border-radius:50%; background:var(--blue); flex-shrink:0; margin-top:7px; }
+
+    /* Unavailable document placeholder */
+    .pdfv-unavail {
+      background:rgba(253,202,15,0.06); border:2px dashed rgba(253,202,15,0.28);
+      border-radius:10px; padding:24px 20px; text-align:center; margin-top:16px;
+    }
+    .pdfv-unavail-title { font-family:'Merriweather',serif; font-size:0.95rem; font-weight:700; color:var(--yellow); margin-bottom:8px; }
+    .pdfv-unavail-body  { font-size:0.83rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ─── HORIZONTAL TIMELINE (Page 4) ──────────────────────── */
+    .htl-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
+    .htl-track-outer { overflow-x:auto; padding-bottom:8px; margin-bottom:32px; }
+    .htl-track {
+      display:flex; align-items:flex-start; gap:0;
+      min-width:660px; position:relative; padding-top:20px;
+    }
+    .htl-connector {
+      flex:1; height:4px; margin-top:44px; position:relative;
+    }
+    .htl-connector-months { background:linear-gradient(90deg,var(--blue),var(--yellow)); }
+    .htl-connector-days   { background:linear-gradient(90deg,var(--yellow),#ef4444); }
+    .htl-phase { display:flex; flex-direction:column; align-items:center; gap:0; flex:0 0 auto; width:200px; }
+    .htl-node {
+      width:88px; height:88px; border-radius:50%; border:3px solid;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:'Merriweather',serif; font-weight:700; cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+      box-shadow:0 0 0 6px var(--navy-dark);
+      position:relative; z-index:2;
+    }
+    .htl-node:hover, .htl-node.active { transform:scale(1.1); box-shadow:0 0 0 6px var(--navy-dark), 0 0 24px rgba(255,255,255,0.2); }
+    .htl-node:focus-visible { outline:3px solid var(--yellow); outline-offset:4px; }
+    .htl-node .hn-icon  { font-size:1.5rem; margin-bottom:2px; }
+    .htl-node .hn-label { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-align:center; line-height:1.2; }
+    .htl-node.months { background:rgba(1,151,222,0.12); border-color:var(--blue); color:var(--blue); }
+    .htl-node.days   { background:rgba(253,202,15,0.1); border-color:var(--yellow); color:var(--yellow); }
+    .htl-node.hours  { background:rgba(239,68,68,0.12); border-color:#ef4444; color:#fca5a5; }
+    .htl-node.months.active { background:rgba(1,151,222,0.25); }
+    .htl-node.days.active   { background:rgba(253,202,15,0.2); }
+    .htl-node.hours.active  { background:rgba(239,68,68,0.25); }
+    .htl-node-label { font-family:'Merriweather',serif; font-size:0.88rem; font-weight:700; color:var(--white); text-align:center; margin-top:10px; margin-bottom:3px; }
+    .htl-node-sub   { font-size:0.72rem; color:var(--text-muted); text-align:center; }
+    .htl-hint { text-align:center; font-size:0.76rem; color:rgba(255,255,255,0.3); margin-bottom:24px; letter-spacing:0.04em; animation:hintfade 3s ease infinite; }
+    .htl-content {
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-radius:14px; padding:24px 28px; display:none; animation:pageIn 0.35s ease;
+    }
+    .htl-content.active { display:block; }
+    .htl-content.months { border-left:5px solid var(--blue); }
+    .htl-content.days   { border-left:5px solid var(--yellow); }
+    .htl-content.hours  { border-left:5px solid #ef4444; }
+    .htl-content-heading { font-family:'Merriweather',serif; font-size:1.2rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+    .htl-content-tag { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:16px; }
+    .htl-points { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .htl-points li { display:flex; align-items:flex-start; gap:10px; font-size:0.88rem; color:var(--text-muted); line-height:1.65; }
+    .htl-bullet { width:7px; height:7px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+    @media(max-width:700px){ .htl-wrap{padding:28px 16px 40px;} }
+
+    /* ─── TRAJECTORIES INTERACTIVE (Page 6) ──────────────────── */
+    .traj-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
+    .traj-select-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:28px; justify-content:center; }
+    .traj-select-btn {
+      display:flex; align-items:center; gap:10px;
+      padding:14px 22px; border-radius:12px; border:2px solid var(--border);
+      background:var(--surface); color:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600;
+      cursor:pointer; transition:all 0.25s; min-width:200px; text-align:left;
+    }
+    .traj-select-btn:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.35); }
+    .traj-select-btn.active-cancer  { background:rgba(1,151,222,0.15); border-color:var(--blue); }
+    .traj-select-btn.active-organ   { background:rgba(253,202,15,0.1); border-color:var(--yellow); }
+    .traj-select-btn.active-frailty { background:rgba(46,204,142,0.1); border-color:#2ecc8e; }
+    .traj-select-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
+    .tsb-icon { font-size:1.4rem; flex-shrink:0; }
+    .tsb-text .tsb-title { font-family:'Merriweather',serif; font-size:0.9rem; font-weight:700; color:var(--white); }
+    .tsb-text .tsb-sub   { font-size:0.72rem; color:var(--text-muted); }
+    .traj-detail { display:none; animation:pageIn 0.35s ease; }
+    .traj-detail.active { display:grid; grid-template-columns:1fr 340px; gap:24px; }
+    .traj-detail-text {}
+    .traj-eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; margin-bottom:4px; }
+    .traj-title { font-family:'Merriweather',serif; font-size:1.5rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+    .traj-example { font-size:0.78rem; color:var(--text-muted); font-style:italic; margin-bottom:16px; }
+    .traj-desc { font-size:0.9rem; color:var(--text-muted); line-height:1.75; margin-bottom:20px; }
+    .traj-points { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+    .traj-points li { display:flex; align-items:flex-start; gap:10px; font-size:0.86rem; color:var(--text-muted); line-height:1.6; }
+    .traj-pt-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+    .traj-svg-box {
+      background:rgba(0,0,0,0.3); border:1px solid var(--border);
+      border-radius:12px; padding:16px 16px 10px;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      height:fit-content;
+    }
+    .traj-svg-title { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px; }
+    .traj-svg-caption { font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px; line-height:1.5; }
+    .traj-not-one-size {
+      background:rgba(253,202,15,0.07); border:1px solid rgba(253,202,15,0.25);
+      border-radius:12px; padding:20px 24px; margin-top:28px;
+    }
+    .traj-not-title { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--yellow); margin-bottom:8px; }
+    .traj-not-body  { font-size:0.88rem; color:var(--text-muted); line-height:1.75; }
+    @media(max-width:800px){ .traj-detail.active{grid-template-columns:1fr;} .traj-select-btn{min-width:0; flex:1 1 140px;} }
+
+    /* ─── DIAGNOSIS OF DYING (Page 5) ───────────────────────── */
+    .dod-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
+    .dod-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+    .dod-sign {
+      background:var(--white); border-radius:12px; padding:18px 20px;
+      border:1.5px solid #d0daea; box-shadow:0 2px 10px rgba(0,0,0,0.06);
+      display:flex; align-items:flex-start; gap:14px;
+    }
+    .dod-sign-icon { font-size:1.4rem; flex-shrink:0; }
+    .dod-sign-title { font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+    .dod-sign-body  { font-size:0.83rem; color:#4a5a72; line-height:1.6; }
+    .dod-gsf-banner {
+      background:var(--navy); border-radius:12px; padding:22px 28px;
+      display:flex; align-items:flex-start; gap:16px; margin-bottom:28px;
+    }
+    .dod-gsf-icon  { font-size:1.6rem; flex-shrink:0; }
+    .dod-gsf-title { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--yellow); margin-bottom:6px; }
+    .dod-gsf-body  { font-size:0.87rem; color:var(--text-muted); line-height:1.7; }
+    @media(max-width:640px){ .dod-grid{grid-template-columns:1fr;} }
+
+    /* ─── CLIPBOARD CASE STUDY (Pages 7, 8, 10) ─────────────── */
+    .case-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
+    .clipboard {
+      background:#f5f0e8; border-radius:4px 4px 8px 8px;
+      box-shadow:0 6px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.1);
+      position:relative; overflow:visible;
+    }
+    .clipboard::before {
+      content:''; position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+      width:64px; height:28px; background:#b8a898; border-radius:8px 8px 4px 4px;
+      box-shadow:0 -2px 6px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+      z-index:2;
+    }
+    .clipboard::after {
+      content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+      width:32px; height:14px; background:#8a7a6a; border-radius:0 0 4px 4px;
+      z-index:3;
+    }
+    .clipboard-header {
+      background:var(--navy); padding:32px 36px 20px;
+      border-radius:0 0 0 0;
+    }
+    .clipboard-label {
+      font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--yellow); margin-bottom:6px; display:flex; align-items:center; gap:8px;
+    }
+    .clipboard-label::after { content:''; flex:1; height:1px; background:rgba(253,202,15,0.2); }
+    .clipboard-title { font-family:'Merriweather',serif; font-size:1.6rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+    .clipboard-subtitle { font-size:0.85rem; color:var(--text-muted); }
+    .clipboard-body { padding:28px 36px 32px; }
+    .clip-section { margin-bottom:28px; }
+    .clip-section-title {
+      font-size:0.65rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+      color:#7a6a5a; padding-bottom:8px; border-bottom:2px dashed #c8b89a;
+      margin-bottom:16px; display:flex; align-items:center; gap:8px;
+    }
+    .clip-section-title::before { content:''; width:8px; height:8px; border-radius:50%; background:#7a6a5a; flex-shrink:0; }
+    .clip-field { margin-bottom:12px; }
+    .clip-field-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8a7a6a; margin-bottom:3px; }
+    .clip-field-value { font-size:0.92rem; color:#2a2020; line-height:1.55; }
+    .clip-field-value strong { color:var(--navy); }
+    .clip-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+    .clip-diagnosis {
+      background:rgba(34,65,126,0.06); border:1.5px solid rgba(34,65,126,0.15);
+      border-radius:8px; padding:10px 14px;
+    }
+    .clip-diagnosis-name  { font-size:0.82rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
+    .clip-diagnosis-detail { font-size:0.76rem; color:#5a6a82; line-height:1.45; }
+    .clip-alert {
+      background:#fff3cd; border:1.5px solid #f0c000; border-radius:8px;
+      padding:12px 16px; display:flex; gap:10px; align-items:flex-start; margin-bottom:14px;
+    }
+    .clip-alert-icon { font-size:1.1rem; flex-shrink:0; }
+    .clip-alert-text { font-size:0.84rem; color:#7a5500; line-height:1.55; }
+    .clip-alert-text strong { color:#5a3a00; }
+    .clip-scenario-box {
+      background:#fffef8; border:2px solid #e8d8a0; border-radius:10px;
+      padding:20px 24px; margin-bottom:20px;
+      font-family:'Merriweather',serif; font-size:0.92rem; color:#2a2020; line-height:1.75;
+    }
+    .clip-scenario-box p { margin-bottom:10px; }
+    .clip-scenario-box p:last-child { margin-bottom:0; }
+    .clip-speech {
+      background:#fff; border-left:4px solid var(--navy);
+      border-radius:0 8px 8px 0; padding:14px 18px; margin:12px 0;
+      font-style:italic; color:#2a2020; font-size:0.92rem;
+    }
+    .clip-learning-focus {
+      background:rgba(1,151,222,0.06); border:1px solid rgba(1,151,222,0.2);
+      border-radius:10px; padding:16px 20px; margin-bottom:20px;
+    }
+    .clf-title { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
+    .clf-items { list-style:none; display:flex; flex-direction:column; gap:7px; }
+    .clf-items li { display:flex; align-items:flex-start; gap:8px; font-size:0.84rem; color:#2a4060; line-height:1.5; }
+    .clf-dot { width:6px; height:6px; border-radius:50%; background:var(--blue); flex-shrink:0; margin-top:6px; }
+    .clip-activity-box {
+      background:var(--navy); border-radius:10px; padding:20px 24px;
+    }
+    .cab-label { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:var(--yellow); margin-bottom:12px; }
+    .cab-question { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--white); margin-bottom:14px; line-height:1.5; }
+    .cab-textarea {
+      width:100%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15);
+      border-radius:8px; padding:12px 16px; color:var(--white); font-family:'DM Sans',sans-serif;
+      font-size:0.88rem; line-height:1.6; resize:vertical; min-height:120px;
+    }
+    .cab-textarea:focus { outline:none; border-color:var(--yellow); background:rgba(255,255,255,0.1); }
+    .cab-textarea::placeholder { color:rgba(255,255,255,0.3); }
+    .cab-reveal-btn {
+      display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+      padding:10px 20px; border-radius:8px; border:2px solid rgba(253,202,15,0.5);
+      background:transparent; color:var(--yellow); font-family:'DM Sans',sans-serif;
+      font-size:0.86rem; font-weight:600; cursor:pointer; transition:all 0.2s;
+    }
+    .cab-reveal-btn:hover { background:rgba(253,202,15,0.1); border-color:var(--yellow); }
+    .cab-reveal-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
+    .cab-answer { display:none; margin-top:14px; }
+    .cab-answer.show { display:block; animation:pageIn 0.3s ease; }
+    .cab-answer-inner {
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px; padding:16px 20px;
+    }
+    .cab-answer-title { font-size:0.65rem; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; color:#6ee7b7; margin-bottom:10px; }
+    .cab-answer ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+    .cab-answer li { display:flex; align-items:flex-start; gap:8px; font-size:0.85rem; color:var(--text-muted); line-height:1.55; }
+    .caa-dot { width:6px; height:6px; border-radius:50%; background:#2ecc8e; flex-shrink:0; margin-top:6px; }
+    @media(max-width:640px){ .clip-grid{grid-template-columns:1fr;} .case-wrap{padding:24px 16px 40px;} .clipboard-body{padding:20px 20px 24px;} .clipboard-header{padding:24px 20px 16px;} }
+
+    /* ─── MCQ (Page 9) ──────────────────────────────────────── */
+    .mcq-wrap { max-width:900px; margin:0 auto; padding:40px 48px 64px; }
+    .mcq-header { text-align:center; margin-bottom:36px; }
+    .mcq-eyebrow {
+      display:inline-block; background:var(--navy); color:var(--yellow);
+      font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+      padding:6px 16px; border-radius:20px; margin-bottom:14px;
+    }
+    .mcq-header h2 { font-family:'Merriweather',serif; font-size:1.8rem; color:var(--navy); margin-bottom:8px; }
+    .mcq-header p  { color:#5a6a82; font-size:0.9rem; }
+    .mcq-progress { display:flex; gap:8px; align-items:center; justify-content:center; margin-bottom:28px; flex-wrap:wrap; }
+    .mcq-dot {
+      width:10px; height:10px; border-radius:50%;
+      background:rgba(34,65,126,0.15); border:2px solid rgba(34,65,126,0.2);
+      transition:all 0.3s;
+    }
+    .mcq-dot.answered { background:var(--navy); border-color:var(--navy); }
+    .mcq-dot.correct  { background:#059669; border-color:#059669; }
+    .mcq-dot.incorrect { background:#dc2626; border-color:#dc2626; }
+    .mcq-q-card {
+      display:none; background:var(--white); border-radius:14px;
+      border:1.5px solid #d0daea; box-shadow:0 4px 20px rgba(0,0,0,0.08);
+      overflow:hidden;
+    }
+    .mcq-q-card.active { display:block; animation:pageIn 0.3s ease; }
+    .mcq-q-header { background:var(--navy); padding:18px 28px; }
+    .mcq-q-num { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--yellow); margin-bottom:6px; }
+    .mcq-q-text { font-family:'Merriweather',serif; font-size:1rem; color:var(--white); line-height:1.6; }
+    .mcq-options { padding:20px 24px; display:flex; flex-direction:column; gap:10px; }
+    .mcq-option {
+      display:flex; align-items:flex-start; gap:12px; padding:14px 18px;
+      border:2px solid #d0daea; border-radius:10px; cursor:pointer;
+      transition:all 0.2s; font-size:0.88rem; color:#2a3a54; line-height:1.5;
+      background:#fafbfd;
+    }
+    .mcq-option:hover:not(.locked) { border-color:var(--navy); background:#f0f4f9; }
+    .mcq-option:focus-visible { outline:3px solid var(--yellow); }
+    .mcq-option.selected  { border-color:var(--navy); background:rgba(34,65,126,0.06); }
+    .mcq-option.correct   { border-color:#059669; background:rgba(5,150,105,0.07); }
+    .mcq-option.incorrect { border-color:#dc2626; background:rgba(220,38,38,0.07); }
+    .mcq-option.locked    { cursor:default; }
+    .mcq-option-letter {
+      width:28px; height:28px; border-radius:50%; border:2px solid #c0cce0;
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.78rem; font-weight:700; color:#5a6a82; flex-shrink:0;
+      transition:all 0.2s;
+    }
+    .mcq-option.selected  .mcq-option-letter { background:var(--navy); border-color:var(--navy); color:var(--white); }
+    .mcq-option.correct   .mcq-option-letter { background:#059669; border-color:#059669; color:var(--white); }
+    .mcq-option.incorrect .mcq-option-letter { background:#dc2626; border-color:#dc2626; color:var(--white); }
+    .mcq-submit-row { padding:0 24px 20px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .mcq-submit-btn {
+      padding:12px 28px; border-radius:8px; border:none; background:var(--navy);
+      color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600;
+      cursor:pointer; transition:all 0.2s;
+    }
+    .mcq-submit-btn:hover { background:var(--navy-light); transform:translateY(-1px); }
+    .mcq-submit-btn:disabled { opacity:0.4; cursor:not-allowed; transform:none; }
+    .mcq-submit-btn:focus-visible { outline:3px solid var(--yellow); outline-offset:2px; }
+    .mcq-nav-row { display:flex; gap:10px; }
+    .mcq-feedback {
+      display:none; margin:0 24px 20px; padding:14px 18px; border-radius:10px;
+      font-size:0.86rem; line-height:1.65;
+    }
+    .mcq-feedback.show { display:block; animation:pageIn 0.25s ease; }
+    .mcq-feedback.correct   { background:rgba(5,150,105,0.1); border:1px solid rgba(5,150,105,0.3); color:#064e3b; }
+    .mcq-feedback.incorrect { background:rgba(220,38,38,0.08); border:1px solid rgba(220,38,38,0.25); color:#7f1d1d; }
+    .mcq-feedback-badge { font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; display:block; }
+    .mcq-results {
+      display:none; background:var(--white); border-radius:14px;
+      border:1.5px solid #d0daea; text-align:center; padding:40px 28px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.08);
+    }
+    .mcq-results.show { display:block; animation:pageIn 0.35s ease; }
+    .mcq-results-icon  { font-size:3rem; margin-bottom:12px; }
+    .mcq-results-score { font-family:'Merriweather',serif; font-size:3rem; font-weight:700; color:var(--navy); line-height:1; }
+    .mcq-results-label { font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#7a8a9e; margin:8px 0 20px; }
+    .mcq-results-msg   { font-size:0.9rem; color:#4a5a72; line-height:1.7; max-width:500px; margin:0 auto 24px; }
+    .mcq-results-breakdown { display:flex; gap:24px; justify-content:center; margin-bottom:24px; }
+    .mcq-result-stat   { text-align:center; }
+    .mcq-result-stat-num { font-family:'Merriweather',serif; font-size:2rem; font-weight:700; }
+    .mcq-result-stat-lbl { font-size:0.72rem; color:#7a8a9e; text-transform:uppercase; letter-spacing:0.07em; }
+    @media(max-width:640px){ .mcq-wrap{padding:24px 16px 40px;} }
+
+    /* ─── FIVE PRIORITIES FLIPCARD (Page 11) ────────────────── */
+    .priorities-wrap { max-width:1100px; margin:0 auto; padding:40px 48px 64px; }
+    .flipcard-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:32px; }
+    .flipcard { perspective:800px; height:240px; cursor:pointer; }
+    .flipcard-inner {
+      position:relative; width:100%; height:100%;
+      transform-style:preserve-3d; transition:transform 0.55s cubic-bezier(0.4,0.2,0.2,1);
+      border-radius:14px;
+    }
+    .flipcard.flipped .flipcard-inner { transform:rotateY(180deg); }
+    .flipcard-front, .flipcard-back {
+      position:absolute; inset:0; backface-visibility:hidden;
+      border-radius:14px; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; padding:20px; text-align:center;
+    }
+    .flipcard-front { border:2px solid var(--border); background:var(--surface); }
+    .flipcard-back  { transform:rotateY(180deg); padding:16px; }
+    .fc-num   { font-family:'Merriweather',serif; font-size:2rem; font-weight:700; opacity:0.3; margin-bottom:6px; }
+    .fc-icon  { font-size:2.2rem; margin-bottom:10px; }
+    .fc-title { font-family:'Merriweather',serif; font-size:0.9rem; font-weight:700; color:var(--white); line-height:1.3; }
+    .fc-hint  { font-size:0.68rem; color:var(--text-muted); margin-top:8px; letter-spacing:0.05em; }
+    .fc-back-title { font-family:'Merriweather',serif; font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:10px; }
+    .fc-back-body  { font-size:0.76rem; color:var(--text-muted); line-height:1.65; }
+    .priorities-instruction { text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.35); margin-bottom:24px; letter-spacing:0.04em; }
+    @media(max-width:900px){ .flipcard-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:480px){ .flipcard-grid{grid-template-columns:1fr;} .flipcard{height:160px;} }
+
+    /* ── PAGE BACKGROUND OVERRIDES (fix styles.css conflicts) ── */
+    #page-2  { background: #f0f4f9 !important; }
+    #page-4  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
+    #page-5  { background: #f0f4f9 !important; }
+    #page-6  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
+    #page-7  { background: #f0f4f9 !important; }
+    #page-8  { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
+    #page-9  { background: #f0f4f9 !important; }
+    #page-10 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
+    #page-11 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%) !important; }
+
+    /* ── PAGE 2: Recognising Deterioration — light bg needs navy text ── */
+    #page-2 .definition-header h2       { color: var(--navy) !important; }
+    #page-2 .definition-header p        { color: #5a6a82 !important; }
+    #page-2 .intro-eyebrow              { background: var(--navy) !important; color: var(--yellow) !important; border: none !important; animation: none !important; }
+    #page-2 .intro-eyebrow::before      { display: none !important; }
+    #page-2 .definition-lead           { background: var(--navy) !important; color: var(--white) !important; border: none !important; }
+    #page-2 .definition-lead em        { color: var(--yellow) !important; }
+    #page-2 .def-card                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; }
+    #page-2 .def-card-title            { color: var(--navy) !important; }
+    #page-2 .def-card-body             { color: #4a5a72 !important; }
+    #page-2 .definition-not            { background: rgba(34,65,126,0.05) !important; border: 1.5px solid rgba(34,65,126,0.15) !important; }
+    #page-2 .definition-not-title      { color: var(--navy) !important; }
+    #page-2 .definition-not-title svg  { stroke: var(--navy) !important; }
+    #page-2 .not-item                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; color: #3a4a60 !important; }
+    #page-2 .not-item-icon             { color: var(--navy) !important; font-style: normal !important; }
+    #page-2 .not-item strong           { color: var(--navy) !important; }
+    #page-2 .btn-secondary             { color: var(--navy) !important; border-color: rgba(34,65,126,0.3) !important; background: transparent !important; }
+    #page-2 .btn-primary               { background: var(--navy) !important; color: var(--white) !important; border-color: var(--navy) !important; }
+
+    /* ── PAGE 5: Diagnosis of Dying — light bg needs navy text ── */
+    #page-5 .outcomes-eyebrow          { background: var(--navy) !important; color: var(--yellow) !important; }
+    #page-5 .outcomes-title-area h2    { color: var(--navy) !important; }
+    #page-5 .outcomes-title-area p     { color: #5a6a82 !important; }
+    #page-5 .dod-sign                  { background: var(--white) !important; border: 1.5px solid #d0daea !important; }
+    #page-5 .dod-sign-title            { color: var(--navy) !important; }
+    #page-5 .dod-sign-body             { color: #4a5a72 !important; }
+
+    /* ── PAGE 7: Meet Bob — light bg ── */
+    #page-7 .outcomes-eyebrow          { background: var(--navy) !important; color: var(--yellow) !important; }
+    #page-7 .outcomes-title-area h2    { color: var(--navy) !important; }
+    #page-7 .outcomes-title-area p     { color: #5a6a82 !important; }
+
+    /* ── PAGE 9: MCQ — light bg ── */
+    #page-9 .mcq-eyebrow               { color: var(--navy) !important; }
+    #page-9 h2                         { color: var(--navy) !important; }
+    #page-9 p                          { color: #5a6a82 !important; }
+    #page-9 .mcq-q-card                { background: var(--white) !important; border: 1.5px solid #d0daea !important; box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important; }
+    #page-9 .mcq-q-num                 { color: var(--blue) !important; }
+    #page-9 .mcq-q-text                { color: var(--navy) !important; }
+    #page-9 .mcq-option                { background: #f8fafb !important; border: 1.5px solid #d0daea !important; color: #2c3e60 !important; }
+    #page-9 .mcq-option:hover          { border-color: var(--navy) !important; background: rgba(34,65,126,0.04) !important; }
+    #page-9 .mcq-option.selected       { border-color: var(--navy) !important; background: rgba(34,65,126,0.08) !important; }
+    #page-9 .mcq-option-letter         { background: rgba(34,65,126,0.1) !important; color: var(--navy) !important; }
+    #page-9 .mcq-option.correct        { border-color: #059669 !important; background: rgba(5,150,105,0.08) !important; }
+    #page-9 .mcq-option.incorrect      { border-color: #dc2626 !important; background: rgba(220,38,38,0.06) !important; }
+    #page-9 .mcq-submit-btn           { background: var(--navy) !important; }
+    #page-9 .mcq-feedback.correct     { background: rgba(5,150,105,0.08) !important; border-color: rgba(5,150,105,0.3) !important; color: #064e3b !important; }
+    #page-9 .mcq-feedback.incorrect   { background: rgba(220,38,38,0.06) !important; border-color: rgba(220,38,38,0.2) !important; color: #7f1d1d !important; }
+    #page-9 .mcq-dot                   { background: rgba(34,65,126,0.15) !important; }
+    #page-9 .mcq-dot.correct           { background: #059669 !important; }
+    #page-9 .mcq-dot.incorrect         { background: #dc2626 !important; }
+
+    /* ── FLIPCARD FIX: hide front when flipped ── */
+    .flipcard-front  { -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important; }
+    .flipcard-back   { -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important; }
+    .flipcard-inner  { -webkit-transform-style: preserve-3d !important; transform-style: preserve-3d !important; }
+
+
+
+    /* ── VIDEO EMBED ── */
+    .video-wrap {
+      background: rgba(0,0,0,0.5); border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border); margin-bottom: 24px; position: relative;
+    }
+    .video-placeholder {
+      aspect-ratio: 16/9; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      background: rgba(255,255,255,0.03); padding: 40px;
+    }
+    .video-placeholder-icon  { font-size: 3rem; opacity: 0.5; }
+    .video-placeholder-text  { font-size: 0.88rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
+    .video-placeholder-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 4px; }
+    .video-activity-box {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px 28px; margin-top: 24px;
+    }
+    .vab-label    { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin-bottom: 8px; }
+    .vab-question { font-family: 'Merriweather', serif; font-size: 0.95rem; color: var(--white); line-height: 1.6; margin-bottom: 16px; }
+    .vab-textarea {
+      width: 100%; background: rgba(255,255,255,0.05); border: 2px solid var(--border);
+      border-radius: 8px; padding: 14px 16px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--white); line-height: 1.65; resize: vertical;
+      min-height: 130px; transition: border-color 0.2s;
+    }
+    .vab-textarea:focus    { outline: none; border-color: var(--blue); }
+    .vab-textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .vab-reveal-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+      padding: 10px 20px; border-radius: 8px;
+      background: rgba(253,202,15,0.1); border: 1.5px solid rgba(253,202,15,0.3);
+      color: var(--yellow); font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .vab-reveal-btn:hover { background: rgba(253,202,15,0.18); }
+    .vab-answer { display: none; margin-top: 14px; background: rgba(1,151,222,0.07); border: 1px solid rgba(1,151,222,0.2); border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0; padding: 16px 20px; }
+    .vab-answer.show { display: block; animation: pageIn 0.3s ease; }
+    .vab-answer-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .vab-answer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .vab-answer li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
+    .vab-answer-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 7px; }
+
+    /* ── MED RECORD CARD (Bob page 7) ── */
+    .med-record {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; margin-bottom: 24px;
+    }
+    .med-record-header {
+      background: var(--navy); padding: 20px 28px;
+      border-bottom: 3px solid var(--yellow);
+    }
+    .med-record-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--yellow); margin-bottom: 4px; }
+    .med-record-name { font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); }
+    .med-record-sub  { font-size: 0.83rem; color: var(--text-muted); margin-top: 2px; }
+    .med-record-body { padding: 24px 28px; }
+    .med-alert {
+      background: rgba(253,202,15,0.08); border: 1.5px solid rgba(253,202,15,0.3);
+      border-radius: 10px; padding: 14px 18px; display: flex; gap: 12px;
+      align-items: flex-start; margin-bottom: 20px;
+    }
+    .med-alert-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .med-alert-text { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
+    .med-alert-text strong { color: var(--yellow); }
+    .med-diag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .med-diag-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+    }
+    .med-diag-name   { font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .med-diag-detail { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .med-diag-card.critical { border-color: rgba(220,38,38,0.4); background: rgba(220,38,38,0.06); }
+    .med-diag-card.critical .med-diag-name { color: #fca5a5; }
+    @media(max-width:640px){ .med-diag-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════ -->
+<header role="banner">
+  <a href="index.html" class="brand" aria-label="St Barnabas Hospice — return to home">
+    <div class="brand-logo">
+      <img src="images/logo.jpg" alt="St Barnabas Hospice" style="width:100%;height:100%;object-fit:contain;display:block;">
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">St Barnabas Hospice</span>
+      <span class="brand-tagline">E-Learning Platform</span>
+    </div>
+  </a>
+  <div class="module-label">
+    <strong>Deterioration &amp; Recognition</strong>
+    Palliative Care Fundamentals · Module 2
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════════
+     PROGRESS NAV
+══════════════════════════════════════════════════════ -->
+<nav aria-label="Module progress" class="progress-nav">
+  <button class="nav-step current" id="nav-1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Introduction"><div class="nav-step-num">1</div><span class="nav-step-label">Intro</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-2" onclick="navClick(2)" disabled aria-label="Step 2: Recognising Deterioration"><div class="nav-step-num">2</div><span class="nav-step-label">Recognition</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-3" onclick="navClick(3)" disabled aria-label="Step 3: Assessment Tools"><div class="nav-step-num">3</div><span class="nav-step-label">Tools</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-4" onclick="navClick(4)" disabled aria-label="Step 4: Timeline"><div class="nav-step-num">4</div><span class="nav-step-label">Timeline</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-5" onclick="navClick(5)" disabled aria-label="Step 5: Diagnosis of Dying"><div class="nav-step-num">5</div><span class="nav-step-label">Diagnosis</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-6" onclick="navClick(6)" disabled aria-label="Step 6: Trajectories"><div class="nav-step-num">6</div><span class="nav-step-label">Trajectories</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-7" onclick="navClick(7)" disabled aria-label="Step 7: Five Priorities"><div class="nav-step-num">7</div><span class="nav-step-label">Priorities</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-8" onclick="navClick(8)" disabled aria-label="Step 8: Meet Bob"><div class="nav-step-num">8</div><span class="nav-step-label">Bob 1</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-9" onclick="navClick(9)" disabled aria-label="Step 9: The Visit"><div class="nav-step-num">9</div><span class="nav-step-label">Bob 2</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-10" onclick="navClick(10)" disabled aria-label="Step 10: MCQ"><div class="nav-step-num">10</div><span class="nav-step-label">MCQ</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-11" onclick="navClick(11)" disabled aria-label="Step 11: Active Dying"><div class="nav-step-num">11</div><span class="nav-step-label">Bob 3</span></button>
+</nav>
+
+<div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress">
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label" aria-live="polite">0% complete</div>
+</div>
+
+<main id="main-content">
+
+<!-- ════════════════════════════════════════════
+     PAGE 1 — INTRODUCTION (Learning outcomes in panel)
+═════════════════════════════════════════════ -->
+<section class="page active" id="page-1" aria-label="Introduction">
+  <div class="intro-hero">
+    <div class="intro-text">
+      <div class="intro-eyebrow" role="note">Module Introduction</div>
+      <h1 class="intro-heading">Deterioration<br>&amp; <em>Recognition</em></h1>
+      <p class="intro-desc">
+        Recognising when a patient's condition is changing — and responding appropriately — is one of the most critical skills in palliative and end of life care. This module explores signs of deterioration, validated tools, care timelines, dying trajectories, and follows the journey of a real case study.
+      </p>
+      <div class="intro-instruction" role="note">
+        <div class="intro-instruction-icon" aria-hidden="true">📋</div>
+        <p><strong>Work through each section in order.</strong> The module includes interactive tools, a horizontal care timeline, clickable trajectory diagrams, a clinical case study, and an MCQ assessment.</p>
+      </div>
+      <div class="continue-row">
+        <button class="btn btn-primary" onclick="goToPage(2)">Begin Module <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+
+    <!-- Learning Outcomes in the key context panel -->
+    <div class="intro-facts-panel" role="complementary" aria-label="Learning outcomes for this module">
+      <div class="facts-panel-header">
+        <div class="facts-panel-eyebrow">Learning Outcomes</div>
+        <div class="facts-panel-title">By the end of this module you will be able to</div>
+      </div>
+      <div class="facts-panel-body" style="gap:0; padding:16px 22px;">
+        <div class="fact-item" style="padding:10px 0;">
+          <div class="fact-icon" style="font-size:1rem; background:rgba(253,202,15,0.12); border:1px solid rgba(253,202,15,0.25); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--yellow); flex-shrink:0;">1</div>
+          <div><div class="fact-label">Define</div><p class="fact-text" style="font-size:0.8rem;">Clinical deterioration across physical, functional and psychological domains</p></div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item" style="padding:10px 0;">
+          <div class="fact-icon" style="background:rgba(253,202,15,0.12); border:1px solid rgba(253,202,15,0.25); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--yellow); flex-shrink:0;">2</div>
+          <div><div class="fact-label">Apply</div><p class="fact-text" style="font-size:0.8rem;">Validated tools — SPICT™, AKPS, CFS, PIG, Analgesic Ladder, Pain Assessment</p></div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item" style="padding:10px 0;">
+          <div class="fact-icon" style="background:rgba(253,202,15,0.12); border:1px solid rgba(253,202,15,0.25); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--yellow); flex-shrink:0;">3</div>
+          <div><div class="fact-label">Explain</div><p class="fact-text" style="font-size:0.8rem;">The Months–Days–Hours palliative care timeline</p></div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item" style="padding:10px 0;">
+          <div class="fact-icon" style="background:rgba(253,202,15,0.12); border:1px solid rgba(253,202,15,0.25); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--yellow); flex-shrink:0;">4</div>
+          <div><div class="fact-label">Describe</div><p class="fact-text" style="font-size:0.8rem;">Three dying trajectories and the signs of active dying</p></div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item" style="padding:10px 0;">
+          <div class="fact-icon" style="background:rgba(253,202,15,0.12); border:1px solid rgba(253,202,15,0.25); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:var(--yellow); flex-shrink:0;">5</div>
+          <div><div class="fact-label">Apply</div><p class="fact-text" style="font-size:0.8rem;">Learning to the Bob Evans case study and Five Priorities of Care</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 2 — RECOGNISING DETERIORATION
+═════════════════════════════════════════════ -->
+<section class="page" id="page-2" aria-label="Recognising Deterioration">
+  <div class="definition-wrap">
+    <div class="definition-header">
+      <div class="intro-eyebrow" style="margin-bottom:0;">Core Concepts</div>
+      <h2>Recognising Deterioration</h2>
+      <p>In palliative care, deterioration may not follow a predictable or linear path. Recognising it early — across multiple domains — creates a critical window for timely, compassionate intervention.</p>
+    </div>
+    <div class="definition-lead" role="note">
+      Clinical deterioration is a <em>change in condition</em> — physical, functional, or psychological — that signals the illness is progressing and the patient's needs are increasing.
+    </div>
+    <div class="definition-grid" role="list">
+      <div class="def-card" role="listitem">
+        <div class="def-card-icon" style="background:rgba(239,68,68,0.14);">🫁</div>
+        <div><div class="def-card-title">Physical Signs</div><p class="def-card-body">Increased breathlessness, uncontrolled pain, new or worsening fatigue, reduced appetite, significant weight loss, or new infections — all signal a potential change in clinical condition.</p></div>
+      </div>
+      <div class="def-card" role="listitem">
+        <div class="def-card-icon" style="background:rgba(124,110,245,0.14);">🚶</div>
+        <div><div class="def-card-title">Functional Decline</div><p class="def-card-body">Reduced ability to carry out daily activities, increased dependence on others, spending more time in bed or a chair — often the earliest observable indicator of deterioration.</p></div>
+      </div>
+      <div class="def-card" role="listitem">
+        <div class="def-card-icon" style="background:rgba(1,151,222,0.14);">🧠</div>
+        <div><div class="def-card-title">Psychological &amp; Emotional</div><p class="def-card-body">Increased anxiety, withdrawal, changes in mood or communication. Psychological deterioration is as clinically significant as physical change and must not be dismissed.</p></div>
+      </div>
+      <div class="def-card" role="listitem">
+        <div class="def-card-icon" style="background:rgba(46,204,142,0.12);">🩺</div>
+        <div><div class="def-card-title">Clinical Indicators</div><p class="def-card-body">Altered consciousness, changes in vital signs, unexpected admissions, or new condition-specific markers all warrant structured reassessment using a validated tool.</p></div>
+      </div>
+    </div>
+    <div class="definition-not" role="note">
+      <div class="definition-not-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Why deterioration can be harder to recognise in palliative care</div>
+      <div class="definition-not-grid">
+        <div class="not-item"><span class="not-item-icon">!</span><span>Symptoms may already be complex — new changes can be masked by existing illness</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Decline is often gradual, making it hard to distinguish from the expected trajectory</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Patients may minimise symptoms to avoid worrying loved ones or professionals</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Clinician familiarity with a patient can lead to unintentional normalisation of change</span></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(1)" style="color:var(--navy);border-color:rgba(34,65,126,0.3);">← Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(3)" style="background:var(--navy);color:var(--white);border-color:var(--navy);">Continue to Tools →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 3 — PDF TOOL VIEWER (actual tool images)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-3" aria-label="Recognition and Identification Tools — PDF viewer">
+  <div class="pdfv-wrap">
+    <div class="definition-header" style="margin-bottom:24px;">
+      <div class="intro-eyebrow" style="margin-bottom:0;">Clinical Tools</div>
+      <h2 style="color:var(--white);">Recognition &amp; Identification Tools</h2>
+      <p style="color:var(--text-muted);">Select each tool to view the full document, understand when to use it, and why it matters in palliative care practice.</p>
+    </div>
+
+    <div class="pdfv-tabs" role="tablist">
+      <button class="pdfv-tab active" id="ptab-spict"  role="tab" aria-selected="true"  aria-controls="ppanel-spict"  onclick="showPdfTool('spict')">SPICT™</button>
+      <button class="pdfv-tab"        id="ptab-akps"   role="tab" aria-selected="false" aria-controls="ppanel-akps"   onclick="showPdfTool('akps')">AKPS</button>
+      <button class="pdfv-tab"        id="ptab-pig"    role="tab" aria-selected="false" aria-controls="ppanel-pig"    onclick="showPdfTool('pig')">PIG Tool</button>
+      <button class="pdfv-tab"        id="ptab-cfs"    role="tab" aria-selected="false" aria-controls="ppanel-cfs"    onclick="showPdfTool('cfs')">Clinical Frailty Scale</button>
+      <button class="pdfv-tab"        id="ptab-ladder" role="tab" aria-selected="false" aria-controls="ppanel-ladder" onclick="showPdfTool('ladder')">Analgesic Ladder</button>
+      <button class="pdfv-tab"        id="ptab-pain"   role="tab" aria-selected="false" aria-controls="ppanel-pain"   onclick="showPdfTool('pain')">Pain Assessment</button>
+    </div>
+
+    <!-- ─── SPICT ─────────────────────────────────────────── -->
+    <div class="pdfv-panel active" id="ppanel-spict" role="tabpanel" aria-labelledby="ptab-spict">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('spict-img',-1)" aria-label="Zoom out">&#8722;</button>
+            <span class="pdfv-zoom-level" id="spict-level">100%</span>
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('spict-img',1)" aria-label="Zoom in">&#43;</button>
+            <button class="pdfv-zoom-reset" onclick="zoomReset('spict-img')">Reset</button>
+          </div>
+          <div class="pdfv-scroll-outer" id="spict-outer">
+            <div class="pdfv-scroll-inner">
+              <img class="pdfv-img" id="spict-img" src="images/tools/spict.jpg" alt="SPICT — Supportive and Palliative Care Indicators Tool full document" draggable="false">
+            </div>
+          </div>
+          <div class="pdfv-scroll-hint">Use +/&minus; to zoom &middot; scroll to pan when zoomed in</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#0197de;">
+            <div class="pdfv-subtitle">Supportive &amp; Palliative Care Indicators Tool</div>
+            <div class="pdfv-title">SPICT</div>
+            <p class="pdfv-desc">A validated trigger tool developed at the University of Edinburgh. Identifies people whose health is deteriorating who may benefit from holistic needs assessment and advance care planning.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">All settings</span><span class="pdfv-badge">2022</span></div>
+          </div>
+          <div class="pdfv-why-box">
+            <div class="pdfv-why-label">When &amp; Why We Use SPICT</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot"></div>When you would not be surprised if the patient died in the next 12 months (the Surprise Question)</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot"></div>At any unplanned admission or GP contact for a life-limiting condition</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot"></div>Triggers a holistic review — supports clinical judgement, does not replace it</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot"></div>Result prompts: review medications, agree care plan, consider specialist referral</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── AKPS ──────────────────────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-akps" role="tabpanel" aria-labelledby="ptab-akps">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('akps-img',-1)" aria-label="Zoom out">&#8722;</button>
+            <span class="pdfv-zoom-level" id="akps-level">100%</span>
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('akps-img',1)" aria-label="Zoom in">&#43;</button>
+            <button class="pdfv-zoom-reset" onclick="zoomReset('akps-img')">Reset</button>
+          </div>
+          <div class="pdfv-scroll-outer" id="akps-outer">
+            <div class="pdfv-scroll-inner">
+              <img class="pdfv-img" id="akps-img" src="images/tools/akps.jpg" alt="AKPS — Australia-modified Karnofsky Performance Scale full document" draggable="false">
+            </div>
+          </div>
+          <div class="pdfv-scroll-hint">Use +/&minus; to zoom &middot; scroll to pan when zoomed in</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#0d9488;">
+            <div class="pdfv-subtitle">Australia-modified Karnofsky Performance Scale</div>
+            <div class="pdfv-title">AKPS</div>
+            <p class="pdfv-desc">A validated 11-point functional status scale used to rate a patient's ability to perform everyday tasks and track functional trajectory over time.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">AKPS &le;50 = significant deterioration</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#0d9488;">
+            <div class="pdfv-why-label" style="color:#0d9488;">When &amp; Why We Use the AKPS</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#0d9488;"></div>At every clinical encounter — document and compare with previous scores</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#0d9488;"></div>A declining score over time is a more reliable indicator than a single snapshot</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#0d9488;"></div>AKPS &le;30 is associated with prognosis of weeks, not months</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#0d9488;"></div>Use alongside other tools — AKPS measures function, not symptom burden alone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PIG Tool ──────────────────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-pig" role="tabpanel" aria-labelledby="ptab-pig">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('pig-img',-1)" aria-label="Zoom out">&#8722;</button>
+            <span class="pdfv-zoom-level" id="pig-level">100%</span>
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('pig-img',1)" aria-label="Zoom in">&#43;</button>
+            <button class="pdfv-zoom-reset" onclick="zoomReset('pig-img')">Reset</button>
+            <div class="pdfv-page-nav">
+              <button class="pdfv-page-btn" id="pig-prev" onclick="pigPage(1)" disabled>Prev</button>
+              <span class="pdfv-page-indicator" id="pig-indicator">1 / 2</span>
+              <button class="pdfv-page-btn" id="pig-next" onclick="pigPage(2)">Next</button>
+            </div>
+          </div>
+          <div class="pdfv-scroll-outer" id="pig-outer">
+            <div class="pdfv-scroll-inner">
+              <img class="pdfv-img" id="pig-img" src="images/tools/pig1.jpg" alt="PIG Tool — GSF Proactive Identification Guidance page 1" draggable="false">
+            </div>
+          </div>
+          <div class="pdfv-scroll-hint">Use +/&minus; to zoom &middot; scroll to pan &middot; Prev/Next for pages</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#7c6ef5;">
+            <div class="pdfv-subtitle">GSF Proactive Identification Guidance (7th Edition)</div>
+            <div class="pdfv-title">PIG Tool</div>
+            <p class="pdfv-desc">Enables earlier identification of people who may need additional supportive care as they near end of life. Applicable to all conditions, all settings, and all care providers.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">Three-step framework</span><span class="pdfv-badge">2 pages</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#7c6ef5;">
+            <div class="pdfv-why-label" style="color:#c4b5fd;">When &amp; Why We Use the PIG Tool</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#7c6ef5;"></div>Step 1: Surprise Question — would you be surprised if this patient died in the next year?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#7c6ef5;"></div>Designed for proactive use — before a crisis, not in response to one</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#7c6ef5;"></div>Earlier identification leads to better planning and fewer crisis admissions</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#7c6ef5;"></div>Positive result adds patient to a palliative care register, triggering proactive care</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Clinical Frailty Scale ────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-cfs" role="tabpanel" aria-labelledby="ptab-cfs">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('cfs-img',-1)" aria-label="Zoom out">&#8722;</button>
+            <span class="pdfv-zoom-level" id="cfs-level">100%</span>
+            <button class="pdfv-zoom-btn" onclick="zoomDoc('cfs-img',1)" aria-label="Zoom in">&#43;</button>
+            <button class="pdfv-zoom-reset" onclick="zoomReset('cfs-img')">Reset</button>
+          </div>
+          <div class="pdfv-scroll-outer" id="cfs-outer">
+            <div class="pdfv-scroll-inner">
+              <img class="pdfv-img" id="cfs-img" src="images/tools/cfs.jpg" alt="Clinical Frailty Scale — Rockwood full document" draggable="false">
+            </div>
+          </div>
+          <div class="pdfv-scroll-hint">Use +/&minus; to zoom &middot; scroll to pan when zoomed in</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#fdca0f;">
+            <div class="pdfv-subtitle">Rockwood Clinical Frailty Scale</div>
+            <div class="pdfv-title">Clinical Frailty Scale</div>
+            <p class="pdfv-desc">A validated 9-point frailty assessment. Scores &ge;5 indicate significant frailty; scores &ge;7 may indicate the patient is approaching end of life and should prompt ACP review.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">CFS &ge;7 = approaching EOL</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#fdca0f;">
+            <div class="pdfv-why-label" style="color:#fdca0f;">When &amp; Why We Use the Clinical Frailty Scale</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#fdca0f;"></div>Particularly useful in older adults and those with dementia or multiple long-term conditions</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#fdca0f;"></div>CFS &ge;7 warrants a care plan review including advance care planning</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#fdca0f;"></div>Rate of change across repeated assessments is as important as the absolute score</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#fdca0f;"></div>Guides conversations about goals of care, treatment escalation, and preferred place of death</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Analgesic Ladder ───────────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-ladder" role="tabpanel" aria-labelledby="ptab-ladder">
+      <div class="pdfv-layout" style="grid-template-columns:1fr;">
+        <div class="pdfv-info" style="max-width:680px;">
+          <div class="pdfv-header" style="border-left-color:#ef4444;">
+            <div class="pdfv-subtitle">WHO Three-Step Analgesic Ladder</div>
+            <div class="pdfv-title">Analgesic Ladder</div>
+            <p class="pdfv-desc">The WHO Analgesic Ladder provides a stepwise framework for pain management — from non-opioid analgesics through weak opioids to strong opioids — adjusting treatment to pain severity and patient response.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">St Barnabas reference document</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#ef4444;">
+            <div class="pdfv-why-label" style="color:#fca5a5;">Three Steps of the Analgesic Ladder</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#34d399;"></div><strong style="color:var(--white);">Step 1 — Mild pain:</strong> Paracetamol, NSAIDs &plusmn; adjuvants</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#fdca0f;"></div><strong style="color:var(--white);">Step 2 — Moderate pain:</strong> Weak opioids (codeine, tramadol) + Step 1</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#ef4444;"></div><strong style="color:var(--white);">Step 3 — Severe pain:</strong> Strong opioids (morphine, oxycodone); convert to syringe driver if oral route lost</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div>Always prescribe PRN breakthrough analgesia at &frac16;th of the 24-hour opioid dose</div>
+            </div>
+          </div>
+          <div class="pdfv-unavail">
+            <div class="pdfv-unavail-title">St Barnabas Analgesic Ladder Document</div>
+            <p class="pdfv-unavail-body">Upload the St Barnabas Analgesic Ladder PDF to display it here. The three-step summary above is provided as a reference until the document is uploaded.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Pain Assessment ───────────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-pain" role="tabpanel" aria-labelledby="ptab-pain">
+      <div class="pdfv-layout" style="grid-template-columns:1fr;">
+        <div class="pdfv-info" style="max-width:680px;">
+          <div class="pdfv-header" style="border-left-color:#2ecc8e;">
+            <div class="pdfv-subtitle">Structured Pain Assessment in Palliative Care</div>
+            <div class="pdfv-title">Pain Assessment Model</div>
+            <p class="pdfv-desc">Pain is multidimensional. Total Pain (Cicely Saunders) encompasses physical, psychological, social, and spiritual components. Structured assessment using SOCRATES ensures a comprehensive, patient-centred approach.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">St Barnabas reference document</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#2ecc8e;">
+            <div class="pdfv-why-label" style="color:#6ee7b7;">SOCRATES Framework</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">S</strong>ite — Where is the pain? Does it radiate?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">O</strong>nset — When did it start? Sudden or gradual?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">C</strong>haracter — Aching, burning, stabbing, throbbing?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">R</strong>adiation — Does it spread anywhere?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">A</strong>ssociations — Other accompanying symptoms?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">T</strong>iming — Constant or intermittent?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">E</strong>xacerbating/relieving — What makes it better or worse?</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#2ecc8e;"></div><strong style="color:var(--white);">S</strong>everity — Numerical rating (0&ndash;10) or verbal descriptor</div>
+            </div>
+          </div>
+          <div class="pdfv-unavail" style="border-color:rgba(46,204,142,0.3);background:rgba(46,204,142,0.05);">
+            <div class="pdfv-unavail-title" style="color:#6ee7b7;">St Barnabas Pain Assessment Model Document</div>
+            <p class="pdfv-unavail-body">Upload the St Barnabas Pain Assessment Model PDF to display it here. The SOCRATES framework above is provided as a reference until the document is uploaded.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(2)">&#8592; Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(4)">Continue to Timeline &#8594;</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 4 — HORIZONTAL INTERACTIVE TIMELINE
+═════════════════════════════════════════════ -->
+<section class="page" id="page-4" aria-label="Palliative care timeline — months, days, hours">
+  <div class="htl-wrap">
+    <div class="definition-header" style="margin-bottom:32px;">
+      <div class="intro-eyebrow" style="margin-bottom:0;">Care Continuum</div>
+      <h2 style="color:var(--white);">Timeline of Palliative Care</h2>
+      <p style="color:var(--text-muted);">Palliative care is not a single moment — it evolves as a person's condition changes. Select a phase below to explore what care looks like at that stage.</p>
+    </div>
+
+    <div class="htl-hint" aria-hidden="true">↓ Click a phase to explore</div>
+
+    <div class="htl-track-outer" role="region" aria-label="Palliative care timeline — select a phase">
+      <div class="htl-track">
+        <!-- Months -->
+        <div class="htl-phase">
+          <div class="htl-node months active" id="htl-months" onclick="showPhase('months')" aria-pressed="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showPhase('months')" role="button" aria-label="Months — chronic and progressive illness care">
+            <div class="hn-icon">📅</div>
+            <div class="hn-label">Months</div>
+          </div>
+          <div class="htl-node-label">Months</div>
+          <div class="htl-node-sub">Chronic illness care</div>
+        </div>
+        <div class="htl-connector htl-connector-months" aria-hidden="true"></div>
+        <!-- Days -->
+        <div class="htl-phase">
+          <div class="htl-node days" id="htl-days" onclick="showPhase('days')" aria-pressed="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showPhase('days')" role="button" aria-label="Days — end of life care transition">
+            <div class="hn-icon">🌅</div>
+            <div class="hn-label">Days</div>
+          </div>
+          <div class="htl-node-label">Days</div>
+          <div class="htl-node-sub">End of life transition</div>
+        </div>
+        <div class="htl-connector htl-connector-days" aria-hidden="true"></div>
+        <!-- Hours -->
+        <div class="htl-phase">
+          <div class="htl-node hours" id="htl-hours" onclick="showPhase('hours')" aria-pressed="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showPhase('hours')" role="button" aria-label="Hours — active dying final phase">
+            <div class="hn-icon">⏳</div>
+            <div class="hn-label">Hours</div>
+          </div>
+          <div class="htl-node-label">Hours</div>
+          <div class="htl-node-sub">Active dying</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content panels -->
+    <div class="htl-content months active" id="htl-content-months" aria-live="polite">
+      <div class="htl-content-heading">Months — Chronic &amp; Progressive Illness Care</div>
+      <div class="htl-content-tag">Palliative care begins at diagnosis of an incurable illness</div>
+      <ul class="htl-points">
+        <li><div class="htl-bullet" style="background:var(--blue);"></div>Palliative care can begin at the point of diagnosis and continue for months or years alongside active treatment.</li>
+        <li><div class="htl-bullet" style="background:var(--blue);"></div>Focus is on managing symptoms of chronic conditions — heart failure, COPD, Parkinson's, cancer — to maintain quality of life.</li>
+        <li><div class="htl-bullet" style="background:var(--blue);"></div>Involves regular MDT assessments: nurses, doctors, social workers, counsellors, and allied health professionals.</li>
+        <li><div class="htl-bullet" style="background:var(--blue);"></div>If a condition is declining on a monthly basis, the focus begins to shift toward comfort and proactive planning even while the person remains active.</li>
+        <li><div class="htl-bullet" style="background:var(--blue);"></div>This is the optimal time to begin Advance Care Planning conversations — before a crisis occurs.</li>
+      </ul>
+    </div>
+    <div class="htl-content days" id="htl-content-days">
+      <div class="htl-content-heading">Days — End-of-Life Care Transition</div>
+      <div class="htl-content-tag">As a person nears the end of life — often defined as the last 12 months</div>
+      <ul class="htl-points">
+        <li><div class="htl-bullet" style="background:var(--yellow);"></div>As illness progresses, care becomes more intense — more frequent visits and support in a hospice, hospital, or home setting.</li>
+        <li><div class="htl-bullet" style="background:var(--yellow);"></div>In the final weeks and days, focus shifts to managing increased pain, fatigue, and breathlessness (dyspnoea) proactively.</li>
+        <li><div class="htl-bullet" style="background:var(--yellow);"></div>Care focuses on helping the patient feel comfortable and offering psychological and spiritual support to both the patient and family.</li>
+        <li><div class="htl-bullet" style="background:var(--yellow);"></div>Anticipatory prescribing should be in place; advance decisions reviewed; preferred place of death documented and shared.</li>
+        <li><div class="htl-bullet" style="background:var(--yellow);"></div>All members of the MDT need to know the patient's wishes — including out-of-hours services and care home staff.</li>
+      </ul>
+    </div>
+    <div class="htl-content hours" id="htl-content-hours">
+      <div class="htl-content-heading">Hours — Active Dying / Final Phase</div>
+      <div class="htl-content-tag">The final, often unpredictable phase of life — the last hours to days</div>
+      <ul class="htl-points">
+        <li><div class="htl-bullet" style="background:#ef4444;"></div>The primary goal is comfort, dignity, and ensuring the patient is free from pain and distress.</li>
+        <li><div class="htl-bullet" style="background:#ef4444;"></div>Physical changes: patients may stop eating and drinking, become more withdrawn, and have difficulty communicating.</li>
+        <li><div class="htl-bullet" style="background:#ef4444;"></div>Comfort measures: keep the mouth moist, reposition regularly, use subcutaneous medication via syringe driver, reduce unnecessary monitoring.</li>
+        <li><div class="htl-bullet" style="background:#ef4444;"></div>Essential support is offered to family members — explaining what to expect, answering questions, being present.</li>
+        <li><div class="htl-bullet" style="background:#ef4444;"></div>Palliative care teams often provide 24/7 phone access for urgent advice and support during this time.</li>
+      </ul>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(3)">← Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(5)">Continue to Diagnosis of Dying →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 5 — DIAGNOSIS OF DYING
+═════════════════════════════════════════════ -->
+<section class="page" id="page-5" aria-label="Diagnosis of dying">
+  <div class="dod-wrap">
+    <div class="outcomes-title-area">
+      <div class="outcomes-eyebrow">Clinical Recognition</div>
+      <h2>Diagnosis of Dying</h2>
+      <p>Recognising that a patient is actively dying is a clinical skill. These signs, drawn from the Gold Standards Framework (2025), indicate that a person may be entering the final hours or days of life.</p>
+    </div>
+    <div class="dod-grid" role="list">
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">🍽️</div>
+        <div><div class="dod-sign-title">Diminished oral intake, difficulty taking medications</div><p class="dod-sign-body">The patient is eating and drinking significantly less, or has stopped. Difficulty swallowing medications is also common. Focus on mouth care rather than forcing fluids or food.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">🌡️</div>
+        <div><div class="dod-sign-title">Skin colour and temperature changes</div><p class="dod-sign-body">Skin may become mottled, pale, or cyanotic (blue/grey tinge), particularly at the knees, feet, and hands. Peripheries feel cold even if the core remains warm.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">📉</div>
+        <div><div class="dod-sign-title">Gradual but progressive decline</div><p class="dod-sign-body">A clear and continuing pattern of deterioration across multiple domains — function, cognition, and energy — that has not reversed despite adjustments to care.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">😔</div>
+        <div><div class="dod-sign-title">Profound weakness</div><p class="dod-sign-body">The patient is fully bed-bound, unable to perform even minimal activities. They may not be able to lift their head or hold a cup. All care is provided by others.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">😴</div>
+        <div><div class="dod-sign-title">Drowsy and disorientated</div><p class="dod-sign-body">Increasing periods of sleepiness; the patient may be difficult to rouse. When awake, they may be confused or unable to recognise familiar people.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">🌬️</div>
+        <div><div class="dod-sign-title">Altered breathing</div><p class="dod-sign-body">Irregular, slow, or shallow breathing. Cheyne-Stokes respiration (cycles of increasing then decreasing depth with periods of apnoea) may occur. A "death rattle" (secretions in the throat) may be audible.</p></div>
+      </div>
+      <div class="dod-sign" role="listitem">
+        <div class="dod-sign-icon">😰</div>
+        <div><div class="dod-sign-title">Terminal agitation</div><p class="dod-sign-body">Some patients experience restlessness, confusion, and agitation in their final hours. This can be deeply distressing for families. Ensure anticipatory medication is prescribed and available.</p></div>
+      </div>
+    </div>
+    <div class="dod-gsf-banner" role="note">
+      <div class="dod-gsf-icon">📘</div>
+      <div>
+        <div class="dod-gsf-title">Gold Standards Framework (2025)</div>
+        <p class="dod-gsf-body">When these signs are recognised: communicate sensitively with the patient (where possible) and family; review and update the care plan; ensure anticipatory medications are prescribed and accessible; confirm the patient's preferred place of death is achievable; and stop all unnecessary investigations, observations, and interventions.</p>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,0.3);" onclick="goToPage(4)">← Back</button>
+      <button class="btn btn-primary"   style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(6)">Continue to Trajectories →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 6 — TRAJECTORIES OF DYING (interactive)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-6" aria-label="Trajectories of dying — interactive">
+  <div class="traj-wrap">
+    <div class="definition-header" style="margin-bottom:28px;">
+      <div class="intro-eyebrow" style="margin-bottom:0;">Clinical Understanding</div>
+      <h2 style="color:var(--white);">Trajectories of Dying</h2>
+      <p style="color:var(--text-muted);">Select a trajectory to understand the pattern of decline, what to expect, and how care should respond.</p>
+    </div>
+
+    <div class="traj-select-row" role="list" aria-label="Select a dying trajectory to explore">
+      <button class="traj-select-btn active-cancer" id="tbtn-cancer" onclick="showTraj('cancer')" role="listitem" aria-pressed="true">
+        <div class="tsb-icon">🎗️</div>
+        <div class="tsb-text"><div class="tsb-title">Terminal Illness</div><div class="tsb-sub">Most late-stage cancers</div></div>
+      </button>
+      <button class="traj-select-btn" id="tbtn-organ" onclick="showTraj('organ')" role="listitem" aria-pressed="false">
+        <div class="tsb-icon">💔</div>
+        <div class="tsb-text"><div class="tsb-title">Organ Failure</div><div class="tsb-sub">Heart failure, COPD, CKD</div></div>
+      </button>
+      <button class="traj-select-btn" id="tbtn-frailty" onclick="showTraj('frailty')" role="listitem" aria-pressed="false">
+        <div class="tsb-icon">🧓</div>
+        <div class="tsb-text"><div class="tsb-title">Frailty &amp; Dementia</div><div class="tsb-sub">Alzheimer's, general frailty</div></div>
+      </button>
+    </div>
+
+    <!-- Terminal Illness detail -->
+    <div class="traj-detail active" id="tdet-cancer">
+      <div class="traj-detail-text">
+        <div class="traj-eyebrow" style="color:#7dd3fc;">Trajectory 1</div>
+        <div class="traj-title">Terminal Illness</div>
+        <div class="traj-example">Most commonly: late-stage cancer</div>
+        <p class="traj-desc">A long period of relatively high functioning, followed by a short, distinct period of rapid decline close to death. The transition from functioning well to active dying can be weeks or a few months.</p>
+        <ul class="traj-points">
+          <li><div class="traj-pt-dot" style="background:var(--blue);"></div>Prognosis is often more predictable than other trajectories, which supports earlier advance care planning conversations</li>
+          <li><div class="traj-pt-dot" style="background:var(--blue);"></div>The rapid decline phase can still be sudden and distressing for families who feel unprepared</li>
+          <li><div class="traj-pt-dot" style="background:var(--blue);"></div>Focus of care shifts quickly from disease management to symptom control and comfort</li>
+          <li><div class="traj-pt-dot" style="background:var(--blue);"></div>Anticipatory prescribing should be in place before the decline phase begins</li>
+        </ul>
+      </div>
+      <div class="traj-svg-box">
+        <div class="traj-svg-title">Functional decline over time</div>
+        <svg viewBox="0 0 260 160" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><marker id="arr-c" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(197,211,232,0.4)"/></marker></defs>
+          <line x1="30" y1="10" x2="30" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-c)"/>
+          <line x1="30" y1="145" x2="250" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-c)"/>
+          <text x="10" y="14" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(197,211,232,0.5)" transform="rotate(-90,10,80)">Function</text>
+          <text x="230" y="155" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(197,211,232,0.5)">Time</text>
+          <path d="M 40 35 L 170 38 Q 182 42 190 60 L 230 130" stroke="#0197de" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <line x1="170" y1="28" x2="170" y2="145" stroke="rgba(1,151,222,0.25)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="158" y="24" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(1,151,222,0.7)">rapid decline</text>
+          <circle cx="170" cy="38" r="4" fill="#0197de"/>
+        </svg>
+        <div class="traj-svg-caption">High function maintained until a short, distinct period of rapid decline</div>
+      </div>
+    </div>
+
+    <!-- Organ Failure detail -->
+    <div class="traj-detail" id="tdet-organ">
+      <div class="traj-detail-text">
+        <div class="traj-eyebrow" style="color:#fdca0f;">Trajectory 2</div>
+        <div class="traj-title">Organ Failure</div>
+        <div class="traj-example">Heart failure, COPD, kidney disease</div>
+        <p class="traj-desc">Long-term gradual decline punctuated by acute deterioration episodes (dips) followed by partial recovery. Each episode may not be fully recovered from, resulting in a stepped overall decline. Predicting the final episode is very difficult.</p>
+        <ul class="traj-points">
+          <li><div class="traj-pt-dot" style="background:var(--yellow);"></div>Patients can appear relatively stable between admissions, making prognosis challenging to communicate</li>
+          <li><div class="traj-pt-dot" style="background:var(--yellow);"></div>Each acute exacerbation is an opportunity to review prognosis, advance care planning, and escalation preferences</li>
+          <li><div class="traj-pt-dot" style="background:var(--yellow);"></div>Families may be shocked by sudden deterioration even when the overall trajectory was downward</li>
+          <li><div class="traj-pt-dot" style="background:var(--yellow);"></div>Proactive care planning between crises is essential — do not wait for the next exacerbation</li>
+        </ul>
+      </div>
+      <div class="traj-svg-box">
+        <div class="traj-svg-title">Functional decline over time</div>
+        <svg viewBox="0 0 260 160" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><marker id="arr-o" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(197,211,232,0.4)"/></marker></defs>
+          <line x1="30" y1="10" x2="30" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-o)"/>
+          <line x1="30" y1="145" x2="250" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-o)"/>
+          <text x="230" y="155" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(197,211,232,0.5)">Time</text>
+          <path d="M 40 40 L 70 42 L 75 72 L 88 54 L 120 60 L 125 82 L 138 66 L 168 73 L 173 96 L 185 84 L 215 90 L 220 118 L 232 128" stroke="#fdca0f" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="78" y="90" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(253,202,15,0.6)">acute dips</text>
+        </svg>
+        <div class="traj-svg-caption">Gradual decline with acute episodes and partial recovery</div>
+      </div>
+    </div>
+
+    <!-- Frailty detail -->
+    <div class="traj-detail" id="tdet-frailty">
+      <div class="traj-detail-text">
+        <div class="traj-eyebrow" style="color:#2ecc8e;">Trajectory 3</div>
+        <div class="traj-title">Frailty &amp; Dementia</div>
+        <div class="traj-example">Alzheimer's disease, general frailty in old age</div>
+        <p class="traj-desc">A slow, lingering decline from a low baseline of health and function. The trajectory is gradual and prolonged, making it difficult to define a clear end-of-life phase. Care must begin early and be sustained over many months or years.</p>
+        <ul class="traj-points">
+          <li><div class="traj-pt-dot" style="background:#2ecc8e;"></div>The end-of-life phase may be difficult to identify and communicate — the "surprise question" is especially useful here</li>
+          <li><div class="traj-pt-dot" style="background:#2ecc8e;"></div>Families often experience prolonged anticipatory grief and carer fatigue</li>
+          <li><div class="traj-pt-dot" style="background:#2ecc8e;"></div>Cognitive decline may affect the patient's ability to participate in advance care planning — begin these conversations early</li>
+          <li><div class="traj-pt-dot" style="background:#2ecc8e;"></div>Loss of communication does not mean loss of the need for dignity, comfort, and connection</li>
+        </ul>
+      </div>
+      <div class="traj-svg-box">
+        <div class="traj-svg-title">Functional decline over time</div>
+        <svg viewBox="0 0 260 160" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><marker id="arr-f" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(197,211,232,0.4)"/></marker></defs>
+          <line x1="30" y1="10" x2="30" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-f)"/>
+          <line x1="30" y1="145" x2="250" y2="145" stroke="rgba(197,211,232,0.2)" stroke-width="1.5" marker-end="url(#arr-f)"/>
+          <text x="230" y="155" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(197,211,232,0.5)">Time</text>
+          <path d="M 40 75 Q 80 80 120 88 Q 160 96 200 107 L 230 118" stroke="#2ecc8e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <line x1="40" y1="75" x2="40" y2="145" stroke="rgba(46,204,142,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="42" y="72" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(46,204,142,0.6)">low baseline</text>
+        </svg>
+        <div class="traj-svg-caption">Slow, lingering decline from a low functional baseline</div>
+      </div>
+    </div>
+
+    <div class="traj-not-one-size" role="note">
+      <div class="traj-not-title">⚠️ These trajectories are not one-size-fits-all</div>
+      <p class="traj-not-body">In practice, many patients — particularly those with multiple long-term conditions — show elements of more than one trajectory simultaneously. A person with cancer and heart failure, for example, may show the rapid end-stage decline of Trajectory 1 alongside the episodic dips of Trajectory 2. Understanding trajectories helps clinicians anticipate what may happen, communicate this sensitively, and ensure proactive care planning is in place before a crisis occurs.</p>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(5)">← Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(7)">Continue to Five Priorities →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 7 — BOB EVANS CASE STUDY PART 1
+═════════════════════════════════════════════ -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 8 — BOB EVANS PART 2: SCENARIO & ACTIVITY
+═════════════════════════════════════════════ -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 9 — MCQ (4 questions, shuffled)
+═════════════════════════════════════════════ -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 10 — BOB EVANS PART 4: ACTIVE DYING
+═════════════════════════════════════════════ -->
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 11 — FIVE PRIORITIES OF CARE (Flipcard)
+═════════════════════════════════════════════ -->
+
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 7 — FIVE PRIORITIES OF CARE (Flipcard)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-7" aria-label="Five priorities of care — flipcard activity">
+  <div class="priorities-wrap">
+    <div class="outcomes-title-area">
+      <div class="outcomes-eyebrow">National End of Life Care Programme</div>
+      <h2>Five Priorities of Care</h2>
+      <p>These five priorities are central to end of life care practice across the UK. Click each card to discover what each priority means in practice — and how it applied to Bob.</p>
+    </div>
+    <div class="priorities-instruction" aria-hidden="true">↓ Click any card to flip it</div>
+    <div class="flipcard-grid" role="list">
+
+      <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 1: Recognise — click to flip">
+        <div class="flipcard-inner">
+          <div class="flipcard-front" style="border-color:rgba(1,151,222,0.4);">
+            <div class="fc-num" style="color:rgba(1,151,222,0.3);">01</div>
+            <div class="fc-icon">👁️</div>
+            <div class="fc-title">Recognise</div>
+            <div class="fc-hint">tap to explore</div>
+          </div>
+          <div class="flipcard-back" style="background:rgba(1,151,222,0.12);border:2px solid var(--blue);">
+            <div class="fc-back-title" style="color:#7dd3fc;">Recognise</div>
+            <p class="fc-back-body">The possibility that a person may be dying is recognised and communicated clearly. In Bob's case, this meant recognising the signs of active dying and sharing this sensitively with the team and — where possible — with Bob himself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 2: Communicate — click to flip">
+        <div class="flipcard-inner">
+          <div class="flipcard-front" style="border-color:rgba(13,148,136,0.4);">
+            <div class="fc-num" style="color:rgba(13,148,136,0.3);">02</div>
+            <div class="fc-icon">💬</div>
+            <div class="fc-title">Communicate</div>
+            <div class="fc-hint">tap to explore</div>
+          </div>
+          <div class="flipcard-back" style="background:rgba(13,148,136,0.12);border:2px solid var(--teal);">
+            <div class="fc-back-title" style="color:#5eead4;">Communicate</div>
+            <p class="fc-back-body">Honest, compassionate communication with the dying person and those important to them. Bob was scared and felt alone. Responding with presence and an open question — not dismissal or false reassurance — was the most therapeutic response.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 3: Involve — click to flip">
+        <div class="flipcard-inner">
+          <div class="flipcard-front" style="border-color:rgba(253,202,15,0.4);">
+            <div class="fc-num" style="color:rgba(253,202,15,0.3);">03</div>
+            <div class="fc-icon">🤝</div>
+            <div class="fc-title">Involve</div>
+            <div class="fc-hint">tap to explore</div>
+          </div>
+          <div class="flipcard-back" style="background:rgba(253,202,15,0.08);border:2px solid var(--yellow);">
+            <div class="fc-back-title" style="color:var(--yellow);">Involve</div>
+            <p class="fc-back-body">Involve the dying person and those important to them in decisions about care. For Bob, this meant respecting what he wanted — including his dog by his side — and making every effort to contact his son before it was too late.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 4: Support — click to flip">
+        <div class="flipcard-inner">
+          <div class="flipcard-front" style="border-color:rgba(124,110,245,0.4);">
+            <div class="fc-num" style="color:rgba(124,110,245,0.3);">04</div>
+            <div class="fc-icon">❤️</div>
+            <div class="fc-title">Support</div>
+            <div class="fc-hint">tap to explore</div>
+          </div>
+          <div class="flipcard-back" style="background:rgba(124,110,245,0.12);border:2px solid #7c6ef5;">
+            <div class="fc-back-title" style="color:#c4b5fd;">Support</div>
+            <p class="fc-back-body">The needs of families and carers are identified and met — during and after the dying process. Bob's son, if he does arrive, will need sensitive support and honest information. Even if he doesn't, the team should acknowledge that loss for Bob.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flipcard" role="listitem" onclick="flipCard(this)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(this)" tabindex="0" aria-label="Priority 5: Plan and Do — click to flip">
+        <div class="flipcard-inner">
+          <div class="flipcard-front" style="border-color:rgba(46,204,142,0.4);">
+            <div class="fc-num" style="color:rgba(46,204,142,0.3);">05</div>
+            <div class="fc-icon">📋</div>
+            <div class="fc-title">Plan &amp; Do</div>
+            <div class="fc-hint">tap to explore</div>
+          </div>
+          <div class="flipcard-back" style="background:rgba(46,204,142,0.1);border:2px solid #2ecc8e;">
+            <div class="fc-back-title" style="color:#6ee7b7;">Plan &amp; Do</div>
+            <p class="fc-back-body">An individual plan of care is agreed and delivered with compassion. For Bob, this means: syringe driver in place, anticipatory prescribing done, dog's welfare arranged, son contact attempted, and all unnecessary treatments stopped. 24/7 access ensured.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="definition-not" style="margin-top:8px;" role="note">
+      <div class="definition-not-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Source: NHS Funded Training — Advance Care Planning
+      </div>
+      <div class="definition-not-grid">
+        <div class="not-item"><span class="not-item-icon">✓</span><span>These priorities apply in <strong style="color:var(--white);">every setting</strong> — hospital, hospice, care home, and home</span></div>
+        <div class="not-item"><span class="not-item-icon">✓</span><span>They apply to <strong style="color:var(--white);">all members of the MDT</strong>, not just medical staff</span></div>
+        <div class="not-item"><span class="not-item-icon">✓</span><span>Failure to meet any priority can cause lasting harm to patients and families</span></div>
+        <div class="not-item"><span class="not-item-icon">✓</span><span>Full guidance: <strong style="color:var(--white);"><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener" style="color:var(--blue);">www.nhft.nhs.uk/acp/</a></strong></span></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
+      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,0.3);" onclick="goToPage(6)">← Back</button>
+      <div style="text-align:right;">
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:8px;">Module complete</div>
+        <button class="btn btn-primary" style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(8)">✓ Bob Evans</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 8 — BOB EVANS CASE STUDY: MEET BOB (Medical)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-8" aria-label="Bob Evans Case Study — Meet Bob">
+  <div class="definition-wrap" style="max-width:960px;">
+    <div class="definition-header">
+      <div class="intro-eyebrow" style="margin-bottom:0;background:rgba(253,202,15,0.12);border:1px solid rgba(253,202,15,0.3);color:var(--yellow);">Case Study</div>
+      <h2 style="color:var(--white);">Meet Bob Evans</h2>
+      <p style="color:var(--text-muted);">Read Bob's medical background carefully before continuing to his first clinical visit.</p>
+    </div>
+
+    <div class="med-record" role="article" aria-label="Bob Evans medical record">
+      <div class="med-record-header">
+        <div class="med-record-eyebrow">Patient Record — Community Palliative Care</div>
+        <div class="med-record-name">Bob Evans</div>
+        <div class="med-record-sub">Aged 56 · Referred to Community Palliative Care Team</div>
+      </div>
+      <div class="med-record-body">
+        <div class="med-alert">
+          <div class="med-alert-icon">⚠️</div>
+          <div class="med-alert-text">Treatment is currently <strong>palliative in intent</strong>. Bob avoids using this term and focuses instead on "seeing how things go." He tends to <strong>downplay symptoms</strong> and delays seeking help.</div>
+        </div>
+        <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;">Confirmed diagnoses</div>
+        <div class="med-diag-grid">
+          <div class="med-diag-card">
+            <div class="med-diag-name">COPD — GOLD Stage III</div>
+            <div class="med-diag-detail">Diagnosed 8 years ago. Three exacerbations in the past 12 months; last admission 3 weeks ago.</div>
+          </div>
+          <div class="med-diag-card">
+            <div class="med-diag-name">Chronic Kidney Disease</div>
+            <div class="med-diag-detail">eGFR &lt;40 — Stage 3b. Not on dialysis.</div>
+          </div>
+          <div class="med-diag-card">
+            <div class="med-diag-name">Hypertension</div>
+            <div class="med-diag-detail">Managed with antihypertensive medication.</div>
+          </div>
+          <div class="med-diag-card">
+            <div class="med-diag-name">Osteoarthritis</div>
+            <div class="med-diag-detail">Knees and hands — affects mobility and daily tasks.</div>
+          </div>
+          <div class="med-diag-card critical" style="grid-column:1/-1;">
+            <div class="med-diag-name">Advanced Lung Cancer</div>
+            <div class="med-diag-detail">Liver metastases · Bone metastases · Brain metastases. Under hospital oncology follow-up. Treatment is palliative in intent.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(9)">Continue to The Visit →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 9 — BOB EVANS: THE VISIT (Video + Activity)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-9" aria-label="Bob Evans — The Visit">
+  <div class="definition-wrap" style="max-width:960px;">
+    <div class="definition-header">
+      <div class="intro-eyebrow" style="margin-bottom:0;background:rgba(253,202,15,0.12);border:1px solid rgba(253,202,15,0.3);color:var(--yellow);">Case Study — Part 2</div>
+      <h2 style="color:var(--white);">The Visit</h2>
+      <p style="color:var(--text-muted);">Watch the video below, then complete the activity. You are visiting Bob for a planned second follow-up.</p>
+    </div>
+
+    <div class="video-wrap">
+      <div class="video-placeholder">
+        <div class="video-placeholder-label">Video</div>
+        <div class="video-placeholder-icon">▶️</div>
+        <div class="video-placeholder-text">
+          <strong style="color:var(--white);display:block;margin-bottom:6px;">The Visit — Bob Evans</strong>
+          Upload your video file to replace this placeholder.<br>
+          Replace this <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;div class="video-placeholder"&gt;</code> with an<br>
+          <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;iframe&gt;</code> or <code style="background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-size:0.82rem;">&lt;video&gt;</code> element.
+        </div>
+      </div>
+    </div>
+
+    <div class="video-activity-box">
+      <div class="vab-label">Your Turn</div>
+      <div class="vab-question">You are not allowed to assume Bob is deteriorating — you can only use what you notice and what Bob tells you. What questions are you going to ask Bob?</div>
+      <textarea class="vab-textarea" id="bob2-input" placeholder="Think about: the yellowish tinge, his energy levels, pain, bowel habits, medications, his dog, his son…" rows="5" aria-label="Your clinical questions for Bob"></textarea>
+      <button class="vab-reveal-btn" onclick="toggleVabReveal('bob2-answer')">🔍 Reveal suggested questions</button>
+      <div class="vab-answer" id="bob2-answer">
+        <div class="vab-answer-title">Suggested questions to ask Bob</div>
+        <ul>
+          <li><div class="vab-answer-dot"></div>"Bob, I noticed your eyes look a little yellow today — have you noticed that yourself?"</li>
+          <li><div class="vab-answer-dot"></div>"How has your energy been since I last saw you? Are you managing to get around the house?"</li>
+          <li><div class="vab-answer-dot"></div>"Are you having any pain at the moment? Anywhere in particular?"</li>
+          <li><div class="vab-answer-dot"></div>"How has your appetite been? Have you noticed any changes in your weight?"</li>
+          <li><div class="vab-answer-dot"></div>"How have your bowels been? Any nausea or feeling of fullness?"</li>
+          <li><div class="vab-answer-dot"></div>"Are you still managing to take your medications? Any difficulty swallowing them?"</li>
+          <li><div class="vab-answer-dot"></div>"Tell me about your dog — who looks after him when you're unwell?"</li>
+          <li><div class="vab-answer-dot"></div>"Is there anything on your mind you'd like to talk through?"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+      <button class="btn btn-primary"   onclick="goToPage(10)">Continue to MCQ →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 10 — MCQ (4 questions, shuffled)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-10" aria-label="Multiple choice questions about Bob Evans">
+  <div class="mcq-wrap">
+    <div class="mcq-header">
+      <div class="mcq-eyebrow">Case Study Assessment</div>
+      <h2>What Would You Do?</h2>
+      <p>Based on what you know about Bob Evans, answer each question. Select your answer and submit to receive feedback and the rationale.</p>
+    </div>
+
+    <div class="mcq-progress" id="mcq-dots" role="status" aria-live="polite" aria-label="MCQ progress"></div>
+
+    <div id="mcq-questions-container"></div>
+    <div class="mcq-results" id="mcq-results" role="region" aria-label="MCQ results" aria-live="polite"></div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 11 — BOB EVANS PART 4: ACTIVE DYING (Video + Activities)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-11" aria-label="Bob Evans Part 4 — Recognising Active Dying">
+  <div class="case-wrap">
+    <div class="outcomes-title-area" style="margin-bottom:28px;">
+      <div class="outcomes-eyebrow">Case Study — Part 4</div>
+      <h2>Recognising Active Dying &amp; Planning Care</h2>
+      <p style="color:#5a6a82;">You visit Bob again following concerns raised by the team. The picture has changed significantly.</p>
+    </div>
+
+    <div class="video-wrap" style="margin-bottom:28px;">
+      <div class="video-placeholder">
+        <div class="video-placeholder-label">Video</div>
+        <div class="video-placeholder-icon">▶️</div>
+        <div class="video-placeholder-text">
+          <strong style="color:var(--white);display:block;margin-bottom:6px;">Bob's Final Visit</strong>
+          Upload your video file to replace this placeholder.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-left:5px solid #ef4444;border-radius:0 14px 14px 0;padding:20px 24px;margin-bottom:24px;" role="note">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px;">Clinical Visit — Urgent Follow-up</div>
+      <div class="clip-scenario-box" style="border:none;background:transparent;padding:0;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-muted);">
+            <p>Bob is now in bed. He appears very unwell. His breathing is <strong>laboured and rapid at times, with long pauses between breaths</strong>. He is visibly anxious and restless, frequently shifting position. He is <strong>unable to lie flat</strong> due to breathlessness.</p>
+            <p>Bob is <strong>no longer able to swallow his medications</strong>. His mouth is dry, and he coughs when attempting small sips of fluid.</p>
+            <p>He is <strong>intermittently drowsy</strong> but becomes agitated when awake, pulling at the bedding and appearing distressed. At times, he seems confused and struggles to follow conversation.</p>
+            <p>Bob has not been able to speak to his son. <strong>Calls and messages have not been returned.</strong></p>
+            <p>His dog is lying on the bed beside him. 🐕</p>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:16px;">Activity 1 — Recognising Deterioration</div>
+          <div class="clip-activity-box">
+            <div class="cab-label">Reflect &amp; Respond</div>
+            <div class="cab-question">Q: What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply to Bob at this point?</div>
+            <textarea class="cab-textarea" id="bob4-q1-input" placeholder="List the signs you can identify from the scenario above…" rows="5" aria-label="Your answer about signs of deterioration in Bob"></textarea>
+            <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q1-answer')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Reveal suggested answer
+            </button>
+            <div class="cab-answer" id="bob4-q1-answer">
+              <div class="cab-answer-inner">
+                <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
+                <ul>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern)</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Profound weakness</strong> — bed-bound, unable to lie flat, all care required</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Diminished oral intake / difficulty taking medications</strong> — unable to swallow, coughing on fluids</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Drowsy and disorientated</strong> — intermittently drowsy, confused, cannot follow conversation</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Terminal agitation</strong> — restless, pulling at bedding, visibly distressed when awake</li>
+                  <li><div class="caa-dot"></div>Dry mouth and difficulty with fluids indicate he is likely in the <strong style="color:var(--white);">final hours to days</strong> of life</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:16px;">Activity 2 — Planning Care</div>
+          <div class="clip-activity-box">
+            <div class="cab-label">Reflect &amp; Respond</div>
+            <div class="cab-question">Q: What do you need to do now? Think about immediate clinical care, communication, the Five Priorities, Bob's son, and his dog.</div>
+            <textarea class="cab-textarea" id="bob4-q2-input" placeholder="Think about: medications, communication, the son, the dog, the Five Priorities of Care…" rows="5" aria-label="Your care plan for Bob"></textarea>
+            <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q2-answer')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Reveal suggested answer
+            </button>
+            <div class="cab-answer" id="bob4-q2-answer">
+              <div class="cab-answer-inner">
+                <div class="cab-answer-title">What needs to happen now — a suggested framework</div>
+                <ul>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Medications:</strong> Convert all medications to subcutaneous route via syringe driver. Ensure anticipatory prescribing is in place for pain, agitation, breathlessness, and secretions.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Recognise and communicate:</strong> Discuss with the wider team that Bob appears to be actively dying. Document this clearly and ensure all involved clinicians are aware.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Oral care:</strong> Keep Bob's mouth moist — regular mouth care is essential. Do not force fluids.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's son:</strong> Make all reasonable attempts to contact the son — this is an urgent and time-limited situation. Consider involving the social worker or chaplain to facilitate contact.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's dog:</strong> This is a source of significant comfort to Bob. Where possible, allow the dog to remain close. Contact a specialist charity (e.g. Cinnamon Trust) or a community contact to create a formal care plan for the dog.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Five Priorities:</strong> Recognise Bob is dying → communicate sensitively → involve him (where able) → support family → ensure an individual plan of care is in place and actioned.</li>
+                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Stop unnecessary treatments:</strong> Review and stop any observations, investigations, or interventions that no longer serve Bob's comfort or dignity.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
+      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,0.3);" onclick="goToPage(10)">← Back</button>
+      <button class="btn btn-primary"   style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(7)">Continue to Five Priorities →</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG 2.2 AA" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<script src="js/scripts.js"></script>
+</body>
+</html>

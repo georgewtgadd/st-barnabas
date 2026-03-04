@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+           targetNamespace="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+           elementFormDefault="qualified"
+           version="ADL SCORM 1.2">
+  <xs:attribute name="scormtype">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="sco"/>
+        <xs:enumeration value="asset"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:element name="masteryscore">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+        <xs:minInclusive value="0"/>
+        <xs:maxInclusive value="100"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="prerequisites" type="xs:string"/>
+  <xs:element name="maxtimeallowed" type="xs:string"/>
+  <xs:element name="datafromlms"    type="xs:string"/>
+</xs:schema>

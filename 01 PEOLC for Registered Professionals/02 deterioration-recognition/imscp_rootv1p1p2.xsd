@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+           xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+           targetNamespace="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+           elementFormDefault="qualified"
+           version="IMS CP 1.1.2">
+  <xs:import namespace="http://www.adlnet.org/xsd/adlcp_rootv1p2" schemaLocation="adlcp_rootv1p2.xsd"/>
+  <xs:element name="manifest" type="manifestType"/>
+  <xs:complexType name="manifestType">
+    <xs:sequence>
+      <xs:element name="metadata"      type="metadataType"      minOccurs="0"/>
+      <xs:element name="organizations" type="organizationsType"/>
+      <xs:element name="resources"     type="resourcesType"/>
+    </xs:sequence>
+    <xs:attribute name="identifier" type="xs:ID"     use="required"/>
+    <xs:attribute name="version"    type="xs:string" use="optional"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="metadataType">
+    <xs:sequence>
+      <xs:element name="schema"        type="xs:string" minOccurs="0"/>
+      <xs:element name="schemaversion" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="organizationsType">
+    <xs:sequence>
+      <xs:element name="organization" type="organizationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="default" type="xs:IDREF" use="optional"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="organizationType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="item"  type="itemType"  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="identifier" type="xs:ID"     use="required"/>
+    <xs:attribute name="structure"  type="xs:string" use="optional" default="hierarchical"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="itemType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="item"  type="itemType"  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+    <xs:attribute name="identifier"    type="xs:ID"      use="required"/>
+    <xs:attribute name="identifierref" type="xs:IDREF"   use="optional"/>
+    <xs:attribute name="isvisible"     type="xs:boolean" use="optional" default="true"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="resourcesType">
+    <xs:sequence>
+      <xs:element name="resource" type="resourceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="resourceType">
+    <xs:sequence>
+      <xs:element name="file"       type="fileType"       minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="dependency" type="dependencyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="identifier" type="xs:ID"     use="required"/>
+    <xs:attribute name="type"       type="xs:string" use="optional"/>
+    <xs:attribute name="href"       type="xs:string" use="optional"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="fileType">
+    <xs:attribute name="href" type="xs:string" use="required"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="dependencyType">
+    <xs:attribute name="identifierref" type="xs:IDREF" use="required"/>
+  </xs:complexType>
+</xs:schema>
