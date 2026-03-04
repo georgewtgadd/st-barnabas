@@ -974,6 +974,15 @@
 
       <div class="choices-panel" id="choices-panel-1" role="region" aria-label="Response options">
         </div></div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
+        <button class="btn btn-secondary" onclick="goToPage(8)" aria-label="Back">
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <button class="btn btn-primary" onclick="goToPage(10)" aria-label="Begin the first visit scenario">
+          Case Study Assessment <span aria-hidden="true">→</span>
+        </button>
+      </div>
   </section>
 
 <!-- ════════════════════════════════════════════
@@ -992,6 +1001,14 @@
     <div id="mcq-questions-container"></div>
     <div class="mcq-results" id="mcq-results" role="region" aria-label="MCQ results" aria-live="polite"></div>
   </div>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
+        <button class="btn btn-secondary" onclick="goToPage(9)" aria-label="Back">
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <button class="btn btn-primary" onclick="goToPage(11)" aria-label="Begin the first visit scenario">
+          Visit Bob Again <span aria-hidden="true">→</span>
+        </button>
+      </div>
 </section>
 
 
@@ -1083,8 +1100,7 @@
 
       <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-secondary" onclick="goToPage(10)">← Back</button>
-        <button class="btn btn-primary"   onclick="goToPage(7)">Continue to Five Priorities →</button>
-      </div>
+<button class="btn btn-primary" onclick="finish()">Finish →</button>      </div>
 
     </div>
   </div>
@@ -1107,4 +1123,3 @@
 <script src="js/scripts.js"></script>
 </body>
 </html>
- 
