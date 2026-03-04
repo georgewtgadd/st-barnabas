@@ -506,6 +506,53 @@ function finishModule() {
   alert('Well done — you have completed the Deterioration & Recognition module. Your progress has been saved.');
 }
 
+/* ══════════════════════════════════════════════════════
+   SCENARIO — selectChoice()
+   Add this function to Bob's scripts.js
+   Called by choice-card buttons on pages 9 and 11
+══════════════════════════════════════════════════════ */
+
+const CHOICE_FEEDBACK = {
+  best: {
+    label: '✓ Best response',
+    text:  'This is the most effective approach. Open, curious questioning allows Bob to share what he may be minimising. Asking about specific symptoms — sleep, appetite, breathing — gives him permission to disclose concerns he might otherwise downplay.'
+  },
+  neutral: {
+    label: '⚠ Acceptable, but incomplete',
+    text:  'Taking observations is appropriate, but accepting "I\'m fine" at face value and moving quickly to the task misses the opportunity to explore what may lie beneath Bob\'s presentation. Clinical curiosity is just as important as clinical measurement.'
+  },
+  poor: {
+    label: '✗ Not recommended',
+    text:  'Leading with a clinical concern — especially one that Bob hasn\'t raised — risks causing alarm without context and can damage rapport. Bob values his independence and tends to minimise; confronting him with a symptom he hasn\'t mentioned may cause him to shut down further.'
+  }
+};
+
+function selectChoice(btn, quality, pageId) {
+  // Disable all choices in this panel
+  const panel = btn.closest('.choices-panel');
+  panel.querySelectorAll('.choice-card').forEach(c => {
+    c.setAttribute('aria-disabled', 'true');
+    c.style.pointerEvents = 'none';
+  });
+
+  // Mark selected card
+  btn.classList.add(quality);
+
+  // Show feedback
+  const feedbackId = 'feedback-' + pageId.replace('page-', '');
+  const fb = document.getElementById(feedbackId);
+  if (fb) {
+    const data = CHOICE_FEEDBACK[quality];
+    fb.className = 'scenario-feedback show ' + quality;
+    fb.innerHTML = '<strong style="display:block;margin-bottom:6px;">' + data.label + '</strong>' + data.text;
+  }
+
+  // Show nav button
+  const navId = 'nav-' + pageId.replace('page-', '');
+  const nav = document.getElementById(navId);
+  if (nav) nav.style.display = 'flex';
+}
+
 
 /* ══════════════════════════════════════════════════════════
    SECTION 10 — INIT & GLOBAL EVENTS
@@ -523,3 +570,5 @@ document.addEventListener('DOMContentLoaded', function () {
     if (SCORM.isInitialized()) SCORM.finish('incomplete', null);
   });
 });
+
+
