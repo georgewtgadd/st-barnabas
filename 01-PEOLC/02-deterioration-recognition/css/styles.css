@@ -1272,16 +1272,17 @@ footer {
 .flipcard-grid { 
   display: flex; 
   flex-wrap: wrap;
-  justify-content: center; /* Centers the bottom row automatically */
-  gap: 24px; 
-  margin-bottom: 32px; 
+  justify-content: center; 
+  gap: 20px; /* Slightly tighter gap */
+  margin: 0 auto 32px auto; 
+  max-width: 960px; /* Constrains the whole group so they don't drift too far apart */
 }
 
 .flipcard { 
-  flex: 1 1 320px; /* Base width of 320px, allowed to grow */
-  max-width: 400px; /* Prevents them from getting absurdly wide */
+  flex: 1 1 260px; /* Much smaller base width */
+  max-width: 280px; /* Caps the width so they don't get huge */
   perspective: 800px; 
-  height: 340px; 
+  height: 260px; /* Dropped from 340px — the bullets don't need as much vertical room! */
   cursor: pointer; 
 }
 
