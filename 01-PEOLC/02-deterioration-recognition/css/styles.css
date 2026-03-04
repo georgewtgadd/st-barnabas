@@ -1262,23 +1262,24 @@ footer {
 
     
 /* ─── FIVE PRIORITIES FLIPCARD ───────────────────────────────── */
-/* ─── FIVE PRIORITIES FLIPCARD ───────────────────────────────── */
 .priorities-wrap { 
-  max-width: 1300px; /* Increased from 1100px to make the cards wider */
+  max-width: 1300px; 
   margin: 0 auto; 
   padding: 40px 48px 64px; 
 }
 
-/* If you want them EVEN wider, change "repeat(5, 1fr)" below to "repeat(auto-fit, minmax(280px, 1fr))". 
-   This will force them to wrap onto two rows instead of squeezing into one. */
+/* Switched to Flexbox for wider, wrapping cards */
 .flipcard-grid { 
-  display: grid; 
-  grid-template-columns: repeat(5, 1fr); 
-  gap: 20px; /* Slightly wider gap */
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the bottom row automatically */
+  gap: 24px; 
   margin-bottom: 32px; 
 }
 
 .flipcard { 
+  flex: 1 1 320px; /* Base width of 320px, allowed to grow */
+  max-width: 400px; /* Prevents them from getting absurdly wide */
   perspective: 800px; 
   height: 340px; 
   cursor: pointer; 
@@ -1309,25 +1310,25 @@ footer {
   display: flex; 
   flex-direction: column;
   padding: 24px; 
-  text-align: center;
   border: none; 
   background: #2b529f; /* Solid NHS blue */
-  opacity: 1; /* Forces solid background */
+  opacity: 1; 
 }
 
 .flipcard-front { 
   align-items: center; 
   justify-content: center; 
+  text-align: center;
 }
 
 .flipcard-back { 
   transform: rotateY(180deg); 
-  align-items: center;
+  align-items: flex-start; /* Aligns content to the left for the bullet points */
   justify-content: flex-start; 
   overflow-y: auto; 
 }
 
-/* ─── Solid White Typography (No Opacity) ─── */
+/* ─── Solid White Typography ─── */
 .fc-title { 
   font-family: 'Merriweather', serif; 
   font-size: 1.4rem; 
@@ -1346,17 +1347,31 @@ footer {
 
 .fc-back-title { 
   font-family: 'Merriweather', serif; 
-  font-size: 1.15rem; 
+  font-size: 1.2rem; 
   font-weight: 700; 
   color: #ffffff; 
-  margin-bottom: 12px; 
+  margin-bottom: 16px; 
+  text-align: left; 
+  width: 100%;
 }
 
-.fc-back-body { 
+/* ─── Bulleted List Styling ─── */
+.fc-back-list {
+  text-align: left;
+  padding-left: 20px; 
+  margin: 0;
+  width: 100%;
+}
+
+.fc-back-list li {
   font-size: 0.85rem; 
   color: #ffffff; 
   line-height: 1.5; 
-  margin: 0;
+  margin-bottom: 12px; /* Breathing room between points */
+}
+
+.fc-back-list li:last-child {
+  margin-bottom: 0;
 }
 
 .priorities-instruction { 
@@ -1368,19 +1383,15 @@ footer {
 }
 
 /* Responsive adjustments */
-@media (max-width: 1100px) { 
-  .flipcard-grid { 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Wraps cleanly on smaller screens */
-  } 
-}
-
-@media (max-width: 480px) { 
-  .flipcard-grid { 
-    grid-template-columns: 1fr; 
-  } 
+@media (max-width: 768px) { 
   .flipcard { 
-    height: 280px; 
+    flex: 1 1 100%; /* Stacks cards 1-by-1 on smaller screens */
+    max-width: 100%;
+    height: 300px; 
   } 
+  .priorities-wrap {
+    padding: 32px 24px 48px;
+  }
 }
 /* ── PAGE 2: Recognising Deterioration — light bg needs navy text ── */
     #page-2 .definition-header h2       { color: var(--navy); }
