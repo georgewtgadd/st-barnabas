@@ -3,39 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation</title>
+    <title>PEOLC for Registered Professionals</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
-        .nav-container {
+        /* Core tokens pulled from your styles.css */
+        :root {
+            --navy:        #22417e;
+            --navy-dark:   #182f5c;
+            --yellow:      #fdca0f;
+            --white:       #ffffff;
+            --text-muted:  #c5d3e8;
+            --surface:     rgba(255,255,255,0.06);
+            --border:      rgba(255,255,255,0.12);
+        }
+
+        /* Base Reset & Typography */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy-dark);
+            color: var(--white);
+            min-height: 100vh;
             display: flex;
-            gap: 10px;
-            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 24px;
+            line-height: 1.6;
         }
 
-        .nav-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #FFFFFF;
-            text-decoration: none;
-            border-radius: 5px;
-            font-family: sans-serif;
-            font-weight: bold;
+        /* Header Area */
+        .header-area {
             text-align: center;
-            transition: background-color 0.3s ease;
+            margin-bottom: 48px;
+            max-width: 600px;
         }
 
-        .nav-button:hover {
-            background-color: #0056b3;
+        .eyebrow {
+            display: inline-block;
+            background: rgba(253,202,15,0.12);
+            border: 1px solid rgba(253,202,15,0.3);
+            color: var(--yellow);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        p.subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Navigation Grid */
+        .nav-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Sophisticated Cards */
+        .nav-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.2s ease;
+        }
+
+        /* Hover animations mimicking your phase-btn */
+        .nav-card:hover {
+            border-color: rgba(253,202,15,0.5);
+            background: rgba(253,202,15,0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .nav-card:focus-visible {
+            outline: 3px solid var(--yellow);
+            outline-offset: 2px;
+        }
+
+        /* Number Badges */
+        .card-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: var(--yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Merriweather', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .card-text {
+            flex: 1;
+            font-family: 'Merriweather', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .card-arrow {
+            color: var(--yellow);
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0.5;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .nav-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateX(4px);
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav-container">
-        <a href="01-PEOLC/01-intro-peolc" class="nav-button">Intro to PEoLC</a>
-        <a href="01-PEOLC/02-deterioration-recognition" class="nav-button">Deterioration Recognition</a>
-        <a href="01-PEOLC/03-understanding-helen" class="nav-button">Understanding Helen</a>
-    </nav>
+    <div class="header-area">
+        <span class="eyebrow">St Barnabas Hospice</span>
+        <h1>PEOLC for Registered Professionals</h1>
+        <p class="subtitle">Select a learning package below to begin</p>
+    </div>
+
+    <div class="nav-grid">
+        <a href="01-PEOLC/" class="nav-card">
+            <div class="card-num">01</div>
+            <div class="card-text">What is PEOLC</div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a href="02-Deterioration/" class="nav-card">
+            <div class="card-num">02</div>
+            <div class="card-text">Deterioration & Recognition</div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a href="03-Helen/" class="nav-card">
+            <div class="card-num">03</div>
+            <div class="card-text">Understanding Helen</div>
+            <div class="card-arrow">→</div>
+        </a>
+    </div>
 
 </body>
 </html>
