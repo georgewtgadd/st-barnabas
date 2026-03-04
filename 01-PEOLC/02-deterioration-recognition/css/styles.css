@@ -1273,16 +1273,16 @@ footer {
   display: flex; 
   flex-wrap: wrap;
   justify-content: center; 
-  gap: 20px; /* Slightly tighter gap */
+  gap: 24px; 
   margin: 0 auto 32px auto; 
-  max-width: 960px; /* Constrains the whole group so they don't drift too far apart */
+  max-width: 800px; /* Widened the container so the cards have room to stretch */
 }
 
 .flipcard { 
-  flex: 1 1 260px; /* Much smaller base width */
-  max-width: 280px; /* Caps the width so they don't get huge */
+  flex: 1 1 340px; /* Tells the cards to start wider */
+  max-width: 440px; /* Allows them to stretch much wider before stopping */
   perspective: 800px; 
-  height: 260px; /* Dropped from 340px — the bullets don't need as much vertical room! */
+  height: 260px; /* Keeps the height contained so they don't look like huge posters */
   cursor: pointer; 
 }
 
@@ -1378,8 +1378,8 @@ footer {
 .priorities-instruction { 
   text-align: center; 
   font-size: 0.85rem; 
-  color: #ffffff; 
-  margin-bottom: 24px; 
+  color: var(--text-muted, rgba(255, 255, 255, 0.6)); /* Removes the bright white */
+  margin-bottom: 12px; /* Slashes the big gap (was 24px) */
   letter-spacing: 0.04em; 
 }
 
