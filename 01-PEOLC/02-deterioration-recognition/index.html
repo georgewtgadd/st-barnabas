@@ -180,7 +180,7 @@
 
 
 <!-- ════════════════════════════════════════════
-     PAGE 7 — PDF TOOL VIEWER (actual tool images)
+     PAGE 3 — Recognition Tools
 ═════════════════════════════════════════════ -->
 <section class="page" id="page-3" aria-label="Recognition and Identification Tools — PDF viewer">
   <div class="pdfv-wrap">
@@ -352,36 +352,91 @@
       </div>
     </div>
 
-   
-<!-- Analgesic Ladder card -->
-<div class="tool-card" role="listitem">
-  <div class="tool-card-icon" aria-hidden="true">💊</div>
-  <div class="tool-card-body">
-    <div class="tool-card-tag">Pain Management</div>
-    <div class="tool-card-title">WHO Analgesic Ladder</div>
-    <p class="tool-card-desc">The three-step WHO analgesic ladder for cancer pain management — guiding appropriate analgesia from non-opioid through to strong opioid therapy.</p>
-    <a class="tool-card-link" href="Analgesic_Ladder.pdf" target="_blank" rel="noopener" aria-label="Open Analgesic Ladder PDF in new tab">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Open PDF
-    </a>
-  </div>
-</div>
+    <!-- ─── Analgesic Ladder ──────────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-ladder" role="tabpanel" aria-labelledby="ptab-ladder">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <span style="font-size:.78rem; color:var(--text-muted); padding:0 4px;">PDF Document</span>
+            <a href="Analgesic_Ladder.pdf" target="_blank" rel="noopener"
+               style="margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:var(--yellow); text-decoration:none; font-weight:600; padding:4px 10px; border:1px solid rgba(253,202,15,.35); border-radius:6px;"
+               aria-label="Open Analgesic Ladder PDF in new tab">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open in new tab
+            </a>
+          </div>
+          <div class="pdfv-scroll-outer" id="ladder-outer" style="height:520px;">
+            <iframe src="Analgesic_Ladder.pdf"
+                    title="WHO Analgesic Ladder PDF"
+                    style="width:100%; height:100%; border:none; display:block;"
+                    aria-label="WHO Analgesic Ladder document">
+            </iframe>
+          </div>
+          <div class="pdfv-scroll-hint">Scroll within the document to read &middot; or open in new tab for full view</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#059669;">
+            <div class="pdfv-subtitle">World Health Organization</div>
+            <div class="pdfv-title">Analgesic Ladder</div>
+            <p class="pdfv-desc">The three-step WHO analgesic ladder provides a structured framework for cancer pain management — guiding appropriate analgesia from non-opioid through to strong opioid therapy with adjuvants at each step.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">Pain management</span><span class="pdfv-badge">3-step framework</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#059669;">
+            <div class="pdfv-why-label" style="color:#6ee7b7;">When &amp; Why We Use the Analgesic Ladder</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#059669;"></div>Step 1: Non-opioids (paracetamol, NSAIDs) ± adjuvants for mild pain</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#059669;"></div>Step 2: Mild opioids (codeine, tramadol) ± non-opioids for moderate pain</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#059669;"></div>Step 3: Strong opioids (morphine, oxycodone) for severe pain — titrate to effect</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#059669;"></div>Adjuvants (steroids, antidepressants, anticonvulsants) can be added at any step</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<!-- Pain Assessment Model card -->
-<div class="tool-card" role="listitem">
-  <div class="tool-card-icon" aria-hidden="true">📊</div>
-  <div class="tool-card-body">
-    <div class="tool-card-tag">Assessment Tool</div>
-    <div class="tool-card-title">Pain Assessment Model</div>
-    <p class="tool-card-desc">A structured model for assessing pain in palliative care settings, accounting for physical, psychological, social, and spiritual dimensions of pain.</p>
-    <a class="tool-card-link" href="Pain_Assessment_Model.pdf" target="_blank" rel="noopener" aria-label="Open Pain Assessment Model PDF in new tab">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Open PDF
-    </a>
-  </div>
-</div>
+    <!-- ─── Pain Assessment Model ─────────────────────────── -->
+    <div class="pdfv-panel" id="ppanel-pain" role="tabpanel" aria-labelledby="ptab-pain">
+      <div class="pdfv-layout">
+        <div class="pdfv-viewer">
+          <div class="pdfv-zoom-bar">
+            <span style="font-size:.78rem; color:var(--text-muted); padding:0 4px;">PDF Document</span>
+            <a href="Pain_Assessment_Model.pdf" target="_blank" rel="noopener"
+               style="margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:.78rem; color:var(--yellow); text-decoration:none; font-weight:600; padding:4px 10px; border:1px solid rgba(253,202,15,.35); border-radius:6px;"
+               aria-label="Open Pain Assessment Model PDF in new tab">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open in new tab
+            </a>
+          </div>
+          <div class="pdfv-scroll-outer" id="pain-outer" style="height:520px;">
+            <iframe src="Pain_Assessment_Model.pdf"
+                    title="Pain Assessment Model PDF"
+                    style="width:100%; height:100%; border:none; display:block;"
+                    aria-label="Pain Assessment Model document">
+            </iframe>
+          </div>
+          <div class="pdfv-scroll-hint">Scroll within the document to read &middot; or open in new tab for full view</div>
+        </div>
+        <div class="pdfv-info">
+          <div class="pdfv-header" style="border-left-color:#ef4444;">
+            <div class="pdfv-subtitle">Palliative Care Assessment</div>
+            <div class="pdfv-title">Pain Assessment Model</div>
+            <p class="pdfv-desc">A structured model for assessing pain in palliative care settings. Recognises that pain is multidimensional — accounting for physical, psychological, social, and spiritual components of a person's total pain experience.</p>
+            <div class="pdfv-meta"><span class="pdfv-badge">Total pain model</span><span class="pdfv-badge">4 dimensions</span></div>
+          </div>
+          <div class="pdfv-why-box" style="border-left-color:#ef4444;">
+            <div class="pdfv-why-label" style="color:#fca5a5;">When &amp; Why We Use the Pain Assessment Model</div>
+            <div class="pdfv-why-grid">
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#ef4444;"></div>At every visit where pain is reported or suspected — do not rely on self-report alone</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#ef4444;"></div>Physical: site, radiation, severity, character, timing, aggravating and relieving factors</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#ef4444;"></div>Psychological: anxiety, depression, fear of dying — all amplify the pain experience</div>
+              <div class="pdfv-why-item"><div class="pdfv-why-dot" style="background:#ef4444;"></div>Social &amp; spiritual dimensions must be assessed — unresolved distress worsens total pain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:28px;">
       <button class="btn btn-secondary" onclick="goToPage(2)">&#8592; Back</button>
       <button class="btn btn-primary"   onclick="goToPage(4)">Continue to Timeline &#8594;</button>
     </div>
