@@ -1262,22 +1262,25 @@ footer {
 
     
 /* ─── FIVE PRIORITIES FLIPCARD ───────────────────────────────── */
+/* ─── FIVE PRIORITIES FLIPCARD ───────────────────────────────── */
 .priorities-wrap { 
-  max-width: 1100px; 
+  max-width: 1300px; /* Increased from 1100px to make the cards wider */
   margin: 0 auto; 
   padding: 40px 48px 64px; 
 }
 
+/* If you want them EVEN wider, change "repeat(5, 1fr)" below to "repeat(auto-fit, minmax(280px, 1fr))". 
+   This will force them to wrap onto two rows instead of squeezing into one. */
 .flipcard-grid { 
   display: grid; 
   grid-template-columns: repeat(5, 1fr); 
-  gap: 16px; 
+  gap: 20px; /* Slightly wider gap */
   margin-bottom: 32px; 
 }
 
 .flipcard { 
   perspective: 800px; 
-  height: 340px; /* Increased height to accommodate detailed text */
+  height: 340px; 
   cursor: pointer; 
 }
 
@@ -1289,13 +1292,14 @@ footer {
   -webkit-transform-style: preserve-3d; 
   transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
   border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Soft shadow for the solid blocks */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .flipcard.flipped .flipcard-inner { 
   transform: rotateY(180deg); 
 }
 
+/* Identical solid styling for both front and back */
 .flipcard-front, .flipcard-back {
   position: absolute; 
   inset: 0; 
@@ -1304,10 +1308,11 @@ footer {
   border-radius: 14px; 
   display: flex; 
   flex-direction: column;
-  padding: 20px; 
+  padding: 24px; 
   text-align: center;
   border: none; 
-  background: #2b529f; /* Unified NHS-style blue block colour */
+  background: #2b529f; /* Solid NHS blue */
+  opacity: 1; /* Forces solid background */
 }
 
 .flipcard-front { 
@@ -1318,22 +1323,22 @@ footer {
 .flipcard-back { 
   transform: rotateY(180deg); 
   align-items: center;
-  justify-content: flex-start; /* Pushes content to the top */
-  overflow-y: auto; /* Safety net: allows scrolling if text gets too long on small screens */
+  justify-content: flex-start; 
+  overflow-y: auto; 
 }
 
-/* Typography for the cards */
+/* ─── Solid White Typography (No Opacity) ─── */
 .fc-title { 
   font-family: 'Merriweather', serif; 
   font-size: 1.4rem; 
   font-weight: 700; 
-  color: var(--white, #ffffff); 
+  color: #ffffff; 
   line-height: 1.3; 
 }
 
 .fc-hint { 
-  font-size: 0.75rem; 
-  color: rgba(255, 255, 255, 0.75); 
+  font-size: 0.8rem; 
+  color: #ffffff; 
   margin-top: 12px; 
   letter-spacing: 0.06em; 
   text-transform: uppercase; 
@@ -1341,31 +1346,31 @@ footer {
 
 .fc-back-title { 
   font-family: 'Merriweather', serif; 
-  font-size: 1.1rem; 
+  font-size: 1.15rem; 
   font-weight: 700; 
   color: #ffffff; 
   margin-bottom: 12px; 
 }
 
 .fc-back-body { 
-  font-size: 0.8rem; 
-  color: rgba(255, 255, 255, 0.95); 
+  font-size: 0.85rem; 
+  color: #ffffff; 
   line-height: 1.5; 
   margin: 0;
 }
 
 .priorities-instruction { 
   text-align: center; 
-  font-size: 0.8rem; 
-  color: rgba(255, 255, 255, 0.5); 
+  font-size: 0.85rem; 
+  color: #ffffff; 
   margin-bottom: 24px; 
   letter-spacing: 0.04em; 
 }
 
 /* Responsive adjustments */
-@media (max-width: 900px) { 
+@media (max-width: 1100px) { 
   .flipcard-grid { 
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Wraps cleanly on smaller screens */
   } 
 }
 
@@ -1374,10 +1379,9 @@ footer {
     grid-template-columns: 1fr; 
   } 
   .flipcard { 
-    height: 260px; /* Reduced height for stacked mobile view, but still tall enough for text */
+    height: 280px; 
   } 
 }
-
 /* ── PAGE 2: Recognising Deterioration — light bg needs navy text ── */
     #page-2 .definition-header h2       { color: var(--navy); }
     #page-2 .definition-header p        { color: #5a6a82; }
