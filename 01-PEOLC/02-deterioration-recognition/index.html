@@ -687,9 +687,9 @@
 <section class="page" id="page-7" aria-label="Five priorities of care — flipcard activity">
   <div class="priorities-wrap">
     <div class="outcomes-title-area">
-      <div class="outcomes-eyebrow">National End of Life Care Programme</div>
-      <h2>Five Priorities of Care</h2>
-      <p>These five priorities are central to end of life care practice across the UK. Click each card to discover what each priority means in practice — and how it applied to Bob.</p>
+      <div class="outcomes-eyebrow" style="background:var(--yellow);color:var(--navy);">National End of Life Care Programme</div>
+      <h2 style="color:var(--white);">Five Priorities of Care</h2>
+      <p style="color:var(--text-muted);">These five priorities are central to end of life care practice across the UK. Click each card to discover what each priority means in practice — and how it applied to Bob.</p>
     </div>
     <div class="priorities-instruction" aria-hidden="true">↓ Click any card to flip it</div>
     <div class="flipcard-grid" role="list">
@@ -771,25 +771,22 @@
 
     </div>
 
-    <div class="definition-not" style="margin-top:8px;" role="note">
-      <div class="definition-not-title">
+    <div class="definition-not" style="margin-top:8px;background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);" role="note">
+      <div class="definition-not-title" style="color:var(--text-muted);">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Source: NHS Funded Training — Advance Care Planning
       </div>
       <div class="definition-not-grid">
-        <div class="not-item"><span class="not-item-icon">✓</span><span>These priorities apply in <strong style="color:var(--white);">every setting</strong> — hospital, hospice, care home, and home</span></div>
-        <div class="not-item"><span class="not-item-icon">✓</span><span>They apply to <strong style="color:var(--white);">all members of the MDT</strong>, not just medical staff</span></div>
-        <div class="not-item"><span class="not-item-icon">✓</span><span>Failure to meet any priority can cause lasting harm to patients and families</span></div>
-        <div class="not-item"><span class="not-item-icon">✓</span><span>Full guidance: <strong style="color:var(--white);"><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener" style="color:var(--blue);">www.nhft.nhs.uk/acp/</a></strong></span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:var(--text-muted);"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>These priorities apply in <strong style="color:var(--white);">every setting</strong> — hospital, hospice, care home, and home</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:var(--text-muted);"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>They apply to <strong style="color:var(--white);">all members of the MDT</strong>, not just medical staff</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:var(--text-muted);"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>Failure to meet any priority can cause lasting harm to patients and families</span></div>
+        <div class="not-item" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:var(--text-muted);"><span class="not-item-icon" style="color:var(--yellow);">✓</span><span>Full guidance: <strong><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener" style="color:var(--blue);">www.nhft.nhs.uk/acp/</a></strong></span></div>
       </div>
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
-      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,0.3);" onclick="goToPage(6)">← Back</button>
-      <div style="text-align:right;">
-        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:8px;">Module complete</div>
-        <button class="btn btn-primary" style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(8)">✓ Bob Evans</button>
-      </div>
+      <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(8)">✓ Bob Evans →</button>
     </div>
   </div>
 </section>
@@ -1002,91 +999,93 @@
      PAGE 11 — BOB EVANS PART 4: ACTIVE DYING (Video + Activities)
 ═════════════════════════════════════════════ -->
 <section class="page" id="page-11" aria-label="Bob Evans Part 4 — Recognising Active Dying">
-  <div class="case-wrap">
-    <div class="outcomes-title-area" style="margin-bottom:28px;">
-      <div class="outcomes-eyebrow">Case Study — Part 4</div>
-      <h2>Recognising Active Dying &amp; Planning Care</h2>
-      <p style="color:#5a6a82;">You visit Bob again following concerns raised by the team. The picture has changed significantly.</p>
-    </div>
+  <div class="scenario-wrap">
 
-    <div class="video-wrap" style="margin-bottom:28px;">
-      <div class="scenario-video" role="figure" aria-label="Bob's Final Visit">
-        <video src="video/bob2.mp4" 
-               controls 
-               aria-label="Bob in bed, appearing very unwell with laboured breathing"
-               style="width:100%; height:100%; object-fit:cover; display:block; border-radius:14px; border: 1px solid var(--border);">
-          Your browser does not support the video tag.
+    <!-- LEFT: video + clinical context -->
+    <div class="scenario-left">
+      <div class="scenario-video" role="figure" aria-label="Bob's final visit">
+        <video src="video/bob2.mp4"
+               controls
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               aria-label="Bob in bed, appearing very unwell with laboured breathing">
+          Your browser does not support the video element.
         </video>
       </div>
-    </div>
 
-    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-left:5px solid #ef4444;border-radius:0 14px 14px 0;padding:20px 24px;margin-bottom:24px;" role="note">
-      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fca5a5;margin-bottom:10px;">Clinical Visit — Urgent Follow-up</div>
-      <div class="clip-scenario-box" style="border:none;background:transparent;padding:0;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text-muted);">
-            <p>Bob is now in bed. He appears very unwell. His breathing is <strong>laboured and rapid at times, with long pauses between breaths</strong>. He is visibly anxious and restless, frequently shifting position. He is <strong>unable to lie flat</strong> due to breathlessness.</p>
-            <p>Bob is <strong>no longer able to swallow his medications</strong>. His mouth is dry, and he coughs when attempting small sips of fluid.</p>
-            <p>He is <strong>intermittently drowsy</strong> but becomes agitated when awake, pulling at the bedding and appearing distressed. At times, he seems confused and struggles to follow conversation.</p>
-            <p>Bob has not been able to speak to his son. <strong>Calls and messages have not been returned.</strong></p>
-            <p>His dog is lying on the bed beside him. 🐕</p>
+      <div class="scenario-context" style="border-left-color:#ef4444;">
+        <div class="scenario-context-label" style="color:#fca5a5;" aria-hidden="true">🚨 Clinical Visit — Urgent Follow-up</div>
+        <p>Bob is now in bed. His breathing is <strong style="color:var(--white);">laboured and rapid at times, with long pauses between breaths.</strong> He is visibly anxious and restless, unable to lie flat.</p>
+        <p>He is <strong style="color:var(--white);">no longer able to swallow his medications.</strong> His mouth is dry; he coughs on small sips of fluid.</p>
+        <p>He is <strong style="color:var(--white);">intermittently drowsy</strong> but becomes agitated when awake — confused, pulling at the bedding, struggling to follow conversation.</p>
+        <p>Bob has not been able to speak to his son. <strong style="color:var(--white);">Calls and messages have not been returned.</strong></p>
+        <p>His dog is lying on the bed beside him. 🐕</p>
       </div>
     </div>
 
-    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
-      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:16px;">Activity 1 — Recognising Deterioration</div>
-          <div class="clip-activity-box">
-            <div class="cab-label">Reflect &amp; Respond</div>
-            <div class="cab-question">Q: What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply to Bob at this point?</div>
-            <textarea class="cab-textarea" id="bob4-q1-input" placeholder="List the signs you can identify from the scenario above…" rows="5" aria-label="Your answer about signs of deterioration in Bob"></textarea>
-            <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q1-answer')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Reveal suggested answer
-            </button>
-            <div class="cab-answer" id="bob4-q1-answer">
-              <div class="cab-answer-inner">
-                <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
-                <ul>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern) </li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Profound weakness</strong> — bed-bound, unable to lie flat, all care required</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Diminished oral intake / difficulty taking medications</strong> — unable to swallow, coughing on fluids</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Drowsy and disorientated</strong> — intermittently drowsy, confused, cannot follow conversation</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Terminal agitation</strong> — restless, pulling at bedding, visibly distressed when awake</li>
-                  <li><div class="caa-dot"></div>Dry mouth and difficulty with fluids indicate he is likely in the <strong style="color:var(--white);">final hours to days</strong> of life</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-    </div>
+    <!-- RIGHT: reflective activities -->
+    <div class="choices-panel" role="region" aria-label="Reflective activities">
 
-    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
-      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--yellow);margin-bottom:16px;">Activity 2 — Planning Care</div>
-          <div class="clip-activity-box">
-            <div class="cab-label">Reflect &amp; Respond</div>
-            <div class="cab-question">Q: What do you need to do now? Think about immediate clinical care, communication, the Five Priorities, Bob's son, and his dog.</div>
-            <textarea class="cab-textarea" id="bob4-q2-input" placeholder="Think about: medications, communication, the son, the dog, the Five Priorities of Care…" rows="5" aria-label="Your care plan for Bob"></textarea>
-            <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q2-answer')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              Reveal suggested answer
-            </button>
-            <div class="cab-answer" id="bob4-q2-answer">
-              <div class="cab-answer-inner">
-                <div class="cab-answer-title">What needs to happen now — a suggested framework</div>
-                <ul>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Medications:</strong> Convert all medications to subcutaneous route via syringe driver. Ensure anticipatory prescribing is in place for pain, agitation, breathlessness, and secretions.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Recognise and communicate:</strong> Discuss with the wider team that Bob appears to be actively dying. Document this clearly and ensure all involved clinicians are aware.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Oral care:</strong> Keep Bob's mouth moist — regular mouth care is essential. Do not force fluids.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's son:</strong> Make all reasonable attempts to contact the son — this is an urgent and time-limited situation. Consider involving the social worker or chaplain to facilitate contact.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's dog:</strong> This is a source of significant comfort to Bob. Where possible, allow the dog to remain close. Contact a specialist charity (e.g. Cinnamon Trust) or a community contact to create a formal care plan for the dog.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Five Priorities:</strong> Recognise Bob is dying → communicate sensitively → involve him (where able) → support family → ensure an individual plan of care is in place and actioned.</li>
-                  <li><div class="caa-dot"></div><strong style="color:var(--white);">Stop unnecessary treatments:</strong> Review and stop any observations, investigations, or interventions that no longer serve Bob's comfort or dignity.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-    </div>
+      <p class="choices-hint">
+        <strong style="color:var(--white);display:block;margin-bottom:4px;">Case Study — Part 4</strong>
+        You visit Bob again following concerns raised by the team. The picture has changed significantly. Work through both activities below.
+      </p>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
-      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,0.3);" onclick="goToPage(10)">← Back</button>
-      <button class="btn btn-primary"   style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(7)">Continue to Five Priorities →</button>
+      <!-- Activity 1 -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:14px;">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Activity 1 — Recognising Deterioration</div>
+        <div class="cab-label">Reflect &amp; Respond</div>
+        <div class="cab-question">What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply to Bob at this point?</div>
+        <textarea class="cab-textarea" id="bob4-q1-input" placeholder="List the signs you can identify from the scenario…" rows="4" aria-label="Your answer about signs of deterioration in Bob"></textarea>
+        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q1-answer')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Reveal suggested answer
+        </button>
+        <div class="cab-answer" id="bob4-q1-answer">
+          <div class="cab-answer-inner">
+            <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
+            <ul>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern)</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Profound weakness</strong> — bed-bound, unable to lie flat</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Unable to swallow medications</strong> — coughing on fluids</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Drowsy and disorientated</strong> — confused, cannot follow conversation</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Terminal agitation</strong> — restless, pulling at bedding, visibly distressed</li>
+              <li><div class="caa-dot"></div>Dry mouth indicates he is likely in the <strong style="color:var(--white);">final hours to days</strong> of life</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity 2 -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:20px;">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Activity 2 — Planning Care</div>
+        <div class="cab-label">Reflect &amp; Respond</div>
+        <div class="cab-question">What do you need to do now? Think about medications, communication, the Five Priorities, Bob's son, and his dog.</div>
+        <textarea class="cab-textarea" id="bob4-q2-input" placeholder="Think about: medications, communication, the son, the dog, the Five Priorities of Care…" rows="4" aria-label="Your care plan for Bob"></textarea>
+        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q2-answer')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Reveal suggested answer
+        </button>
+        <div class="cab-answer" id="bob4-q2-answer">
+          <div class="cab-answer-inner">
+            <div class="cab-answer-title">What needs to happen now — a suggested framework</div>
+            <ul>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Medications:</strong> Convert to subcutaneous route via syringe driver. Ensure anticipatory prescribing for pain, agitation, breathlessness, and secretions.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Recognise and communicate:</strong> Discuss with the team that Bob appears to be actively dying. Document clearly.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Oral care:</strong> Keep mouth moist with regular mouth care. Do not force fluids.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's son:</strong> Make all reasonable attempts to contact him — this is urgent. Consider involving the social worker or chaplain.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's dog:</strong> Allow him to remain close. Contact a specialist charity (e.g. Cinnamon Trust) for a dog care plan.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Five Priorities:</strong> Recognise → communicate → involve → support → plan and do.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Stop unnecessary treatments:</strong> Review and stop observations, investigations, or interventions that no longer serve Bob's comfort.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="goToPage(10)">← Back</button>
+        <button class="btn btn-primary"   onclick="goToPage(7)">Continue to Five Priorities →</button>
+      </div>
+
     </div>
   </div>
 </section>
