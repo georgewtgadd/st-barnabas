@@ -1068,6 +1068,35 @@ footer {
     .dod-gsf-title { font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--yellow); margin-bottom:6px; }
     .dod-gsf-body  { font-size:0.87rem; color:var(--text-muted); line-height:1.7; }
     @media(max-width:640px){ .dod-grid{grid-template-columns:1fr;} }
+/*VIDEO LAYOUT */
+.scenario-wrap {
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  align-items: start;
+}
+
+.scenario-video {
+  position: relative;
+  border-radius: 14px; overflow: hidden;
+  aspect-ratio: 16/9; background: #0d1a33;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+  margin-bottom: 20px;
+}
+
+.scenario-context {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--yellow);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 22px;
+}
+.scenario-context-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); margin-bottom: 8px; }
+.scenario-context p    { font-size: 0.9rem; color: #c5d3e8; line-height: 1.7; }
+.scenario-context p em { color: var(--yellow); font-style: italic; }
+
 
     /* ─── CLIPBOARD CASE STUDY (Pages 7, 8, 10) ─────────────── */
     .case-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
