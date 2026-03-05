@@ -326,7 +326,7 @@
       .sort-stmt.placed   { display:none; }
       .sort-cols  { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px; }
       .sort-col   { border-radius:12px;padding:16px;min-height:140px;transition:border-color .2s,background .2s; }
-      .sort-placed { border-radius:8px;padding:11px 13px;font-size:.84rem;line-height:1.5;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start; }
+      .sort-placed { border-radius:8px;padding:11px 13px;font-size:.84rem;line-height:1.5;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;pointer-events:all; }
       .sort-placed-remove { flex-shrink:0;font-size:.8rem;opacity:.5;cursor:pointer;margin-top:1px; }
       .sort-placed-remove:hover { opacity:1; }
       .sort-feedback { display:none;padding:14px 18px;border-radius:10px;font-size:.88rem;line-height:1.65;margin-bottom:16px; }
@@ -362,15 +362,15 @@
            ondragover="event.preventDefault();this.classList.add('drag-over')"
            ondragleave="this.classList.remove('drag-over')"
            ondrop="dropStatement(event,'myth')">
-        <div class="sort-col-title" style="color:#c0392b;">✗ Myth</div>
-        <div id="zone-myth"></div>
+        <div class="sort-col-title" style="color:#c0392b;pointer-events:none;">✗ Myth</div>
+        <div id="zone-myth" style="pointer-events:none;"></div>
       </div>
       <div class="sort-col" id="col-fact"
            ondragover="event.preventDefault();this.classList.add('drag-over')"
            ondragleave="this.classList.remove('drag-over')"
            ondrop="dropStatement(event,'fact')">
-        <div class="sort-col-title" style="color:#059669;">✓ Fact</div>
-        <div id="zone-fact"></div>
+        <div class="sort-col-title" style="color:#059669;pointer-events:none;">✓ Fact</div>
+        <div id="zone-fact" style="pointer-events:none;"></div>
       </div>
     </div>
 
@@ -1402,6 +1402,7 @@
         }
       }
     }, 300);
+  } // end resetQuiz
 
   // ── LEARNING RECORD ──────────────────────────────────────────
   function populateLearningRecord() {
