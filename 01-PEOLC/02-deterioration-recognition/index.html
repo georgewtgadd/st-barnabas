@@ -947,120 +947,7 @@
         <p>St Barnabas Hospice &nbsp;·&nbsp; <strong>Not for distribution</strong></p>
       </div>
     </div>
-    <!-- ── AKPS Mini-Scorer ───────────────────────────── -->
-<div class="akps-scorer" role="region" aria-label="AKPS Mini-Scorer for Bob Evans">
-
-  <div class="akps-scorer-header">
-    <div class="akps-scorer-eyebrow">Interactive Tool</div>
-    <div class="akps-scorer-title">Apply the AKPS to Bob</div>
-    <p class="akps-scorer-desc">Using what you know about Bob, select the statement that best describes his current functional status.</p>
-  </div>
-
-  <div class="akps-options" role="radiogroup" aria-label="AKPS performance scale options">
-
-    <label class="akps-option" data-score="100">
-      <input type="radio" name="akps" value="100" aria-label="AKPS 100 — Normal, no complaints">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">100</span>
-        <span class="akps-option-text">Normal activity, no evidence of disease, no complaints</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="90">
-      <input type="radio" name="akps" value="90" aria-label="AKPS 90 — Normal activity, minor symptoms">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">90</span>
-        <span class="akps-option-text">Normal activity with effort, some symptoms of disease</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="80">
-      <input type="radio" name="akps" value="80" aria-label="AKPS 80 — Normal activity with effort">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">80</span>
-        <span class="akps-option-text">Normal activity with effort, some signs or symptoms of disease</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="70">
-      <input type="radio" name="akps" value="70" aria-label="AKPS 70 — Cares for self, unable to work">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">70</span>
-        <span class="akps-option-text">Cares for self; unable to carry on normal activity or active work</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="60">
-      <input type="radio" name="akps" value="60" aria-label="AKPS 60 — Requires occasional assistance">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">60</span>
-        <span class="akps-option-text">Requires occasional assistance but is able to care for most personal needs</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="50">
-      <input type="radio" name="akps" value="50" aria-label="AKPS 50 — Requires considerable assistance">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">50</span>
-        <span class="akps-option-text">Requires considerable assistance and frequent medical care</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="40">
-      <input type="radio" name="akps" value="40" aria-label="AKPS 40 — Disabled, requires special care">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">40</span>
-        <span class="akps-option-text">Disabled; requires special care and assistance</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="30">
-      <input type="radio" name="akps" value="30" aria-label="AKPS 30 — Severely disabled, hospitalisation indicated">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">30</span>
-        <span class="akps-option-text">Severely disabled; hospitalisation indicated, death not imminent</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="20">
-      <input type="radio" name="akps" value="20" aria-label="AKPS 20 — Very sick, active supportive care needed">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">20</span>
-        <span class="akps-option-text">Very sick; hospitalisation necessary, active supportive treatment necessary</span>
-      </div>
-    </label>
-
-    <label class="akps-option" data-score="10">
-      <input type="radio" name="akps" value="10" aria-label="AKPS 10 — Moribund, fatal processes progressing rapidly">
-      <div class="akps-option-inner">
-        <span class="akps-score-badge">10</span>
-        <span class="akps-option-text">Moribund; fatal processes progressing rapidly</span>
-      </div>
-    </label>
-
-  </div>
-
-  <button class="akps-submit-btn" id="akps-submit-btn" onclick="scoreAKPS()" disabled aria-label="Submit AKPS score">
-    Score Bob →
-  </button>
-
-  <!-- Result panel — hidden until submitted -->
-  <div class="akps-result" id="akps-result" aria-live="polite" hidden>
-    <div class="akps-result-inner">
-      <div class="akps-result-top">
-        <div>
-          <div class="akps-result-label">Bob's AKPS Score</div>
-          <div class="akps-result-score" id="akps-result-score">—</div>
-        </div>
-        <div class="akps-result-indicator" id="akps-result-indicator"></div>
-      </div>
-      <div class="akps-result-interpretation" id="akps-result-interpretation"></div>
-      <div class="akps-result-clinical" id="akps-result-clinical"></div>
-      <button class="akps-reset-btn" onclick="resetAKPS()" aria-label="Try a different AKPS score">Try a different score</button>
-    </div>
-  </div>
-
-</div>
+ 
     <!-- /clipboard -->
 
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
@@ -1087,28 +974,19 @@
       
       <div class="scenario-context">
         <div class="scenario-context-label" aria-hidden="true">📍 Setting the Scene</div>
-        <p style="color:#fff; >You are visiting Bob for a planned follow-up. He answers the door himself and walks slowly to his chair. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely.</p>
+        <p>You are visiting Bob for a planned follow-up. He answers the door himself and walks slowly to his chair. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely.</p>
         
         <p>While talking, you notice a <strong style="color:#fff;">yellowish tinge around his eyes</strong>. You ask Bob how he has been.</p>
         
-        <p style="color:#fff; ><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
+        <p><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
         
         <hr style="margin:20px 0; border:0; border-top:1px solid rgba(255,255,255,.1);">
         
         <div class="scenario-context-label" aria-hidden="true">💡 Learning Focus</div>
-        <p style="color:#fff; >This stage is about **recognising hidden deterioration**. People often minimise symptoms. "I'm fine" does not always mean nothing is wrong.</p>
+        <p>This stage is about **recognising hidden deterioration**. People often minimise symptoms. "I'm fine" does not always mean nothing is wrong.</p>
       </div>
     </div>
-
-    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Response options">
-      
-      <p class="choices-hint" style="color:#fff;>
-        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
-        Bob is not volunteering concerns, but your observations suggest otherwise. Complete the activities below.
-      </p>
-
-      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:14px;">
-       <!-- ══ AKPS SLIDER ══ -->
+   <!-- ══ AKPS SLIDER ══ -->
 <div class="akps-slider-block">
 
   <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
@@ -1166,6 +1044,15 @@
 
 </div>
 <!-- /AKPS SLIDER ══ -->
+    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Response options">
+      
+      <p class="choices-hint" style="color:#fff;>
+        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
+        Bob is not volunteering concerns, but your observations suggest otherwise. Complete the activities below.
+      </p>
+
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:14px;">
+    
         <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity 1 — Observations</div>
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating despite saying he is "fine"?</div>
