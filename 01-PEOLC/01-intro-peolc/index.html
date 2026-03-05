@@ -267,8 +267,8 @@
       </div>
 
       <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
-<div class="def-card-icon" style="background:#1a2e4a; border:2px solid #1a2e4a; display:flex; align-items:center; justify-content:center; color:#ffffff;" aria-hidden="true">
-    </div>          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="def-card-icon" style="background:rgba(253,202,15,0.18);border:2px solid rgba(253,202,15,0.35);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div>
           <div class="def-card-title" style="color:#1a2e4a !important;">Alongside Active Treatment</div>
@@ -299,7 +299,7 @@
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-bottom:48px;">
       <button class="btn btn-secondary" onclick="goToPage(1)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(3)">Myth or Fact? →</button>
     </div>
@@ -1219,42 +1219,54 @@
   var vignetteAnswered = { v1: false, v2: false, v3: false };
 
   function answerVignette(btn, chosen, id, correctIsYes) {
-    var card = btn.closest('.vignette');
-    card.querySelectorAll('.vignette-btn').forEach(function(b){ b.disabled = true; b.style.opacity = '.55'; });
     var isCorrect = (chosen === 'yes') === correctIsYes;
-    btn.style.borderColor = isCorrect ? '#059669' : '#ef4444';
-    btn.style.background  = isCorrect ? 'rgba(5,150,105,.1)' : 'rgba(220,38,38,.08)';
     var data = vignetteFeedback[id][chosen];
     var rationale = document.getElementById(id + '-rationale');
     if (!rationale) return;
-    rationale.textContent = data.text;
-    rationale.className = 'vignette-rationale show ' + (data.correct ? 'correct' : 'incorrect');
-    // Store user answer
-    vignetteAnswered[id] = { chosen: chosen, correct: data.correct };
-    // Check if all 3 answered
-    var allDone = vignetteAnswered.v1 && vignetteAnswered.v2 && vignetteAnswered.v3;
-    if (allDone) {
-      var contBtn = document.getElementById('vignette-continue-btn');
-      var lockedMsg = document.getElementById('vignette-locked-msg');
-      if (contBtn) { contBtn.disabled = false; contBtn.style.opacity = '1'; contBtn.style.cursor = 'pointer'; }
-      if (lockedMsg) lockedMsg.style.display = 'none';
+
+    if (isCorrect) {
+      // Lock in the correct answer — disable both buttons permanently
+      var card = btn.closest('.vignette');
+      card.querySelectorAll('.vignette-btn').forEach(function(b){
+        b.disabled = true; b.style.opacity = '.55';
+      });
+      btn.style.borderColor = '#059669';
+      btn.style.background  = 'rgba(5,150,105,.1)';
+      btn.style.opacity     = '1';
+      rationale.innerHTML   = data.text;
+      rationale.className   = 'vignette-rationale show correct';
+      vignetteAnswered[id]  = { chosen: chosen, correct: true };
+
+      // Check if all 3 now correct
+      var allDone = vignetteAnswered.v1 && vignetteAnswered.v2 && vignetteAnswered.v3;
+      if (allDone) {
+        var contBtn   = document.getElementById('vignette-continue-btn');
+        var lockedMsg = document.getElementById('vignette-locked-msg');
+        if (contBtn)   { contBtn.disabled = false; contBtn.style.opacity = '1'; contBtn.style.cursor = 'pointer'; }
+        if (lockedMsg) lockedMsg.style.display = 'none';
+      }
+    } else {
+      // Wrong — show feedback with Try Again, don't lock
+      btn.style.borderColor = '#ef4444';
+      btn.style.background  = 'rgba(220,38,38,.08)';
+      rationale.innerHTML   = data.text +
+        '<button onclick="retryVignette(\'' + id + '\')" ' +
+        'style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 16px;' +
+        'background:transparent;color:#1a2e4a;border:2px solid #c8d8e8;border-radius:7px;' +
+        'font-family:\'DM Sans\',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;">↩ Try again</button>';
+      rationale.className   = 'vignette-rationale show incorrect';
     }
   }
 
-  function resetVignettes() {
-    ['v1','v2','v3'].forEach(function(id) {
-      vignetteAnswered[id] = false;
-      var rat = document.getElementById(id + '-rationale');
-      if (rat) { rat.className = 'vignette-rationale'; rat.textContent = ''; }
-    });
-    document.querySelectorAll('.vignette-btn').forEach(function(b){
+  function retryVignette(id) {
+    // Reset just this one card
+    var rationale = document.getElementById(id + '-rationale');
+    if (rationale) { rationale.className = 'vignette-rationale'; rationale.innerHTML = ''; }
+    var allBtns = document.querySelectorAll('[onclick*="answerVignette"][onclick*="\'' + id + '\'"]');
+    allBtns.forEach(function(b){
       b.disabled = false; b.style.opacity = '1';
       b.style.borderColor = '#c8d8e8'; b.style.background = 'transparent';
     });
-    var contBtn = document.getElementById('vignette-continue-btn');
-    var lockedMsg = document.getElementById('vignette-locked-msg');
-    if (contBtn) { contBtn.disabled = true; contBtn.style.opacity = '.4'; contBtn.style.cursor = 'not-allowed'; }
-    if (lockedMsg) lockedMsg.style.display = 'flex';
   }
 
   // ── QUIZ — 80% PASS GATE + QUESTION CAPTURE ─────────────────
@@ -1312,23 +1324,84 @@
       var btn = document.getElementById('quiz-continue-btn');
       if (passed) {
         if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; }
+        // Remove any lingering fail message
+        var old = document.getElementById('quiz-fail-msg');
+        if (old) old.remove();
       } else {
-        // Show fail message — need to retry
-        if (btn) {
-          btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed';
-        }
+        if (btn) { btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed'; }
         var failMsg = document.getElementById('quiz-fail-msg');
         if (!failMsg) {
           failMsg = document.createElement('div');
           failMsg.id = 'quiz-fail-msg';
-          failMsg.style.cssText = 'margin-top:16px;padding:14px 18px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);border-left:4px solid #ef4444;border-radius:8px;font-size:.88rem;color:#fca5a5;line-height:1.65;';
-          failMsg.innerHTML = '<strong>Score: ' + pct + '%</strong> — a score of 80% or above is required to continue. Please review the questions and try again.';
+          failMsg.style.cssText = 'margin-top:16px;padding:14px 18px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);border-left:4px solid #ef4444;border-radius:8px;font-size:.88rem;color:#fca5a5;line-height:1.65;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;';
+          failMsg.innerHTML =
+            '<span><strong>Score: ' + pct + '%</strong> — 80% required to continue.</span>' +
+            '<button onclick="resetQuiz()" style="padding:8px 18px;background:var(--yellow);color:var(--navy);border:none;border-radius:7px;font-family:\'DM Sans\',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;white-space:nowrap;">↩ Retry Quiz</button>';
           var quizWrap = document.querySelector('.quiz-wrap');
           if (quizWrap) quizWrap.appendChild(failMsg);
         }
       }
     }
   }, 300);
+
+  function resetQuiz() {
+    // Clear stored quiz data
+    window._quizScoreText = null; window._quizPassed = null; window._quizPct = null;
+    // Remove fail message
+    var failMsg = document.getElementById('quiz-fail-msg');
+    if (failMsg) failMsg.remove();
+    // Clear results panel and questions
+    var r = document.getElementById('quiz-results');
+    if (r) { r.classList.remove('show'); r.innerHTML = ''; }
+    var qc = document.getElementById('quiz-questions-container');
+    if (qc) qc.innerHTML = '';
+    var dots = document.getElementById('quiz-dots');
+    if (dots) dots.innerHTML = '';
+    var prog = document.getElementById('quiz-progress-text');
+    if (prog) prog.textContent = 'Question 1 of 5';
+    // Re-lock continue
+    var contBtn = document.getElementById('quiz-continue-btn');
+    if (contBtn) { contBtn.disabled = true; contBtn.style.opacity = '.4'; contBtn.style.cursor = 'not-allowed'; }
+    // Re-initialise quiz via scripts.js function if available
+    if (typeof initQuiz === 'function') {
+      initQuiz();
+    } else if (typeof renderQuiz === 'function') {
+      renderQuiz();
+    } else {
+      // Fallback — reload the quiz by re-calling goToPage(8) on scripts.js's internal state
+      var orig = window._orig_goToPage || goToPage;
+      orig(8);
+    }
+    // Restart the interval watcher
+    clearInterval(_quizCheck);
+    _quizCheck = setInterval(function() {
+      var r2 = document.getElementById('quiz-results');
+      if (r2 && r2.classList.contains('show')) {
+        clearInterval(_quizCheck);
+        var scoreNum2  = r2.querySelector('.quiz-results-score');
+        var scoreText2 = scoreNum2 ? scoreNum2.textContent.trim() : '';
+        var parts2 = scoreText2.replace(/\s/g,'').split('/');
+        var got2 = parseInt(parts2[0],10), total2 = parseInt(parts2[1],10);
+        var pct2 = total2 ? Math.round((got2/total2)*100) : 0;
+        window._quizScoreText = scoreText2; window._quizPct = pct2; window._quizPassed = pct2 >= 80;
+        var btn2 = document.getElementById('quiz-continue-btn');
+        var fail2 = document.getElementById('quiz-fail-msg');
+        if (pct2 >= 80) {
+          if (btn2) { btn2.disabled = false; btn2.style.opacity = '1'; btn2.style.cursor = 'pointer'; }
+          if (fail2) fail2.remove();
+        } else {
+          if (btn2) { btn2.disabled = true; btn2.style.opacity = '.4'; btn2.style.cursor = 'not-allowed'; }
+          if (!fail2) {
+            fail2 = document.createElement('div');
+            fail2.id = 'quiz-fail-msg';
+            fail2.style.cssText = 'margin-top:16px;padding:14px 18px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);border-left:4px solid #ef4444;border-radius:8px;font-size:.88rem;color:#fca5a5;line-height:1.65;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;';
+            fail2.innerHTML = '<span><strong>Score: ' + pct2 + '%</strong> — 80% required to continue.</span><button onclick="resetQuiz()" style="padding:8px 18px;background:var(--yellow);color:var(--navy);border:none;border-radius:7px;font-family:\'DM Sans\',sans-serif;font-size:.84rem;font-weight:700;cursor:pointer;white-space:nowrap;">↩ Retry Quiz</button>';
+            var qw2 = document.querySelector('.quiz-wrap');
+            if (qw2) qw2.appendChild(fail2);
+          }
+        }
+      }
+    }, 300);
 
   // ── LEARNING RECORD ──────────────────────────────────────────
   function populateLearningRecord() {
