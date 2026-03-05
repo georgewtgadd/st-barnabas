@@ -8,6 +8,70 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* ── Light page overrides (pages 2, 3, 4, 6, 7) ──────── */
+    #page-2, #page-3, #page-4, #page-6, #page-7 {
+      background: #f0f4f9;
+    }
+
+    /* Headings */
+    #page-2 h2, #page-3 h2, #page-4 h2, #page-6 h2, #page-7 h2 {
+      color: var(--navy, #1a2e4a) !important;
+    }
+    /* Body / paragraph text */
+    #page-2 p,  #page-3 p,  #page-4 p,  #page-6 p,  #page-7 p,
+    #page-2 li, #page-3 li, #page-4 li, #page-6 li, #page-7 li {
+      color: #3d4f65 !important;
+    }
+    /* Labels & subtitles */
+    #page-2 .def-card-title,
+    #page-2 .definition-not-title { color: #1a2e4a !important; }
+    #page-2 .def-card-body        { color: #3d4f65 !important; }
+    #page-2 .definition-lead      { color: #1a2e4a !important; background: rgba(1,151,222,.08) !important; border-left-color: #0197de !important; }
+
+    /* Reflect page */
+    #page-4 .reflect-q-text       { color: #1a2e4a !important; }
+    #page-4 .reflect-prompts-label{ color: #5a6a82 !important; }
+    #page-4 .reflect-prompt-chip  { background: #e2eaf4 !important; color: #1a2e4a !important; border-color: #c8d8e8 !important; }
+    #page-4 .reflect-textarea     { background: #fff !important; color: #1a2e4a !important; border-color: #c8d8e8 !important; }
+    #page-4 .reflect-question     { background: #fff !important; border-color: #d0daea !important; }
+
+    /* GMC pages */
+    #page-6 .twelve-month-callout-title { color: #1a2e4a !important; }
+    #page-6 .twelve-month-callout-body  { color: #3d4f65 !important; }
+    #page-6 .criteria-title             { color: #1a2e4a !important; }
+    #page-6 .criteria-card              { background: #fff !important; border-color: #d0daea !important; }
+    #page-6 .criteria-card-title        { color: #1a2e4a !important; }
+    #page-6 .criteria-card-body         { color: #3d4f65 !important; }
+    #page-6 .def-banner                 { background: #fff !important; border-color: #d0daea !important; }
+    #page-6 .def-banner-org             { color: #0197de !important; }
+    #page-6 .def-banner-quote           { color: #3d4f65 !important; }
+    #page-6 .twelve-month-callout       { background: #fff !important; border-color: #d0daea !important; }
+
+    /* Apply criteria page */
+    #page-7 .vignette       { background: #fff !important; border-color: #d0daea !important; }
+    #page-7 .vignette-text  { color: #3d4f65 !important; }
+    #page-7 .criteria-letter { background: rgba(1,151,222,.12) !important; color: #0197de !important; }
+
+    /* Sort activity */
+    #page-3 .sort-stmt {
+      background: #fff;
+      border: 2px solid #c8d8e8;
+      color: #1a2e4a;
+    }
+    #page-3 .sort-stmt:hover { border-color: #0197de; background: #eef5fb; }
+    #page-3 .sort-col {
+      background: rgba(0,0,0,.02);
+      border: 2px dashed #c0d0e0;
+    }
+    #page-3 .sort-col.drag-over { border-color: #0197de; background: rgba(1,151,222,.04); }
+    #page-3 .sort-col-title { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
+    #page-3 .sort-placed.myth { background: rgba(220,38,38,.06); border:1px solid rgba(220,38,38,.25); border-left:3px solid #ef4444; color: #7f1d1d; }
+    #page-3 .sort-placed.fact { background: rgba(5,150,105,.06); border:1px solid rgba(5,150,105,.2); border-left:3px solid #059669; color: #064e3b; }
+    #page-3 .sort-feedback.all-correct { background:rgba(5,150,105,.08); border:1px solid rgba(5,150,105,.25); border-left:4px solid #059669; color:#065f46; }
+    #page-3 .sort-feedback.some-wrong  { background:rgba(217,119,6,.07); border:1px solid rgba(217,119,6,.2); border-left:4px solid #d97706; color:#78350f; }
+  </style>
 </head>
 <body>
 
@@ -16,7 +80,7 @@
 <header role="banner">
   <a href="index.html" class="brand" aria-label="St Barnabas Hospice — return to home">
     <div class="brand-logo">
-      <img src="images/logo.jpg" alt="St Barnabas Hospice" style="width:100%; height:100%; object-fit:contain; display:block;">
+      <img src="images/logo.jpg" alt="St Barnabas Hospice" style="width:100%;height:100%;object-fit:contain;display:block;">
     </div>
     <div class="brand-text">
       <span class="brand-name">St Barnabas Hospice</span>
@@ -83,133 +147,141 @@
 
 <main id="main-content">
 
-<!-- ══ PAGE 1 — INTRODUCTION ══ -->
-<section class="page active" id="page-1" aria-label="Introduction">
+<!-- ══ PAGE 1 — INTRODUCTION (dark, hero) ══════════════════════ -->
+<section class="page active" id="page-1" aria-label="Introduction — What is End of Life Palliative Care?">
   <div class="intro-hero">
+
     <div class="intro-text">
       <h1 class="intro-heading">What is <em>Palliative</em><br>End of Life Care?</h1>
       <p class="intro-desc">
-        Palliative and end of life care is one of the most important and often misunderstood areas
-        of healthcare. This module will help you understand what it is, when it applies, and how
-        language and timing shape the experience of patients, families, and carers.
+        Palliative and end of life care is one of the most important and often misunderstood
+        areas of healthcare. This module will help you understand what it is, when it applies,
+        and how language and timing shape the experience of patients, families, and carers.
       </p>
       <div class="intro-instruction" role="note">
         <div class="intro-instruction-icon" aria-hidden="true">📋</div>
-        <p><strong>Work through each section in order.</strong> You will reflect on terminology, explore an
-        interactive care model based on Wong et al (2024), review GMC &amp; NICE definitions, and test
-        your understanding with a short quiz.</p>
+        <p><strong>Work through each section in order.</strong> You will reflect on terminology,
+        explore an interactive care model based on Wong et al (2024), review GMC &amp; NICE
+        definitions, and test your understanding with a short quiz.</p>
       </div>
       <div class="continue-row">
         <button class="btn btn-primary" onclick="goToPage(2)">Start Module →</button>
       </div>
     </div>
 
-    <!-- Facts panel — learning outcomes only -->
+    <!-- Learning outcomes panel -->
     <div class="intro-facts-panel" role="complementary" aria-label="Learning outcomes">
       <div class="facts-panel-header">
         <div class="facts-panel-eyebrow">Learning Outcomes</div>
         <div class="facts-panel-title">By the end of this module you will be able to</div>
       </div>
       <div class="facts-panel-body">
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">1</span>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</span>
             <span><strong style="color:#fff;">Define</strong> palliative and end of life care using NICE and GMC guidance</span>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">2</span>
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</span>
             <span><strong style="color:#fff;">Explain</strong> the difference and overlap between palliative and end of life care</span>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">3</span>
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</span>
             <span><strong style="color:#fff;">Identify</strong> common challenges associated with palliative care terminology</span>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">4</span>
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</span>
             <span><strong style="color:#fff;">Describe</strong> the impact of language and timing on patients, families, and carers</span>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">5</span>
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</span>
             <span><strong style="color:#fff;">Recognise</strong> when palliative care may be appropriate across the illness trajectory</span>
           </div>
-          <div style="display:flex; gap:12px; align-items:flex-start; font-size:.84rem; color:rgba(255,255,255,.75); line-height:1.6;">
-            <span style="min-width:22px; height:22px; border-radius:50%; background:rgba(1,151,222,.25); color:#7dd3fc; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">6</span>
+
+          <div style="display:flex;gap:12px;align-items:flex-start;font-size:.84rem;color:rgba(255,255,255,.75);line-height:1.6;">
+            <span style="min-width:22px;height:22px;border-radius:50%;background:rgba(1,151,222,.25);color:#7dd3fc;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</span>
             <span><strong style="color:#fff;">Apply</strong> appropriate terminology in a clear, compassionate, person-centred way</span>
           </div>
+
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
 
-<!-- ══ PAGE 2 — WHAT IS PALLIATIVE CARE? ══ -->
+<!-- ══ PAGE 2 — WHAT IS PALLIATIVE CARE? (light bg, dark text) ══ -->
 <section class="page" id="page-2" aria-label="What is palliative and end of life care?">
   <div class="definition-wrap">
 
     <div class="definition-header">
-      <h2 style="color:#fff;">What is Palliative &amp; End of Life Care?</h2>
-      <p style="color:rgba(255,255,255,.75);">
-        Understanding what palliative care is — and crucially, what it is <em>not</em> —
-        is the foundation for compassionate, well-timed clinical communication.
-      </p>
+      <h2>What is Palliative &amp; End of Life Care?</h2>
+      <p>Understanding what palliative care is — and crucially, what it is <em>not</em> — is the
+      foundation for compassionate, well-timed clinical communication.</p>
     </div>
 
     <div class="definition-lead" role="note">
-      Palliative and End of Life Care focuses on <em>improving quality of life</em> for people with serious, life-limiting illness.
+      Palliative and End of Life Care focuses on
+      <em>improving quality of life</em> for people with serious, life-limiting illness.
     </div>
 
     <div class="definition-grid" role="list" aria-label="Core elements of palliative care">
 
-      <div class="def-card" role="listitem">
-        <div class="def-card-icon" style="background:rgba(1,151,222,0.14);" aria-hidden="true">🧠</div>
+      <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="def-card-icon" style="background:rgba(1,151,222,0.12);" aria-hidden="true">🧠</div>
         <div>
-          <div class="def-card-title" style="color:#fff;">Holistic Needs</div>
-          <p class="def-card-body" style="color:rgba(255,255,255,.75);">Addresses physical, psychological, social and spiritual needs — treating the whole person, not just the illness.</p>
+          <div class="def-card-title">Holistic Needs</div>
+          <p class="def-card-body">Addresses physical, psychological, social and spiritual needs — treating the whole person, not just the illness.</p>
         </div>
       </div>
 
-      <div class="def-card" role="listitem">
-        <div class="def-card-icon" style="background:rgba(46,204,142,0.12);" aria-hidden="true">👨‍👩‍👧</div>
+      <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="def-card-icon" style="background:rgba(46,204,142,0.1);" aria-hidden="true">👨‍👩‍👧</div>
         <div>
-          <div class="def-card-title" style="color:#fff;">Family &amp; Carers</div>
-          <p class="def-card-body" style="color:rgba(255,255,255,.75);">Supports families and carers — their wellbeing, their grief, and their ability to provide care are all part of the focus.</p>
+          <div class="def-card-title">Family &amp; Carers</div>
+          <p class="def-card-body">Supports families and carers — their wellbeing, their grief, and their ability to provide care are all part of the focus.</p>
         </div>
       </div>
 
-      <div class="def-card" role="listitem">
-        <div class="def-card-icon" style="background:rgba(253,202,15,0.12);" aria-hidden="true">⚕️</div>
+      <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="def-card-icon" style="background:rgba(253,202,15,0.1);" aria-hidden="true">⚕️</div>
         <div>
-          <div class="def-card-title" style="color:#fff;">Alongside Active Treatment</div>
-          <p class="def-card-body" style="color:rgba(255,255,255,.75);">Can be provided alongside curative or life-prolonging treatment. It is not a replacement for active care — it complements it.</p>
+          <div class="def-card-title">Alongside Active Treatment</div>
+          <p class="def-card-body">Can be provided alongside curative or life-prolonging treatment. It is not a replacement for active care — it complements it.</p>
         </div>
       </div>
 
-      <div class="def-card" role="listitem">
-        <div class="def-card-icon" style="background:rgba(124,110,245,0.14);" aria-hidden="true">📅</div>
+      <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="def-card-icon" style="background:rgba(124,110,245,0.1);" aria-hidden="true">📅</div>
         <div>
-          <div class="def-card-title" style="color:#fff;">Not Just the Final Days</div>
-          <p class="def-card-body" style="color:rgba(255,255,255,.75);">Is not limited to the final days or weeks of life. Palliative care can begin at diagnosis and continues through bereavement.</p>
+          <div class="def-card-title">Not Just the Final Days</div>
+          <p class="def-card-body">Is not limited to the final days or weeks of life. Palliative care can begin at diagnosis and continues through bereavement.</p>
         </div>
       </div>
 
     </div>
 
-    <div class="definition-not" role="note">
-      <div class="definition-not-title">
+    <div class="definition-not" role="note" style="background:#fff;border-color:#d0daea;">
+      <div class="definition-not-title" style="color:#1a2e4a;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Common misconceptions — what palliative care is <em>not</em>
       </div>
       <div class="definition-not-grid">
-        <div class="not-item"><span class="not-item-icon" aria-hidden="true">✗</span><span>It is <strong>not</strong> about "giving up" on a patient</span></div>
-        <div class="not-item"><span class="not-item-icon" aria-hidden="true">✗</span><span>It is <strong>not</strong> only for people who are imminently dying</span></div>
-        <div class="not-item"><span class="not-item-icon" aria-hidden="true">✗</span><span>It does <strong>not</strong> mean stopping all active treatment</span></div>
-        <div class="not-item"><span class="not-item-icon" aria-hidden="true">✗</span><span>It is <strong>not</strong> only delivered in a hospice setting</span></div>
+        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> about "giving up" on a patient</span></div>
+        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> only for people who are imminently dying</span></div>
+        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It does <strong>not</strong> mean stopping all active treatment</span></div>
+        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> only delivered in a hospice setting</span></div>
       </div>
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(1)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(3)">Myth or Fact? →</button>
     </div>
 
@@ -217,93 +289,68 @@
 </section>
 
 
-<!-- ══ PAGE 3 — MYTH OR FACT? ══ -->
+<!-- ══ PAGE 3 — MYTH OR FACT? (light bg, dark text) ══════════════ -->
 <section class="page" id="page-3" aria-label="Myth or Fact sorting activity">
   <div class="definition-wrap">
 
     <div class="definition-header">
-      <h2 style="color:#fff;">Myth or Fact?</h2>
-      <p style="color:rgba(255,255,255,.75);">Drag each statement into the correct column — or click a statement then click the column to place it. Use the Reset button to start again.</p>
+      <h2>Myth or Fact?</h2>
+      <p>Drag each statement into the correct column — or click a statement to select it, then
+      click a column to place it. Use <strong>Reset</strong> to start again.</p>
     </div>
 
     <style>
-      .sort-pool-wrap { display:flex; flex-direction:column; gap:10px; margin-bottom:24px; }
-      .sort-stmt {
-        background:var(--surface); border:2px solid var(--border); border-radius:8px;
-        padding:13px 16px; font-size:.88rem; color:#c5d3e8; line-height:1.55;
-        cursor:grab; transition:border-color .2s, background .2s, opacity .2s;
-        user-select:none;
-      }
-      .sort-stmt:hover { border-color:rgba(253,202,15,.5); background:rgba(253,202,15,.06); }
-      .sort-stmt.dragging { opacity:.4; cursor:grabbing; }
-      .sort-stmt.selected { border-color:var(--yellow); background:rgba(253,202,15,.1); }
-      .sort-stmt.placed { display:none; }
-      .sort-cols { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:20px; }
-      .sort-col {
-        background:rgba(255,255,255,.03); border:2px dashed rgba(255,255,255,.15);
-        border-radius:12px; padding:16px; min-height:140px;
-        transition:border-color .2s, background .2s;
-      }
-      .sort-col.drag-over { border-color:rgba(253,202,15,.6); background:rgba(253,202,15,.05); }
-      .sort-col-title { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
-      .sort-placed {
-        border-radius:8px; padding:11px 13px; font-size:.84rem;
-        line-height:1.5; margin-bottom:8px; display:flex; gap:10px;
-        align-items:flex-start; cursor:pointer;
-      }
-      .sort-placed.myth { background:rgba(220,38,38,.1); border:1px solid rgba(220,38,38,.3); border-left:3px solid #ef4444; color:#fca5a5; }
-      .sort-placed.fact { background:rgba(5,150,105,.1); border:1px solid rgba(5,150,105,.25); border-left:3px solid #059669; color:#a7f3d0; }
-      .sort-placed-remove { flex-shrink:0; font-size:.75rem; opacity:.5; margin-top:2px; }
+      .sort-pool-wrap  { display:flex;flex-direction:column;gap:10px;margin-bottom:24px; }
+      .sort-stmt       { border-radius:8px;padding:13px 16px;font-size:.88rem;line-height:1.55;cursor:grab;transition:border-color .2s,background .2s,opacity .2s;user-select:none; }
+      .sort-stmt.dragging { opacity:.4;cursor:grabbing; }
+      .sort-stmt.selected { outline:2px solid #0197de;outline-offset:2px; }
+      .sort-stmt.placed   { display:none; }
+      .sort-cols  { display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px; }
+      .sort-col   { border-radius:12px;padding:16px;min-height:140px;transition:border-color .2s,background .2s; }
+      .sort-placed { border-radius:8px;padding:11px 13px;font-size:.84rem;line-height:1.5;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start; }
+      .sort-placed-remove { flex-shrink:0;font-size:.8rem;opacity:.5;cursor:pointer;margin-top:1px; }
       .sort-placed-remove:hover { opacity:1; }
-      .sort-feedback { display:none; padding:14px 18px; border-radius:10px; font-size:.88rem; line-height:1.65; margin-bottom:16px; }
+      .sort-feedback { display:none;padding:14px 18px;border-radius:10px;font-size:.88rem;line-height:1.65;margin-bottom:16px; }
       .sort-feedback.show { display:block; }
-      .sort-feedback.all-correct { background:rgba(5,150,105,.12); border:1px solid rgba(5,150,105,.3); border-left:4px solid #059669; color:#a7f3d0; }
-      .sort-feedback.some-wrong { background:rgba(217,119,6,.1); border:1px solid rgba(217,119,6,.3); border-left:4px solid #d97706; color:#fde68a; }
-      .sort-actions { display:flex; gap:12px; flex-wrap:wrap; }
+      .sort-actions   { display:flex;gap:12px;flex-wrap:wrap; }
     </style>
 
-    <!-- Pool of statements -->
+    <!-- Statement pool -->
     <div class="sort-pool-wrap" id="sort-pool" role="list" aria-label="Statements to sort">
-      <div class="sort-stmt" draggable="true" data-id="s1" data-answer="myth" role="listitem" tabindex="0"
-           aria-label="Palliative care means stopping all active treatment. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s1" data-answer="myth" role="listitem" tabindex="0">
         Palliative care means stopping all active treatment.
       </div>
-      <div class="sort-stmt" draggable="true" data-id="s2" data-answer="fact" role="listitem" tabindex="0"
-           aria-label="Palliative care can begin at the point of diagnosis. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s2" data-answer="fact" role="listitem" tabindex="0">
         Palliative care can begin at the point of diagnosis.
       </div>
-      <div class="sort-stmt" draggable="true" data-id="s3" data-answer="myth" role="listitem" tabindex="0"
-           aria-label="Palliative care is only for people who are dying imminently. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s3" data-answer="myth" role="listitem" tabindex="0">
         Palliative care is only for people who are dying imminently.
       </div>
-      <div class="sort-stmt" draggable="true" data-id="s4" data-answer="fact" role="listitem" tabindex="0"
-           aria-label="Palliative care addresses psychological and spiritual needs, not just physical ones. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s4" data-answer="fact" role="listitem" tabindex="0">
         Palliative care addresses psychological and spiritual needs, not just physical ones.
       </div>
-      <div class="sort-stmt" draggable="true" data-id="s5" data-answer="myth" role="listitem" tabindex="0"
-           aria-label="Palliative care is only delivered in a hospice. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s5" data-answer="myth" role="listitem" tabindex="0">
         Palliative care is only delivered in a hospice.
       </div>
-      <div class="sort-stmt" draggable="true" data-id="s6" data-answer="fact" role="listitem" tabindex="0"
-           aria-label="Families and carers are an explicit focus of palliative care. Drag to Myth or Fact column.">
+      <div class="sort-stmt" draggable="true" data-id="s6" data-answer="fact" role="listitem" tabindex="0">
         Families and carers are an explicit focus of palliative care.
       </div>
     </div>
 
-    <!-- Drop columns -->
+    <!-- Drop zones -->
     <div class="sort-cols">
       <div class="sort-col" id="col-myth"
-           ondragover="event.preventDefault(); this.classList.add('drag-over')"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
            ondragleave="this.classList.remove('drag-over')"
-           ondrop="dropStatement(event, 'myth')">
-        <div class="sort-col-title" style="color:#fca5a5;">✗ Myth</div>
+           ondrop="dropStatement(event,'myth')">
+        <div class="sort-col-title" style="color:#c0392b;">✗ Myth</div>
         <div id="zone-myth"></div>
       </div>
       <div class="sort-col" id="col-fact"
-           ondragover="event.preventDefault(); this.classList.add('drag-over')"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
            ondragleave="this.classList.remove('drag-over')"
-           ondrop="dropStatement(event, 'fact')">
-        <div class="sort-col-title" style="color:#6ee7b7;">✓ Fact</div>
+           ondrop="dropStatement(event,'fact')">
+        <div class="sort-col-title" style="color:#059669;">✓ Fact</div>
         <div id="zone-fact"></div>
       </div>
     </div>
@@ -312,17 +359,17 @@
 
     <div class="sort-actions">
       <button onclick="checkSort()"
-              style="padding:10px 22px; background:var(--yellow); color:var(--navy); border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:700; cursor:pointer;">
+              style="padding:10px 22px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;">
         Check my answers
       </button>
       <button onclick="resetSort()"
-              style="padding:10px 22px; background:transparent; color:rgba(255,255,255,.7); border:2px solid rgba(255,255,255,.2); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:600; cursor:pointer; transition:all .2s;">
+              style="padding:10px 22px;background:transparent;color:#3d4f65;border:2px solid #c8d8e8;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;">
         Reset
       </button>
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,.08);">
-      <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #d0daea;">
+      <button class="btn btn-secondary" onclick="goToPage(2)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(4)">Continue to Reflect →</button>
     </div>
 
@@ -330,13 +377,14 @@
 </section>
 
 
-<!-- ══ PAGE 4 — REFLECTIVE ACTIVITY ══ -->
+<!-- ══ PAGE 4 — REFLECTIVE ACTIVITY (light bg, dark text) ════════ -->
 <section class="page" id="page-4" aria-label="Reflective activity — terminology challenges">
   <div class="reflect-wrap">
 
     <div class="reflect-title-area">
-      <h2 style="color:#fff;">Terminology &amp; Its Impact</h2>
-      <p style="color:rgba(255,255,255,.75);">Take a few minutes to reflect on the question below before revealing the model answer. You can save your response or download it for your CPD records.</p>
+      <h2>Terminology &amp; Its Impact</h2>
+      <p>Take a few minutes to reflect on the question below before revealing the model answer.
+      You can save your response or download it for your CPD records.</p>
     </div>
 
     <div class="reflect-question" role="region" aria-label="Reflection question">
@@ -346,7 +394,7 @@
         families, and professionals?
       </p>
 
-      <div class="reflect-prompts-label" style="color:rgba(255,255,255,.6);">Consider these areas in your response:</div>
+      <div class="reflect-prompts-label">Consider these areas in your response:</div>
       <div class="reflect-prompts" role="list">
         <span class="reflect-prompt-chip" role="listitem">Emotional responses</span>
         <span class="reflect-prompt-chip" role="listitem">Timing of conversations</span>
@@ -381,23 +429,24 @@
       </div>
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <button class="btn btn-secondary" onclick="goToPage(3)">← Back</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(3)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(5)">Continue to Phases &amp; Layers →</button>
     </div>
 
   </div>
 </section>
 
-</main>
+</main><!-- /main — phases page lives outside main for full-width layout -->
 
 
-<!-- ══ PAGE 5 — PHASES AND LAYERS ══ -->
-<section class="page" id="page-5" aria-label="Phases and layers of palliative care">
+<!-- ══ PAGE 5 — PHASES AND LAYERS (dark, interactive) ═══════════ -->
+<section class="page" id="page-5" aria-label="Phases and layers of palliative care — Wong et al 2024">
   <div class="phases-wrap">
 
     <h2 class="phases-page-title">Phases &amp; Layers of Palliative Care</h2>
-    <p class="phases-page-sub">Based on Wong et al (2024). Click each phase or layer to explore its definition, characteristics, and clinical implications.</p>
+    <p class="phases-page-sub">Based on Wong et al (2024). Click each phase or layer to explore its
+    definition, characteristics, and clinical implications.</p>
 
     <div class="phases-timeline-wrap" role="region" aria-label="Illness trajectory phases">
       <div class="phases-timeline-label" aria-hidden="true">Illness Trajectory →</div>
@@ -467,35 +516,35 @@
 
     <p class="phases-hint" aria-hidden="true">↑ Click any phase or layer to explore</p>
 
-    <div class="hs-continue-wrap" style="width:100%; max-width:960px;">
+    <div class="hs-continue-wrap" style="width:100%;max-width:960px;">
       <div class="hs-locked-msg" id="phases-locked-msg">
         <span aria-hidden="true">🔒</span>
         <span id="phases-lock-text">Explore at least 4 items to unlock the next section</span>
       </div>
       <button class="btn btn-primary" id="phases-continue-btn" disabled
-              onclick="goToPage(6)" style="opacity:0.4; cursor:not-allowed;">
+              onclick="goToPage(6)" style="opacity:.4;cursor:not-allowed;">
         Continue to GMC &amp; NICE →
       </button>
     </div>
 
-    <div style="margin-top:16px; width:100%; max-width:960px;">
-      <button class="btn btn-secondary" onclick="goToPage(4)" style="font-size:.82rem; padding:10px 18px;">← Back</button>
+    <div style="margin-top:16px;width:100%;max-width:960px;">
+      <button class="btn btn-secondary" onclick="goToPage(4)" style="font-size:.82rem;padding:10px 18px;">← Back</button>
     </div>
 
   </div>
 </section>
 
 
-<!-- ══ PAGE 6 — GMC & NICE DEFINITIONS ══ -->
+<!-- ══ PAGE 6 — GMC & NICE (light bg, dark text) ════════════════ -->
 <section class="page" id="page-6" aria-label="GMC and NICE definitions">
   <div class="gmcnice-wrap">
 
     <div class="gmcnice-title-area">
-      <h2 style="color:#fff;">GMC &amp; NICE Definitions</h2>
-      <p style="color:rgba(255,255,255,.75);">Understanding the formal definitions underpins consistent, legally grounded clinical communication.</p>
+      <h2>GMC &amp; NICE Definitions</h2>
+      <p>Understanding the formal definitions underpins consistent, legally grounded clinical communication.</p>
     </div>
 
-    <div class="twelve-month-callout" role="note">
+    <div class="twelve-month-callout" role="note" style="background:#fff;border-color:#d0daea;border-left-color:#0197de;">
       <div class="twelve-month-callout-icon" aria-hidden="true">📅</div>
       <div>
         <div class="twelve-month-callout-title">The 12-Month Definition</div>
@@ -503,46 +552,51 @@
       </div>
     </div>
 
-    <div class="def-banner" role="note">
-      <div class="def-banner-org">GMC &amp; NICE Combined Guidance</div>
-      <p class="def-banner-quote">Patients are <em>'approaching the end of life'</em> when they are likely to die within the next 12 months. This includes patients whose death is imminent (expected within a few hours or days) and those with advanced, progressive, incurable conditions.</p>
+    <div class="def-banner" role="note" style="background:#fff;border:1px solid #d0daea;border-left:4px solid #0197de;">
+      <div class="def-banner-org" style="color:#0197de;">GMC &amp; NICE Combined Guidance</div>
+      <p class="def-banner-quote" style="color:#3d4f65;">Patients are <em>'approaching the end of life'</em> when they are likely to die within the next 12 months. This includes patients whose death is imminent (expected within a few hours or days) and those with advanced, progressive, incurable conditions.</p>
     </div>
 
-    <div class="criteria-title" style="color:#fff;">The following groups are included within the 12-month definition</div>
+    <div class="criteria-title" style="color:#1a2e4a;">The following groups are included within the 12-month definition</div>
 
     <div class="criteria-grid" role="list">
-      <div class="criteria-card" role="listitem">
-        <div class="criteria-letter" aria-hidden="true">A</div>
+
+      <div class="criteria-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="criteria-letter" style="background:rgba(1,151,222,.12);color:#0197de;" aria-hidden="true">A</div>
         <div>
-          <div class="criteria-card-title" style="color:#fff;">Advanced &amp; Progressive</div>
-          <p class="criteria-card-body" style="color:rgba(255,255,255,.75);">Advanced, progressive, incurable conditions — where disease trajectory indicates the person is likely to die within 12 months.</p>
+          <div class="criteria-card-title">Advanced &amp; Progressive</div>
+          <p class="criteria-card-body">Advanced, progressive, incurable conditions — where disease trajectory indicates the person is likely to die within 12 months.</p>
         </div>
       </div>
-      <div class="criteria-card" role="listitem">
-        <div class="criteria-letter" aria-hidden="true">B</div>
+
+      <div class="criteria-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="criteria-letter" style="background:rgba(13,148,136,.1);color:#0d9488;" aria-hidden="true">B</div>
         <div>
-          <div class="criteria-card-title" style="color:#fff;">General Frailty</div>
-          <p class="criteria-card-body" style="color:rgba(255,255,255,.75);">General frailty and co-existing conditions that mean the person is expected to die within 12 months.</p>
+          <div class="criteria-card-title">General Frailty</div>
+          <p class="criteria-card-body">General frailty and co-existing conditions that mean the person is expected to die within 12 months.</p>
         </div>
       </div>
-      <div class="criteria-card" role="listitem">
-        <div class="criteria-letter" aria-hidden="true">C</div>
+
+      <div class="criteria-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="criteria-letter" style="background:rgba(253,202,15,.15);color:#b45309;" aria-hidden="true">C</div>
         <div>
-          <div class="criteria-card-title" style="color:#fff;">Risk of Acute Crisis</div>
-          <p class="criteria-card-body" style="color:rgba(255,255,255,.75);">Existing conditions where the person is at risk of dying from a sudden acute crisis in their condition.</p>
+          <div class="criteria-card-title">Risk of Acute Crisis</div>
+          <p class="criteria-card-body">Existing conditions where the person is at risk of dying from a sudden acute crisis in their condition.</p>
         </div>
       </div>
-      <div class="criteria-card" role="listitem">
-        <div class="criteria-letter" aria-hidden="true">D</div>
+
+      <div class="criteria-card" role="listitem" style="background:#fff;border-color:#d0daea;">
+        <div class="criteria-letter" style="background:rgba(124,110,245,.1);color:#6d28d9;" aria-hidden="true">D</div>
         <div>
-          <div class="criteria-card-title" style="color:#fff;">Catastrophic Events</div>
-          <p class="criteria-card-body" style="color:rgba(255,255,255,.75);">Life-threatening acute conditions caused by sudden catastrophic events, such as trauma or stroke.</p>
+          <div class="criteria-card-title">Catastrophic Events</div>
+          <p class="criteria-card-body">Life-threatening acute conditions caused by sudden catastrophic events, such as trauma or stroke.</p>
         </div>
       </div>
+
     </div>
 
-    <div class="gmcnice-nav">
-      <button class="btn btn-secondary" onclick="goToPage(5)">← Back</button>
+    <div class="gmcnice-nav" style="margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(5)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(7)">Apply the Criteria →</button>
     </div>
 
@@ -550,58 +604,79 @@
 </section>
 
 
-<!-- ══ PAGE 7 — APPLY THE CRITERIA ══ -->
+<!-- ══ PAGE 7 — APPLY THE CRITERIA (light bg, dark text) ════════ -->
 <section class="page" id="page-7" aria-label="Apply the criteria — patient vignettes">
   <div class="gmcnice-wrap">
 
     <div class="gmcnice-title-area">
-      <h2 style="color:#fff;">Apply the Criteria</h2>
-      <p style="color:rgba(255,255,255,.75);">Read each patient vignette. Does this person meet the 12-month definition of approaching end of life? Select Yes or No and see the rationale.</p>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+        <div>
+          <h2 style="margin-bottom:6px;">Apply the Criteria</h2>
+          <p>Read each patient vignette. Does this person meet the 12-month definition of
+          approaching end of life? Select Yes or No and see the rationale.</p>
+        </div>
+        <!-- GMC reference button -->
+        <button onclick="document.getElementById('gmc-ref-modal').classList.add('show')"
+                style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;background:rgba(1,151,222,.1);color:#0197de;border:1px solid rgba(1,151,222,.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          GMC &amp; NICE Reference
+        </button>
+      </div>
     </div>
 
-    <style>
-      .vignette { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px 22px; margin-bottom:16px; }
-      .vignette-text { font-size:.9rem; color:#c5d3e8; line-height:1.75; margin-bottom:16px; }
-      .vignette-btns { display:flex; gap:10px; margin-bottom:12px; }
-      .vignette-btn { padding:9px 22px; border-radius:7px; border:2px solid var(--border); background:transparent; color:#fff; font-family:'DM Sans',sans-serif; font-size:.86rem; font-weight:600; cursor:pointer; transition:all .2s; }
-      .vignette-btn:hover:not(:disabled) { border-color:var(--yellow); }
-      .vignette-btn.selected-yes { border-color:#059669; background:rgba(5,150,105,.15); }
-      .vignette-btn.selected-no  { border-color:#ef4444; background:rgba(220,38,38,.15); }
-      .vignette-rationale { display:none; font-size:.86rem; line-height:1.7; padding:14px 16px; border-radius:8px; }
-      .vignette-rationale.show { display:block; }
-      .vignette-rationale.correct   { background:rgba(5,150,105,.12); border:1px solid rgba(5,150,105,.3); border-left:4px solid #059669; color:#a7f3d0; }
-      .vignette-rationale.incorrect { background:rgba(220,38,38,.1); border:1px solid rgba(220,38,38,.25); border-left:4px solid #ef4444; color:#fca5a5; }
-    </style>
-
-    <div class="vignette">
-      <p class="vignette-text"><strong style="color:#fff;">Margaret, 81.</strong> Diagnosed with advanced heart failure. She has been admitted twice in the last three months with acute exacerbations. Her cardiologist has said there are no further surgical options. She is increasingly breathless on minimal exertion and losing weight.</p>
-      <div class="vignette-btns">
-        <button class="vignette-btn" onclick="answerVignette(this,'yes','v1',true)">Yes — meets the definition</button>
-        <button class="vignette-btn" onclick="answerVignette(this,'no','v1',true)">No — does not meet the definition</button>
+    <div class="vignette" style="background:#fff;border:1px solid #d0daea;border-radius:10px;padding:20px 22px;margin-bottom:16px;">
+      <p class="vignette-text" style="font-size:.9rem;color:#3d4f65;line-height:1.75;margin-bottom:16px;">
+        <strong style="color:#1a2e4a;">Margaret, 81.</strong> Diagnosed with advanced heart failure. She has been admitted twice in the last three months with acute exacerbations. Her cardiologist has said there are no further surgical options. She is increasingly breathless on minimal exertion and losing weight.
+      </p>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <button class="vignette-btn" onclick="answerVignette(this,'yes','v1',true)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          Yes — meets the definition
+        </button>
+        <button class="vignette-btn" onclick="answerVignette(this,'no','v1',true)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          No — does not meet the definition
+        </button>
       </div>
       <div class="vignette-rationale" id="v1-rationale"></div>
     </div>
 
-    <div class="vignette">
-      <p class="vignette-text"><strong style="color:#fff;">David, 58.</strong> Recovering well from a hip replacement. He has mild hypertension managed with medication and is otherwise fit and well. He plays golf twice a week and lives independently.</p>
-      <div class="vignette-btns">
-        <button class="vignette-btn" onclick="answerVignette(this,'yes','v2',false)">Yes — meets the definition</button>
-        <button class="vignette-btn" onclick="answerVignette(this,'no','v2',false)">No — does not meet the definition</button>
+    <div class="vignette" style="background:#fff;border:1px solid #d0daea;border-radius:10px;padding:20px 22px;margin-bottom:16px;">
+      <p class="vignette-text" style="font-size:.9rem;color:#3d4f65;line-height:1.75;margin-bottom:16px;">
+        <strong style="color:#1a2e4a;">David, 58.</strong> Recovering well from a hip replacement. He has mild hypertension managed with medication and is otherwise fit and well. He plays golf twice a week and lives independently.
+      </p>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <button class="vignette-btn" onclick="answerVignette(this,'yes','v2',false)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          Yes — meets the definition
+        </button>
+        <button class="vignette-btn" onclick="answerVignette(this,'no','v2',false)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          No — does not meet the definition
+        </button>
       </div>
       <div class="vignette-rationale" id="v2-rationale"></div>
     </div>
 
-    <div class="vignette">
-      <p class="vignette-text"><strong style="color:#fff;">Priya, 67.</strong> Has Motor Neurone Disease diagnosed 18 months ago. She is progressing rapidly — now using a wheelchair and requiring PEG feeding. Her respiratory function is declining. Her neurologist has discussed prognosis with her.</p>
-      <div class="vignette-btns">
-        <button class="vignette-btn" onclick="answerVignette(this,'yes','v3',true)">Yes — meets the definition</button>
-        <button class="vignette-btn" onclick="answerVignette(this,'no','v3',true)">No — does not meet the definition</button>
+    <div class="vignette" style="background:#fff;border:1px solid #d0daea;border-radius:10px;padding:20px 22px;margin-bottom:16px;">
+      <p class="vignette-text" style="font-size:.9rem;color:#3d4f65;line-height:1.75;margin-bottom:16px;">
+        <strong style="color:#1a2e4a;">Priya, 67.</strong> Has Motor Neurone Disease diagnosed 18 months ago. She is progressing rapidly — now using a wheelchair and requiring PEG feeding. Her respiratory function is declining. Her neurologist has discussed prognosis with her.
+      </p>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <button class="vignette-btn" onclick="answerVignette(this,'yes','v3',true)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          Yes — meets the definition
+        </button>
+        <button class="vignette-btn" onclick="answerVignette(this,'no','v3',true)"
+                style="padding:9px 22px;border-radius:7px;border:2px solid #c8d8e8;background:transparent;color:#1a2e4a;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;transition:all .2s;">
+          No — does not meet the definition
+        </button>
       </div>
       <div class="vignette-rationale" id="v3-rationale"></div>
     </div>
 
-    <div class="gmcnice-nav" style="margin-top:28px;">
-      <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(6)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(8)">Test Your Understanding →</button>
     </div>
 
@@ -609,7 +684,7 @@
 </section>
 
 
-<!-- ══ PAGE 8 — QUIZ ══ -->
+<!-- ══ PAGE 8 — QUIZ (dark) ══════════════════════════════════════ -->
 <section class="page" id="page-8" aria-label="Test your understanding — True or False quiz">
   <div class="quiz-wrap">
 
@@ -626,10 +701,10 @@
     <div id="quiz-questions-container"></div>
     <div class="quiz-results" id="quiz-results" role="region" aria-label="Quiz results" aria-live="polite"></div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:36px; padding-top:24px; border-top:1px solid rgba(255,255,255,.1);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);">
       <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
       <button class="btn btn-primary" id="quiz-continue-btn" disabled
-              style="opacity:.4; cursor:not-allowed;" onclick="goToPage(9)">
+              style="opacity:.4;cursor:not-allowed;" onclick="goToPage(9)">
         My Learning Record →
       </button>
     </div>
@@ -638,17 +713,22 @@
 </section>
 
 
-<!-- ══ PAGE 9 — LEARNING RECORD ══ -->
-<section class="page" id="page-9" aria-label="My Learning Record" style="background:#f0f4f9; min-height:calc(100vh - 164px);">
-  <div style="max-width:860px; margin:0 auto; padding:48px 32px 80px;">
+<!-- ══ PAGE 9 — LEARNING RECORD (light) ═════════════════════════ -->
+<section class="page" id="page-9" aria-label="My Learning Record"
+         style="background:#f0f4f9;min-height:calc(100vh - 164px);">
+  <div style="max-width:860px;margin:0 auto;padding:48px 32px 80px;">
 
-    <div style="text-align:center; margin-bottom:36px;">
-      <h2 style="font-family:'Merriweather',serif; font-size:1.75rem; color:var(--navy); margin-bottom:8px;">My Learning Record</h2>
-      <p style="color:#5a6a82; font-size:.92rem; line-height:1.7; max-width:560px; margin:0 auto;">A summary of everything you recorded during this module. Review your responses, then export as a PDF.</p>
+    <div style="text-align:center;margin-bottom:36px;">
+      <h2 style="font-family:'Merriweather',serif;font-size:1.75rem;color:var(--navy);margin-bottom:8px;">My Learning Record</h2>
+      <p style="color:#5a6a82;font-size:.92rem;line-height:1.7;max-width:560px;margin:0 auto;">
+        A summary of everything you recorded during this module. Review your responses,
+        then export as a PDF to save or submit as evidence of your learning.
+      </p>
     </div>
 
-    <div style="display:flex; justify-content:flex-end; margin-bottom:28px;">
-      <button onclick="exportLearningRecord()" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; cursor:pointer;">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:28px;">
+      <button onclick="exportLearningRecord()"
+              style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export as PDF
       </button>
@@ -657,48 +737,66 @@
     <div id="learning-record-body">
 
       <!-- Module info -->
-      <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:12px;">Module</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:.88rem; color:#4a5a72;">
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">Module</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:.88rem;color:#4a5a72;">
           <div><strong style="color:var(--navy);">Module:</strong> What is End of Life Palliative Care?</div>
           <div><strong style="color:var(--navy);">Organisation:</strong> St Barnabas Hospice</div>
           <div><strong style="color:var(--navy);">Completed:</strong> <span id="export-date"></span></div>
-          <div><strong style="color:var(--navy);">Status:</strong> <span style="color:#059669; font-weight:600;">Complete</span></div>
+          <div><strong style="color:var(--navy);">Status:</strong> <span style="color:#059669;font-weight:600;">Complete</span></div>
         </div>
       </div>
 
       <!-- Reflection -->
-      <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:4px;">Page 4 — Reflective Activity</div>
-        <div style="font-family:'Merriweather',serif; font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:12px;">Terminology &amp; Its Impact — Your Response</div>
-        <div id="export-reflection" style="background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:60px; white-space:pre-wrap;">No response recorded.</div>
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 4 — Reflective Activity</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Terminology &amp; Its Impact — Your Response</div>
+        <div id="export-reflection" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;">No response recorded.</div>
+      </div>
+
+      <!-- Myth or Fact sort -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 3 — Myth or Fact?</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Sorting Activity — Your Score</div>
+        <div id="export-sort" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Activity not yet completed.</div>
+      </div>
+
+      <!-- Apply the criteria -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 7 — Apply the Criteria</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Patient Vignettes — Your Answers</div>
+        <div id="export-vignettes" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;">Activity not yet completed.</div>
       </div>
 
       <!-- Quiz -->
-      <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:4px;">Page 8 — Quiz</div>
-        <div style="font-family:'Merriweather',serif; font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:12px;">True or False — Your Score</div>
-        <div id="export-quiz" style="background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:40px;">Quiz not yet completed.</div>
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 8 — Quiz</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">True or False — Your Score</div>
+        <div id="export-quiz" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Quiz not yet completed.</div>
       </div>
 
-      <!-- Additional reflections -->
-      <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:28px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:4px;">Optional</div>
-        <div style="font-family:'Merriweather',serif; font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:10px;">Additional reflections</div>
-        <p style="font-size:.84rem; color:#5a6a82; margin-bottom:10px;">Changes to your practice, questions for your supervisor, or key learning points.</p>
-        <textarea id="export-extra-notes" style="width:100%; font-family:'DM Sans',sans-serif; font-size:.88rem; color:#1e2d50; border:1px solid #c8d8e8; border-radius:8px; padding:12px 14px; line-height:1.7; resize:vertical; min-height:100px; background:#f8fafc; box-sizing:border-box;" placeholder="Add any additional reflections here…"></textarea>
+      <!-- Additional notes -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:28px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Optional</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Additional reflections</div>
+        <p style="font-size:.84rem;color:#5a6a82;margin-bottom:10px;">Changes to your practice, questions for your supervisor, or key learning points.</p>
+        <textarea id="export-extra-notes"
+                  style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;min-height:100px;background:#f8fafc;box-sizing:border-box;"
+                  placeholder="Add any additional reflections here…"></textarea>
       </div>
 
     </div>
 
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <button class="btn btn-primary" onclick="goToPage(8)">← Back</button>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <button onclick="exportLearningRecord()" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:#fff; color:var(--navy); border:2px solid #d0daea; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; cursor:pointer;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(8)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button onclick="exportLearningRecord()"
+                style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#fff;color:var(--navy);border:2px solid #d0daea;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Export as PDF
         </button>
-        <button onclick="finishModule()" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; background:var(--yellow); color:var(--navy); border:2px solid var(--yellow); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:700; cursor:pointer;">
+        <button onclick="finishModule()"
+                style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--yellow);color:var(--navy);border:2px solid var(--yellow);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           Finish Module
         </button>
@@ -709,29 +807,36 @@
 </section>
 
 
-<!-- Completion overlay -->
+<!-- ══ COMPLETION OVERLAY ════════════════════════════════════════ -->
 <div id="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete"
-     style="display:none; position:fixed; inset:0; background:rgba(10,20,48,.92); z-index:9999; align-items:center; justify-content:center;">
+     style="display:none;position:fixed;inset:0;background:rgba(10,20,48,.92);z-index:9999;align-items:center;justify-content:center;">
   <style>#finish-overlay.show { display:flex !important; }</style>
-  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466); border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:48px 40px; max-width:480px; width:90%; text-align:center; box-shadow:0 32px 80px rgba(0,0,0,.5);">
-    <div style="font-size:3rem; margin-bottom:16px;" aria-hidden="true">🎓</div>
-    <div style="font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Module Complete</div>
-    <h2 style="font-family:'Merriweather',serif; font-size:1.6rem; color:#fff; margin-bottom:12px;">Well done!</h2>
-    <p style="font-size:.9rem; color:rgba(255,255,255,.7); line-height:1.75; margin-bottom:28px;">You have completed this module. Your progress has been recorded. You may now close this window.</p>
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-      <button class="btn btn-secondary" onclick="goToPage(1); document.getElementById('finish-overlay').classList.remove('show');" style="font-size:.85rem;">↩ Review from Start</button>
-      <button onclick="window.close()" style="padding:10px 22px; background:var(--yellow); color:var(--navy); border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.85rem; font-weight:700; cursor:pointer;">Close Window</button>
+  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:48px 40px;max-width:480px;width:90%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+    <div style="font-size:3rem;margin-bottom:16px;" aria-hidden="true">🎓</div>
+    <div style="font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Module Complete</div>
+    <h2 style="font-family:'Merriweather',serif;font-size:1.6rem;color:#fff;margin-bottom:12px;">Well done!</h2>
+    <p id="finish-overlay-msg" style="font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:28px;">
+      Your progress has been recorded. You may now close this window.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-secondary"
+              onclick="goToPage(1);document.getElementById('finish-overlay').classList.remove('show');"
+              style="font-size:.85rem;">↩ Review from Start</button>
+      <button onclick="closeOrRedirect()"
+              style="padding:10px 22px;background:var(--yellow);color:var(--navy);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;">
+        Close Window
+      </button>
     </div>
   </div>
 </div>
 
 
-<!-- ══ MODALS ══ -->
+<!-- ══ MODAL — PHASE / LAYER DETAIL ════════════════════════════ -->
 <div id="phase-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="phm-title">
   <div class="modal-inner modal-wide">
     <div class="phase-modal-stripe" id="phm-stripe"></div>
-    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,.07);">
-      <div style="display:flex; align-items:center; gap:14px;">
+    <div class="modal-header" style="background:#0f1c34;border-bottom:1px solid rgba(255,255,255,.07);">
+      <div style="display:flex;align-items:center;gap:14px;">
         <div class="phase-modal-icon" id="phm-icon"></div>
         <div>
           <div class="phase-modal-tag" id="phm-tag"></div>
@@ -755,13 +860,15 @@
   </div>
 </div>
 
+
+<!-- ══ MODAL — MODEL ANSWER ══════════════════════════════════════ -->
 <div id="model-answer-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="ma-title">
   <div class="modal-inner modal-wide">
-    <div style="height:5px; background:linear-gradient(90deg,var(--blue),var(--yellow));"></div>
-    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,.07);">
-      <div style="display:flex; align-items:center; gap:14px;">
-        <div style="width:42px; height:42px; border-radius:10px; background:rgba(1,151,222,.15); display:flex; align-items:center; justify-content:center; font-size:1.2rem;" aria-hidden="true">💡</div>
-        <div id="ma-title" style="font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--white);">Model Answer</div>
+    <div style="height:5px;background:linear-gradient(90deg,var(--blue),var(--yellow));"></div>
+    <div class="modal-header" style="background:#0f1c34;border-bottom:1px solid rgba(255,255,255,.07);">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:rgba(1,151,222,.15);display:flex;align-items:center;justify-content:center;font-size:1.2rem;" aria-hidden="true">💡</div>
+        <div id="ma-title" style="font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:var(--white);">Model Answer</div>
       </div>
       <button class="modal-close" onclick="closeModelAnswerModal()" aria-label="Close">✕</button>
     </div>
@@ -800,6 +907,54 @@
 </div>
 
 
+<!-- ══ MODAL — GMC & NICE QUICK REFERENCE ════════════════════════ -->
+<div id="gmc-ref-modal" class="modal-backdrop" role="dialog" aria-modal="true"
+     aria-label="GMC and NICE Quick Reference" style="display:none;">
+  <style>#gmc-ref-modal.show { display:flex !important; }</style>
+  <div class="modal-inner modal-wide">
+    <div style="height:5px;background:linear-gradient(90deg,#0197de,#fdca0f);"></div>
+    <div class="modal-header" style="background:#0f1c34;border-bottom:1px solid rgba(255,255,255,.07);">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:10px;background:rgba(1,151,222,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;" aria-hidden="true">📋</div>
+        <div>
+          <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:3px;">Quick Reference</div>
+          <div style="font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:#fff;">GMC &amp; NICE — The 12-Month Definition</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('gmc-ref-modal').classList.remove('show')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:rgba(1,151,222,.08);border:1px solid rgba(1,151,222,.2);border-left:4px solid #0197de;border-radius:0 8px 8px 0;padding:16px 18px;margin-bottom:20px;">
+        <p style="color:#c5d3e8;font-size:.9rem;line-height:1.75;margin:0;">Patients are <strong style="color:#fff;">'approaching the end of life'</strong> when they are likely to die within the next <strong style="color:#fff;">12 months</strong>. This includes patients whose death is imminent (expected within a few hours or days) and those with advanced, progressive, incurable conditions.</p>
+      </div>
+      <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;">Four clinical criteria</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:rgba(1,151,222,.2);color:#7dd3fc;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">A</span>
+          <div><div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:3px;">Advanced &amp; Progressive</div><p style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.55;margin:0;">Advanced, progressive, incurable conditions where the disease trajectory indicates the person is likely to die within 12 months.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:rgba(13,148,136,.2);color:#5eead4;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">B</span>
+          <div><div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:3px;">General Frailty</div><p style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.55;margin:0;">General frailty and co-existing conditions that mean the person is expected to die within 12 months.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:rgba(253,202,15,.15);color:#fdca0f;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">C</span>
+          <div><div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:3px;">Risk of Acute Crisis</div><p style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.55;margin:0;">Existing conditions where the person is at risk of dying from a sudden acute crisis.</p></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:rgba(124,110,245,.2);color:#c4b5fd;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">D</span>
+          <div><div style="font-size:.85rem;font-weight:700;color:#fff;margin-bottom:3px;">Catastrophic Events</div><p style="font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.55;margin:0;">Life-threatening acute conditions caused by sudden catastrophic events, such as trauma or stroke.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p>Use these criteria to inform your decisions in the activity below.</p>
+      <button class="btn btn-primary" onclick="document.getElementById('gmc-ref-modal').classList.remove('show')">Close</button>
+    </div>
+  </div>
+</div>
+
+
 <footer role="contentinfo">
   <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
   <div class="footer-wcag">
@@ -813,6 +968,7 @@
   </div>
 </footer>
 
+
 <style>
   @media print {
     header, nav, .module-progress-bar, footer,
@@ -821,30 +977,34 @@
     #page-9 * { color:#000 !important; background:#fff !important; border-color:#ccc !important; box-shadow:none !important; }
     body { background:#fff; }
   }
+  /* Vignette rationale styling */
+  .vignette-rationale { display:none;font-size:.86rem;line-height:1.7;padding:14px 16px;border-radius:8px;margin-top:4px; }
+  .vignette-rationale.show { display:block; }
+  .vignette-rationale.correct   { background:rgba(5,150,105,.08);border:1px solid rgba(5,150,105,.25);border-left:4px solid #059669;color:#065f46; }
+  .vignette-rationale.incorrect { background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.2);border-left:4px solid #ef4444;color:#7f1d1d; }
 </style>
 
-<!-- scripts.js must load first — all inline JS depends on it -->
+
+<!-- Load scripts.js first — all inline JS depends on its globals -->
 <script src="js/scripts.js"></script>
 
 <script>
-  // ── TOTAL_PAGES (must match scripts.js expectation) ──
-  // Update scripts.js: var TOTAL_PAGES = 9;
+  // scripts.js must define TOTAL_PAGES = 9
 
-  // ── Sort activity (page 3) ───────────────────────────
-  var draggedId = null;
+  // ── DRAG & DROP SORT (page 3) ────────────────────────────────
+  var draggedId  = null;
   var selectedId = null;
-  var placedStatements = {}; // id → column
+  var placedStatements = {};
 
   var statementsData = {
-    s1: { text: 'Palliative care means stopping all active treatment.', answer: 'myth' },
-    s2: { text: 'Palliative care can begin at the point of diagnosis.', answer: 'fact' },
-    s3: { text: 'Palliative care is only for people who are dying imminently.', answer: 'myth' },
-    s4: { text: 'Palliative care addresses psychological and spiritual needs, not just physical ones.', answer: 'fact' },
-    s5: { text: 'Palliative care is only delivered in a hospice.', answer: 'myth' },
-    s6: { text: 'Families and carers are an explicit focus of palliative care.', answer: 'fact' }
+    s1: { text:'Palliative care means stopping all active treatment.',                              answer:'myth' },
+    s2: { text:'Palliative care can begin at the point of diagnosis.',                              answer:'fact' },
+    s3: { text:'Palliative care is only for people who are dying imminently.',                      answer:'myth' },
+    s4: { text:'Palliative care addresses psychological and spiritual needs, not just physical ones.', answer:'fact' },
+    s5: { text:'Palliative care is only delivered in a hospice.',                                   answer:'myth' },
+    s6: { text:'Families and carers are an explicit focus of palliative care.',                     answer:'fact' }
   };
 
-  // Drag events
   document.addEventListener('dragstart', function(e) {
     var el = e.target.closest('.sort-stmt');
     if (!el) return;
@@ -868,29 +1028,27 @@
   // Click-to-select then click column
   document.addEventListener('click', function(e) {
     var stmt = e.target.closest('.sort-stmt');
-    if (stmt) {
-      // Deselect previous
-      document.querySelectorAll('.sort-stmt.selected').forEach(function(s) { s.classList.remove('selected'); });
+    if (stmt && !stmt.classList.contains('placed')) {
+      document.querySelectorAll('.sort-stmt.selected').forEach(function(s){ s.classList.remove('selected'); });
       selectedId = stmt.getAttribute('data-id');
       stmt.classList.add('selected');
       return;
     }
-    var col = e.target.closest('.sort-col');
+    var col = e.target.closest('#col-myth, #col-fact');
     if (col && selectedId) {
       var colId = col.id === 'col-myth' ? 'myth' : 'fact';
       placeStatement(selectedId, colId);
       selectedId = null;
       return;
     }
-    // Click elsewhere deselects
     if (!e.target.closest('.sort-col') && !e.target.closest('.sort-stmt')) {
-      document.querySelectorAll('.sort-stmt.selected').forEach(function(s) { s.classList.remove('selected'); });
+      document.querySelectorAll('.sort-stmt.selected').forEach(function(s){ s.classList.remove('selected'); });
       selectedId = null;
     }
   });
 
   function placeStatement(id, col) {
-    // Remove from previous column if already placed
+    // Remove from old column if already placed
     if (placedStatements[id]) {
       var oldZone = document.getElementById('zone-' + placedStatements[id]);
       var oldEl = oldZone ? oldZone.querySelector('[data-placed="' + id + '"]') : null;
@@ -898,21 +1056,20 @@
     }
     placedStatements[id] = col;
 
-    // Hide from pool
     var poolEl = document.querySelector('.sort-stmt[data-id="' + id + '"]');
     if (poolEl) { poolEl.classList.remove('selected'); poolEl.classList.add('placed'); }
 
-    // Add to zone
     var zone = document.getElementById('zone-' + col);
     var div = document.createElement('div');
     div.className = 'sort-placed ' + col;
     div.setAttribute('data-placed', id);
-    div.innerHTML = '<span style="flex:1;">' + statementsData[id].text + '</span><span class="sort-placed-remove" title="Return to pool" onclick="returnStatement(\'' + id + '\')">✕</span>';
+    div.innerHTML =
+      '<span style="flex:1;">' + statementsData[id].text + '</span>' +
+      '<span class="sort-placed-remove" onclick="returnStatement(\'' + id + '\')" title="Return to pool">✕</span>';
     zone.appendChild(div);
 
-    // Clear feedback
     var fb = document.getElementById('sort-feedback');
-    if (fb) { fb.className = 'sort-feedback'; }
+    if (fb) fb.className = 'sort-feedback';
   }
 
   function returnStatement(id) {
@@ -942,56 +1099,75 @@
 
     var correct = 0;
     ids.forEach(function(id) {
-      if (placedStatements[id] === statementsData[id].answer) correct++;
+      var isCorrect = placedStatements[id] === statementsData[id].answer;
+      if (isCorrect) correct++;
+
+      // Add tick / cross badge to placed item
+      var zone = document.getElementById('zone-' + placedStatements[id]);
+      var el = zone ? zone.querySelector('[data-placed="' + id + '"]') : null;
+      if (el) {
+        var old = el.querySelector('.sort-badge');
+        if (old) old.remove();
+        var badge = document.createElement('span');
+        badge.className = 'sort-badge';
+        badge.style.cssText = 'flex-shrink:0;font-size:1rem;margin-left:8px;font-weight:700;';
+        badge.textContent = isCorrect ? '✓' : '✗';
+        badge.style.color  = isCorrect ? '#059669' : '#dc2626';
+        badge.title = isCorrect ? 'Correct' : 'Incorrect — should be ' + statementsData[id].answer;
+        el.appendChild(badge);
+      }
     });
+
+    // Save for learning record
+    window._sortResult = correct + ' / ' + total + ' correct';
 
     if (correct === total) {
       fb.className = 'sort-feedback show all-correct';
       fb.textContent = '✓ All correct — well done! You have correctly identified all six statements.';
     } else {
       fb.className = 'sort-feedback show some-wrong';
-      fb.textContent = correct + ' of ' + total + ' correct. Some statements are in the wrong column — use the ✕ buttons to move them back and try again.';
+      fb.textContent = correct + ' of ' + total + ' correct. Incorrect items are marked ✗ — use the ✕ buttons to move them and try again.';
     }
   }
 
   function resetSort() {
-    // Return all placed statements to pool
-    Object.keys(placedStatements).forEach(function(id) { returnStatement(id); });
+    Object.keys(statementsData).forEach(function(id) {
+      var col = placedStatements[id];
+      if (col) {
+        var zone = document.getElementById('zone-' + col);
+        var el = zone ? zone.querySelector('[data-placed="' + id + '"]') : null;
+        if (el) el.remove();
+      }
+    });
     placedStatements = {};
-    // Clear zones
-    ['myth','fact'].forEach(function(col) {
-      var z = document.getElementById('zone-' + col);
-      if (z) z.innerHTML = '';
-    });
-    // Show all pool items
-    document.querySelectorAll('.sort-stmt').forEach(function(s) {
-      s.classList.remove('placed','selected');
-    });
-    // Clear feedback
+    document.querySelectorAll('.sort-stmt').forEach(function(s){ s.classList.remove('placed','selected'); });
     var fb = document.getElementById('sort-feedback');
     if (fb) fb.className = 'sort-feedback';
+    window._sortResult = null;
   }
 
-  // ── Vignette activity (page 7) ───────────────────────
+  // ── VIGNETTE ACTIVITY (page 7) ───────────────────────────────
   var vignetteFeedback = {
     v1: {
-      yes: { correct: true,  text: 'Correct. Margaret meets criteria A (advanced progressive condition) and potentially B (frailty). Repeated acute admissions, no further surgical options, and functional decline all indicate she is approaching end of life.' },
-      no:  { correct: false, text: 'Incorrect. Margaret meets the 12-month definition — advanced heart failure with no further surgical options, functional decline, and repeated acute admissions indicate she is approaching end of life.' }
+      yes: { correct:true,  text:'Correct. Margaret meets criteria A (advanced progressive condition) and potentially B (frailty). Repeated acute admissions, no further surgical options, and functional decline all indicate she is approaching end of life.' },
+      no:  { correct:false, text:'Incorrect. Margaret meets the 12-month definition — advanced heart failure with no further surgical options, functional decline, and repeated acute admissions indicate she is approaching end of life.' }
     },
     v2: {
-      yes: { correct: false, text: 'Incorrect. David does not meet the definition. He is recovering well, has a managed chronic condition, and no indicators of life-limiting illness or likely death within 12 months.' },
-      no:  { correct: true,  text: 'Correct. David does not meet the 12-month definition. He has no life-limiting illness, is functionally independent, and his hypertension is well-managed. Palliative care is not indicated.' }
+      yes: { correct:false, text:'Incorrect. David does not meet the definition. He is recovering well, has a managed chronic condition, and there are no indicators of life-limiting illness or likely death within 12 months.' },
+      no:  { correct:true,  text:'Correct. David does not meet the 12-month definition. He has no life-limiting illness, is functionally independent, and his hypertension is well-managed.' }
     },
     v3: {
-      yes: { correct: true,  text: 'Correct. Priya meets criteria A — MND is an advanced, progressive, incurable condition. Rapid progression affecting swallowing and respiratory function indicates she is likely to die within 12 months.' },
-      no:  { correct: false, text: 'Incorrect. Priya meets the definition. MND with rapid progression affecting swallowing and respiratory function represents an advanced incurable condition with a trajectory indicating death within 12 months.' }
+      yes: { correct:true,  text:'Correct. Priya meets criteria A — MND is an advanced, progressive, incurable condition. Rapid progression affecting swallowing and respiratory function indicates she is likely to die within 12 months.' },
+      no:  { correct:false, text:'Incorrect. Priya meets the definition. MND with rapid progression affecting swallowing and respiratory function represents an advanced incurable condition with a trajectory indicating death within 12 months.' }
     }
   };
 
   function answerVignette(btn, chosen, id, correctIsYes) {
     var card = btn.closest('.vignette');
-    card.querySelectorAll('.vignette-btn').forEach(function(b) { b.disabled = true; b.style.opacity = '.6'; });
-    btn.classList.add(chosen === 'yes' ? 'selected-yes' : 'selected-no');
+    card.querySelectorAll('.vignette-btn').forEach(function(b){ b.disabled = true; b.style.opacity = '.55'; });
+    var isCorrect = (chosen === 'yes') === correctIsYes;
+    btn.style.borderColor = isCorrect ? '#059669' : '#ef4444';
+    btn.style.background  = isCorrect ? 'rgba(5,150,105,.1)' : 'rgba(220,38,38,.08)';
     var data = vignetteFeedback[id][chosen];
     var rationale = document.getElementById(id + '-rationale');
     if (!rationale) return;
@@ -999,40 +1175,57 @@
     rationale.className = 'vignette-rationale show ' + (data.correct ? 'correct' : 'incorrect');
   }
 
-  // ── Quiz continue unlock ─────────────────────────────
-  var quizCheckInterval = setInterval(function() {
+  // ── QUIZ CONTINUE UNLOCK ─────────────────────────────────────
+  var _quizCheck = setInterval(function() {
     var r = document.getElementById('quiz-results');
     if (r && r.classList.contains('show')) {
       var btn = document.getElementById('quiz-continue-btn');
       if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; }
-      clearInterval(quizCheckInterval);
+      clearInterval(_quizCheck);
     }
   }, 300);
 
-  // ── Learning record ──────────────────────────────────
+  // ── LEARNING RECORD ──────────────────────────────────────────
   function populateLearningRecord() {
     // Date
     var dateEl = document.getElementById('export-date');
     if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
 
-    // Reflection from page 4
-    var reflectEl = document.getElementById('reflect-input');
+    // Reflection (page 4)
+    var reflectEl  = document.getElementById('reflect-input');
     var expReflect = document.getElementById('export-reflection');
-    if (expReflect) {
-      expReflect.textContent = (reflectEl && reflectEl.value.trim()) ? reflectEl.value.trim() : 'No response recorded.';
+    if (expReflect) expReflect.textContent = (reflectEl && reflectEl.value.trim()) ? reflectEl.value.trim() : 'No response recorded.';
+
+    // Sort result (page 3)
+    var expSort = document.getElementById('export-sort');
+    if (expSort) expSort.textContent = window._sortResult || 'Activity not yet completed.';
+
+    // Vignettes (page 7)
+    var expVig = document.getElementById('export-vignettes');
+    if (expVig) {
+      var vigLabels = { v1:'Margaret', v2:'David', v3:'Priya' };
+      var lines = [];
+      var anyAnswered = false;
+      ['v1','v2','v3'].forEach(function(id) {
+        var el = document.getElementById(id + '-rationale');
+        if (el && el.classList.contains('show')) {
+          anyAnswered = true;
+          var correct = el.classList.contains('correct');
+          var snippet = el.textContent.substring(0, 90).trim();
+          lines.push((correct ? '✓ ' : '✗ ') + vigLabels[id] + ': ' + snippet + '…');
+        }
+      });
+      expVig.textContent = anyAnswered ? lines.join('\n') : 'Activity not yet completed.';
     }
 
-    // Quiz score from page 8
+    // Quiz (page 8)
     var quizEl = document.getElementById('export-quiz');
     if (quizEl) {
       var results = document.getElementById('quiz-results');
       if (results && results.classList.contains('show')) {
-        var scoreNum = results.querySelector('.quiz-results-score');
+        var scoreNum   = results.querySelector('.quiz-results-score');
         var scoreLabel = results.querySelector('.quiz-results-label');
-        var scoreText = '';
-        if (scoreNum) scoreText += scoreNum.textContent;
-        if (scoreLabel) scoreText += ' — ' + scoreLabel.textContent;
-        quizEl.textContent = scoreText || 'Score recorded.';
+        quizEl.textContent = (scoreNum ? scoreNum.textContent : '—') + (scoreLabel ? ' — ' + scoreLabel.textContent : '');
       } else {
         quizEl.textContent = 'Quiz not yet completed.';
       }
@@ -1040,10 +1233,10 @@
   }
 
   function exportLearningRecord() {
-    var extra = document.getElementById('export-extra-notes');
+    var extra    = document.getElementById('export-extra-notes');
     var printDiv = document.createElement('div');
     printDiv.id = 'export-extra-print';
-    printDiv.style.cssText = 'background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:60px; white-space:pre-wrap;';
+    printDiv.style.cssText = 'background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;';
     printDiv.textContent = (extra && extra.value.trim()) ? extra.value.trim() : 'No additional reflections recorded.';
     if (extra) { extra.style.display = 'none'; extra.parentNode.insertBefore(printDiv, extra); }
     window.print();
@@ -1058,10 +1251,19 @@
     if (o) o.classList.add('show');
   }
 
-  // Override goToPage AFTER scripts.js has defined it
-  var _origGoToPage = typeof goToPage === 'function' ? goToPage : function(n) { console.warn('goToPage not ready', n); };
+  function closeOrRedirect() {
+    window.close();
+    // If browser blocks close (non-script-opened tab), update the message
+    setTimeout(function() {
+      var msg = document.getElementById('finish-overlay-msg');
+      if (msg) msg.innerHTML = 'Your progress has been recorded.<br><strong style="color:var(--yellow);">You can now close this browser tab.</strong>';
+    }, 400);
+  }
+
+  // Hook into goToPage AFTER scripts.js has loaded it
+  var _orig = typeof goToPage === 'function' ? goToPage : null;
   goToPage = function(num) {
-    _origGoToPage(num);
+    if (_orig) _orig(num);
     if (num === 9) { populateLearningRecord(); }
   };
 </script>
