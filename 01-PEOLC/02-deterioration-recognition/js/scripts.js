@@ -66,7 +66,7 @@ var SCORM = (function () {
    SECTION 2 — PAGE NAVIGATION  (11 pages)
 ══════════════════════════════════════════════════════════ */
 var visited = new Set([1]);
-var TOTAL_PAGES = 11;
+var TOTAL_PAGES = 12;
 
 function updateProgressBar(num) {
   var pct  = Math.round(((num-1)/(TOTAL_PAGES-1))*100);
