@@ -1412,6 +1412,11 @@ footer {
   letter-spacing: 0.04em; 
 }
 
+.flipcard-back { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.4) rgba(255,255,255,0.1); }
+.flipcard-back::-webkit-scrollbar { width: 5px; }
+.flipcard-back::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 3px; }
+.flipcard-back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.4); border-radius: 3px; }
+
 /* Responsive adjustments */
 @media (max-width: 768px) { 
   .flipcard { 
