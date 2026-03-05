@@ -1097,6 +1097,9 @@ footer {
 .scenario-context p    { font-size: 0.9rem; color: #c5d3e8; line-height: 1.7; }
 .scenario-context p em { color: var(--yellow); font-style: italic; }
 
+/* ── PAGE 9 — BOB: THE VISIT ────────────────────────── */
+#page-9 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-9.active { display: block; }
 
     /* ─── CLIPBOARD CASE STUDY (Pages 7, 8, 10) ─────────────── */
     .case-wrap { max-width:960px; margin:0 auto; padding:40px 48px 64px; }
