@@ -10,65 +10,82 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <style>
-    /* ── Light page overrides (pages 2, 3, 4, 6, 7) ──────── */
+    /* ═══════════════════════════════════════════════════════════
+       LIGHT PAGE OVERRIDES — all !important to beat styles.css
+       Affects pages 2, 3, 4, 6, 7
+    ═══════════════════════════════════════════════════════════ */
+
+    /* Backgrounds — styles.css has dark gradients on #page-3 and #page-7 */
     #page-2, #page-3, #page-4, #page-6, #page-7 {
-      background: #f0f4f9;
+      background: #f0f4f9 !important;
     }
 
-    /* Headings */
-    #page-2 h2, #page-3 h2, #page-4 h2, #page-6 h2, #page-7 h2 {
-      color: var(--navy, #1a2e4a) !important;
+    /* All text on light pages */
+    #page-2 h1, #page-2 h2, #page-2 h3, #page-2 h4,
+    #page-3 h1, #page-3 h2, #page-3 h3, #page-3 h4,
+    #page-4 h1, #page-4 h2, #page-4 h3, #page-4 h4,
+    #page-6 h1, #page-6 h2, #page-6 h3, #page-6 h4,
+    #page-7 h1, #page-7 h2, #page-7 h3, #page-7 h4 {
+      color: #1a2e4a !important;
     }
-    /* Body / paragraph text */
-    #page-2 p,  #page-3 p,  #page-4 p,  #page-6 p,  #page-7 p,
-    #page-2 li, #page-3 li, #page-4 li, #page-6 li, #page-7 li {
+    #page-2 p, #page-2 li, #page-2 span,
+    #page-3 p, #page-3 li, #page-3 span,
+    #page-4 p, #page-4 li, #page-4 span,
+    #page-6 p, #page-6 li, #page-6 span,
+    #page-7 p, #page-7 li, #page-7 span {
       color: #3d4f65 !important;
     }
-    /* Labels & subtitles */
-    #page-2 .def-card-title,
-    #page-2 .definition-not-title { color: #1a2e4a !important; }
-    #page-2 .def-card-body        { color: #3d4f65 !important; }
-    #page-2 .definition-lead      { color: #1a2e4a !important; background: rgba(1,151,222,.08) !important; border-left-color: #0197de !important; }
 
-    /* Reflect page */
-    #page-4 .reflect-q-text       { color: #1a2e4a !important; }
-    #page-4 .reflect-prompts-label{ color: #5a6a82 !important; }
-    #page-4 .reflect-prompt-chip  { background: #e2eaf4 !important; color: #1a2e4a !important; border-color: #c8d8e8 !important; }
-    #page-4 .reflect-textarea     { background: #fff !important; color: #1a2e4a !important; border-color: #c8d8e8 !important; }
-    #page-4 .reflect-question     { background: #fff !important; border-color: #d0daea !important; }
+    /* Definition cards (page 2) */
+    #page-2 .def-card-title              { color: #1a2e4a !important; }
+    #page-2 .def-card-body               { color: #3d4f65 !important; }
+    #page-2 .definition-lead             { color: #1a2e4a !important; background: rgba(1,151,222,.08) !important; }
+    #page-2 .definition-header p         { color: #3d4f65 !important; }
+    #page-2 .definition-not              { background: #fff !important; border-color: #d0daea !important; }
+    #page-2 .definition-not-title        { color: #1a2e4a !important; }
+    #page-2 .not-item                    { color: #1a2e4a !important; background: rgba(0,0,0,.02) !important; border-color: #d0daea !important; }
+    #page-2 .not-item strong             { color: #1a2e4a !important; }
+    #page-2 .not-item-icon               { color: #dc2626 !important; }
 
-    /* GMC pages */
-    #page-6 .twelve-month-callout-title { color: #1a2e4a !important; }
-    #page-6 .twelve-month-callout-body  { color: #3d4f65 !important; }
-    #page-6 .criteria-title             { color: #1a2e4a !important; }
-    #page-6 .criteria-card              { background: #fff !important; border-color: #d0daea !important; }
-    #page-6 .criteria-card-title        { color: #1a2e4a !important; }
-    #page-6 .criteria-card-body         { color: #3d4f65 !important; }
-    #page-6 .def-banner                 { background: #fff !important; border-color: #d0daea !important; }
-    #page-6 .def-banner-org             { color: #0197de !important; }
-    #page-6 .def-banner-quote           { color: #3d4f65 !important; }
-    #page-6 .twelve-month-callout       { background: #fff !important; border-color: #d0daea !important; }
+    /* Sort activity (page 3) */
+    #page-3 .definition-header p         { color: #3d4f65 !important; }
+    #page-3 .sort-stmt                   { background: #fff !important; border: 2px solid #c8d8e8 !important; color: #1a2e4a !important; }
+    #page-3 .sort-stmt:hover             { border-color: #0197de !important; background: #eef5fb !important; }
+    #page-3 .sort-col                    { background: rgba(0,0,0,.02) !important; border: 2px dashed #c0d0e0 !important; }
+    #page-3 .sort-placed.myth            { background: rgba(220,38,38,.06) !important; border-left: 3px solid #ef4444 !important; color: #7f1d1d !important; }
+    #page-3 .sort-placed.fact            { background: rgba(5,150,105,.06) !important; border-left: 3px solid #059669 !important; color: #064e3b !important; }
 
-    /* Apply criteria page */
-    #page-7 .vignette       { background: #fff !important; border-color: #d0daea !important; }
-    #page-7 .vignette-text  { color: #3d4f65 !important; }
-    #page-7 .criteria-letter { background: rgba(1,151,222,.12) !important; color: #0197de !important; }
+    /* Reflect (page 4) */
+    #page-4 .reflect-q-text              { color: #1a2e4a !important; }
+    #page-4 .reflect-prompts-label       { color: #5a6a82 !important; }
+    #page-4 .reflect-prompt-chip         { background: #e2eaf4 !important; color: #1a2e4a !important; border-color: #c8d8e8 !important; }
 
-    /* Sort activity */
-    #page-3 .sort-stmt {
-      background: #fff;
-      border: 2px solid #c8d8e8;
-      color: #1a2e4a;
-    }
-    #page-3 .sort-stmt:hover { border-color: #0197de; background: #eef5fb; }
-    #page-3 .sort-col {
-      background: rgba(0,0,0,.02);
-      border: 2px dashed #c0d0e0;
-    }
-    #page-3 .sort-col.drag-over { border-color: #0197de; background: rgba(1,151,222,.04); }
+    /* GMC definitions (page 6) */
+    #page-6 .gmcnice-title-area h2       { color: #1a2e4a !important; }
+    #page-6 .gmcnice-title-area p        { color: #3d4f65 !important; }
+    #page-6 .twelve-month-callout        { background: #fff !important; border-color: #d0daea !important; }
+    #page-6 .twelve-month-callout-title  { color: #1a2e4a !important; }
+    #page-6 .twelve-month-callout-body   { color: #3d4f65 !important; }
+    #page-6 .def-banner                  { background: #fff !important; border-color: #d0daea !important; }
+    #page-6 .def-banner-org              { color: #0197de !important; }
+    #page-6 .def-banner-quote            { color: #3d4f65 !important; }
+    #page-6 .criteria-title              { color: #1a2e4a !important; }
+    #page-6 .criteria-card               { background: #fff !important; border-color: #d0daea !important; }
+    #page-6 .criteria-letter             { background: rgba(1,151,222,.12) !important; color: #0197de !important; }
+    #page-6 .criteria-card-title         { color: #1a2e4a !important; }
+    #page-6 .criteria-card-body          { color: #3d4f65 !important; }
+
+    /* Apply criteria (page 7) */
+    #page-7 .gmcnice-title-area h2       { color: #1a2e4a !important; }
+    #page-7 .gmcnice-title-area p        { color: #3d4f65 !important; }
+    #page-7 .vignette                    { background: #fff !important; border-color: #d0daea !important; }
+    #page-7 .vignette-text               { color: #3d4f65 !important; }
+    #page-7 .vignette-text strong        { color: #1a2e4a !important; }
+    #page-7 .vignette-btn                { color: #1a2e4a !important; border-color: #c8d8e8 !important; background: transparent !important; }
+    #page-7 .criteria-letter             { background: rgba(1,151,222,.12) !important; color: #0197de !important; }
+    /* Sort colours — also defined above with !important, these add drag-over state */
+    #page-3 .sort-col.drag-over { border-color: #0197de !important; background: rgba(1,151,222,.04) !important; }
     #page-3 .sort-col-title { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px; }
-    #page-3 .sort-placed.myth { background: rgba(220,38,38,.06); border:1px solid rgba(220,38,38,.25); border-left:3px solid #ef4444; color: #7f1d1d; }
-    #page-3 .sort-placed.fact { background: rgba(5,150,105,.06); border:1px solid rgba(5,150,105,.2); border-left:3px solid #059669; color: #064e3b; }
     #page-3 .sort-feedback.all-correct { background:rgba(5,150,105,.08); border:1px solid rgba(5,150,105,.25); border-left:4px solid #059669; color:#065f46; }
     #page-3 .sort-feedback.some-wrong  { background:rgba(217,119,6,.07); border:1px solid rgba(217,119,6,.2); border-left:4px solid #d97706; color:#78350f; }
   </style>
