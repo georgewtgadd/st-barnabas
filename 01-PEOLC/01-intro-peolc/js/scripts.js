@@ -180,7 +180,7 @@ var SCORM = (function () {
 ══════════════════════════════════════════════════════════ */
 
 var visited     = new Set([1]);
-var TOTAL_PAGES = 7;
+var TOTAL_PAGES = 9;
 
 function updateProgressBar(num) {
   var pct   = Math.round(((num - 1) / (TOTAL_PAGES - 1)) * 100);
