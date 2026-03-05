@@ -250,7 +250,9 @@
       </div>
 
       <div class="def-card" role="listitem" style="background:#fff;border-color:#d0daea;">
-        <div class="def-card-icon" style="background:rgba(253,202,15,0.1);" aria-hidden="true">⚕️</div>
+        <div class="def-card-icon" style="background:rgba(253,202,15,0.18);border:2px solid rgba(253,202,15,0.4);display:flex;align-items:center;justify-content:center;" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div>
           <div class="def-card-title">Alongside Active Treatment</div>
           <p class="def-card-body">Can be provided alongside curative or life-prolonging treatment. It is not a replacement for active care — it complements it.</p>
@@ -268,15 +270,15 @@
     </div>
 
     <div class="definition-not" role="note" style="background:#fff;border-color:#d0daea;">
-      <div class="definition-not-title" style="color:#1a2e4a;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="definition-not-title" style="color:#1a2e4a;border-bottom:1px solid #e2eaf4;padding-bottom:10px;margin-bottom:12px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a2e4a" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         Common misconceptions — what palliative care is <em>not</em>
       </div>
       <div class="definition-not-grid">
-        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> about "giving up" on a patient</span></div>
-        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> only for people who are imminently dying</span></div>
-        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It does <strong>not</strong> mean stopping all active treatment</span></div>
-        <div class="not-item" style="color:#3d4f65;"><span class="not-item-icon" aria-hidden="true" style="color:#ef4444;">✗</span><span>It is <strong>not</strong> only delivered in a hospice setting</span></div>
+        <div class="not-item" style="color:#1a2e4a;"><span class="not-item-icon" aria-hidden="true" style="color:#dc2626;font-weight:700;">✗</span><span>It is <strong style="color:#1a2e4a;">not</strong> about "giving up" on a patient</span></div>
+        <div class="not-item" style="color:#1a2e4a;"><span class="not-item-icon" aria-hidden="true" style="color:#dc2626;font-weight:700;">✗</span><span>It is <strong style="color:#1a2e4a;">not</strong> only for people who are imminently dying</span></div>
+        <div class="not-item" style="color:#1a2e4a;"><span class="not-item-icon" aria-hidden="true" style="color:#dc2626;font-weight:700;">✗</span><span>It does <strong style="color:#1a2e4a;">not</strong> mean stopping all active treatment</span></div>
+        <div class="not-item" style="color:#1a2e4a;"><span class="not-item-icon" aria-hidden="true" style="color:#dc2626;font-weight:700;">✗</span><span>It is <strong style="color:#1a2e4a;">not</strong> only delivered in a hospice setting</span></div>
       </div>
     </div>
 
@@ -370,7 +372,15 @@
 
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #d0daea;">
       <button class="btn btn-secondary" onclick="goToPage(2)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(4)">Continue to Reflect →</button>
+      <div>
+        <div id="sort-locked-msg" style="font-size:.8rem;color:#b45309;background:rgba(253,202,15,.15);border:1px solid rgba(253,202,15,.3);border-radius:6px;padding:7px 12px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+          🔒 Sort all statements correctly to continue
+        </div>
+        <button class="btn btn-primary" id="sort-continue-btn" disabled
+                style="opacity:.4;cursor:not-allowed;" onclick="goToPage(4)">
+          Continue to Reflect →
+        </button>
+      </div>
     </div>
 
   </div>
@@ -612,14 +622,13 @@
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
         <div>
           <h2 style="margin-bottom:6px;">Apply the Criteria</h2>
-          <p>Read each patient vignette. Does this person meet the 12-month definition of
-          approaching end of life? Select Yes or No and see the rationale.</p>
+          <p>Read each patient vignette and decide whether they meet the GMC &amp; NICE 12-month definition of approaching end of life. The reference guide is available if you need a reminder of the criteria.</p>
         </div>
         <!-- GMC reference button -->
         <button onclick="document.getElementById('gmc-ref-modal').classList.add('show')"
                 style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;background:rgba(1,151,222,.1);color:#0197de;border:1px solid rgba(1,151,222,.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          GMC &amp; NICE Reference
+          GMC &amp; NICE Criteria
         </button>
       </div>
     </div>
@@ -675,9 +684,23 @@
       <div class="vignette-rationale" id="v3-rationale"></div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
-      <button class="btn btn-secondary" onclick="goToPage(6)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(8)">Test Your Understanding →</button>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="goToPage(6)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
+        <button onclick="resetVignettes()"
+                style="padding:10px 20px;background:transparent;color:#5a6a82;border:2px solid #c8d8e8;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;">
+          Reset
+        </button>
+      </div>
+      <div>
+        <div id="vignette-locked-msg" style="font-size:.8rem;color:#b45309;background:rgba(253,202,15,.15);border:1px solid rgba(253,202,15,.3);border-radius:6px;padding:7px 12px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+          🔒 Answer all three vignettes to continue
+        </div>
+        <button class="btn btn-primary" id="vignette-continue-btn" disabled
+                style="opacity:.4;cursor:not-allowed;float:right;" onclick="goToPage(8)">
+          Test Your Understanding →
+        </button>
+      </div>
     </div>
 
   </div>
@@ -771,8 +794,9 @@
       <!-- Quiz -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 8 — Quiz</div>
-        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">True or False — Your Score</div>
-        <div id="export-quiz" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Quiz not yet completed.</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px;">True or False — Your Score</div>
+        <p style="font-size:.8rem;color:#5a6a82;margin-bottom:10px;">Pass mark: 80% or above required.</p>
+        <div id="export-quiz" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;white-space:pre-wrap;">Quiz not yet completed.</div>
       </div>
 
       <!-- Additional notes -->
@@ -1120,10 +1144,17 @@
 
     // Save for learning record
     window._sortResult = correct + ' / ' + total + ' correct';
+    // Store per-statement placement for detailed record
+    window._sortPlacements = JSON.parse(JSON.stringify(placedStatements));
 
     if (correct === total) {
       fb.className = 'sort-feedback show all-correct';
       fb.textContent = '✓ All correct — well done! You have correctly identified all six statements.';
+      // Unlock continue
+      var contBtn = document.getElementById('sort-continue-btn');
+      var lockedMsg = document.getElementById('sort-locked-msg');
+      if (contBtn) { contBtn.disabled = false; contBtn.style.opacity = '1'; contBtn.style.cursor = 'pointer'; }
+      if (lockedMsg) lockedMsg.style.display = 'none';
     } else {
       fb.className = 'sort-feedback show some-wrong';
       fb.textContent = correct + ' of ' + total + ' correct. Incorrect items are marked ✗ — use the ✕ buttons to move them and try again.';
@@ -1144,6 +1175,12 @@
     var fb = document.getElementById('sort-feedback');
     if (fb) fb.className = 'sort-feedback';
     window._sortResult = null;
+    window._sortPlacements = null;
+    // Relock
+    var contBtn = document.getElementById('sort-continue-btn');
+    var lockedMsg = document.getElementById('sort-locked-msg');
+    if (contBtn) { contBtn.disabled = true; contBtn.style.opacity = '.4'; contBtn.style.cursor = 'not-allowed'; }
+    if (lockedMsg) lockedMsg.style.display = 'flex';
   }
 
   // ── VIGNETTE ACTIVITY (page 7) ───────────────────────────────
@@ -1162,6 +1199,8 @@
     }
   };
 
+  var vignetteAnswered = { v1: false, v2: false, v3: false };
+
   function answerVignette(btn, chosen, id, correctIsYes) {
     var card = btn.closest('.vignette');
     card.querySelectorAll('.vignette-btn').forEach(function(b){ b.disabled = true; b.style.opacity = '.55'; });
@@ -1173,15 +1212,104 @@
     if (!rationale) return;
     rationale.textContent = data.text;
     rationale.className = 'vignette-rationale show ' + (data.correct ? 'correct' : 'incorrect');
+    // Store user answer
+    vignetteAnswered[id] = { chosen: chosen, correct: data.correct };
+    // Check if all 3 answered
+    var allDone = vignetteAnswered.v1 && vignetteAnswered.v2 && vignetteAnswered.v3;
+    if (allDone) {
+      var contBtn = document.getElementById('vignette-continue-btn');
+      var lockedMsg = document.getElementById('vignette-locked-msg');
+      if (contBtn) { contBtn.disabled = false; contBtn.style.opacity = '1'; contBtn.style.cursor = 'pointer'; }
+      if (lockedMsg) lockedMsg.style.display = 'none';
+    }
   }
 
-  // ── QUIZ CONTINUE UNLOCK ─────────────────────────────────────
+  function resetVignettes() {
+    ['v1','v2','v3'].forEach(function(id) {
+      vignetteAnswered[id] = false;
+      var rat = document.getElementById(id + '-rationale');
+      if (rat) { rat.className = 'vignette-rationale'; rat.textContent = ''; }
+    });
+    document.querySelectorAll('.vignette-btn').forEach(function(b){
+      b.disabled = false; b.style.opacity = '1';
+      b.style.borderColor = '#c8d8e8'; b.style.background = 'transparent';
+    });
+    var contBtn = document.getElementById('vignette-continue-btn');
+    var lockedMsg = document.getElementById('vignette-locked-msg');
+    if (contBtn) { contBtn.disabled = true; contBtn.style.opacity = '.4'; contBtn.style.cursor = 'not-allowed'; }
+    if (lockedMsg) lockedMsg.style.display = 'flex';
+  }
+
+  // ── QUIZ — 80% PASS GATE + QUESTION CAPTURE ─────────────────
+  // Store quiz question data as the quiz renders (patch after scripts.js loads)
+  window._quizAnswers = [];   // { question, userAnswer, correct }
+
+  // Intercept quiz answer clicks via delegation
+  document.addEventListener('click', function(e) {
+    var ansBtn = e.target.closest('.quiz-answer-btn, .tf-btn, [data-quiz-answer]');
+    if (!ansBtn) return;
+    // Try to capture question text + answer - works with most quiz HTML patterns
+    var card = ansBtn.closest('.quiz-card, .quiz-question-wrap, [class*="quiz"]');
+    var qText = card ? (card.querySelector('.quiz-question-text, .quiz-q, h3, p') || {}).textContent : '';
+    var answer = ansBtn.textContent.trim();
+    // Store (will be read by populateLearningRecord)
+    // We don't know correctness here — that's determined by scripts.js
+    // Instead read DOM after results appear
+  });
+
   var _quizCheck = setInterval(function() {
     var r = document.getElementById('quiz-results');
     if (r && r.classList.contains('show')) {
-      var btn = document.getElementById('quiz-continue-btn');
-      if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; }
       clearInterval(_quizCheck);
+
+      // Extract score from results DOM
+      var scoreNum   = r.querySelector('.quiz-results-score');
+      var scoreLabel = r.querySelector('.quiz-results-label');
+      var scoreText  = scoreNum ? scoreNum.textContent.trim() : '';
+
+      // Parse "X / Y" or "X/Y"
+      var parts = scoreText.replace(/\s/g,'').split('/');
+      var got   = parseInt(parts[0], 10);
+      var total = parseInt(parts[1], 10);
+      var pct   = total ? Math.round((got / total) * 100) : 0;
+      var passed = pct >= 80;
+
+      // Store for learning record
+      window._quizScoreText  = scoreText;
+      window._quizScoreLabel = scoreLabel ? scoreLabel.textContent.trim() : '';
+      window._quizPassed     = passed;
+      window._quizPct        = pct;
+
+      // Capture per-question results from DOM
+      window._quizQuestionData = [];
+      var rows = r.querySelectorAll('.quiz-result-item, .result-row, [class*="result-item"]');
+      rows.forEach(function(row) {
+        var qEl   = row.querySelector('.result-question, .quiz-q-text, p, span');
+        var isOk  = row.classList.contains('correct') || row.querySelector('.correct') !== null;
+        window._quizQuestionData.push({
+          question: qEl ? qEl.textContent.trim() : '',
+          correct: isOk
+        });
+      });
+
+      var btn = document.getElementById('quiz-continue-btn');
+      if (passed) {
+        if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer'; }
+      } else {
+        // Show fail message — need to retry
+        if (btn) {
+          btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed';
+        }
+        var failMsg = document.getElementById('quiz-fail-msg');
+        if (!failMsg) {
+          failMsg = document.createElement('div');
+          failMsg.id = 'quiz-fail-msg';
+          failMsg.style.cssText = 'margin-top:16px;padding:14px 18px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);border-left:4px solid #ef4444;border-radius:8px;font-size:.88rem;color:#fca5a5;line-height:1.65;';
+          failMsg.innerHTML = '<strong>Score: ' + pct + '%</strong> — a score of 80% or above is required to continue. Please review the questions and try again.';
+          var quizWrap = document.querySelector('.quiz-wrap');
+          if (quizWrap) quizWrap.appendChild(failMsg);
+        }
+      }
     }
   }, 300);
 
@@ -1196,38 +1324,86 @@
     var expReflect = document.getElementById('export-reflection');
     if (expReflect) expReflect.textContent = (reflectEl && reflectEl.value.trim()) ? reflectEl.value.trim() : 'No response recorded.';
 
-    // Sort result (page 3)
+    // ── Sort result (page 3) — structured Myths / Facts ──────
     var expSort = document.getElementById('export-sort');
-    if (expSort) expSort.textContent = window._sortResult || 'Activity not yet completed.';
-
-    // Vignettes (page 7)
-    var expVig = document.getElementById('export-vignettes');
-    if (expVig) {
-      var vigLabels = { v1:'Margaret', v2:'David', v3:'Priya' };
-      var lines = [];
-      var anyAnswered = false;
-      ['v1','v2','v3'].forEach(function(id) {
-        var el = document.getElementById(id + '-rationale');
-        if (el && el.classList.contains('show')) {
-          anyAnswered = true;
-          var correct = el.classList.contains('correct');
-          var snippet = el.textContent.substring(0, 90).trim();
-          lines.push((correct ? '✓ ' : '✗ ') + vigLabels[id] + ': ' + snippet + '…');
-        }
-      });
-      expVig.textContent = anyAnswered ? lines.join('\n') : 'Activity not yet completed.';
+    if (expSort) {
+      if (window._sortResult && window._sortPlacements) {
+        var myths = [], facts = [];
+        Object.keys(statementsData).forEach(function(id) {
+          var placed = window._sortPlacements[id];
+          if (placed === 'myth') myths.push('• ' + statementsData[id].text);
+          if (placed === 'fact') facts.push('• ' + statementsData[id].text);
+        });
+        var sortLines = [window._sortResult + '\n'];
+        if (myths.length) { sortLines.push('Myths:'); myths.forEach(function(m){ sortLines.push(m); }); sortLines.push(''); }
+        if (facts.length) { sortLines.push('Facts:'); facts.forEach(function(f){ sortLines.push(f); }); }
+        expSort.textContent = sortLines.join('\n');
+      } else {
+        expSort.textContent = 'Activity not yet completed.';
+      }
     }
 
-    // Quiz (page 8)
-    var quizEl = document.getElementById('export-quiz');
-    if (quizEl) {
-      var results = document.getElementById('quiz-results');
-      if (results && results.classList.contains('show')) {
-        var scoreNum   = results.querySelector('.quiz-results-score');
-        var scoreLabel = results.querySelector('.quiz-results-label');
-        quizEl.textContent = (scoreNum ? scoreNum.textContent : '—') + (scoreLabel ? ' — ' + scoreLabel.textContent : '');
+    // ── Vignettes (page 7) — structured per patient ──────────
+    var expVig = document.getElementById('export-vignettes');
+    if (expVig) {
+      var vigMeta = {
+        v1: { name:'Margaret, 81', context:'Advanced heart failure, no further surgical options' },
+        v2: { name:'David, 58',    context:'Post hip replacement, hypertension — otherwise fit' },
+        v3: { name:'Priya, 67',    context:'Rapidly progressing Motor Neurone Disease' }
+      };
+      var anyAnswered = vignetteAnswered.v1 || vignetteAnswered.v2 || vignetteAnswered.v3;
+      if (anyAnswered) {
+        var lines = [];
+        ['v1','v2','v3'].forEach(function(id) {
+          var ans = vignetteAnswered[id];
+          var meta = vigMeta[id];
+          if (ans) {
+            var icon   = ans.correct ? '✓' : '✗';
+            var answer = ans.chosen === 'yes' ? 'Yes — meets the definition' : 'No — does not meet the definition';
+            lines.push(icon + ' ' + meta.name + ' (' + meta.context + ')');
+            lines.push('   Your answer: ' + answer);
+            lines.push('   Result: ' + (ans.correct ? 'Correct' : 'Incorrect'));
+            lines.push('');
+          } else {
+            lines.push('— ' + meta.name + ': not answered');
+            lines.push('');
+          }
+        });
+        expVig.textContent = lines.join('\n').trim();
       } else {
-        quizEl.textContent = 'Quiz not yet completed.';
+        expVig.textContent = 'Activity not yet completed.';
+      }
+    }
+
+    // ── Quiz (page 8) — score + per-question breakdown ───────
+    var expQuiz = document.getElementById('export-quiz');
+    if (expQuiz) {
+      var results = document.getElementById('quiz-results');
+      if (results && results.classList.contains('show') && window._quizScoreText) {
+        var qLines = [];
+        qLines.push('Score: ' + window._quizScoreText + ' (' + window._quizPct + '%) — ' + (window._quizPassed ? 'PASSED ✓' : 'DID NOT PASS — 80% required'));
+        if (window._quizScoreLabel) qLines.push(window._quizScoreLabel);
+        qLines.push('');
+        // Per-question breakdown (if captured from DOM)
+        if (window._quizQuestionData && window._quizQuestionData.length) {
+          qLines.push('Question results:');
+          window._quizQuestionData.forEach(function(q, i) {
+            if (q.question) qLines.push((q.correct ? '✓' : '✗') + ' Q' + (i+1) + ': ' + q.question);
+          });
+        } else {
+          // Fallback — parse visible quiz result items
+          var items = results.querySelectorAll('li, .result-row, p');
+          if (items.length) {
+            qLines.push('Question results:');
+            items.forEach(function(item, i) {
+              var t = item.textContent.trim();
+              if (t) qLines.push((i+1) + '. ' + t);
+            });
+          }
+        }
+        expQuiz.textContent = qLines.join('\n');
+      } else {
+        expQuiz.textContent = 'Quiz not yet completed.';
       }
     }
   }
