@@ -946,7 +946,122 @@
         <p>Printed: <strong>Confidential — Clinical Use Only</strong></p>
         <p>St Barnabas Hospice &nbsp;·&nbsp; <strong>Not for distribution</strong></p>
       </div>
-    </div><!-- /clipboard -->
+    </div>
+    <!-- ── AKPS Mini-Scorer ───────────────────────────── -->
+<div class="akps-scorer" role="region" aria-label="AKPS Mini-Scorer for Bob Evans">
+
+  <div class="akps-scorer-header">
+    <div class="akps-scorer-eyebrow">Interactive Tool</div>
+    <div class="akps-scorer-title">Apply the AKPS to Bob</div>
+    <p class="akps-scorer-desc">Using what you know about Bob, select the statement that best describes his current functional status.</p>
+  </div>
+
+  <div class="akps-options" role="radiogroup" aria-label="AKPS performance scale options">
+
+    <label class="akps-option" data-score="100">
+      <input type="radio" name="akps" value="100" aria-label="AKPS 100 — Normal, no complaints">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">100</span>
+        <span class="akps-option-text">Normal activity, no evidence of disease, no complaints</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="90">
+      <input type="radio" name="akps" value="90" aria-label="AKPS 90 — Normal activity, minor symptoms">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">90</span>
+        <span class="akps-option-text">Normal activity with effort, some symptoms of disease</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="80">
+      <input type="radio" name="akps" value="80" aria-label="AKPS 80 — Normal activity with effort">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">80</span>
+        <span class="akps-option-text">Normal activity with effort, some signs or symptoms of disease</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="70">
+      <input type="radio" name="akps" value="70" aria-label="AKPS 70 — Cares for self, unable to work">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">70</span>
+        <span class="akps-option-text">Cares for self; unable to carry on normal activity or active work</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="60">
+      <input type="radio" name="akps" value="60" aria-label="AKPS 60 — Requires occasional assistance">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">60</span>
+        <span class="akps-option-text">Requires occasional assistance but is able to care for most personal needs</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="50">
+      <input type="radio" name="akps" value="50" aria-label="AKPS 50 — Requires considerable assistance">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">50</span>
+        <span class="akps-option-text">Requires considerable assistance and frequent medical care</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="40">
+      <input type="radio" name="akps" value="40" aria-label="AKPS 40 — Disabled, requires special care">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">40</span>
+        <span class="akps-option-text">Disabled; requires special care and assistance</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="30">
+      <input type="radio" name="akps" value="30" aria-label="AKPS 30 — Severely disabled, hospitalisation indicated">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">30</span>
+        <span class="akps-option-text">Severely disabled; hospitalisation indicated, death not imminent</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="20">
+      <input type="radio" name="akps" value="20" aria-label="AKPS 20 — Very sick, active supportive care needed">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">20</span>
+        <span class="akps-option-text">Very sick; hospitalisation necessary, active supportive treatment necessary</span>
+      </div>
+    </label>
+
+    <label class="akps-option" data-score="10">
+      <input type="radio" name="akps" value="10" aria-label="AKPS 10 — Moribund, fatal processes progressing rapidly">
+      <div class="akps-option-inner">
+        <span class="akps-score-badge">10</span>
+        <span class="akps-option-text">Moribund; fatal processes progressing rapidly</span>
+      </div>
+    </label>
+
+  </div>
+
+  <button class="akps-submit-btn" id="akps-submit-btn" onclick="scoreAKPS()" disabled aria-label="Submit AKPS score">
+    Score Bob →
+  </button>
+
+  <!-- Result panel — hidden until submitted -->
+  <div class="akps-result" id="akps-result" aria-live="polite" hidden>
+    <div class="akps-result-inner">
+      <div class="akps-result-top">
+        <div>
+          <div class="akps-result-label">Bob's AKPS Score</div>
+          <div class="akps-result-score" id="akps-result-score">—</div>
+        </div>
+        <div class="akps-result-indicator" id="akps-result-indicator"></div>
+      </div>
+      <div class="akps-result-interpretation" id="akps-result-interpretation"></div>
+      <div class="akps-result-clinical" id="akps-result-clinical"></div>
+      <button class="akps-reset-btn" onclick="resetAKPS()" aria-label="Try a different AKPS score">Try a different score</button>
+    </div>
+  </div>
+
+</div>
+    <!-- /clipboard -->
 
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
     <button class="btn btn-secondary" style="color:var(--navy); border-color:rgba(34,65,126,.3);" onclick="goToPage(7)">← Back</button>
@@ -972,27 +1087,85 @@
       
       <div class="scenario-context">
         <div class="scenario-context-label" aria-hidden="true">📍 Setting the Scene</div>
-        <p>You are visiting Bob for a planned follow-up. He answers the door himself and walks slowly to his chair. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely.</p>
+        <p style="color:#fff; >You are visiting Bob for a planned follow-up. He answers the door himself and walks slowly to his chair. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely.</p>
         
         <p>While talking, you notice a <strong style="color:#fff;">yellowish tinge around his eyes</strong>. You ask Bob how he has been.</p>
         
-        <p><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
+        <p style="color:#fff; ><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
         
         <hr style="margin:20px 0; border:0; border-top:1px solid rgba(255,255,255,.1);">
         
         <div class="scenario-context-label" aria-hidden="true">💡 Learning Focus</div>
-        <p>This stage is about **recognising hidden deterioration**. People often minimise symptoms. "I'm fine" does not always mean nothing is wrong.</p>
+        <p style="color:#fff; >This stage is about **recognising hidden deterioration**. People often minimise symptoms. "I'm fine" does not always mean nothing is wrong.</p>
       </div>
     </div>
 
     <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Response options">
       
-      <p class="choices-hint">
+      <p class="choices-hint" style="color:#fff;>
         <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
         Bob is not volunteering concerns, but your observations suggest otherwise. Complete the activities below.
       </p>
 
       <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:14px;">
+       <!-- ══ AKPS SLIDER ══ -->
+<div class="akps-slider-block">
+
+  <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
+  <div class="akps-block-title">Score Bob on the AKPS</div>
+  <p class="akps-block-desc">Based on what you've observed in the video and the scene above — not what Bob says — where would you place him on the Australia-modified Karnofsky Performance Scale?</p>
+
+  <div class="akps-score-display">
+    <div class="akps-score-number" id="akps-num">70</div>
+    <div class="akps-score-label-wrap">
+      <div class="akps-score-label" id="akps-label">Limited self-care</div>
+      <div class="akps-score-sublabel" id="akps-sublabel">Cares for self; unable to carry on normal activity or active work</div>
+    </div>
+  </div>
+
+  <div class="akps-slider-wrap">
+    <div class="akps-track-labels">
+      <span class="akps-track-label">Most dependent ←</span>
+      <span class="akps-track-label">→ Fully active</span>
+    </div>
+    <input type="range" class="akps-range" id="akps-slider"
+           min="1" max="10" value="7" step="1"
+           aria-label="AKPS score slider"
+           oninput="updateAKPSSlider(this.value)">
+    <div class="akps-colour-bar"></div>
+    <div class="akps-tick-row">
+      <span class="akps-tick">10</span>
+      <span class="akps-tick">20</span>
+      <span class="akps-tick">30</span>
+      <span class="akps-tick">40</span>
+      <span class="akps-tick">50</span>
+      <span class="akps-tick">60</span>
+      <span class="akps-tick">70</span>
+      <span class="akps-tick">80</span>
+      <span class="akps-tick">90</span>
+      <span class="akps-tick">100</span>
+    </div>
+  </div>
+
+  <div class="akps-interpretation amber" id="akps-interp">
+    <div class="akps-interp-title">
+      <span id="akps-interp-icon">⚠️</span>
+      <span id="akps-interp-title-text">Functional decline present</span>
+    </div>
+    <div class="akps-interp-body" id="akps-interp-body">
+      At AKPS 70, Bob is managing self-care but unable to work or sustain normal activity. His score is <strong>inconsistent with saying he is "fine"</strong> — this is a clinically significant gap that warrants probing.
+    </div>
+  </div>
+
+  <button class="akps-confirm-btn" id="akps-confirm-btn" onclick="confirmAKPSScore()">
+    ✓ Confirm this score &amp; save to Learning Record
+  </button>
+  <div class="akps-confirmed-note" id="akps-confirmed-note">
+    ✓ Score saved — you can still adjust and re-confirm before finishing
+  </div>
+
+</div>
+<!-- /AKPS SLIDER ══ -->
         <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity 1 — Observations</div>
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating despite saying he is "fine"?</div>
@@ -1070,24 +1243,51 @@
     </div>
   </div>
 
-  <script>
-    // Unlock "Visit Bob Again" button when all MCQ questions answered
-    (function() {
-      var CHECK_INTERVAL = setInterval(function() {
-        var results = document.getElementById('mcq-results');
-        if (results && results.classList.contains('show')) {
-          var btn = document.getElementById('mcq-continue-btn');
-          if (btn) {
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-            btn.setAttribute('aria-label', 'Continue to visit Bob again');
+ <script>
+  (function() {
+    var CHECK_INTERVAL = setInterval(function() {
+      var results = document.getElementById('mcq-results');
+      if (results && results.classList.contains('show')) {
+        clearInterval(CHECK_INTERVAL);
+
+        // Parse score — handles "4 / 5" or "4/5" format
+        var scoreEl = results.querySelector('.quiz-results-score');
+        var passed = false;
+        if (scoreEl) {
+          var parts = scoreEl.textContent.split('/');
+          if (parts.length === 2) {
+            var correct = parseInt(parts[0]);
+            var total   = parseInt(parts[1]);
+            if (!isNaN(correct) && !isNaN(total) && total > 0) {
+              passed = (correct / total) >= 0.8;
+            }
           }
-          clearInterval(CHECK_INTERVAL);
         }
-      }, 300);
-    })();
-  </script>
+
+        var btn = document.getElementById('mcq-continue-btn');
+        if (!btn) return;
+
+        if (passed) {
+          btn.disabled = false;
+          btn.style.opacity  = '1';
+          btn.style.cursor   = 'pointer';
+          btn.setAttribute('aria-label', 'Continue to visit Bob again');
+        } else {
+          // Show retake message — button stays locked
+          var existing = document.getElementById('mcq-fail-msg');
+          if (!existing) {
+            var msg = document.createElement('p');
+            msg.id = 'mcq-fail-msg';
+            msg.setAttribute('role', 'alert');
+            msg.style.cssText = 'text-align:center; color:#fca5a5; font-size:.87rem; margin-top:14px; line-height:1.6;';
+            msg.innerHTML = '⚠️ You need <strong>80% or above</strong> to continue. Review the module and try again.';
+            btn.parentNode.insertBefore(msg, btn.nextSibling);
+          }
+        }
+      }
+    }, 300);
+  })();
+</script>
 </section>
 
 
@@ -1312,68 +1512,127 @@
 
 <script>
   // Populate the learning record when page 12 is reached
-  function populateLearningRecord() {
+ function populateLearningRecord() {
 
-    // Date
-    var d = new Date();
-    var el = document.getElementById('export-date');
-    if (el) el.textContent = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  // Date
+  var d = new Date();
+  var el = document.getElementById('export-date');
+  if (el) el.textContent = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
 
-    // Bob visit questions (page 9 branching textarea — id may vary; update if needed)
-    var bobQ = document.getElementById('bob-visit-notes');
-    var exportBobQ = document.getElementById('export-bob-questions');
-    if (exportBobQ) exportBobQ.textContent = (bobQ && bobQ.value.trim()) ? bobQ.value.trim() : 'No response recorded.';
+  // Page 9 — Activity 1
+  var b3q1 = document.getElementById('bob3-q1-input');
+  var expB3q1 = document.getElementById('export-bob3-q1');
+  if (expB3q1) expB3q1.textContent = (b3q1 && b3q1.value.trim()) ? b3q1.value.trim() : 'No response recorded.';
 
-    // MCQ score
-    var mcqEl = document.getElementById('export-mcq-score');
-    if (mcqEl) {
-      var scoreDiv = document.getElementById('mcq-results');
-      if (scoreDiv && scoreDiv.classList.contains('show')) {
-        var scoreNum = scoreDiv.querySelector('.quiz-results-score');
-        var scoreLabel = scoreDiv.querySelector('.quiz-results-label');
-        mcqEl.textContent = (scoreNum ? scoreNum.textContent : '—') + ' — ' + (scoreLabel ? scoreLabel.textContent : '');
-      } else {
-        mcqEl.textContent = 'Assessment not yet completed.';
+  // Page 9 — Activity 2
+  var b3q2 = document.getElementById('bob3-q2-input');
+  var expB3q2 = document.getElementById('export-bob3-q2');
+  if (expB3q2) expB3q2.textContent = (b3q2 && b3q2.value.trim()) ? b3q2.value.trim() : 'No response recorded.';
+
+  // Page 10 — MCQ score
+  var mcqEl   = document.getElementById('export-mcq-score');
+  var mcqAns  = document.getElementById('export-mcq-answers');
+  var scoreDiv = document.getElementById('mcq-results');
+
+  if (mcqEl) {
+    if (scoreDiv && scoreDiv.classList.contains('show')) {
+      var scoreNum   = scoreDiv.querySelector('.quiz-results-score');
+      var scoreLabel = scoreDiv.querySelector('.quiz-results-label');
+      var rawScore   = (scoreNum ? scoreNum.textContent.trim() : '—');
+      var parts      = rawScore.split('/');
+      var passed     = false;
+      if (parts.length === 2) {
+        var c = parseInt(parts[0]), t = parseInt(parts[1]);
+        if (!isNaN(c) && !isNaN(t) && t > 0) passed = (c / t) >= 0.8;
       }
+      var pct = (parts.length === 2 && !isNaN(parseInt(parts[0])) && !isNaN(parseInt(parts[1])))
+        ? Math.round((parseInt(parts[0]) / parseInt(parts[1])) * 100) + '%'
+        : '';
+      mcqEl.innerHTML =
+        '<strong style="color:var(--navy);">Score: ' + rawScore + (pct ? ' (' + pct + ')' : '') + '</strong>' +
+        '&nbsp;&nbsp;' +
+        '<span style="font-weight:700; color:' + (passed ? '#059669' : '#dc2626') + ';">' +
+        (passed ? '✓ Pass' : '✗ Did not meet 80% pass mark') +
+        '</span>' +
+        (scoreLabel ? '<br><span style="color:#5a6a82;">' + scoreLabel.textContent.trim() + '</span>' : '');
+    } else {
+      mcqEl.textContent = 'Assessment not yet completed.';
     }
-
-    // Activity 1
-    var q1 = document.getElementById('bob4-q1-input');
-    var exp1 = document.getElementById('export-bob4-q1');
-    if (exp1) exp1.textContent = (q1 && q1.value.trim()) ? q1.value.trim() : 'No response recorded.';
-
-    // Activity 2
-    var q2 = document.getElementById('bob4-q2-input');
-    var exp2 = document.getElementById('export-bob4-q2');
-    if (exp2) exp2.textContent = (q2 && q2.value.trim()) ? q2.value.trim() : 'No response recorded.';
   }
 
-  function exportLearningRecord() {
-    // Copy extra notes into display before printing
-    var extra = document.getElementById('export-extra-notes');
-    var extraVal = extra ? extra.value.trim() : '';
-    if (extra) {
-      // Replace textarea with a div for print
-      var printDiv = document.createElement('div');
-      printDiv.id = 'export-extra-print';
-      printDiv.style.cssText = 'background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:60px; white-space:pre-wrap; display:none;';
-      printDiv.textContent = extraVal || 'No additional reflections recorded.';
-      extra.parentNode.insertBefore(printDiv, extra);
+  // Page 10 — MCQ individual answers
+  if (mcqAns) {
+    mcqAns.innerHTML = '';
+    var cards = document.querySelectorAll('.quiz-question-card');
+    if (cards.length === 0) {
+      mcqAns.innerHTML = '<p style="font-size:.85rem; color:#5a6a82;">No MCQ questions found.</p>';
+    } else {
+      cards.forEach(function(card, i) {
+        var qText    = card.querySelector('.quiz-q-text');
+        var feedback = card.querySelector('.quiz-feedback');
+        var correct  = feedback && feedback.classList.contains('correct');
+        var badge    = feedback ? feedback.querySelector('.quiz-feedback-badge') : null;
+        var feedText = feedback ? feedback.querySelector('p') : null;
+
+        var item = document.createElement('div');
+        item.style.cssText = 'background:#f8fafc; border:1px solid #e2eaf4; border-left:4px solid ' +
+          (correct ? '#059669' : '#dc2626') +
+          '; border-radius:0 8px 8px 0; padding:12px 14px; font-size:.85rem; line-height:1.65;';
+        item.innerHTML =
+          '<div style="font-weight:700; color:var(--navy); margin-bottom:4px;">Q' + (i + 1) + ': ' +
+          (qText ? qText.textContent.trim() : '(Question text unavailable)') + '</div>' +
+          '<div style="color:' + (correct ? '#059669' : '#dc2626') + '; font-weight:600; margin-bottom:4px;">' +
+          (badge ? badge.textContent.trim() : (correct ? '✓ Correct' : '✗ Incorrect')) + '</div>' +
+          (feedText ? '<div style="color:#5a6a82;">' + feedText.textContent.trim() + '</div>' : '');
+        mcqAns.appendChild(item);
+      });
     }
-    window.print();
-    // Clean up
-    var printDiv2 = document.getElementById('export-extra-print');
-    if (printDiv2) printDiv2.remove();
   }
 
-  // Hook into goToPage to populate when page 12 is shown
-  var _origGoToPage = goToPage;
-  goToPage = function(num) {
-    _origGoToPage(num);
-    if (num === 12) { populateLearningRecord(); }
-  };
+  // Page 11 — Activity 1
+  var q1 = document.getElementById('bob4-q1-input');
+  var exp1 = document.getElementById('export-bob4-q1');
+  if (exp1) exp1.textContent = (q1 && q1.value.trim()) ? q1.value.trim() : 'No response recorded.';
+
+  // Page 11 — Activity 2
+  var q2 = document.getElementById('bob4-q2-input');
+  var exp2 = document.getElementById('export-bob4-q2');
+  if (exp2) exp2.textContent = (q2 && q2.value.trim()) ? q2.value.trim() : 'No response recorded.';
+}
 </script>
+<!-- ══ COMPLETION OVERLAY ════════════════════════════════════════ -->
+<div id="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete"
+     style="display:none; position:fixed; inset:0; background:rgba(10,20,48,.92); z-index:9999; align-items:center; justify-content:center;">
+  <style>#finish-overlay.show { display:flex !important; }</style>
+  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466); border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:48px 40px; max-width:480px; width:90%; text-align:center; box-shadow:0 32px 80px rgba(0,0,0,.5);">
+    <div style="font-size:3rem; margin-bottom:16px;" aria-hidden="true">🎓</div>
+    <div style="font-size:.68rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Module Complete</div>
+    <h2 style="font-family:'Merriweather',serif; font-size:1.6rem; color:#fff; margin-bottom:12px;">Well done!</h2>
+    <p id="finish-overlay-msg" style="font-size:.9rem; color:rgba(255,255,255,.7); line-height:1.75; margin-bottom:28px;">
+      Your progress has been recorded. Export your Learning Record below, or close this window.
+    </p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn btn-secondary"
+              onclick="goToPage(12); document.getElementById('finish-overlay').classList.remove('show');"
+              style="font-size:.85rem;">📄 View My Record</button>
+      <button class="btn btn-secondary"
+              onclick="goToPage(1); document.getElementById('finish-overlay').classList.remove('show');"
+              style="font-size:.85rem;">↩ Review from Start</button>
+      <button onclick="closeOrRedirect()"
+              style="padding:10px 22px; background:var(--yellow); color:var(--navy); border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.85rem; font-weight:700; cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
 
+<script>
+  function closeOrRedirect() {
+    // If opened in LMS iframe, try to close; otherwise go to page 1
+    try { window.close(); } catch(e) {}
+    setTimeout(function() { goToPage(1); }, 300);
+  }
+</script>
 </main>
 
 <footer role="contentinfo">
