@@ -990,7 +990,7 @@
 
     <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Response options">
       
-      <p class="choices-hint" style="color:#fff;>
+      <p class="choices-hint" style="color:#fff";>
         <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
         Bob is not volunteering concerns, but your observations suggest otherwise. Complete the activities below.
       </p>
@@ -1076,10 +1076,21 @@
       </div>
 
 
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-        <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
-        <button class="btn btn-primary" onclick="goToPage(10)">Case Study Assessment →</button>
-      </div>
+<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+  <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+  <div>
+    <button class="btn btn-primary" id="page9-continue-btn"
+            disabled
+            style="opacity:.4; cursor:not-allowed;"
+            onclick="goToPage(10)">
+      Case Study Assessment →
+    </button>
+    <p id="page9-gate-nudge"
+       style="font-size:.76rem; color:rgba(253,202,15,.8); text-align:right; margin-top:6px; margin-bottom:0;">
+      Complete the AKPS and both activities to continue
+    </p>
+  </div>
+</div>
 
     </div>
   </div>
@@ -1304,6 +1315,14 @@
         </div>
       </div>
 
+            <!-- AKPS score -->
+<div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
+  <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:4px;">Page 9 — Bob's Visit · AKPS</div>
+  <div style="font-family:'Merriweather',serif; font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:12px;">Your AKPS score for Bob</div>
+  <div id="export-akps-score"
+       style="background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:40px;"></div>
+</div>
+
       <!-- Bob visit — questions asked -->
       <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
         <div style="font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:4px;">Page 9 — Bob's Visit</div>
@@ -1311,6 +1330,7 @@
         <div id="export-bob-questions"
              style="background:#f8fafc; border:1px solid #e2eaf4; border-radius:8px; padding:14px 16px; font-size:.88rem; color:#4a5a72; line-height:1.75; min-height:60px; white-space:pre-wrap;"></div>
       </div>
+
 
       <!-- MCQ result -->
       <div style="background:#fff; border:1px solid #d0daea; border-radius:12px; padding:20px 24px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04);">
