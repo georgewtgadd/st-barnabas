@@ -785,51 +785,6 @@ input[type="range"].akps-range:focus-visible { outline: 3px solid var(--yellow);
 }
 .akps-confirmed-note.show { display: block; }
 
-/* ══════════════════════════════════════════════════════
-   PAGE 9 — Gate: requires AKPS confirmed + both activities
-══════════════════════════════════════════════════════ */
-(function () {
-
-  function checkPage9Gate() {
-    var akpsOk = window.akpsConfirmedScore !== null;
-    var q1Ok   = (document.getElementById('bob3-q1-input') || {}).value && document.getElementById('bob3-q1-input').value.trim().length > 0;
-    var q2Ok   = (document.getElementById('bob3-q2-input') || {}).value && document.getElementById('bob3-q2-input').value.trim().length > 0;
-
-    var btn   = document.getElementById('page9-continue-btn');
-    var nudge = document.getElementById('page9-gate-nudge');
-    if (!btn) return;
-
-    if (akpsOk && q1Ok && q2Ok) {
-      btn.disabled       = false;
-      btn.style.opacity  = '1';
-      btn.style.cursor   = 'pointer';
-      if (nudge) nudge.style.display = 'none';
-    } else {
-      btn.disabled       = true;
-      btn.style.opacity  = '.4';
-      btn.style.cursor   = 'not-allowed';
-      if (nudge) nudge.style.display = 'block';
-    }
-  }
-
-  // Run on every relevant change
-  window.addEventListener('DOMContentLoaded', function () {
-    var q1 = document.getElementById('bob3-q1-input');
-    var q2 = document.getElementById('bob3-q2-input');
-    if (q1) q1.addEventListener('input', checkPage9Gate);
-    if (q2) q2.addEventListener('input', checkPage9Gate);
-    checkPage9Gate();
-  });
-
-  // Hook into confirmAKPSScore so the gate re-checks after confirming
-  var _origConfirm = window.confirmAKPSScore;
-  window.confirmAKPSScore = function () {
-    if (_origConfirm) _origConfirm();
-    checkPage9Gate();
-  };
-
-})();
-
 /* ── SHARED BUTTONS ─────────────────────────────────── */
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
