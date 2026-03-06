@@ -1044,9 +1044,10 @@
     </div>
   </div>
 
-  <button class="akps-confirm-btn" id="akps-confirm-btn" onclick="confirmAKPSScore()">
-    ✓ Confirm this score &amp; save to Learning Record
-  </button>
+<button class="akps-confirm-btn" id="akps-confirm-btn"
+        onclick="confirmAKPSScore(); if(window.checkPage9Gate) checkPage9Gate();">
+  ✓ Confirm this score &amp; save to Learning Record
+</button>
   <div class="akps-confirmed-note" id="akps-confirmed-note">
     ✓ Score saved — you can still adjust and re-confirm before finishing
   </div>
