@@ -560,6 +560,28 @@ function flipCard(card) {
 
 })();
 
+// Page 9 — gate (AKPS confirmed + both activities typed)
+  window.checkPage9Gate = function () {
+    var akpsOk = window.akpsConfirmedScore !== null;
+    var q1     = document.getElementById('bob3-q1-input');
+    var q2     = document.getElementById('bob3-q2-input');
+    var q1Ok   = q1 && q1.value.trim().length > 0;
+    var q2Ok   = q2 && q2.value.trim().length > 0;
+    var btn    = document.getElementById('page9-continue-btn');
+    var nudge  = document.getElementById('page9-gate-nudge');
+    if (!btn) { return; }
+    var pass = akpsOk && q1Ok && q2Ok;
+    btn.disabled      = !pass;
+    btn.style.opacity = pass ? '1' : '.4';
+    btn.style.cursor  = pass ? 'pointer' : 'not-allowed';
+    if (nudge) { nudge.style.display = pass ? 'none' : 'block'; }
+  };
+
+  var _q1 = document.getElementById('bob3-q1-input');
+  var _q2 = document.getElementById('bob3-q2-input');
+  if (_q1) { _q1.addEventListener('input', window.checkPage9Gate); }
+  if (_q2) { _q2.addEventListener('input', window.checkPage9Gate); }
+  window.checkPage9Gate();
 /* ══════════════════════════════════════════════════════════
    SECTION 9 — MODULE COMPLETION
 ══════════════════════════════════════════════════════════ */
