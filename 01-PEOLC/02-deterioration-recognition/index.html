@@ -798,8 +798,8 @@
 
     </div>
 
-  <div class="definition-not" role="note" style="background:rgba(253,202,15,.07);border:1px solid rgba(253,202,15,.2);">
-      <div class="definition-not-title" style="color:var(--yellow);">
+  <div class="definition-not" role="note" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);margin-top:24px;">
+      <div class="definition-not-title" style="color:rgba(255,255,255,.9);">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> 
         Source: NHS Funded Training — Advance Care Planning
       </div>
@@ -943,12 +943,8 @@
         </div>
 
       </div><div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
-        <button class="btn btn-secondary" onclick="goToPage(7)" aria-label="Back">
-          <span aria-hidden="true">←</span> Back
-        </button>
-        <button class="btn btn-primary" onclick="goToPage(9)" aria-label="Begin the first visit scenario">
-          Begin the First Visit <span aria-hidden="true">→</span>
-        </button>
+        <button class="btn btn-secondary" onclick="goToPage(7)" aria-label="Back" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
+        <button class="btn btn-primary" onclick="goToPage(9)" aria-label="Begin the first visit scenario" style="background:var(--navy);color:var(--white);border-color:var(--navy);">Begin the First Visit →</button>
       </div>
 
     </div>
@@ -1057,13 +1053,13 @@
                   oninput="saveActivity9(); checkPage9Gate();"
                   aria-label="Your observations and questions for Bob"></textarea>
         <div style="display:flex; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap;">
-          <button class="cab-reveal-btn" onclick="toggleReveal('bob3-q1-answer')">
+          <button class="cab-reveal-btn" onclick="openAnswerModal('bob3-q1')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             Reveal suggested answer
           </button>
           <span id="bob3-q1-saved-note" style="font-size:.75rem; color:#6ee7b7; display:none;" aria-live="polite">✓ Response saved</span>
         </div>
-        <div class="cab-answer" id="bob3-q1-answer">
+        <div class="cab-answer" id="bob3-q1-answer" style="display:none;">
           <div class="cab-answer-inner">
             <div class="cab-answer-title">Key observations &amp; questions to explore</div>
             <ul>
@@ -1121,14 +1117,14 @@
     <div id="quiz-questions-container"></div>
     <div class="quiz-results" id="quiz-results" role="region" aria-label="Quiz results" aria-live="polite"></div>
   </div>
-  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-top:36px; margin-bottom:48px; flex-wrap:wrap; gap:16px; padding:0 0 32px;">
-        <button class="btn btn-secondary" onclick="goToPage(9)" aria-label="Back">
-          <span aria-hidden="true">←</span> Back
-        </button>
-        <button class="btn btn-primary" id="page10-continue-btn" disabled style="opacity:.4;cursor:not-allowed;" onclick="goToPage(11)" aria-label="Visit Bob Again — requires passing the MCQ">
-          Visit Bob Again <span aria-hidden="true">→</span>
-        </button>
-        <p id="page10-gate-nudge" style="font-size:.76rem;color:rgba(253,202,15,.8);text-align:right;margin-top:6px;margin-bottom:0;">Answer all questions and pass to continue</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; margin-bottom:48px; flex-wrap:wrap; gap:16px; padding:0 48px 32px;">
+        <button class="btn btn-secondary" onclick="goToPage(9)" aria-label="Back">← Back</button>
+        <div style="text-align:right;">
+          <button class="btn btn-primary" id="page10-continue-btn" disabled style="opacity:.4;cursor:not-allowed;" onclick="goToPage(11)" aria-label="Visit Bob Again">
+            Visit Bob Again →
+          </button>
+          <p id="page10-gate-nudge" style="font-size:.76rem;color:rgba(253,202,15,.8);text-align:right;margin-top:6px;margin-bottom:0;">Pass the MCQ to continue</p>
+        </div>
       </div>
 </section>
 
@@ -1174,11 +1170,11 @@
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply to Bob at this point?</div>
         <textarea class="cab-textarea" id="bob4-q1-input" placeholder="List the signs you can identify from the scenario…" rows="4" aria-label="Your answer about signs of deterioration in Bob"></textarea>
-        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q1-answer')">
+        <button class="cab-reveal-btn" onclick="openAnswerModal('bob4-q1')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Reveal suggested answer
         </button>
-        <div class="cab-answer" id="bob4-q1-answer">
+        <div class="cab-answer" id="bob4-q1-answer" style="display:none;">
           <div class="cab-answer-inner">
             <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
             <ul>
@@ -1199,11 +1195,11 @@
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">What do you need to do now? Think about medications, communication, the Five Priorities, Bob's son, and his dog.</div>
         <textarea class="cab-textarea" id="bob4-q2-input" placeholder="Think about: medications, communication, the son, the dog, the Five Priorities of Care…" rows="4" aria-label="Your care plan for Bob"></textarea>
-        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q2-answer')">
+        <button class="cab-reveal-btn" onclick="openAnswerModal('bob4-q2')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Reveal suggested answer
         </button>
-        <div class="cab-answer" id="bob4-q2-answer">
+        <div class="cab-answer" id="bob4-q2-answer" style="display:none;">
           <div class="cab-answer-inner">
             <div class="cab-answer-title">What needs to happen now — a suggested framework</div>
             <ul>
@@ -1241,52 +1237,55 @@
     </div>
 
     <div id="learning-record-body">
-      <!-- Populated by populateLearningRecord() -->
-    </div>
 
-    <!-- MCQ Score card -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 10 · Case Study Assessment</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">MCQ Result</div>
-      <div id="export-mcq-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
-    </div>
+      <!-- 1. AKPS Score -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · AKPS Assessment</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Your AKPS Score for Bob</div>
+        <div id="export-akps-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
+      </div>
 
-    <!-- AKPS Score card -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · AKPS</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Your AKPS Score for Bob</div>
-      <div id="export-akps-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
-    </div>
+      <!-- 2. Bob Visit reflection -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · Reflective Activity</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Observations &amp; Questions</div>
+        <p style="font-size:.8rem;color:#8a9ab5;margin-bottom:10px;font-style:italic;">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating?</p>
+        <div id="export-bob3-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+      </div>
 
-    <!-- Bob Visit reflection -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · Activity</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Observations &amp; Questions</div>
-      <div id="export-bob3-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
-    </div>
+      <!-- 3. MCQ Result -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 10 · Case Study Assessment</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">MCQ Result</div>
+        <div id="export-mcq-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
+      </div>
 
-    <!-- Bob Active Dying — Activity 1 -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 1</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Recognising Deterioration</div>
-      <div id="export-bob4-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
-    </div>
+      <!-- 4. Active Dying Act 1 -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 1</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Recognising Deterioration</div>
+        <p style="font-size:.8rem;color:#8a9ab5;margin-bottom:10px;font-style:italic;">What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply?</p>
+        <div id="export-bob4-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+      </div>
 
-    <!-- Bob Active Dying — Activity 2 -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 2</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Planning Care</div>
-      <div id="export-bob4-q2" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
-    </div>
+      <!-- 5. Active Dying Act 2 -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 2</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:4px;">Planning Care</div>
+        <p style="font-size:.8rem;color:#8a9ab5;margin-bottom:10px;font-style:italic;">What do you need to do now? Think about medications, communication, the Five Priorities, Bob's son, and his dog.</p>
+        <div id="export-bob4-q2" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+      </div>
 
-    <!-- Extra notes -->
-    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:32px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Additional Notes</div>
-      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Any further reflections?</div>
-      <textarea id="export-extra-notes"
-                placeholder="Add any additional notes or reflections for your CPD record…"
-                rows="4"
-                style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1.5px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;background:#f8fafc;"></textarea>
+      <!-- 6. Extra notes -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:32px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Additional Notes</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Any further reflections?</div>
+        <textarea id="export-extra-notes"
+                  placeholder="Add any additional notes or reflections for your CPD record…"
+                  rows="4"
+                  style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1.5px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;background:#f8fafc;"></textarea>
+      </div>
+
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
@@ -1311,6 +1310,41 @@
   </div>
 </footer>
 
+
+<!-- ══ ANSWER MODAL ════════════════════════════════════════ -->
+<div id="answer-modal" role="dialog" aria-modal="true" aria-label="Suggested answer"
+     style="display:none;position:fixed;inset:0;background:rgba(10,20,48,.88);z-index:9000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:32px 28px 28px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.5);position:relative;">
+    <button onclick="closeAnswerModal()"
+            aria-label="Close"
+            style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:rgba(255,255,255,.7);font-size:1.1rem;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">✕</button>
+    <div style="font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Suggested Answer</div>
+    <div id="answer-modal-content"></div>
+  </div>
+</div>
+
+<!-- ══ COMPLETION OVERLAY ════════════════════════════════════════ -->
+<div id="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete"
+     style="display:none;position:fixed;inset:0;background:rgba(10,20,48,.92);z-index:9999;align-items:center;justify-content:center;">
+  <style>#finish-overlay.show { display:flex !important; }</style>
+  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:48px 40px;max-width:480px;width:90%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+    <div style="font-size:3rem;margin-bottom:16px;" aria-hidden="true">🎓</div>
+    <div style="font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Module Complete</div>
+    <h2 style="font-family:'Merriweather',serif;font-size:1.6rem;color:#fff;margin-bottom:12px;">Well done!</h2>
+    <p id="finish-overlay-msg" style="font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:28px;">
+      Your responses have been saved to your Learning Record below.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-secondary"
+              onclick="document.getElementById('finish-overlay').classList.remove('show'); goToPage(1);"
+              style="font-size:.85rem;">↩ Review from Start</button>
+      <button onclick="document.getElementById('finish-overlay').classList.remove('show'); goToPage(12);"
+              style="padding:10px 22px;background:var(--yellow);color:var(--navy);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;">
+        View Learning Record →
+      </button>
+    </div>
+  </div>
+</div>
 <script src="js/scripts.js"></script>
 </body>
 </html>
