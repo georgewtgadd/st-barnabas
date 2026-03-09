@@ -57,6 +57,8 @@
   <button class="nav-step" id="nav-10" onclick="navClick(10)" disabled aria-label="Step 10: MCQ"><div class="nav-step-num">10</div><span class="nav-step-label">MCQ</span></button>
   <div class="nav-divider"></div>
   <button class="nav-step" id="nav-11" onclick="navClick(11)" disabled aria-label="Step 11: Active Dying"><div class="nav-step-num">11</div><span class="nav-step-label">Bob 3</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-12" onclick="navClick(12)" disabled aria-label="Step 12: Learning Record"><div class="nav-step-num">12</div><span class="nav-step-label">Record</span></button>
 </nav>
 
 <div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress">
@@ -796,27 +798,27 @@
 
     </div>
 
-  <div class="definition-not" role="note">
-      <div class="definition-not-title">
+  <div class="definition-not" role="note" style="background:rgba(253,202,15,.07);border:1px solid rgba(253,202,15,.2);">
+      <div class="definition-not-title" style="color:var(--yellow);">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> 
         Source: NHS Funded Training — Advance Care Planning
       </div>
       <div class="definition-not-grid">
-        <div class="not-item">
-          <span class="not-item-icon">✓</span>
-          <span>These priorities apply in <strong>every setting</strong> — hospital, hospice, care home, and home</span>
+        <div class="not-item" style="color:rgba(255,255,255,.85);">
+          <span class="not-item-icon" style="background:rgba(253,202,15,.2);color:var(--yellow);">✓</span>
+          <span>These priorities apply in <strong style="color:#fff;">every setting</strong> — hospital, hospice, care home, and home</span>
         </div>
-        <div class="not-item">
-          <span class="not-item-icon">✓</span>
-          <span>They apply to <strong>all members of the MDT</strong>, not just medical staff</span>
+        <div class="not-item" style="color:rgba(255,255,255,.85);">
+          <span class="not-item-icon" style="background:rgba(253,202,15,.2);color:var(--yellow);">✓</span>
+          <span>They apply to <strong style="color:#fff;">all members of the MDT</strong>, not just medical staff</span>
         </div>
-        <div class="not-item">
-          <span class="not-item-icon">✓</span>
+        <div class="not-item" style="color:rgba(255,255,255,.85);">
+          <span class="not-item-icon" style="background:rgba(253,202,15,.2);color:var(--yellow);">✓</span>
           <span>Failure to meet any priority can cause lasting harm to patients and families</span>
         </div>
-        <div class="not-item">
-          <span class="not-item-icon">✓</span>
-          <span>Full guidance: <strong><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener">www.nhft.nhs.uk/acp/</a></strong></span>
+        <div class="not-item" style="color:rgba(255,255,255,.85);">
+          <span class="not-item-icon" style="background:rgba(253,202,15,.2);color:var(--yellow);">✓</span>
+          <span>Full guidance: <strong style="color:#fff;"><a href="https://www.nhft.nhs.uk/acp/" target="_blank" rel="noopener" style="color:var(--yellow);">www.nhft.nhs.uk/acp/</a></strong></span>
         </div>
       </div>
     </div>
@@ -832,7 +834,7 @@
 <!-- ════════════════════════════════════════════
      PAGE 8 — BOB EVANS CASE STUDY: MEET BOB (Medical)
 ═════════════════════════════════════════════ -->
-<section class="page" id="page-8" aria-label="Bob's clinical profile">
+<section class="page" id="page-8" aria-label="Bob's clinical profile" style="background:#f0f4f9;">
     <div class="clipboard-wrap">
 
       <div class="clipboard-title-area">
@@ -985,6 +987,12 @@
         </ul>
       </div>
 
+    </div>
+    <!-- /scenario-left -->
+
+    <!-- RIGHT: activity + nav — everything inside choices-panel -->
+    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Reflective activity">
+
       <!-- AKPS SLIDER -->
       <div class="akps-slider-block">
         <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
@@ -1032,11 +1040,6 @@
       </div>
       <!-- /AKPS SLIDER -->
 
-    </div>
-    <!-- /scenario-left -->
-
-    <!-- RIGHT: activity + nav — everything inside choices-panel -->
-    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Reflective activity">
 
       <p class="choices-hint">
         <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
@@ -1118,13 +1121,14 @@
     <div id="quiz-questions-container"></div>
     <div class="quiz-results" id="quiz-results" role="region" aria-label="Quiz results" aria-live="polite"></div>
   </div>
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; flex-wrap:wrap; gap:16px;">
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-top:36px; margin-bottom:48px; flex-wrap:wrap; gap:16px; padding:0 0 32px;">
         <button class="btn btn-secondary" onclick="goToPage(9)" aria-label="Back">
           <span aria-hidden="true">←</span> Back
         </button>
-        <button class="btn btn-primary" onclick="goToPage(11)" aria-label="Begin the first visit scenario">
+        <button class="btn btn-primary" id="page10-continue-btn" disabled style="opacity:.4;cursor:not-allowed;" onclick="goToPage(11)" aria-label="Visit Bob Again — requires passing the MCQ">
           Visit Bob Again <span aria-hidden="true">→</span>
         </button>
+        <p id="page10-gate-nudge" style="font-size:.76rem;color:rgba(253,202,15,.8);text-align:right;margin-top:6px;margin-bottom:0;">Answer all questions and pass to continue</p>
       </div>
 </section>
 
@@ -1220,6 +1224,76 @@
 <button class="btn btn-primary" onclick="finish()">Finish →</button>      </div>
 
     </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     PAGE 12 — LEARNING RECORD
+═════════════════════════════════════════════ -->
+<section class="page" id="page-12" aria-label="Your learning record" style="background:#f0f4f9;">
+  <div style="max-width:820px; margin:0 auto; padding:40px 24px 64px;">
+
+    <div style="margin-bottom:28px;">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">Module Complete</div>
+      <h2 style="font-family:'Merriweather',serif;font-size:1.6rem;font-weight:700;color:var(--navy);margin-bottom:8px;">Your Learning Record</h2>
+      <p style="font-size:.92rem;color:#5a6a82;line-height:1.7;">A summary of your responses and assessment results from this module. You can print or save this page for your CPD records.</p>
+    </div>
+
+    <div id="learning-record-body">
+      <!-- Populated by populateLearningRecord() -->
+    </div>
+
+    <!-- MCQ Score card -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 10 · Case Study Assessment</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">MCQ Result</div>
+      <div id="export-mcq-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
+    </div>
+
+    <!-- AKPS Score card -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · AKPS</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Your AKPS Score for Bob</div>
+      <div id="export-akps-score" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed</div>
+    </div>
+
+    <!-- Bob Visit reflection -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 · Bob's Visit · Activity</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Observations &amp; Questions</div>
+      <div id="export-bob3-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+    </div>
+
+    <!-- Bob Active Dying — Activity 1 -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 1</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Recognising Deterioration</div>
+      <div id="export-bob4-q1" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+    </div>
+
+    <!-- Bob Active Dying — Activity 2 -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 11 · Active Dying · Activity 2</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Planning Care</div>
+      <div id="export-bob4-q2" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:60px;white-space:pre-wrap;"></div>
+    </div>
+
+    <!-- Extra notes -->
+    <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:32px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+      <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Additional Notes</div>
+      <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Any further reflections?</div>
+      <textarea id="export-extra-notes"
+                placeholder="Add any additional notes or reflections for your CPD record…"
+                rows="4"
+                style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1.5px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;background:#f8fafc;"></textarea>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(11)" style="color:var(--navy);border-color:rgba(34,65,126,.3);">← Back</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨 Print / Save PDF</button>
+    </div>
+
   </div>
 </section>
 </main>
