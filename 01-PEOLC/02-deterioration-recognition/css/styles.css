@@ -1,1019 +1,1121 @@
 /* ══════════════════════════════════════════════════════════
    ST BARNABAS HOSPICE — What is End of Life Palliative Care?
-   js/scripts.js  ·  SCORM 1.2 Edition for EQUAL Online
-   ──────────────────────────────────────────────────────────
-   SCORM 1.2 data model elements used:
-     cmi.core.lesson_status   → "passed" | "failed" | "incomplete" | "not attempted"
-     cmi.core.score.raw       → 0–100  (quiz percentage)
-     cmi.core.score.min       → 0
-     cmi.core.score.max       → 100
-     cmi.core.session_time    → HH:MM:SS
-     cmi.core.lesson_location → current page number (bookmark)
-     cmi.suspend_data         → JSON string bookmark
+   css/styles.css
+   WCAG 2.2 AA verified colour pairings:
+     white on #22417e  = 7.2:1 AAA ✅
+     white on #182f5c  = 9.1:1 AAA ✅
+     #22417e on #fdca0f = 9.1:1 AAA ✅
+     #22417e on #ffffff = 7.2:1 AAA ✅
 ══════════════════════════════════════════════════════════ */
 
-
-/* ══════════════════════════════════════════════════════════
-   SECTION 1 — SCORM 1.2 API WRAPPER
-   Finds the LMS-injected API object and exposes safe helpers
-   for Initialize, SetValue, GetValue, Commit and Finish.
-══════════════════════════════════════════════════════════ */
-
-var SCORM = (function () {
-
-  'use strict';
-
-  var _api          = null;
-  var _initialized  = false;
-  var _finished     = false;
-  var _sessionStart = Date.now();
-
-  /* ── Find the API object injected by the LMS ─────────── */
-  // SCORM 1.2 spec: walk up to 7 parent frames looking for
-  // a window that exposes an object called "API".
-  function _findAPI(win) {
-    var attempts = 0;
-    while (win.API == null && win.parent != null && win.parent !== win) {
-      attempts++;
-      if (attempts > 7) { return null; }
-      win = win.parent;
-    }
-    return win.API || null;
-  }
-
-  function _getAPI() {
-    var api = _findAPI(window);
-    if (api == null && window.opener != null && window.opener !== window) {
-      api = _findAPI(window.opener);
-    }
-    return api;
-  }
-
-  /* ── Initialize ─────────────────────────────────────── */
-  function initialize() {
-    if (_initialized || _finished) { return false; }
-    _api = _getAPI();
-    if (_api == null) {
-      // No LMS present — running as a standalone file. Fail silently.
-      console.info('[SCORM] No LMS API found — running in standalone mode.');
-      return false;
-    }
-    var result = _api.LMSInitialize('');
-    if (result === 'true' || result === true) {
-      _initialized  = true;
-      _sessionStart = Date.now();
-      // Tell the LMS the learner has started
-      setValue('cmi.core.lesson_status', 'incomplete');
-      setValue('cmi.core.score.min',     '0');
-      setValue('cmi.core.score.max',     '100');
-      commit();
-      return true;
-    }
-    console.warn('[SCORM] LMSInitialize failed. Error:', _api.LMSGetLastError());
-    return false;
-  }
-
-  /* ── SetValue ────────────────────────────────────────── */
-  function setValue(element, value) {
-    if (!_initialized || _finished || _api == null) { return false; }
-    var result = _api.LMSSetValue(element, String(value));
-    if (result !== 'true' && result !== true) {
-      console.warn('[SCORM] LMSSetValue failed for', element, '—', _api.LMSGetLastError());
-      return false;
-    }
-    return true;
-  }
-
-  /* ── GetValue ────────────────────────────────────────── */
-  function getValue(element) {
-    if (!_initialized || _finished || _api == null) { return ''; }
-    return _api.LMSGetValue(element);
-  }
-
-  /* ── Commit (flush buffered data to the LMS) ─────────── */
-  function commit() {
-    if (!_initialized || _finished || _api == null) { return false; }
-    var result = _api.LMSCommit('');
-    if (result !== 'true' && result !== true) {
-      console.warn('[SCORM] LMSCommit failed:', _api.LMSGetLastError());
-      return false;
-    }
-    return true;
-  }
-
-  /* ── Format elapsed ms as HH:MM:SS ──────────────────── */
-  function _formatTime(ms) {
-    var total = Math.floor(ms / 1000);
-    var h     = Math.floor(total / 3600);
-    var m     = Math.floor((total % 3600) / 60);
-    var s     = total % 60;
-    return (h < 10 ? '0' : '') + h + ':' +
-           (m < 10 ? '0' : '') + m + ':' +
-           (s < 10 ? '0' : '') + s;
-  }
-
-  /* ── Finish ──────────────────────────────────────────── */
-  // status : 'passed' | 'failed' | 'incomplete'  (or null to leave unchanged)
-  // score  : number 0–100  (or null to skip score reporting)
-  // Guards against double-calling — safe to call from both
-  // showResults() and the beforeunload handler.
-  function finish(status, score) {
-    if (_finished || !_initialized || _api == null) { return false; }
-
-    setValue('cmi.core.session_time', _formatTime(Date.now() - _sessionStart));
-
-    if (status !== null && status !== undefined) {
-      setValue('cmi.core.lesson_status', status);
-    }
-    if (score !== null && score !== undefined) {
-      setValue('cmi.core.score.raw', String(Math.round(score)));
-    }
-
-    commit();
-
-    var result = _api.LMSFinish('');
-    _finished  = true;
-
-    if (result !== 'true' && result !== true) {
-      console.warn('[SCORM] LMSFinish failed:', _api.LMSGetLastError());
-      return false;
-    }
-    return true;
-  }
-
-  /* ── Bookmark helpers ────────────────────────────────── */
-  function saveBookmark(pageNum) {
-    setValue('cmi.core.lesson_location', String(pageNum));
-    setValue('cmi.suspend_data', JSON.stringify({ page: pageNum }));
-    commit();
-  }
-
-  function getBookmark() {
-    try {
-      var raw = getValue('cmi.suspend_data');
-      if (raw) {
-        var data = JSON.parse(raw);
-        return data.page || 1;
-      }
-    } catch (e) { /* ignore JSON parse errors */ }
-    var loc = parseInt(getValue('cmi.core.lesson_location'), 10);
-    return isNaN(loc) ? 1 : loc;
-  }
-
-  /* ── Public surface ──────────────────────────────────── */
-  return {
-    initialize:    initialize,
-    setValue:      setValue,
-    getValue:      getValue,
-    commit:        commit,
-    finish:        finish,
-    saveBookmark:  saveBookmark,
-    getBookmark:   getBookmark,
-    isInitialized: function () { return _initialized; }
-  };
-
-}());
-
-
-/* ══════════════════════════════════════════════════════════
-   SECTION 2 — PAGE NAVIGATION
-══════════════════════════════════════════════════════════ */
-
-var visited     = new Set([1]);
-var TOTAL_PAGES = 12;
-
-function updateProgressBar(num) {
-  var pct   = Math.round(((num - 1) / (TOTAL_PAGES - 1)) * 100);
-  var fill  = document.getElementById('progress-fill');
-  var label = document.getElementById('progress-label');
-  if (fill)  { fill.style.width = pct + '%'; }
-  if (label) {
-    label.textContent = pct + '% complete';
-    var bar = label.closest('.module-progress-bar');
-    if (bar) { bar.setAttribute('aria-valuenow', pct); }
-  }
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --navy:        #22417e;
+  --navy-dark:   #182f5c;
+  --navy-light:  #2d5299;
+  --brand-header:#2b529f;
+  --blue:        #0197de;
+  --blue-dark:   #0178b0;
+  --yellow:      #fdca0f;
+  --yellow-dark: #d4a800;
+  --teal:        #0d9488;
+  --teal-light:  #5eead4;
+  --white:       #ffffff;
+  --text-muted:  #c5d3e8;
+  --surface:     rgba(255,255,255,0.06);
+  --border:      rgba(255,255,255,0.12);
 }
 
-function goToPage(num) {
-  visited.add(num);
+/* ── RESET ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-  document.querySelectorAll('.page').forEach(function (p) {
-    p.classList.remove('active');
-  });
-
-  var page = document.getElementById('page-' + num);
-  if (page) { page.classList.add('active'); }
-
-  for (var i = 1; i <= TOTAL_PAGES; i++) {
-    var step = document.getElementById('nav-' + i);
-    if (!step) { continue; }
-    step.classList.remove('current', 'done');
-    step.removeAttribute('aria-current');
-    if (i === num) {
-      step.classList.add('current');
-      step.setAttribute('aria-current', 'step');
-      step.disabled = false;
-    } else if (visited.has(i)) {
-      step.classList.add('done');
-      step.disabled = false;
-    } else {
-      step.disabled = true;
-    }
-  }
-
-  updateProgressBar(num);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Move focus to heading for screen readers
-  var heading = page && page.querySelector('h1, h2');
-  if (heading) {
-    heading.setAttribute('tabindex', '-1');
-    heading.focus();
-  }
-
-  // SCORM: save bookmark and keep status as incomplete
-  SCORM.saveBookmark(num);
-  if (SCORM.isInitialized()) {
-    var current = SCORM.getValue('cmi.core.lesson_status');
-    if (current !== 'passed' && current !== 'failed') {
-      SCORM.setValue('cmi.core.lesson_status', 'incomplete');
-      SCORM.commit();
-    }
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy-dark);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-function navClick(num) {
-  if (visited.has(num)) { goToPage(num); }
+/* ── SKIP LINK (WCAG 2.4.1) ─────────────────────────── */
+.skip-link {
+  position: absolute; top: -100px; left: 16px;
+  background: var(--yellow); color: var(--navy);
+  padding: 10px 18px; border-radius: 4px;
+  font-weight: 700; font-size: 0.9rem; z-index: 9999;
+  transition: top 0.2s; text-decoration: none;
+}
+.skip-link:focus { top: 16px; outline: 3px solid var(--navy); }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-
-/* ══════════════════════════════════════════════════════════
-   SECTION 3 — REFLECTIVE ACTIVITY
-══════════════════════════════════════════════════════════ */
-
-var savedReflection = '';
-
-function saveReflection() {
-  var textarea = document.getElementById('reflect-input');
-  if (!textarea) { return; }
-  savedReflection = textarea.value.trim();
-  var banner = document.getElementById('reflect-saved-banner');
-  if (banner) { banner.classList.add('show'); }
+/* ── HEADER ─────────────────────────────────────────── */
+header {
+  background: var(--brand-header);
+  border-bottom: 4px solid var(--yellow);
+  padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
-function downloadReflection() {
-  var textarea = document.getElementById('reflect-input');
-  var text     = textarea ? textarea.value.trim() : '';
-  if (!text) {
-    alert('Please type your reflection before downloading.');
-    return;
-  }
-  var lines = [
-    'St Barnabas Hospice \u2014 E-Learning Platform',
-    'Module: What is End of Life Palliative Care?',
-    'Activity: Reflective Activity \u2014 Terminology & Its Impact',
-    '',
-    'Question:',
-    'What challenges can arise from using the terms "palliative care" and "end of life care"?',
-    'What impact might this have on patients, families, and professionals?',
-    '',
-    'My Response:',
-    text,
-    '',
-    'Saved: ' + new Date().toLocaleString('en-GB'),
-  ];
-  var blob = new Blob([lines.join('\n')], { type: 'text/plain' });
-  var url  = URL.createObjectURL(blob);
-  var a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'palliative-care-reflection.txt';
-  a.click();
-  URL.revokeObjectURL(url);
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: inherit;
+}
+.brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+
+.brand-logo {
+  width: 120px; height: 52px;
+  background: transparent; border-radius: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 
-function openModelAnswerModal() {
-  var modal = document.getElementById('model-answer-modal');
-  if (!modal) { return; }
-
-  var panel    = document.getElementById('user-answer-panel');
-  var textEl   = document.getElementById('user-answer-text');
-  var live     = document.getElementById('reflect-input');
-  var display  = savedReflection || (live ? live.value.trim() : '');
-
-  if (panel && textEl) {
-    if (display) {
-      textEl.textContent  = display;
-      panel.style.display = 'block';
-    } else {
-      panel.style.display = 'none';
-    }
-  }
-
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  var closeBtn = modal.querySelector('.modal-close');
-  if (closeBtn) { closeBtn.focus(); }
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-name {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 0.01em;
+}
+.brand-tagline {
+  font-size: 0.7rem; color: var(--yellow);
+  font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
 }
 
-function closeModelAnswerModal() {
-  var modal = document.getElementById('model-answer-modal');
-  if (modal) { modal.classList.remove('open'); }
-  document.body.style.overflow = '';
+.module-label {
+  font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase; text-align: right; line-height: 1.4;
+}
+.module-label strong {
+  display: block; color: var(--white);
+  font-size: 0.85rem; letter-spacing: 0.02em;
 }
 
+/* ── PROGRESS NAV ───────────────────────────────────── */
+.progress-nav {
+  background: var(--navy); border-bottom: 1px solid var(--border);
+  padding: 0 32px; display: flex; align-items: center;
+  min-height: 52px; flex-wrap: nowrap; overflow-x: auto;
+  scrollbar-width: none;
+}
+.progress-nav::-webkit-scrollbar { display: none; }
 
-/* ══════════════════════════════════════════════════════════
-   SECTION 4 — PHASES & LAYERS INTERACTIVE MODEL
-   Based on Wong et al (2024)
-══════════════════════════════════════════════════════════ */
+.nav-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; height: 52px; cursor: default;
+  border: none; border-bottom: 3px solid transparent;
+  background: transparent; color: inherit; font-family: inherit;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: border-color 0.3s, background 0.2s;
+}
+.nav-step.done            { border-color: var(--blue); cursor: pointer; }
+.nav-step.done:hover      { background: rgba(1,151,222,0.1); }
+.nav-step.done:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+.nav-step.current         { border-color: var(--yellow); cursor: default; }
+.nav-step:disabled        { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
-var PHASES_REQUIRED = 4;
-var phasesExplored  = new Set();
+.nav-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.4);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.nav-step.done    .nav-step-num { background: var(--blue);   border-color: var(--blue);   color: var(--white); }
+.nav-step.current .nav-step-num { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
 
-var phaseData = {
-  phase: {
-    1: {
-      icon: '\uD83D\uDFE2', tag: 'Phase 1', name: 'Stable',
-      stripe: '#0197de', iconBg: 'rgba(1,151,222,0.14)', tagColor: '#7dd3fc',
-      definition: 'The person has a life-limiting illness but their symptoms are adequately controlled and their condition is not actively changing. Care during this phase focuses on maintaining quality of life, monitoring, and early advance care planning.',
-      listLabel: 'Clinical characteristics',
-      items: [
-        'Illness present and acknowledged',
-        'Symptoms managed \u2014 person can engage in daily life',
-        'Palliative care can begin here, well before end of life',
-        'Good opportunity to introduce advance care planning',
-        'Regular review and monitoring in primary care or community setting'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    2: {
-      icon: '\uD83D\uDFE1', tag: 'Phase 2', name: 'Unstable',
-      stripe: '#0d9488', iconBg: 'rgba(13,148,136,0.14)', tagColor: '#5eead4',
-      definition: 'An acute change or deterioration has occurred that was not expected as part of the usual illness trajectory. This may require urgent assessment and often a change in the care plan. The person may recover to a stable state, deteriorate further, or die.',
-      listLabel: 'Clinical characteristics',
-      items: [
-        'Unexpected acute deterioration or new clinical problem',
-        'Requires urgent assessment \u2014 often results in care plan change',
-        'Person and family may need additional emotional support',
-        'Review of goals of care and treatment decisions is important',
-        'Person may stabilise, deteriorate, or die \u2014 uncertainty is high'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    3: {
-      icon: '\uD83D\uDFE0', tag: 'Phase 3', name: 'Deteriorating',
-      stripe: '#fdca0f', iconBg: 'rgba(253,202,15,0.12)', tagColor: '#fdca0f',
-      definition: 'The person\'s condition is worsening gradually over weeks or months as a result of their life-limiting illness. Advance care planning should be well established, and the focus shifts more towards comfort and quality of life.',
-      listLabel: 'Clinical characteristics',
-      items: [
-        'Progressive functional decline over weeks or months',
-        'Expected as part of illness trajectory \u2014 not a sudden change',
-        'Increasing symptom burden requiring proactive management',
-        'Advance care planning should be complete or underway',
-        'Key time to discuss preferred place of death and ReSPECT'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    4: {
-      icon: '\uD83D\uDD34', tag: 'Phase 4', name: 'Terminal',
-      stripe: '#ef4444', iconBg: 'rgba(220,38,38,0.14)', tagColor: '#fca5a5',
-      definition: 'The person is in the last hours or days of life. Death is expected imminently. The focus is entirely on comfort, dignity, and supporting the person and their loved ones through this final stage.',
-      listLabel: 'Clinical characteristics',
-      items: [
-        'Death expected within hours or days',
-        'Emphasis on comfort, dignity, and symptom control',
-        'Anticipatory medicines should be in place',
-        'Family and carers need clear information and support',
-        'Preferred place of death should be honoured where possible'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    5: {
-      icon: '\uD83D\uDC9C', tag: 'Phase 5', name: 'Bereavement',
-      stripe: '#7c6ef5', iconBg: 'rgba(124,110,245,0.14)', tagColor: '#c4b5fd',
-      definition: 'Bereavement care begins at the time of death and continues for as long as families and carers need support. Grief is a normal response to loss, but some individuals experience complicated grief that requires specialist intervention.',
-      listLabel: 'Key considerations',
-      items: [
-        'Care and support for family and carers after death',
-        'Grief is individual \u2014 responses vary greatly',
-        'Anticipatory grief may have begun long before death',
-        'Consider referral to bereavement services where appropriate',
-        'Children in the family require specific, age-appropriate support'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    }
-  },
-  layer: {
-    1: {
-      icon: '\uD83E\uDE7A', tag: 'Layer', name: 'Physical Care',
-      stripe: '#0197de', iconBg: 'rgba(1,151,222,0.14)', tagColor: '#7dd3fc',
-      definition: 'Physical care encompasses all aspects of symptom management, comfort, and clinical care. It includes pain management, breathlessness, nausea, fatigue, and other physical symptoms. The goal is not cure but the best possible quality of life.',
-      listLabel: 'Examples of physical care',
-      items: [
-        'Pain assessment and management (pharmacological and non-pharmacological)',
-        'Breathlessness management including oxygen and positioning',
-        'Nausea, vomiting, and appetite support',
-        'Wound care, pressure area prevention, and comfort positioning',
-        'Anticipatory prescribing for common end of life symptoms'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    2: {
-      icon: '\uD83D\uDD4A\uFE0F', tag: 'Layer', name: 'Psychological & Emotional',
-      stripe: '#7c6ef5', iconBg: 'rgba(124,110,245,0.14)', tagColor: '#c4b5fd',
-      definition: 'This layer recognises that living with a life-limiting illness profoundly affects mental and emotional wellbeing. Fear, grief, loss of identity, anxiety, and depression are common. Support may range from active listening to specialist psychological services.',
-      listLabel: 'Key psychological dimensions',
-      items: [
-        'Anticipatory grief \u2014 grief before the loss occurs',
-        'Anxiety about dying, pain, and being a burden',
-        'Adjustment to changing roles and loss of independence',
-        'Depression \u2014 often underdiagnosed in palliative patients',
-        'Specialist counselling or psychological support where needed'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    3: {
-      icon: '\uD83E\uDD1D', tag: 'Layer', name: 'Social & Practical',
-      stripe: '#2ecc8e', iconBg: 'rgba(46,204,142,0.12)', tagColor: '#6ee7b7',
-      definition: 'Serious illness affects not just the individual but everyone around them. This layer addresses family and carer wellbeing, social connection, financial hardship, and practical day-to-day needs.',
-      listLabel: 'Social and practical considerations',
-      items: [
-        'Carer support \u2014 recognising and preventing carer burnout',
-        'Financial hardship \u2014 benefits, CHC, and welfare advice',
-        'Home adaptations, equipment, and care packages',
-        'Risk of social isolation and loneliness',
-        'Safeguarding considerations for vulnerable individuals'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    4: {
-      icon: '\u2728', tag: 'Layer', name: 'Spiritual & Cultural',
-      stripe: '#fdca0f', iconBg: 'rgba(253,202,15,0.1)', tagColor: '#fde68a',
-      definition: 'Spiritual wellbeing relates to meaning, purpose, peace, and identity in the face of death. Cultural beliefs shape how people understand illness, dying, and death. Sensitive attention to these dimensions is central to person-centred palliative care.',
-      listLabel: 'Key dimensions',
-      items: [
-        'Religious practices, rituals, and faith community support',
-        'Cultural beliefs about death, dying, and the afterlife',
-        'Meaning-making and life review',
-        'Spiritual distress \u2014 existential suffering, fear, or despair',
-        'Chaplaincy and spiritual care services'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    5: {
-      icon: '\uD83D\uDCAC', tag: 'Layer', name: 'Communication & ACP',
-      stripe: '#0d9488', iconBg: 'rgba(13,148,136,0.14)', tagColor: '#5eead4',
-      definition: 'Clear, compassionate communication is the thread that runs through all of palliative care. Advance Care Planning allows people to express their wishes, values, and preferences for future care.',
-      listLabel: 'Key communication elements',
-      items: [
-        'Honest, sensitive conversations about prognosis and goals of care',
-        'Advance Care Planning \u2014 recording wishes, values, and preferences',
-        'ReSPECT conversations and documentation',
-        'DNACPR discussions and decision-making',
-        'Lasting Power of Attorney (Health & Welfare)'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    },
-    6: {
-      icon: '\uD83D\uDD17', tag: 'Layer', name: 'Coordination & MDT',
-      stripe: '#ef4444', iconBg: 'rgba(220,38,38,0.12)', tagColor: '#fca5a5',
-      definition: 'Effective palliative care depends on seamless coordination across a multidisciplinary team and across care settings. Poor coordination leads to fragmented care, avoidable hospital admissions, and unmet needs.',
-      listLabel: 'Coordination in practice',
-      items: [
-        'MDT working \u2014 GP, specialist nurse, social worker, chaplain, OT, physio',
-        'Shared care records and handover between settings',
-        'Named keyworker or care coordinator for the person and family',
-        'Avoiding avoidable hospital admissions through proactive planning',
-        'Hospice, community, hospital, and care home integration'
-      ],
-      source: 'Wong et al (2024) Phases and Layers of Palliative Care Framework'
-    }
-  }
-};
+.nav-step-label {
+  font-size: 0.74rem; font-weight: 500; color: rgba(255,255,255,0.35); transition: color 0.3s;
+}
+.nav-step.done    .nav-step-label { color: var(--text-muted); }
+.nav-step.current .nav-step-label { color: var(--white); font-weight: 600; }
 
-function openPhaseDetail(type, id) {
-  var key  = type + '-' + id;
-  var data = phaseData[type] && phaseData[type][id];
-  if (!data) { return; }
+.nav-divider { width: 20px; height: 1px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
-  phasesExplored.add(key);
-
-  document.querySelectorAll('.phase-btn, .layer-btn').forEach(function (b) {
-    b.classList.remove('active');
-  });
-  var btn = document.getElementById((type === 'phase' ? 'pb-' : 'lb-') + id);
-  if (btn) { btn.classList.add('active'); }
-
-  var stripe = document.getElementById('phm-stripe');
-  if (stripe) { stripe.style.background = data.stripe; }
-
-  var iconEl = document.getElementById('phm-icon');
-  if (iconEl) { iconEl.style.background = data.iconBg; iconEl.textContent = data.icon; }
-
-  var tagEl = document.getElementById('phm-tag');
-  if (tagEl) { tagEl.style.color = data.tagColor; tagEl.textContent = data.tag; }
-
-  var titleEl = document.getElementById('phm-title');
-  if (titleEl) { titleEl.textContent = data.name; }
-
-  var defEl = document.getElementById('phm-definition');
-  if (defEl) { defEl.textContent = data.definition; }
-
-  var listLabelEl = document.getElementById('phm-list-label');
-  if (listLabelEl) { listLabelEl.textContent = data.listLabel; }
-
-  var listEl = document.getElementById('phm-list');
-  if (listEl) {
-    listEl.innerHTML = '<ul class="phase-detail-list">' +
-      data.items.map(function (item) {
-        return '<li><div class="phase-detail-dot" style="background:' + data.stripe + ';"></div><span>' + item + '</span></li>';
-      }).join('') +
-    '</ul>';
-  }
-
-  var sourceEl = document.getElementById('phm-source');
-  if (sourceEl) { sourceEl.textContent = data.source; }
-
-  var remaining = PHASES_REQUIRED - phasesExplored.size;
-  var hintEl    = document.getElementById('phm-hint');
-  if (hintEl) {
-    hintEl.textContent = phasesExplored.size < PHASES_REQUIRED
-      ? 'Explore ' + remaining + ' more item' + (remaining !== 1 ? 's' : '') + ' to unlock Continue.'
-      : 'All required items explored \u2014 you may now continue.';
-  }
-
-  var modal = document.getElementById('phase-modal');
-  if (modal) {
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    var closeBtn = modal.querySelector('.modal-close');
-    if (closeBtn) { closeBtn.focus(); }
-  }
+/* ── PAGE TRANSITIONS ───────────────────────────────── */
+.page { display: none; min-height: calc(100vh - 164px); animation: pageIn 0.45s ease; }
+.page.active { display: block; }
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-function closePhaseModal() {
-  var modal = document.getElementById('phase-modal');
-  if (modal) { modal.classList.remove('open'); }
-  document.body.style.overflow = '';
-  document.querySelectorAll('.phase-btn, .layer-btn').forEach(function (b) {
-    b.classList.remove('active');
-  });
-  if (phasesExplored.size >= PHASES_REQUIRED) { unlockPhasesContinue(); }
+/* ── PAGE 1 — INTRODUCTION ──────────────────────────── */
+#page-1 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-1.active { display: flex; flex-direction: column; }
+
+.intro-hero {
+  flex: 1; display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 60px; max-width: 1200px; margin: 0 auto;
+  width: 100%; padding: 56px 48px; align-items: center;
 }
 
-function unlockPhasesContinue() {
-  var lockMsg = document.getElementById('phases-locked-msg');
-  if (lockMsg) {
-    lockMsg.innerHTML = '<span aria-hidden="true">\u2705</span><span>Enough items explored \u2014 you may now continue.</span>';
-    lockMsg.style.color = '#6ee7b7';
-  }
-  var btn = document.getElementById('phases-continue-btn');
-  if (btn) {
-    btn.disabled           = false;
-    btn.style.opacity      = '1';
-    btn.style.cursor       = 'pointer';
-    btn.setAttribute('aria-label', 'Continue to GMC and NICE Definitions');
-    btn.focus();
-  }
+.intro-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(253,202,15,0.12); border: 1px solid rgba(253,202,15,0.3);
+  color: var(--yellow); padding: 6px 14px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.intro-eyebrow::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--yellow); animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.intro-heading {
+  font-family: 'Merriweather', serif; font-size: 2.6rem; line-height: 1.25;
+  font-weight: 700; margin-bottom: 20px; color: var(--white);
+}
+.intro-heading em { font-style: italic; color: var(--yellow); }
+
+.intro-desc {
+  font-size: 1rem; color: var(--text-muted); line-height: 1.75;
+  margin-bottom: 32px; max-width: 480px;
 }
 
+.intro-instruction {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(1,151,222,0.12); border: 1px solid rgba(1,151,222,0.3);
+  border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin-bottom: 36px;
+}
+.intro-instruction-icon { font-size: 1.4rem; flex-shrink: 0; }
+.intro-instruction p    { font-size: 0.88rem; color: #c5d3e8; line-height: 1.65; }
+.intro-instruction strong { color: var(--white); }
 
-/* ══════════════════════════════════════════════════════════
-   SECTION 5 — QUIZ
-   Pass mark = 80% (matches adlcp:masteryscore in manifest)
-══════════════════════════════════════════════════════════ */
+.continue-row { display: flex; align-items: center; gap: 16px; }
 
-var PASS_MARK = 80;
+/* Key facts panel */
+.intro-facts-panel {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+}
+.facts-panel-header {
+  background: rgba(255,255,255,0.06); border-bottom: 1px solid var(--border);
+  padding: 16px 22px;
+}
+.facts-panel-eyebrow {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 3px;
+}
+.facts-panel-title { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; }
+.facts-panel-body  { padding: 20px 22px; display: flex; flex-direction: column; }
 
-var quizData = [
-  {
-    question: 'Palliative care is only provided in the last days of life.',
-    answer: false,
-    feedbackCorrect:   '\u2705 Correct. Palliative care can begin at the point of diagnosis with a life-limiting illness and continues throughout the illness trajectory \u2014 it is not limited to the final days or weeks of life.',
-    feedbackIncorrect: '\u274c Incorrect. Palliative care is not limited to the last days of life. It can begin at diagnosis and run alongside curative or life-prolonging treatment.'
-  },
-  {
-    question: 'End of life care may begin when a person is thought to be in the last 12 months of life.',
-    answer: true,
-    feedbackCorrect:   '\u2705 Correct. According to NICE and GMC guidance, a person is \u201capproaching the end of life\u201d when they are likely to die within the next 12 months \u2014 this is the threshold for end of life care.',
-    feedbackIncorrect: '\u274c Incorrect. NICE and GMC guidance defines \u201capproaching the end of life\u201d as when a person is likely to die within the next 12 months \u2014 this is when end of life care may begin.'
-  },
-  {
-    question: 'Using the term \u201cpalliative care\u201d too late can limit access to symptom control and support.',
-    answer: true,
-    feedbackCorrect:   '\u2705 Correct. Delayed use of palliative care terminology can mean patients miss vital symptom control, advance care planning, and psychological support that could have improved their quality of life.',
-    feedbackIncorrect: '\u274c Incorrect. Late or avoided use of palliative care language is linked to delayed referrals, missed opportunities for symptom control, and reduced quality of life for patients and families.'
-  },
-  {
-    question: 'Palliative care means stopping all active treatment.',
-    answer: false,
-    feedbackCorrect:   '\u2705 Correct. Palliative care can be \u2014 and often is \u2014 provided alongside curative or life-prolonging treatment. It focuses on quality of life, not on withholding treatment.',
-    feedbackIncorrect: '\u274c Incorrect. Palliative care does not mean stopping active treatment. It can run alongside chemotherapy, radiotherapy, or other treatments, focusing on comfort and quality of life.'
-  },
-  {
-    question: 'Clear and compassionate language can improve patient understanding and decision-making.',
-    answer: true,
-    feedbackCorrect:   '\u2705 Correct. Person-centred communication that is honest, clear, and compassionate supports patients in making informed decisions about their care and helps reduce fear and uncertainty.',
-    feedbackIncorrect: '\u274c Incorrect. Research and guidance consistently show that clear, compassionate communication improves patient understanding, supports informed decision-making, and reduces distress.'
-  }
-];
+.fact-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; }
+.fact-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.fact-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--yellow); margin-bottom: 4px;
+}
+.fact-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+.fact-divider { height: 1px; background: var(--border); }
 
-var currentQuestion = 0;
-var quizAnswers     = [];
-var quizScore       = null; // set when results are shown; guards beforeunload logic
+/* ── PAGE 2 — LEARNING OUTCOMES ─────────────────────── */
+#page-2 { background: #f0f4f9; display: none; }
+#page-2.active { display: block; }
 
-function renderQuiz() {
-  quizAnswers = quizData.map(function () { return { answered: false, correct: false }; });
-  quizScore   = null;
+.outcomes-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 64px; }
 
-  var dotsContainer = document.getElementById('quiz-dots');
-  if (dotsContainer) {
-    dotsContainer.innerHTML = quizData.map(function (_, i) {
-      return '<div class="quiz-dot" id="qdot-' + i + '" aria-hidden="true"></div>';
-    }).join('');
-  }
+.outcomes-title-area { text-align: center; margin-bottom: 36px; }
+.outcomes-eyebrow {
+  display: inline-block; background: var(--navy); color: var(--yellow);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 14px;
+}
+.outcomes-title-area h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; color: var(--navy); margin-bottom: 8px; }
+.outcomes-title-area p  { color: #5a6a82; font-size: 0.92rem; }
 
-  var container = document.getElementById('quiz-questions-container');
-  if (!container) { return; }
+.outcomes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 36px; }
 
-  container.innerHTML = quizData.map(function (q, i) {
-    return (
-      '<div class="quiz-question-card' + (i === 0 ? ' active' : '') + '" id="qcard-' + i + '">' +
-        '<div class="quiz-q-num">Question ' + (i + 1) + ' of ' + quizData.length + '</div>' +
-        '<p class="quiz-q-text">' + q.question + '</p>' +
-        '<div class="quiz-tf-btns">' +
-          '<button class="quiz-tf-btn" id="qtrue-'  + i + '" onclick="answerQuiz(' + i + ', true)"  aria-label="True">\u2713 True</button>' +
-          '<button class="quiz-tf-btn" id="qfalse-' + i + '" onclick="answerQuiz(' + i + ', false)" aria-label="False">\u2717 False</button>' +
-        '</div>' +
-        '<div class="quiz-feedback" id="qfeedback-' + i + '" role="alert" aria-live="polite"></div>' +
-        '<div class="quiz-nav-row" id="qnav-' + i + '" style="display:none;">' +
-          (i > 0
-            ? '<button class="btn btn-secondary" onclick="showQuestion(' + (i - 1) + ')" style="font-size:0.82rem;padding:10px 18px;">\u2190 Back</button>'
-            : '<span></span>') +
-          (i < quizData.length - 1
-            ? '<button class="btn btn-primary" onclick="showQuestion(' + (i + 1) + ')">Next Question \u2192</button>'
-            : '<button class="btn btn-primary" onclick="showResults()">See Results \u2192</button>') +
-        '</div>' +
-      '</div>'
-    );
-  }).join('');
+.outcome-card {
+  background: var(--white); border-radius: 12px; padding: 20px 22px;
+  border: 1.5px solid #d0daea; box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.outcome-card:hover { box-shadow: 0 6px 20px rgba(34,65,126,0.12); transform: translateY(-2px); }
+
+.outcome-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--navy); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 700; flex-shrink: 0;
+}
+.outcome-verb {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
+}
+.outcome-text { font-size: 0.88rem; color: #2c3e60; line-height: 1.6; }
+
+/* ── PAGE 3 — DEFINITION ────────────────────────────── */
+#page-3 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-3.active { display: block; }
+
+.definition-wrap { max-width: 1100px; margin: 0 auto; padding: 48px 48px 64px; }
+.definition-header { text-align: center; margin-bottom: 40px; }
+.definition-header h2 { font-family: 'Merriweather', serif; font-size: 1.9rem; margin-bottom: 12px; }
+.definition-header p  { font-size: 0.95rem; color: var(--text-muted); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+.definition-lead {
+  background: rgba(1,151,222,0.1); border: 1px solid rgba(1,151,222,0.25);
+  border-left: 5px solid var(--blue); border-radius: 0 12px 12px 0;
+  padding: 22px 28px; margin-bottom: 36px;
+  font-family: 'Merriweather', serif; font-size: 1.05rem; color: var(--white); line-height: 1.75;
+}
+.definition-lead em { color: var(--yellow); font-style: italic; }
+
+.definition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+
+.def-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 24px; display: flex; gap: 16px; align-items: flex-start;
+}
+.def-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.def-card-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: var(--white); }
+.def-card-body  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+.definition-not {
+  background: rgba(13,148,136,0.08); border: 1px solid rgba(13,148,136,0.25);
+  border-radius: 12px; padding: 20px 24px; margin-bottom: 36px;
+}
+.definition-not-title {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #5eead4; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.definition-not-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.not-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;
+}
+.not-item-icon { color: #f87171; flex-shrink: 0; font-style: normal; font-weight: 700; }
+.not-item strong { color: var(--white); }
+
+/* ── PAGE 4 — REFLECTIVE ACTIVITY ───────────────────── */
+#page-4 { background: #f0f4f9; display: none; }
+#page-4.active { display: block; }
+
+.reflect-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 64px; }
+
+.reflect-title-area { text-align: center; margin-bottom: 36px; }
+.reflect-eyebrow {
+  display: inline-block; background: var(--navy); color: var(--yellow);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 14px;
+}
+.reflect-title-area h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; color: var(--navy); margin-bottom: 8px; }
+.reflect-title-area p  { color: #5a6a82; font-size: 0.92rem; line-height: 1.6; max-width: 580px; margin: 0 auto; }
+
+.reflect-question {
+  background: var(--white); border-radius: 12px; padding: 28px 32px;
+  border: 1.5px solid #d0daea; margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.reflect-q-text {
+  font-family: 'Merriweather', serif; font-size: 1.05rem; color: var(--navy);
+  margin-bottom: 16px; line-height: 1.55;
+}
+.reflect-q-text strong { color: #0178b0; }
+
+.reflect-prompts-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #7a8a9e; margin-bottom: 10px; }
+.reflect-prompts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.reflect-prompt-chip {
+  background: rgba(34,65,126,0.06); border: 1.5px solid rgba(34,65,126,0.2);
+  color: var(--navy); border-radius: 20px; padding: 5px 14px;
+  font-size: 0.78rem; font-weight: 500;
 }
 
-function answerQuiz(index, userAnswer) {
-  if (quizAnswers[index].answered) { return; }
+.reflect-textarea {
+  width: 100%; background: #f8fafb; border: 2px solid #d0daea;
+  border-radius: 8px; padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: #1e2d50;
+  line-height: 1.65; resize: vertical; min-height: 150px; transition: border-color 0.2s;
+}
+.reflect-textarea:focus { outline: none; border-color: var(--navy); background: var(--white); }
+.reflect-textarea::placeholder { color: #9aabb8; }
 
-  var q       = quizData[index];
-  var correct = (userAnswer === q.answer);
+.reflect-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
 
-  quizAnswers[index].answered = true;
-  quizAnswers[index].correct  = correct;
+.btn-save-reflect {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: var(--navy); color: var(--white);
+  border: 2px solid var(--navy); transition: background 0.2s, transform 0.15s;
+}
+.btn-save-reflect:hover { background: var(--navy-light); transform: translateY(-1px); }
+.btn-save-reflect:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
-  var trueBtn  = document.getElementById('qtrue-'  + index);
-  var falseBtn = document.getElementById('qfalse-' + index);
-  if (trueBtn)  { trueBtn.disabled  = true; }
-  if (falseBtn) { falseBtn.disabled = true; }
+.btn-model-answer {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: transparent; color: var(--navy);
+  border: 2px solid rgba(34,65,126,0.35); transition: all 0.2s;
+}
+.btn-model-answer:hover { background: rgba(34,65,126,0.06); border-color: var(--navy); }
+.btn-model-answer:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
-  if (userAnswer === true) {
-    if (trueBtn)              { trueBtn.classList.add(correct  ? 'correct-glow' : 'wrong-glow'); }
-    if (!correct && falseBtn) { falseBtn.classList.add('correct-glow'); }
-  } else {
-    if (falseBtn)            { falseBtn.classList.add(correct ? 'correct-glow' : 'wrong-glow'); }
-    if (!correct && trueBtn) { trueBtn.classList.add('correct-glow'); }
-  }
+.btn-download-reflect {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: transparent; color: #5a6a82;
+  border: 2px solid rgba(90,106,130,0.3); transition: all 0.2s;
+}
+.btn-download-reflect:hover { border-color: #5a6a82; color: var(--navy); }
+.btn-download-reflect:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
-  var fb = document.getElementById('qfeedback-' + index);
-  if (fb) {
-    fb.className = 'quiz-feedback show ' + (correct ? 'correct' : 'incorrect');
-    fb.innerHTML =
-      '<span class="quiz-feedback-badge">' + (correct ? '\u2705 Correct' : '\u274c Incorrect') + '</span>' +
-      '<p>' + (correct ? q.feedbackCorrect : q.feedbackIncorrect) + '</p>';
-  }
+.reflect-saved-banner {
+  display: none; margin-top: 12px;
+  background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.3);
+  border-left: 4px solid #059669; border-radius: 0 8px 8px 0;
+  padding: 10px 14px; font-size: 0.84rem; color: #064e3b;
+  align-items: center; gap: 8px;
+}
+.reflect-saved-banner.show { display: flex; }
 
-  var dot = document.getElementById('qdot-' + index);
-  if (dot) { dot.classList.add(correct ? 'correct' : 'incorrect'); }
+/* ── PAGE 5 — PHASES & LAYERS ────────────────────────── */
+#page-5 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-5.active { display: flex; flex-direction: column; align-items: center; }
 
-  var nav = document.getElementById('qnav-' + index);
-  if (nav) { nav.style.display = 'flex'; }
+.phases-wrap {
+  width: 100%; padding: 48px 48px 56px;
+  display: flex; flex-direction: column; align-items: center;
 }
 
-function showQuestion(index) {
-  document.querySelectorAll('.quiz-question-card').forEach(function (c) {
-    c.classList.remove('active');
-  });
-  var card = document.getElementById('qcard-' + index);
-  if (card) { card.classList.add('active'); currentQuestion = index; }
-  var progressText = document.getElementById('quiz-progress-text');
-  if (progressText) { progressText.textContent = 'Question ' + (index + 1) + ' of ' + quizData.length; }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+.phases-page-eyebrow {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; text-align: center;
+}
+.phases-page-title { font-family: 'Merriweather', serif; font-size: 1.9rem; font-weight: 700; text-align: center; margin-bottom: 8px; }
+.phases-page-sub {
+  font-size: 0.88rem; color: var(--text-muted); text-align: center;
+  max-width: 520px; line-height: 1.7; margin-bottom: 40px;
 }
 
-function showResults() {
-  document.querySelectorAll('.quiz-question-card').forEach(function (c) {
-    c.classList.remove('active');
-  });
-
-  var correctCount   = quizAnswers.filter(function (a) { return a.correct;  }).length;
-  var incorrectCount = quizAnswers.filter(function (a) { return !a.correct; }).length;
-  var pct            = Math.round((correctCount / quizData.length) * 100);
-  var passed         = pct >= PASS_MARK;
-  quizScore          = pct; // flags beforeunload not to double-call finish()
-
-  var icon, message;
-  if (pct === 100) {
-    icon    = '\uD83C\uDF1F';
-    message = 'Outstanding! You answered every question correctly. You have a strong understanding of palliative and end of life care terminology, definitions, and principles.';
-  } else if (passed) {
-    icon    = '\u2705';
-    message = 'Well done \u2014 you answered ' + correctCount + ' out of ' + quizData.length + ' correctly and have passed this module (' + PASS_MARK + '% required). Review any questions you found challenging.';
-  } else if (pct >= 60) {
-    icon    = '\uD83D\uDCDA';
-    message = 'You answered ' + correctCount + ' out of ' + quizData.length + ' correctly (' + pct + '%). The pass mark is ' + PASS_MARK + '%. Please review the GMC &amp; NICE Definitions and What is Palliative Care? sections, then retry the quiz.';
-  } else {
-    icon    = '\uD83D\uDD04';
-    message = 'You answered ' + correctCount + ' out of ' + quizData.length + ' correctly (' + pct + '%). The pass mark is ' + PASS_MARK + '%. We recommend working through the full module again before retrying.';
-  }
-
-  var results = document.getElementById('quiz-results');
-  if (!results) { return; }
-
-  results.innerHTML =
-    '<div class="quiz-results-icon" aria-hidden="true">' + icon + '</div>' +
-    '<div class="quiz-results-score">' + pct + '%</div>' +
-    '<div class="quiz-results-label">' + (passed ? 'Module Passed \u2014 Well done!' : 'Module not yet passed') + '</div>' +
-    '<div class="quiz-results-breakdown" role="list">' +
-      '<div class="quiz-result-stat" role="listitem"><div class="quiz-result-stat-num stat-correct">'   + correctCount   + '</div><div class="quiz-result-stat-lbl">Correct</div></div>' +
-      '<div class="quiz-result-stat" role="listitem"><div class="quiz-result-stat-num stat-incorrect">' + incorrectCount + '</div><div class="quiz-result-stat-lbl">Incorrect</div></div>' +
-      '<div class="quiz-result-stat" role="listitem"><div class="quiz-result-stat-num" style="color:var(--yellow);">' + quizData.length + '</div><div class="quiz-result-stat-lbl">Total</div></div>' +
-    '</div>' +
-    '<div class="quiz-results-msg">' + message + '</div>' +
-    '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
-      '<button class="btn btn-secondary" onclick="retryQuiz()"  aria-label="Retry the quiz">\uD83D\uDD04 Retry Quiz</button>' +
-      '<button class="btn btn-primary"   onclick="goToPage(1)"  aria-label="Return to start">\u21A9 Back to Start</button>' +
-    '</div>';
-
-  results.classList.add('show');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // ── SCORM: report final score and pass/fail status ─────
-  SCORM.finish(passed ? 'passed' : 'failed', pct);
-
-  // ── Unlock page 10 continue button if passed ───────────
-  if (passed) { unlockPage10Continue(); }
+/* Timeline */
+.phases-timeline-wrap { width: 100%; max-width: 960px; margin-bottom: 12px; }
+.phases-timeline-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 10px;
+}
+.phases-row {
+  display: grid; grid-template-columns: repeat(5,1fr); gap: 10px;
 }
 
-function retryQuiz() {
-  var results = document.getElementById('quiz-results');
-  if (results) { results.classList.remove('show'); }
-  currentQuestion = 0;
-  renderQuiz();
-  showQuestion(0);
+.phase-btn {
+  display: flex; flex-direction: column; gap: 4px;
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: 10px; padding: 14px 16px; cursor: pointer;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif; color: var(--white); text-align: left;
+}
+.phase-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.phase-btn.active { box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.phase-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
 
-  // SCORM: revert to incomplete so the learner can earn a pass on retry
-  if (SCORM.isInitialized()) {
-    SCORM.setValue('cmi.core.lesson_status', 'incomplete');
-    SCORM.commit();
-  }
+.phase-marker { width: 100%; height: 4px; border-radius: 4px; margin-bottom: 6px; }
+.phase-label  { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.phase-title  { font-family: 'Merriweather', serif; font-size: 0.88rem; font-weight: 700; line-height: 1.3; }
+.phase-hint   { font-size: 0.73rem; color: var(--text-muted); line-height: 1.4; }
+
+.phase-1 { border-color: rgba(1,151,222,0.4); }
+.phase-1.active { background: rgba(1,151,222,0.12); border-color: var(--blue); }
+.phase-2 { border-color: rgba(13,148,136,0.4); }
+.phase-2.active { background: rgba(13,148,136,0.12); border-color: var(--teal); }
+.phase-3 { border-color: rgba(253,202,15,0.35); }
+.phase-3.active { background: rgba(253,202,15,0.08); border-color: var(--yellow); }
+.phase-4 { border-color: rgba(220,38,38,0.4); }
+.phase-4.active { background: rgba(220,38,38,0.1); border-color: #ef4444; }
+.phase-5 { border-color: rgba(124,110,245,0.4); }
+.phase-5.active { background: rgba(124,110,245,0.1); border-color: #7c6ef5; }
+
+/* Layers */
+.layers-section { width: 100%; max-width: 960px; margin: 20px 0 0; }
+.layers-section-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 10px;
+}
+.layers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+
+.layer-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 2px solid var(--border);
+  border-radius: 10px; padding: 14px 16px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; color: var(--white); text-align: left;
+  transition: all 0.2s;
+}
+.layer-btn:hover  { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); transform: translateX(3px); }
+.layer-btn.active { background: rgba(253,202,15,0.08); border-color: rgba(253,202,15,0.5); }
+.layer-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+.layer-icon  { font-size: 1.3rem; flex-shrink: 0; }
+.layer-title { font-family: 'Merriweather', serif; font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.layer-sub   { font-size: 0.73rem; color: var(--text-muted); }
+
+.phases-hint {
+  text-align: center; font-size: 0.76rem; color: rgba(255,255,255,0.27);
+  margin-top: 18px; letter-spacing: 0.05em;
+  animation: hintfade 3s ease infinite;
+}
+@keyframes hintfade { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+.hs-continue-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px; margin-top: 24px;
+}
+.hs-locked-msg { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+
+/* ── PAGE 6 — GMC & NICE ────────────────────────────── */
+#page-6 { background: #f0f4f9; display: none; }
+#page-6.active { display: block; }
+
+.gmcnice-wrap { max-width: 900px; margin: 0 auto; padding: 48px 48px 64px; }
+
+.gmcnice-title-area { text-align: center; margin-bottom: 36px; }
+.gmcnice-eyebrow {
+  display: inline-block; background: var(--navy); color: var(--yellow);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 14px;
+}
+.gmcnice-title-area h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; color: var(--navy); margin-bottom: 8px; }
+.gmcnice-title-area p  { color: #5a6a82; font-size: 0.92rem; line-height: 1.6; max-width: 560px; margin: 0 auto; }
+
+.twelve-month-callout {
+  background: rgba(1,151,222,0.06); border: 2px solid rgba(1,151,222,0.25);
+  border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.twelve-month-callout-icon { font-size: 1.5rem; flex-shrink: 0; }
+.twelve-month-callout-title { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.twelve-month-callout-body  { font-size: 0.88rem; color: #4a5a72; line-height: 1.7; }
+.twelve-month-callout-body strong { color: var(--navy); }
+
+.def-banner {
+  background: var(--navy); border-radius: 12px; padding: 28px 32px;
+  margin-bottom: 28px; position: relative; overflow: hidden;
+}
+.def-banner::before {
+  content: ''; position: absolute; right: -20px; top: -20px;
+  width: 120px; height: 120px; border-radius: 50%; background: rgba(253,202,15,0.08);
+}
+.def-banner-org {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--yellow); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.def-banner-org::after { content: ''; flex: 1; height: 1px; background: rgba(253,202,15,0.25); }
+.def-banner-quote {
+  font-family: 'Merriweather', serif; font-size: 1.05rem; color: var(--white);
+  line-height: 1.75; font-style: italic;
+}
+.def-banner-quote em { font-style: normal; color: var(--yellow); font-weight: 700; }
+
+.criteria-title {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #5a6a82; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+}
+.criteria-title::after { content: ''; flex: 1; height: 1px; background: #d0daea; }
+
+.criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+
+.criteria-card {
+  background: var(--white); border-radius: 12px; padding: 18px 20px;
+  border: 1.5px solid #d0daea; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.criteria-letter {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--navy); color: var(--yellow);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Merriweather', serif; font-size: 0.9rem; font-weight: 700; flex-shrink: 0;
+}
+.criteria-card-title { font-size: 0.78rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.criteria-card-body  { font-size: 0.85rem; color: #4a5a72; line-height: 1.65; }
+
+.gmcnice-nav {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.gmcnice-nav .btn-primary  { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.gmcnice-nav .btn-primary:hover { background: var(--navy-light); }
+.gmcnice-nav .btn-secondary { color: var(--navy); border-color: rgba(34,65,126,0.3); }
+.gmcnice-nav .btn-secondary:hover { background: rgba(34,65,126,0.06); border-color: var(--navy); }
+
+/* ── PAGE 7 — QUIZ ──────────────────────────────────── */
+#page-7 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-7.active { display: block; }
+
+/* ── PAGE 9 — BOB: THE VISIT ────────────────────────── */
+#page-9 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); display: none; }
+#page-9.active { display: block; }
+
+.quiz-wrap { max-width: 820px; margin: 0 auto; padding: 48px 48px 64px; }
+
+.quiz-header { text-align: center; margin-bottom: 40px; }
+.quiz-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
+.quiz-title   { font-family: 'Merriweather', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 8px; }
+.quiz-sub     { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; max-width: 480px; margin: 0 auto; }
+
+.quiz-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; font-size: 0.78rem; color: var(--text-muted); }
+.quiz-progress-dots { display: flex; gap: 6px; }
+.quiz-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); transition: all 0.4s;
+}
+.quiz-dot.answered  { background: rgba(253,202,15,0.4); }
+.quiz-dot.correct   { background: #34d399; }
+.quiz-dot.incorrect { background: #f87171; }
+
+.quiz-question-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 32px; margin-bottom: 16px;
+  display: none; animation: pageIn 0.4s ease;
+}
+.quiz-question-card.active { display: block; }
+
+.quiz-q-num {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 10px;
+}
+.quiz-q-text {
+  font-family: 'Merriweather', serif; font-size: 1.05rem; color: var(--white);
+  line-height: 1.6; margin-bottom: 24px;
 }
 
+.quiz-tf-btns { display: flex; gap: 12px; margin-bottom: 20px; }
+.quiz-tf-btn {
+  flex: 1; padding: 14px; border-radius: 10px; border: 2px solid var(--border);
+  background: rgba(255,255,255,0.04); color: var(--white);
+  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.quiz-tf-btn:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+.quiz-tf-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.quiz-tf-btn.selected-true  { border-color: #34d399; background: rgba(52,211,153,0.1); color: #34d399; }
+.quiz-tf-btn.selected-false { border-color: #f87171; background: rgba(248,113,113,0.1); color: #f87171; }
+.quiz-tf-btn.correct-glow   { border-color: #34d399; background: rgba(52,211,153,0.15); }
+.quiz-tf-btn.wrong-glow     { border-color: #f87171; background: rgba(248,113,113,0.1); }
+.quiz-tf-btn:disabled       { cursor: default; transform: none; }
 
-/* ── Answer Modal (pages 9 & 11 suggested answers) ─────── */
-function openAnswerModal(baseId) {
-  var src = document.getElementById(baseId + '-answer');
-  var modal = document.getElementById('answer-modal');
-  var content = document.getElementById('answer-modal-content');
-  if (!src || !modal || !content) { return; }
-  // Clone the inner content from the hidden cab-answer-inner div
-  var inner = src.querySelector('.cab-answer-inner');
-  content.innerHTML = inner ? inner.innerHTML : src.innerHTML;
-  modal.style.display = 'flex';
-  // Focus the close button
-  var closeBtn = modal.querySelector('button');
-  if (closeBtn) { setTimeout(function(){ closeBtn.focus(); }, 50); }
+.quiz-feedback {
+  display: none; border-radius: 10px; padding: 16px 20px;
+  font-size: 0.9rem; line-height: 1.7; animation: feedIn 0.3s ease;
+}
+.quiz-feedback.show    { display: block; }
+.quiz-feedback.correct   { background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.3); border-left: 4px solid #059669; }
+.quiz-feedback.incorrect { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3); border-left: 4px solid #dc2626; }
+.quiz-feedback-badge { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; display: block; }
+.correct   .quiz-feedback-badge { color: #6ee7b7; }
+.incorrect .quiz-feedback-badge { color: #fca5a5; }
+.quiz-feedback p { color: #c5d3e8; }
+
+@keyframes feedIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+.quiz-nav-row {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 24px;
 }
 
-function closeAnswerModal() {
-  var modal = document.getElementById('answer-modal');
-  if (modal) { modal.style.display = 'none'; }
+/* Results card */
+.quiz-results {
+  display: none; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 40px; text-align: center; animation: pageIn 0.5s ease;
+}
+.quiz-results.show { display: block; }
+.quiz-results-icon  { font-size: 3rem; margin-bottom: 16px; }
+.quiz-results-score {
+  font-family: 'Merriweather', serif; font-size: 3rem; font-weight: 700;
+  color: var(--yellow); margin-bottom: 8px; line-height: 1;
+}
+.quiz-results-label { font-size: 1rem; color: var(--text-muted); margin-bottom: 28px; }
+.quiz-results-breakdown { display: flex; justify-content: center; gap: 32px; margin-bottom: 28px; }
+.quiz-result-stat { text-align: center; }
+.quiz-result-stat-num { font-family: 'Merriweather', serif; font-size: 1.6rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.quiz-result-stat-lbl { font-size: 0.75rem; color: var(--text-muted); }
+.stat-correct   { color: #34d399; }
+.stat-incorrect { color: #f87171; }
+.quiz-results-msg {
+  background: rgba(253,202,15,0.08); border: 1px solid rgba(253,202,15,0.2);
+  border-radius: 10px; padding: 16px 20px; font-size: 0.9rem; color: var(--text-muted);
+  line-height: 1.7; margin-bottom: 28px; text-align: left;
 }
 
-/* ── Finish: show overlay, populate learning record ────── */
-function finish() {
-  populateLearningRecord();
-  var overlay = document.getElementById('finish-overlay');
-  if (overlay) { overlay.classList.add('show'); }
+/* ── SHARED BUTTONS ─────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem; font-weight: 600;
+  cursor: pointer; border: 2px solid transparent;
+  transition: transform 0.15s, opacity 0.15s, box-shadow 0.15s;
+  text-decoration: none; letter-spacing: 0.02em;
+}
+.btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.btn:hover         { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.btn:active        { transform: translateY(0); }
+.btn[hidden]       { display: none !important; }
+.btn-primary       { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
+.btn-primary:hover { background: #ffd740; }
+.btn-secondary     { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.25); }
+.btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+/* ── MODALS ─────────────────────────────────────────── */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(9,15,30,0.92); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 24px;
+}
+.modal-backdrop.open { display: flex; animation: modalIn 0.3s ease; }
+@keyframes modalIn { from{opacity:0} to{opacity:1} }
+
+.modal-inner {
+  max-width: 680px; width: 100%; background: #111827;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+  animation: modalSlide 0.3s ease; max-height: 90vh; overflow-y: auto;
+}
+.modal-inner.modal-wide { max-width: 860px; width: min(860px,94vw); }
+@keyframes modalSlide { from{opacity:0;transform:translateY(20px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+
+.modal-header {
+  background: var(--navy); padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 3px solid var(--yellow); position: sticky; top: 0; z-index: 10;
+}
+.modal-header-text .modal-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 3px; }
+.modal-header-text .modal-title   { font-family: 'Merriweather', serif; font-size: 1rem; color: var(--white); }
+.modal-close {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white); width: 36px; height: 36px; border-radius: 50%;
+  font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; flex-shrink: 0;
+}
+.modal-close:hover { background: rgba(255,255,255,0.18); }
+.modal-close:focus-visible { outline: 3px solid var(--yellow); }
+.modal-body   { padding: 28px; }
+.modal-footer {
+  padding: 16px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--border);
+}
+.modal-footer p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Phase modal specific */
+.phase-modal-stripe { height: 5px; width: 100%; }
+.phase-modal-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.phase-modal-tag  { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+.phase-modal-name { font-family: 'Merriweather', serif; font-size: 1.15rem; font-weight: 700; color: var(--white); }
+.phase-modal-definition { font-size: 0.9rem; color: var(--text-muted); line-height: 1.82; margin-bottom: 22px; }
+
+.pillar-section-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 9px; }
+.pillar-rule          { height: 1px; background: rgba(255,255,255,0.07); margin: 18px 0; }
+
+.phase-detail-list { display: flex; flex-direction: column; gap: 8px; list-style: none; margin-top: 6px; }
+.phase-detail-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 10px 13px;
+  font-size: 0.85rem; color: var(--text-muted); line-height: 1.55;
+}
+.phase-detail-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+.phases-source { font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 16px; font-style: italic; }
+
+/* Model answer modal */
+.model-answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.model-sub-section {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 16px 18px;
+}
+.model-section-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+.model-items { display: flex; flex-direction: column; gap: 8px; }
+.model-item  { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+.model-item strong { color: var(--white); }
+.model-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+
+.user-answer-panel {
+  background: rgba(1,151,222,0.08); border: 1px solid rgba(1,151,222,0.2);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 18px;
+}
+.user-answer-label { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7dd3fc; margin-bottom: 8px; }
+.user-answer-text  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; white-space: pre-wrap; }
+
+/* ── PROGRESS BAR ────────────────────────────────────── */
+.module-progress-bar {
+  background: rgba(0,0,0,0.25); border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 48px; height: 40px; display: flex; align-items: center; gap: 14px;
+}
+.progress-track { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; }
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--blue) 0%, var(--yellow) 100%);
+  border-radius: 10px; transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
+  width: 0%; box-shadow: 0 0 8px rgba(253,202,15,0.3);
+}
+.progress-label { font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.07em; white-space: nowrap; min-width: 70px; text-align: right; }
+
+/* ── FOOTER ─────────────────────────────────────────── */
+footer {
+  background: var(--navy-dark); border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 48px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy  { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+.footer-wcag  { display: flex; align-items: center; gap: 10px; }
+.wcag-icon    { width: 44px; height: 44px; opacity: 0.75; flex-shrink: 0; }
+.footer-wcag-text { font-size: 0.68rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  header                      { padding: 0 20px; height: 60px; }
+  .brand-logo                 { width: 90px; height: 40px; }
+  .brand-name                 { font-size: 0.88rem; }
+  .module-label               { font-size: 0.66rem; }
+  .module-label strong        { font-size: 0.75rem; }
+  .progress-nav               { padding: 0 12px; }
+  .nav-step                   { padding: 0 8px; gap: 6px; }
+  .nav-step-label             { display: none; }
+  .nav-divider                { width: 12px; }
+  .module-progress-bar        { padding: 0 20px; }
+  .intro-hero                 { grid-template-columns: 1fr; padding: 28px 24px; gap: 28px; }
+  .outcomes-wrap, .reflect-wrap, .definition-wrap,
+  .gmcnice-wrap, .quiz-wrap   { padding: 28px 24px; }
+  .phases-wrap                { padding: 28px 24px 40px; }
+  .outcomes-grid, .definition-grid,
+  .definition-not-grid, .criteria-grid { grid-template-columns: 1fr; }
+  .phases-row                 { grid-template-columns: repeat(3,1fr); }
+  .layers-grid                { grid-template-columns: 1fr 1fr; }
+  .model-answer-grid          { grid-template-columns: 1fr; }
 }
 
-/* ── Populate the Page 12 learning record ─────────────── */
-function populateLearningRecord() {
-  // AKPS
-  var akpsEl = document.getElementById('export-akps-score');
-  if (akpsEl) {
-    if (window.akpsConfirmedScore !== null) {
-      akpsEl.innerHTML =
-        '<strong>Score: ' + window.akpsConfirmedScore + '</strong> — ' + (window.akpsConfirmedLabel || '') +
-        '<br><span style="color:#5a6a82;">' + (window.akpsConfirmedSub || '') + '</span>';
-    } else {
-      akpsEl.textContent = 'AKPS not confirmed during the module.';
-    }
-  }
-  // MCQ
-  var mcqEl = document.getElementById('export-mcq-score');
-  if (mcqEl) {
-    if (quizScore !== null) {
-      var passed = quizScore >= PASS_MARK;
-      mcqEl.innerHTML =
-        '<strong>' + quizScore + '%</strong> — ' +
-        (passed ? '<span style="color:#059669;">Passed ✓</span>' : '<span style="color:#dc2626;">Not yet passed</span>');
-    } else {
-      mcqEl.textContent = 'MCQ not completed.';
-    }
-  }
-  // Textarea responses
-  var map = {
-    'export-bob3-q1': 'bob3-q1-input',
-    'export-bob4-q1': 'bob4-q1-input',
-    'export-bob4-q2': 'bob4-q2-input'
-  };
-  Object.keys(map).forEach(function (exportId) {
-    var srcId = map[exportId];
-    var exportEl = document.getElementById(exportId);
-    var srcEl    = document.getElementById(srcId);
-    if (exportEl && srcEl) {
-      exportEl.textContent = srcEl.value.trim() || '(no response recorded)';
-    }
-  });
+@media (max-width: 640px) {
+  header                      { padding: 0 16px; height: 56px; }
+  .brand-text                 { display: none; }
+  .brand-logo                 { width: 100px; height: 44px; }
+  .module-label               { display: none; }
+  .progress-nav               { padding: 0 8px; min-height: 44px; }
+  .nav-step                   { padding: 0 4px; }
+  .nav-step-num               { width: 22px; height: 22px; font-size: 0.65rem; }
+  .nav-divider                { width: 6px; }
+  .intro-hero, .outcomes-wrap, .reflect-wrap,
+  .definition-wrap, .phases-wrap, .gmcnice-wrap,
+  .quiz-wrap                  { padding: 20px 16px 36px; }
+  .intro-heading              { font-size: 1.5rem; }
+  .phases-row                 { grid-template-columns: 1fr 1fr; }
+  .layers-grid                { grid-template-columns: 1fr; }
+  .quiz-tf-btns               { flex-direction: column; }
+  footer                      { padding: 12px 16px; flex-direction: column; gap: 8px; text-align: center; }
 }
 
-/* ── MCQ pass gate — called from showResults() ─────────── */
-function unlockPage10Continue() {
-  var btn   = document.getElementById('page10-continue-btn');
-  var nudge = document.getElementById('page10-gate-nudge');
-  if (btn) {
-    btn.disabled      = false;
-    btn.style.opacity = '1';
-    btn.style.cursor  = 'pointer';
-  }
-  if (nudge) { nudge.style.display = 'none'; }
+/* ── PRINT STYLES ────────────────────────────────────── */
+@media print {
+  header, nav, .module-progress-bar, footer,
+  .btn, button, .modal-backdrop { display: none !important; }
+  body { background: white !important; color: #111 !important; }
+  .page { display: none !important; }
+  .page.active { display: block !important; }
 }
 
 
-/* ══════════════════════════════════════════════════════════
-   SECTION 6 — AKPS SLIDER (Page 9)
-══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+   PAGES 8–11 — SCENARIO, CLIPBOARD, ACTIVITY & AKPS STYLES
+   Added to support Bob Evans case study pages
+════════════════════════════════════════════════════════════ */
 
-var AKPS_SCORES = [10,20,30,40,50,60,70,80,90,100];
+/* ── Badges (used on page 8 patient header) ─────────────── */
+.badge           { display:inline-block; padding:3px 10px; border-radius:20px; font-size:.72rem; font-weight:600; margin-right:6px; margin-top:4px; }
+.badge-blue      { background:#dbeafe; color:#1e40af; }
+.badge-green     { background:#dcfce7; color:#166534; }
+.badge-navy      { background:#dde5f5; color:var(--navy); }
+.badge-warn      { background:#fef9c3; color:#854d0e; }
 
-var AKPS_DATA = {
-  10:  { label:'Moribund',                sublabel:'Fatal processes progressing rapidly',                           cls:'pink',   icon:'🔴', title:'Moribund',                 body:'Patient is actively dying. All Five Priorities of Care should be implemented immediately. Bob presenting as conversational at this score would be highly inconsistent.' },
-  20:  { label:'Very sick',               sublabel:'Active supportive treatment necessary',                        cls:'red',    icon:'🔴', title:'End of life — hours/days',  body:'Likely in the final weeks of life. Syringe driver and comfort care should be actively in place. Inconsistent with Bob walking to the door unassisted.' },
-  30:  { label:'Severely disabled',       sublabel:'Hospitalisation indicated, death not imminent',               cls:'red',    icon:'🔴', title:'Severely disabled',         body:'AKPS ≤30 is associated with a prognosis of weeks, not months. All anticipatory decisions should be documented and shared with the wider team.' },
-  40:  { label:'Disabled',                sublabel:'Requires special care and assistance',                        cls:'red',    icon:'🔴', title:'Significant decline',       body:'High care needs. Review syringe driver requirements and ensure the out-of-hours team are briefed. Proactive family communication is essential.' },
-  50:  { label:'Considerable assistance', sublabel:'Requires frequent medical care',                              cls:'orange', icon:'⚠️', title:'Key clinical threshold',    body:'⚠️ AKPS ≤50 is a key threshold — consider specialist palliative care referral. Bob\'s self-report of "fine" is clinically inconsistent with this level of need.' },
-  60:  { label:'Occasional assistance',   sublabel:'Able to care for most personal needs',                       cls:'orange', icon:'⚠️', title:'Increasing dependency',     body:'Bob requires occasional help. Review medications and anticipatory care plan. His "plodding along" phrasing may be masking this level of dependency.' },
-  70:  { label:'Limited self-care',       sublabel:'Cares for self; unable to carry on normal activity or work', cls:'amber',  icon:'⚠️', title:'Functional decline present', body:'At AKPS 70, Bob is managing self-care but unable to sustain normal activity. His score is <strong>inconsistent with saying he is "fine"</strong> — this warrants probing.' },
-  80:  { label:'Self-caring with effort', sublabel:'Some signs or symptoms of disease present',                  cls:'amber',  icon:'💛', title:'Mild-moderate decline',     body:'Managing independently but with effort. Consider initiating advance care planning and reviewing support needs at this visit.' },
-  90:  { label:'Minor limitations',       sublabel:'Normal activity with effort, some symptoms',                 cls:'green',  icon:'✅', title:'Minor limitations',         body:'Minor symptoms present. Ensure routine symptom review continues and begin documenting preferences and goals of care.' },
-  100: { label:'Fully active',            sublabel:'No complaints, no evidence of disease',                      cls:'green',  icon:'✅', title:'Fully active',              body:'No functional impairment. This score would be inconsistent with Bob\'s known diagnoses and recent hospitalisation three weeks ago.' }
-};
+/* ── Clipboard layout (Page 8) ──────────────────────────── */
+.clipboard-wrap  { max-width:820px; margin:0 auto; padding:32px 24px 64px; }
 
-window.akpsConfirmedScore = null;
-window.akpsConfirmedLabel = null;
-window.akpsConfirmedCls   = null;
-window.akpsConfirmedSub   = null;
-
-function updateAKPSSlider(val) {
-  var score = AKPS_SCORES[val - 1];
-  var d = AKPS_DATA[score];
-  if (!d) { return; }
-  var numEl = document.getElementById('akps-num');
-  var lblEl = document.getElementById('akps-label');
-  var subEl = document.getElementById('akps-sublabel');
-  if (numEl) { numEl.textContent = score; }
-  if (lblEl) { lblEl.textContent = d.label; }
-  if (subEl) { subEl.textContent = d.sublabel; }
-  var interp = document.getElementById('akps-interp');
-  if (interp) { interp.className = 'akps-interpretation ' + d.cls; }
-  var iconEl  = document.getElementById('akps-interp-icon');
-  var titleEl = document.getElementById('akps-interp-title-text');
-  var bodyEl  = document.getElementById('akps-interp-body');
-  if (iconEl)  { iconEl.textContent  = d.icon; }
-  if (titleEl) { titleEl.textContent = d.title; }
-  if (bodyEl)  { bodyEl.innerHTML    = d.body; }
-  /* Reset confirm state if slider moved after confirming */
-  if (window.akpsConfirmedScore !== null && score !== window.akpsConfirmedScore) {
-    var btn  = document.getElementById('akps-confirm-btn');
-    var note = document.getElementById('akps-confirmed-note');
-    if (btn)  { btn.classList.remove('confirmed'); btn.textContent = '✓ Confirm this score & save to Learning Record'; }
-    if (note) { note.classList.remove('show'); }
-    window.akpsConfirmedScore = null;
-    checkPage9Gate();
-  }
+.clipboard {
+  background:#fff;
+  border:1px solid #d0daea;
+  border-radius:16px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  overflow:hidden;
 }
 
-function confirmAKPSScore() {
-  var slider = document.getElementById('akps-slider');
-  if (!slider) { return; }
-  var score = AKPS_SCORES[slider.value - 1];
-  var d = AKPS_DATA[score];
-  window.akpsConfirmedScore = score;
-  window.akpsConfirmedLabel = d.label;
-  window.akpsConfirmedCls   = d.cls;
-  window.akpsConfirmedSub   = d.sublabel;
-  var btn  = document.getElementById('akps-confirm-btn');
-  var note = document.getElementById('akps-confirmed-note');
-  if (btn)  { btn.classList.add('confirmed'); btn.textContent = '✓ Score ' + score + ' confirmed'; }
-  if (note) { note.classList.add('show'); }
+.clipboard-header {
+  background:var(--navy);
+  padding:22px 28px 20px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.clipboard-header-brand { display:flex; align-items:center; gap:10px; }
+.header-logo-sm         { width:48px; height:auto; border-radius:6px; }
+.clipboard-title-area   { flex:1; }
+.clipboard-eyebrow      { font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(253,202,15,.8); margin-bottom:4px; }
+.clipboard-ref          { font-size:.75rem; color:rgba(255,255,255,.5); margin-top:4px; }
+
+.clipboard-body         { padding:24px 28px; }
+
+/* Patient header strip */
+.patient-header {
+  display:flex; align-items:center; gap:18px;
+  padding:16px 0 20px;
+  border-bottom:1px solid #e8eef6;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+.patient-photo {
+  width:60px; height:60px; border-radius:50%;
+  background:var(--navy); color:var(--yellow);
+  font-family:'Merriweather',serif; font-size:1.3rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.patient-name   { font-family:'Merriweather',serif; font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
+.patient-dob    { font-size:.8rem; color:#5a6a82; margin-bottom:6px; }
+.patient-meta   { font-size:.78rem; color:#5a6a82; }
+.patient-badges { margin-top:5px; }
+
+/* Info rows */
+.info-section        { margin-bottom:20px; }
+.info-section-title  { font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #e8eef6; }
+.info-grid           { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.info-row            { display:flex; flex-direction:column; gap:2px; }
+.info-label          { font-size:.68rem; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:#8a9ab5; }
+.info-value          { font-size:.88rem; color:#1e2d50; line-height:1.5; }
+.info-paragraph      { font-size:.88rem; color:#3a4a62; line-height:1.75; }
+
+/* Alert strip (page 8 "active cancer" banner) */
+.alert              { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border-radius:10px; margin-bottom:14px; }
+.alert-icon         { font-size:1.1rem; flex-shrink:0; }
+.active-cancer      { background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; }
+
+.clipboard-alert    { margin-bottom:14px; }
+.clipboard-footer   { border-top:1px solid #e8eef6; padding:14px 28px; background:#f8fafc; font-size:.78rem; color:#8a9ab5; display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+
+/* ── Two-column scenario layout (Pages 9 & 11) ──────────── */
+.scenario-wrap {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 24px;
+  align-items:start;
+  max-width:1200px;
+  margin:0 auto;
+  padding:32px 24px 48px;
 }
 
-/* ── Activity save (shows ✓ Response saved indicator) ── */
-function saveActivity9() {
-  var note = document.getElementById('bob3-q1-saved-note');
-  if (!note) { return; }
-  note.style.display = 'inline';
-  clearTimeout(saveActivity9._timer);
-  saveActivity9._timer = setTimeout(function () {
-    note.style.display = 'none';
-  }, 2500);
+.scenario-left {
+  min-width:0;
 }
 
-/* ── Gate: AKPS confirmed AND activity has text ── */
-function checkPage9Gate() {
-  var akpsOk = window.akpsConfirmedScore !== null;
-  var q1     = document.getElementById('bob3-q1-input');
-  var q1Ok   = q1 && q1.value.trim().length > 0;
-  var btn    = document.getElementById('page9-continue-btn');
-  var nudge  = document.getElementById('page9-gate-nudge');
-  if (!btn) { return; }
-  var pass = akpsOk && q1Ok;
-  btn.disabled      = !pass;
-  btn.style.opacity = pass ? '1' : '.4';
-  btn.style.cursor  = pass ? 'pointer' : 'not-allowed';
-  if (nudge) { nudge.style.display = pass ? 'none' : 'block'; }
+.scenario-video {
+  background:#000;
+  border-radius:14px;
+  overflow:hidden;
+  aspect-ratio:16/9;
+  margin-bottom:16px;
+}
+.scenario-video video { width:100%; display:block; }
+
+.scenario-context {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  padding:20px 22px;
+  margin-bottom:0;
+  font-size:.88rem;
+  color:rgba(255,255,255,.85);
+  line-height:1.75;
+}
+.scenario-context p         { margin-bottom:12px; }
+.scenario-context p:last-child { margin-bottom:0; }
+.scenario-context ul        { padding-left:20px; }
+.scenario-context li        { margin-bottom:6px; }
+.scenario-context-label     { font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:8px; }
+
+/* Right panel */
+.choices-panel  { min-width:0; }
+.choices-hint   { font-size:.84rem; color:rgba(255,255,255,.7); line-height:1.7; margin-bottom:18px; }
+
+/* ── Case Activity Box (cab) — right panel cards ────────── */
+.cab-label    { font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:6px; }
+.cab-question {
+  font-family:'Merriweather',serif; font-size:.92rem; font-weight:700;
+  color:var(--white); line-height:1.6; margin-bottom:14px;
+}
+.cab-textarea {
+  width:100%; display:block;
+  font-family:'DM Sans',sans-serif; font-size:.88rem; color:var(--white);
+  background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.15);
+  border-radius:8px; padding:12px 14px; line-height:1.7;
+  resize:vertical; min-height:100px;
+  transition:border-color .2s;
+}
+.cab-textarea::placeholder { color:rgba(255,255,255,.3); }
+.cab-textarea:focus         { outline:none; border-color:rgba(253,202,15,.5); background:rgba(255,255,255,.08); }
+
+.cab-reveal-btn {
+  display:inline-flex; align-items:center; gap:7px;
+  background:none; border:1.5px solid rgba(255,255,255,.2);
+  border-radius:7px; color:rgba(255,255,255,.6);
+  font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:600;
+  padding:7px 14px; cursor:pointer;
+  transition:all .2s;
+}
+.cab-reveal-btn:hover { border-color:rgba(253,202,15,.4); color:var(--yellow); }
+
+.cab-answer       { display:none; margin-top:12px; }
+.cab-answer.open  { display:block; }
+.cab-answer-inner {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px; padding:16px 18px;
+}
+.cab-answer-title { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px; }
+.cab-answer-inner ul  { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.cab-answer-inner li  { display:flex; align-items:flex-start; gap:10px; font-size:.86rem; color:rgba(255,255,255,.8); line-height:1.65; }
+
+.caa-dot {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--yellow); flex-shrink:0; margin-top:6px;
 }
 
+/* ── AKPS Slider Block (inside scenario-left) ───────────── */
+.akps-slider-block {
+  margin-top:18px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:20px 22px;
+}
+.akps-block-eyebrow { font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:5px; }
+.akps-block-title   { font-family:'Merriweather',serif; font-size:.95rem; font-weight:700; color:var(--white); margin-bottom:4px; }
+.akps-block-desc    { font-size:.82rem; color:rgba(255,255,255,.55); line-height:1.6; margin-bottom:18px; }
 
-/* ══════════════════════════════════════════════════════════
-   SECTION 7 — INIT & GLOBAL EVENTS
-══════════════════════════════════════════════════════════ */
+.akps-score-display     { display:flex; align-items:center; gap:16px; margin-bottom:14px; }
+.akps-score-number      { font-family:'Merriweather',serif; font-size:3rem; font-weight:700; color:var(--white); line-height:1; min-width:66px; transition:color .3s; }
+.akps-score-label-wrap  { flex:1; }
+.akps-score-label       { font-size:.88rem; font-weight:600; color:var(--white); margin-bottom:3px; }
+.akps-score-sublabel    { font-size:.77rem; color:rgba(255,255,255,.45); line-height:1.5; }
 
-document.addEventListener('DOMContentLoaded', function () {
+.akps-track-labels  { display:flex; justify-content:space-between; margin-bottom:7px; }
+.akps-track-label   { font-size:.67rem; color:rgba(255,255,255,.3); }
 
-  // Open SCORM connection to EQUAL Online
-  SCORM.initialize();
+input[type="range"].akps-range {
+  -webkit-appearance:none; appearance:none;
+  width:100%; height:6px; border-radius:10px;
+  background:rgba(255,255,255,.12); outline:none; cursor:pointer;
+}
+input[type="range"].akps-range::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  width:24px; height:24px; border-radius:50%;
+  background:var(--yellow);
+  border:3px solid var(--navy-dark);
+  box-shadow:0 0 0 2px var(--yellow), 0 4px 12px rgba(0,0,0,.3);
+  cursor:pointer; transition:transform .15s;
+}
+input[type="range"].akps-range::-webkit-slider-thumb:hover { transform:scale(1.2); }
+input[type="range"].akps-range::-moz-range-thumb {
+  width:24px; height:24px; border-radius:50%;
+  background:var(--yellow); border:3px solid var(--navy-dark); cursor:pointer;
+}
 
-  // Page 9 — AKPS slider init
-  var akpsSlider = document.getElementById('akps-slider');
-  if (akpsSlider) { updateAKPSSlider(akpsSlider.value); }
+.akps-colour-bar {
+  width:100%; height:4px; border-radius:10px; margin-top:6px; opacity:.45;
+  background:linear-gradient(to left, #166534 0%, #166534 20%, #854d0e 20%, #854d0e 50%, #991b1b 50%, #991b1b 80%, #831843 80%, #831843 100%);
+}
+.akps-tick-row { display:flex; justify-content:space-between; margin-top:5px; padding:0 2px; }
+.akps-tick     { font-size:.63rem; color:rgba(255,255,255,.22); }
 
-  // Page 9 — gate listener on textarea
-  var bob3q1 = document.getElementById('bob3-q1-input');
-  if (bob3q1) { bob3q1.addEventListener('input', checkPage9Gate); }
-  checkPage9Gate();
+.akps-interpretation { margin-top:16px; border-radius:10px; padding:13px 15px; border:1px solid transparent; transition:all .3s ease; min-height:48px; }
+.akps-interpretation.green  { background:rgba(22,101,52,.15);  border-color:rgba(22,101,52,.35);  color:#bbf7d0; }
+.akps-interpretation.amber  { background:rgba(133,77,14,.15);  border-color:rgba(133,77,14,.4);   color:#fde68a; }
+.akps-interpretation.orange { background:rgba(154,52,18,.15);  border-color:rgba(154,52,18,.4);   color:#fed7aa; }
+.akps-interpretation.red    { background:rgba(153,27,27,.2);   border-color:rgba(153,27,27,.45);  color:#fecaca; }
+.akps-interpretation.pink   { background:rgba(131,24,67,.2);   border-color:rgba(131,24,67,.45);  color:#fbcfe8; }
+.akps-interp-title  { font-weight:700; font-size:.77rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:5px; display:flex; align-items:center; gap:7px; }
+.akps-interp-body   { font-size:.82rem; opacity:.9; line-height:1.65; }
 
-  // UI init
-  updateProgressBar(1);
-  renderQuiz();
+.akps-confirm-btn {
+  display:block; width:100%; margin-top:14px; padding:11px;
+  background:rgba(253,202,15,.1); border:1.5px solid rgba(253,202,15,.35);
+  border-radius:8px; color:var(--yellow);
+  font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:700;
+  cursor:pointer; transition:all .2s;
+}
+.akps-confirm-btn:hover    { background:rgba(253,202,15,.2); border-color:var(--yellow); }
+.akps-confirm-btn.confirmed { background:rgba(5,150,105,.15); border-color:rgba(5,150,105,.5); color:#6ee7b7; cursor:default; }
 
-  // Close modals on backdrop click
-  document.querySelectorAll('.modal-backdrop').forEach(function (backdrop) {
-    backdrop.addEventListener('click', function (e) {
-      if (e.target !== backdrop) { return; }
-      if (backdrop.id === 'phase-modal')        { closePhaseModal(); }
-      if (backdrop.id === 'model-answer-modal') { closeModelAnswerModal(); }
-    });
-  });
+.akps-confirmed-note      { display:none; font-size:.77rem; color:#6ee7b7; text-align:center; margin-top:7px; }
+.akps-confirmed-note.show { display:block; }
 
-  // Close answer modal on backdrop click
-  var answerModal = document.getElementById('answer-modal');
-  if (answerModal) {
-    answerModal.addEventListener('click', function(e) {
-      if (e.target === answerModal) { closeAnswerModal(); }
-    });
-  }
+/* ── Responsive tweaks ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .scenario-wrap { grid-template-columns:1fr; padding:20px 16px 40px; }
+  .info-grid     { grid-template-columns:1fr; }
+  .clipboard-body, .clipboard-header, .clipboard-footer { padding-left:20px; padding-right:20px; }
+}
 
-  // Close modals on Escape
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') { return; }
-    if (document.getElementById('phase-modal')?.classList.contains('open'))        { closePhaseModal(); }
-    if (document.getElementById('model-answer-modal')?.classList.contains('open')) { closeModelAnswerModal(); }
-    var am = document.getElementById('answer-modal');
-    if (am && am.style.display === 'flex') { closeAnswerModal(); }
-  });
+/* ════════════════════════════════════════════════════════════
+   FIXES — page backgrounds, text colours, answer modal
+════════════════════════════════════════════════════════════ */
 
-  // Safety net: always call LMSFinish when the learner closes/navigates away.
-  // If the quiz has already been completed, SCORM.finish() is a no-op (guarded
-  // by the _finished flag), so no data will be overwritten.
-  window.addEventListener('beforeunload', function () {
-    if (SCORM.isInitialized()) {
-      if (quizScore === null) {
-        // Learner left before completing the quiz
-        SCORM.finish('incomplete', null);
-      } else {
-        // Quiz was completed — finish() was already called in showResults().
-        // Call again harmlessly; the wrapper's _finished guard prevents double-reporting.
-        SCORM.finish(null, null);
-      }
-    }
-  });
+/* Pages 10 and 11 need a dark background like page 9 */
+#page-10,
+#page-11 { background: linear-gradient(160deg, var(--navy-dark) 0%, #1a3466 100%); }
 
-});
+/* Page 9 choices-hint — make fully readable white */
+.choices-hint { color: rgba(255,255,255,.9) !important; }
+
+/* Answer modal — clone of cab-answer-inner styling for modal context */
+#answer-modal-content .cab-answer-inner {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+#answer-modal-content .cab-answer-title {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 14px;
+}
+#answer-modal-content ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+#answer-modal-content li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: .88rem; color: rgba(255,255,255,.85); line-height: 1.7;
+}
+#answer-modal-content .caa-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--yellow); flex-shrink: 0; margin-top: 7px;
+}
+
+/* Page 8 — light background btn-secondary override */
+#page-8 .btn-secondary {
+  color: var(--navy) !important;
+  border-color: rgba(34,65,126,.3) !important;
+}
+#page-8 .btn-secondary:hover {
+  background: rgba(34,65,126,.06) !important;
+}
