@@ -958,144 +958,153 @@
 </section>
 
 
-<!-- ═══ PAGE 9 — BOB: THE VISIT ═══ -->
+<!-- ════════════════════════════════════════════
+     PAGE 9 — BOB EVANS: THE VISIT (Video + Activity)
+═════════════════════════════════════════════ -->
 <section class="page" id="page-9" aria-label="Follow-up visit — Bob Evans">
   <div class="scenario-wrap">
 
+    <!-- LEFT: video + context + AKPS slider -->
     <div class="scenario-left">
-    <div class="scenario-video" role="region" aria-label="Scene — arriving at Bob's home">
-  <video controls
-         style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"
-         aria-label="Bob sitting upright in his living room chair with his dog on his lap">
-    <source src="video/bob1.mp4" type="video/mp4">
-    Your browser does not support the video element.
-  </video>
-</div>
-      
+
+      <div class="scenario-video" role="figure" aria-label="Scene — arriving at Bob's home"
+           style="background:#000; border-radius:14px; overflow:hidden; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+        <video src="video/bob1.mp4" controls
+               aria-label="Bob sitting upright in his living room chair with his dog on his lap"
+               style="width:100%; max-height:100%; display:block;">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <div class="scenario-context">
         <div class="scenario-context-label" aria-hidden="true">📍 Setting the Scene</div>
-        <p>You are visiting Bob for a planned follow-up. He answers the door himself and walks slowly to his chair. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely.</p>
-        
-        <p>While talking, you notice a <strong style="color:#fff;">yellowish tinge around his eyes</strong>. You ask Bob how he has been.</p>
-        
+        <p>You are visiting Bob for a planned follow-up visit. This is the second time you have seen him. Bob answers the door himself and walks slowly to his chair in the living room. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely. At first glance, he appears well.</p>
+        <p>While talking to Bob, you notice a <strong style="color:#fff;">yellowish tinge around his eyes</strong>, although you briefly wonder whether this could be due to the lighting in the room. You ask Bob how he has been.</p>
         <p><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
-        
+        <p>He smiles slightly and changes the subject to his dog. Bob does not volunteer any specific concerns.</p>
         <hr style="margin:20px 0; border:0; border-top:1px solid rgba(255,255,255,.1);">
-        
         <div class="scenario-context-label" aria-hidden="true">💡 Learning Focus</div>
-        <p>This stage is about **recognising hidden deterioration**. People often minimise symptoms. "I'm fine" does not always mean nothing is wrong.</p>
+        <ul style="margin-top:8px; margin-bottom:0; padding-left:20px; line-height:1.7; color:rgba(255,255,255,.9);">
+          <li>People often minimise symptoms.</li>
+          <li>"I'm fine" does not equal "nothing is wrong".</li>
+          <li>Deterioration is frequently uncovered through curiosity, not observation alone.</li>
+        </ul>
       </div>
-   
+
     </div>
+    <!-- /scenario-left -->
 
-    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Response options">
-      
-      <p class="choices-hint" style="color:#fff";>
-        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
-        Bob is not volunteering concerns, but your observations suggest otherwise. Complete the activities below.
-      </p>
-<br>
-            <!-- ══ AKPS SLIDER ══ -->
-<div class="akps-slider-block">
+    <!-- RIGHT: activity + nav — everything inside choices-panel -->
+    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Reflective activity">
 
-  <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
-  <div class="akps-block-title">Score Bob on the AKPS</div>
-  <p class="akps-block-desc">Based on what you've observed in the video and the scene above — not what Bob says — where would you place him on the Australia-modified Karnofsky Performance Scale?</p>
-
-  <div class="akps-score-display">
-    <div class="akps-score-number" id="akps-num">70</div>
-    <div class="akps-score-label-wrap">
-      <div class="akps-score-label" id="akps-label">Limited self-care</div>
-      <div class="akps-score-sublabel" id="akps-sublabel">Cares for self; unable to carry on normal activity or active work</div>
-    </div>
-  </div>
-
-  <div class="akps-slider-wrap">
-    <div class="akps-track-labels">
-      <span class="akps-track-label">Most dependent ←</span>
-      <span class="akps-track-label">→ Fully active</span>
-    </div>
-    <input type="range" class="akps-range" id="akps-slider"
-           min="1" max="10" value="7" step="1"
-           aria-label="AKPS score slider"
-           oninput="updateAKPSSlider(this.value)">
-    <div class="akps-colour-bar"></div>
-    <div class="akps-tick-row">
-      <span class="akps-tick">10</span>
-      <span class="akps-tick">20</span>
-      <span class="akps-tick">30</span>
-      <span class="akps-tick">40</span>
-      <span class="akps-tick">50</span>
-      <span class="akps-tick">60</span>
-      <span class="akps-tick">70</span>
-      <span class="akps-tick">80</span>
-      <span class="akps-tick">90</span>
-      <span class="akps-tick">100</span>
-    </div>
-  </div>
-
-  <div class="akps-interpretation amber" id="akps-interp">
-    <div class="akps-interp-title">
-      <span id="akps-interp-icon">⚠️</span>
-      <span id="akps-interp-title-text">Functional decline present</span>
-    </div>
-    <div class="akps-interp-body" id="akps-interp-body">
-      At AKPS 70, Bob is managing self-care but unable to work or sustain normal activity. His score is <strong>inconsistent with saying he is "fine"</strong> — this is a clinically significant gap that warrants probing.
-    </div>
-  </div>
-
-<button class="akps-confirm-btn" id="akps-confirm-btn"
-        onclick="confirmAKPSScore(); if(window.checkPage9Gate) checkPage9Gate();">
-  ✓ Confirm this score &amp; save to Learning Record
-</button>
-  <div class="akps-confirmed-note" id="akps-confirmed-note">
-    ✓ Score saved — you can still adjust and re-confirm before finishing
-  </div>
-
-</div>
-<!-- /AKPS SLIDER ══ -->
-      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:14px;">
-    
-        <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity 1 — Observations</div>
-        <div class="cab-label">Reflect &amp; Respond</div>
-        <div class="cab-question">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating despite saying he is "fine"?</div>
-        <textarea class="cab-textarea" id="bob3-q1-input" placeholder="What did you notice about his appearance or movement?..." rows="4"></textarea>
-        <button class="cab-reveal-btn" onclick="toggleReveal('bob3-q1-answer')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Reveal suggested answer
+      <!-- AKPS SLIDER -->
+      <div class="akps-slider-block">
+        <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
+        <div class="akps-block-title">Score Bob on the AKPS</div>
+        <p class="akps-block-desc">Based on what you've observed in the video and scene above — not what Bob says — where would you place him on the Australia-modified Karnofsky Performance Scale?</p>
+        <div class="akps-score-display">
+          <div class="akps-score-number" id="akps-num">70</div>
+          <div class="akps-score-label-wrap">
+            <div class="akps-score-label" id="akps-label">Limited self-care</div>
+            <div class="akps-score-sublabel" id="akps-sublabel">Cares for self; unable to carry on normal activity or work</div>
+          </div>
+        </div>
+        <div class="akps-track-labels">
+          <span class="akps-track-label">Most dependent ←</span>
+          <span class="akps-track-label">→ Fully active</span>
+        </div>
+        <input type="range" class="akps-range" id="akps-slider"
+               min="1" max="10" value="7" step="1"
+               aria-label="AKPS score — drag to select"
+               oninput="updateAKPSSlider(this.value)">
+        <div class="akps-colour-bar"></div>
+        <div class="akps-tick-row">
+          <span class="akps-tick">10</span><span class="akps-tick">20</span>
+          <span class="akps-tick">30</span><span class="akps-tick">40</span>
+          <span class="akps-tick">50</span><span class="akps-tick">60</span>
+          <span class="akps-tick">70</span><span class="akps-tick">80</span>
+          <span class="akps-tick">90</span><span class="akps-tick">100</span>
+        </div>
+        <div class="akps-interpretation amber" id="akps-interp">
+          <div class="akps-interp-title">
+            <span id="akps-interp-icon">⚠️</span>
+            <span id="akps-interp-title-text">Functional decline present</span>
+          </div>
+          <div class="akps-interp-body" id="akps-interp-body">
+            At AKPS 70, Bob is managing self-care but unable to sustain normal activity. His score is <strong>inconsistent with saying he is "fine"</strong> — this is a clinically significant gap that warrants probing.
+          </div>
+        </div>
+        <button class="akps-confirm-btn" id="akps-confirm-btn"
+                onclick="confirmAKPSScore(); checkPage9Gate();">
+          ✓ Confirm this score &amp; save to Learning Record
         </button>
-        <div class="cab-answer" id="bob3-q1-answer">
+        <div class="akps-confirmed-note" id="akps-confirmed-note">
+          ✓ Saved — adjust and re-confirm any time before finishing
+        </div>
+      </div>
+      <!-- /AKPS SLIDER -->
+
+
+      <p class="choices-hint">
+        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
+        Bob is not volunteering concerns, but your observations suggest otherwise. Score Bob on the AKPS (left panel), then complete the activity below.
+      </p>
+
+      <!-- Activity -->
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:18px;">
+        <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity — Observations &amp; Questions</div>
+        <div class="cab-label">Reflect &amp; Respond</div>
+        <div class="cab-question">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating despite saying he is "fine"? What questions would you ask him?</div>
+        <textarea class="cab-textarea" id="bob3-q1-input"
+                  placeholder="What did you notice about his appearance or movement? What would you ask next?…"
+                  rows="6"
+                  oninput="saveActivity9(); checkPage9Gate();"
+                  aria-label="Your observations and questions for Bob"></textarea>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap;">
+          <button class="cab-reveal-btn" onclick="openAnswerModal('bob3-q1')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Reveal suggested answer
+          </button>
+          <span id="bob3-q1-saved-note" style="font-size:.75rem; color:#6ee7b7; display:none;" aria-live="polite">✓ Response saved</span>
+        </div>
+        <div class="cab-answer" id="bob3-q1-answer" style="display:none;">
           <div class="cab-answer-inner">
-            <div class="cab-answer-title">Key observations to explore</div>
+            <div class="cab-answer-title">Key observations &amp; questions to explore</div>
             <ul>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Jaundice:</strong> The yellowish tinge in the eyes suggests liver dysfunction or biliary obstruction.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Reduced Mobility:</strong> He is walking "slowly" to his chair compared to previous visits.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Subjective Minimisation:</strong> "Plodding along" is a vague phrase often used to mask worsening symptoms.</li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Jaundice:</strong> The yellowish tinge suggests liver dysfunction or biliary obstruction — worth exploring directly.</li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Reduced mobility:</strong> He walked slowly — ask about energy levels and what a typical day looks like.</li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Subjective minimisation:</strong> "Plodding along" is vague. Probe gently: <em>"What does plodding along actually look like day to day?"</em></li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Total Pain:</strong> Ask about appetite, sleep, pain, breathlessness, and emotional wellbeing — not just physical symptoms.</li>
             </ul>
           </div>
         </div>
       </div>
 
-
-<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
-  <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
-  <div>
-    <button class="btn btn-primary" id="page9-continue-btn"
-            disabled
-            style="opacity:.4; cursor:not-allowed;"
-            onclick="goToPage(10)">
-      Case Study Assessment →
-    </button>
-    <p id="page9-gate-nudge"
-       style="font-size:.76rem; color:rgba(253,202,15,.8); text-align:right; margin-top:6px; margin-bottom:0;">
-      Complete the AKPS and both activities to continue
-    </p>
-  </div>
-</div>
+      <!-- Nav — inside choices-panel, so it stays in the right column -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+        <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+        <div style="text-align:right;">
+          <button class="btn btn-primary"
+                  id="page9-continue-btn"
+                  disabled
+                  style="opacity:.4; cursor:not-allowed;"
+                  onclick="goToPage(10)"
+                  aria-label="Complete the AKPS and activity to continue">
+            Case Study Assessment →
+          </button>
+          <p id="page9-gate-nudge"
+             style="font-size:.76rem; color:rgba(253,202,15,.8); text-align:right; margin-top:6px; margin-bottom:0;">
+            Score the AKPS and complete the activity to continue
+          </p>
+        </div>
+      </div>
 
     </div>
+    <!-- /choices-panel -->
+
   </div>
 </section>
+
 
 
 <!-- ═══ PAGE 10 — MCQ ═══ -->
@@ -1172,114 +1181,100 @@
 </section>
 
 
-<!-- ═══ PAGE 11 — BOB: ACTIVE DYING ═══ -->
-<section class="page" id="page-11" aria-label="Bob Evans — Recognising Active Dying">
+ ════════════════════════════════════════════
+     PAGE 11 — BOB EVANS PART 4: ACTIVE DYING (Video + Activities)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-11" aria-label="Bob Evans Part 4 — Recognising Active Dying">
   <div class="scenario-wrap">
 
+    <!-- LEFT: video + clinical context -->
     <div class="scenario-left">
-
-      <!-- Video — nested identically to Helen's intro video -->
-<div class="scenario-video" role="region" aria-label="Bob's final visit">
-  <video controls
-         style="display:block; width:100%; height:100%; object-fit:cover;"
-         aria-label="Bob in bed, appearing very unwell with laboured breathing">
-    <source src="video/bob2.mp4" type="video/mp4">
-    Your browser does not support the video element.
-  </video>
-</div>
+      <div class="scenario-video" role="figure" aria-label="Bob's final visit">
+        <video src="video/bob2.mp4"
+               controls
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               aria-label="Bob in bed, appearing very unwell with laboured breathing">
+          Your browser does not support the video element.
+        </video>
+      </div>
 
       <div class="scenario-context" style="border-left-color:#ef4444;">
         <div class="scenario-context-label" style="color:#fca5a5;" aria-hidden="true">🚨 Clinical Visit — Urgent Follow-up</div>
-        <p>Bob is now in bed. His breathing is <strong style="color:#fff;">laboured and rapid at times, with long pauses between breaths.</strong> He is visibly anxious and restless, unable to lie flat.</p>
-        <p>He is <strong style="color:#fff;">no longer able to swallow his medications.</strong> His mouth is dry; he coughs on small sips of fluid.</p>
-        <p>He is <strong style="color:#fff;">intermittently drowsy</strong> but becomes agitated when awake — confused, pulling at the bedding, struggling to follow conversation.</p>
-        <p>Bob has not been able to speak to his son. <strong style="color:#fff;">Calls and messages have not been returned.</strong></p>
+        <p>Bob is now in bed. His breathing is <strong style="color:var(--white);">laboured and rapid at times, with long pauses between breaths.</strong> He is visibly anxious and restless, unable to lie flat.</p>
+        <p>He is <strong style="color:var(--white);">no longer able to swallow his medications.</strong> His mouth is dry; he coughs on small sips of fluid.</p>
+        <p>He is <strong style="color:var(--white);">intermittently drowsy</strong> but becomes agitated when awake — confused, pulling at the bedding, struggling to follow conversation.</p>
+        <p>Bob has not been able to speak to his son. <strong style="color:var(--white);">Calls and messages have not been returned.</strong></p>
         <p>His dog is lying on the bed beside him. 🐕</p>
       </div>
     </div>
 
+    <!-- RIGHT: reflective activities -->
     <div class="choices-panel" role="region" aria-label="Reflective activities">
 
       <p class="choices-hint">
-        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 4</strong>
+        <strong style="color:var(--white);display:block;margin-bottom:4px;">Case Study — Part 4</strong>
         You visit Bob again following concerns raised by the team. The picture has changed significantly. Work through both activities below.
       </p>
 
       <!-- Activity 1 -->
-      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:14px;">
-        <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity 1 — Recognising Deterioration</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:14px;">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Activity 1 — Recognising Deterioration</div>
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">What are you recognising as signs of deterioration now? Which signs from the Diagnosis of Dying apply to Bob at this point?</div>
         <textarea class="cab-textarea" id="bob4-q1-input" placeholder="List the signs you can identify from the scenario…" rows="4" aria-label="Your answer about signs of deterioration in Bob"></textarea>
-        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q1-answer')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <button class="cab-reveal-btn" onclick="openAnswerModal('bob4-q1')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Reveal suggested answer
         </button>
-        <div class="cab-answer" id="bob4-q1-answer">
+        <div class="cab-answer" id="bob4-q1-answer" style="display:none;">
           <div class="cab-answer-inner">
             <div class="cab-answer-title">Signs of active dying visible in this scenario</div>
             <ul>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern)</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Profound weakness</strong> — bed-bound, unable to lie flat</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Unable to swallow medications</strong> — coughing on fluids</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Drowsy and disorientated</strong> — confused, cannot follow conversation</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Terminal agitation</strong> — restless, pulling at bedding, visibly distressed</li>
-              <li><div class="caa-dot"></div>Dry mouth indicates he is likely in the <strong style="color:#fff;">final hours to days</strong> of life</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Altered breathing</strong> — laboured, rapid with long pauses (Cheyne-Stokes pattern)</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Profound weakness</strong> — bed-bound, unable to lie flat</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Unable to swallow medications</strong> — coughing on fluids</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Drowsy and disorientated</strong> — confused, cannot follow conversation</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Terminal agitation</strong> — restless, pulling at bedding, visibly distressed</li>
+              <li><div class="caa-dot"></div>Dry mouth indicates he is likely in the <strong style="color:var(--white);">final hours to days</strong> of life</li>
             </ul>
           </div>
         </div>
       </div>
 
       <!-- Activity 2 -->
-      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:20px;">
-        <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity 2 — Planning Care</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:20px;">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Activity 2 — Planning Care</div>
         <div class="cab-label">Reflect &amp; Respond</div>
         <div class="cab-question">What do you need to do now? Think about medications, communication, the Five Priorities, Bob's son, and his dog.</div>
         <textarea class="cab-textarea" id="bob4-q2-input" placeholder="Think about: medications, communication, the son, the dog, the Five Priorities of Care…" rows="4" aria-label="Your care plan for Bob"></textarea>
-        <button class="cab-reveal-btn" onclick="toggleReveal('bob4-q2-answer')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <button class="cab-reveal-btn" onclick="openAnswerModal('bob4-q2')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Reveal suggested answer
         </button>
-        <div class="cab-answer" id="bob4-q2-answer">
+        <div class="cab-answer" id="bob4-q2-answer" style="display:none;">
           <div class="cab-answer-inner">
             <div class="cab-answer-title">What needs to happen now — a suggested framework</div>
             <ul>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Medications:</strong> Convert to subcutaneous route via syringe driver. Ensure anticipatory prescribing for pain, agitation, breathlessness, and secretions.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Recognise and communicate:</strong> Discuss with the team that Bob appears to be actively dying. Document clearly.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Oral care:</strong> Keep mouth moist with regular mouth care. Do not force fluids.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Bob's son:</strong> Make all reasonable attempts to contact him — this is urgent. Consider involving the social worker or chaplain.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Bob's dog:</strong> Allow him to remain close. Contact a specialist charity (e.g. Cinnamon Trust) for a dog care plan.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Five Priorities:</strong> Recognise → communicate → involve → support → plan and do.</li>
-              <li><div class="caa-dot"></div><strong style="color:#fff;">Stop unnecessary treatments:</strong> Review and stop observations, investigations, or interventions that no longer serve Bob's comfort.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Medications:</strong> Convert to subcutaneous route via syringe driver. Ensure anticipatory prescribing for pain, agitation, breathlessness, and secretions.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Recognise and communicate:</strong> Discuss with the team that Bob appears to be actively dying. Document clearly.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Oral care:</strong> Keep mouth moist with regular mouth care. Do not force fluids.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's son:</strong> Make all reasonable attempts to contact him — this is urgent. Consider involving the social worker or chaplain.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Bob's dog:</strong> Allow him to remain close. Contact a specialist charity (e.g. Cinnamon Trust) for a dog care plan.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Five Priorities:</strong> Recognise → communicate → involve → support → plan and do.</li>
+              <li><div class="caa-dot"></div><strong style="color:var(--white);">Stop unnecessary treatments:</strong> Review and stop observations, investigations, or interventions that no longer serve Bob's comfort.</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Nav — inside choices-panel, proper spacing -->
-      <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding-top:8px; padding-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-secondary" onclick="goToPage(10)">← Back</button>
- <button class="btn btn-primary" onclick="goToPage(12)"
-        style="background:var(--yellow); color:var(--navy); border-color:var(--yellow);">
-  My Learning Record →
-</button>
-      </div>
+<button class="btn btn-primary" onclick="finish()">Finish →</button>      </div>
 
     </div>
-  </div><!-- /scenario-wrap -->
-
-  <script>
-    function finishModule() {
-      // Report completion to SCORM if available
-      if (typeof SCORM !== 'undefined' && SCORM.isInitialized()) {
-        SCORM.finish('passed', 100);
-      }
-      // Show completion overlay
-      var overlay = document.getElementById('finish-overlay');
-      if (overlay) { overlay.classList.add('show'); }
-    }
-  </script>
+  </div>
 </section>
+
 
 
 <!-- ═══ PAGE 12 — LEARNING RECORD & EXPORT ═══ -->
