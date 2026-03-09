@@ -776,21 +776,31 @@ function retryQuiz() {
 }
 
 
-/* ── Toggle reveal (cab-answer panels) ────────────────── */
-function toggleReveal(id) {
-  var el = document.getElementById(id);
-  if (!el) { return; }
-  el.classList.toggle('open');
-  // Also support hidden attribute pattern
-  if (el.hasAttribute('hidden')) {
-    el.removeAttribute('hidden');
-  }
+/* ── Answer Modal (pages 9 & 11 suggested answers) ─────── */
+function openAnswerModal(baseId) {
+  var src = document.getElementById(baseId + '-answer');
+  var modal = document.getElementById('answer-modal');
+  var content = document.getElementById('answer-modal-content');
+  if (!src || !modal || !content) { return; }
+  // Clone the inner content from the hidden cab-answer-inner div
+  var inner = src.querySelector('.cab-answer-inner');
+  content.innerHTML = inner ? inner.innerHTML : src.innerHTML;
+  modal.style.display = 'flex';
+  // Focus the close button
+  var closeBtn = modal.querySelector('button');
+  if (closeBtn) { setTimeout(function(){ closeBtn.focus(); }, 50); }
 }
 
-/* ── Finish: populate learning record then go to page 12 ── */
+function closeAnswerModal() {
+  var modal = document.getElementById('answer-modal');
+  if (modal) { modal.style.display = 'none'; }
+}
+
+/* ── Finish: show overlay, populate learning record ────── */
 function finish() {
   populateLearningRecord();
-  goToPage(12);
+  var overlay = document.getElementById('finish-overlay');
+  if (overlay) { overlay.classList.add('show'); }
 }
 
 /* ── Populate the Page 12 learning record ─────────────── */
@@ -973,11 +983,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Close answer modal on backdrop click
+  var answerModal = document.getElementById('answer-modal');
+  if (answerModal) {
+    answerModal.addEventListener('click', function(e) {
+      if (e.target === answerModal) { closeAnswerModal(); }
+    });
+  }
+
   // Close modals on Escape
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') { return; }
     if (document.getElementById('phase-modal')?.classList.contains('open'))        { closePhaseModal(); }
     if (document.getElementById('model-answer-modal')?.classList.contains('open')) { closeModelAnswerModal(); }
+    var am = document.getElementById('answer-modal');
+    if (am && am.style.display === 'flex') { closeAnswerModal(); }
   });
 
   // Safety net: always call LMSFinish when the learner closes/navigates away.
