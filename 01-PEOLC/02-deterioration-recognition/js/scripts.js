@@ -180,7 +180,7 @@ var SCORM = (function () {
 ══════════════════════════════════════════════════════════ */
 
 var visited     = new Set([1]);
-var TOTAL_PAGES = 7;
+var TOTAL_PAGES = 12;
 
 function updateProgressBar(num) {
   var pct   = Math.round(((num - 1) / (TOTAL_PAGES - 1)) * 100);
@@ -756,6 +756,9 @@ function showResults() {
 
   // ── SCORM: report final score and pass/fail status ─────
   SCORM.finish(passed ? 'passed' : 'failed', pct);
+
+  // ── Unlock page 10 continue button if passed ───────────
+  if (passed) { unlockPage10Continue(); }
 }
 
 function retryQuiz() {
@@ -770,6 +773,77 @@ function retryQuiz() {
     SCORM.setValue('cmi.core.lesson_status', 'incomplete');
     SCORM.commit();
   }
+}
+
+
+/* ── Toggle reveal (cab-answer panels) ────────────────── */
+function toggleReveal(id) {
+  var el = document.getElementById(id);
+  if (!el) { return; }
+  el.classList.toggle('open');
+  // Also support hidden attribute pattern
+  if (el.hasAttribute('hidden')) {
+    el.removeAttribute('hidden');
+  }
+}
+
+/* ── Finish: populate learning record then go to page 12 ── */
+function finish() {
+  populateLearningRecord();
+  goToPage(12);
+}
+
+/* ── Populate the Page 12 learning record ─────────────── */
+function populateLearningRecord() {
+  // AKPS
+  var akpsEl = document.getElementById('export-akps-score');
+  if (akpsEl) {
+    if (window.akpsConfirmedScore !== null) {
+      akpsEl.innerHTML =
+        '<strong>Score: ' + window.akpsConfirmedScore + '</strong> — ' + (window.akpsConfirmedLabel || '') +
+        '<br><span style="color:#5a6a82;">' + (window.akpsConfirmedSub || '') + '</span>';
+    } else {
+      akpsEl.textContent = 'AKPS not confirmed during the module.';
+    }
+  }
+  // MCQ
+  var mcqEl = document.getElementById('export-mcq-score');
+  if (mcqEl) {
+    if (quizScore !== null) {
+      var passed = quizScore >= PASS_MARK;
+      mcqEl.innerHTML =
+        '<strong>' + quizScore + '%</strong> — ' +
+        (passed ? '<span style="color:#059669;">Passed ✓</span>' : '<span style="color:#dc2626;">Not yet passed</span>');
+    } else {
+      mcqEl.textContent = 'MCQ not completed.';
+    }
+  }
+  // Textarea responses
+  var map = {
+    'export-bob3-q1': 'bob3-q1-input',
+    'export-bob4-q1': 'bob4-q1-input',
+    'export-bob4-q2': 'bob4-q2-input'
+  };
+  Object.keys(map).forEach(function (exportId) {
+    var srcId = map[exportId];
+    var exportEl = document.getElementById(exportId);
+    var srcEl    = document.getElementById(srcId);
+    if (exportEl && srcEl) {
+      exportEl.textContent = srcEl.value.trim() || '(no response recorded)';
+    }
+  });
+}
+
+/* ── MCQ pass gate — called from showResults() ─────────── */
+function unlockPage10Continue() {
+  var btn   = document.getElementById('page10-continue-btn');
+  var nudge = document.getElementById('page10-gate-nudge');
+  if (btn) {
+    btn.disabled      = false;
+    btn.style.opacity = '1';
+    btn.style.cursor  = 'pointer';
+  }
+  if (nudge) { nudge.style.display = 'none'; }
 }
 
 
