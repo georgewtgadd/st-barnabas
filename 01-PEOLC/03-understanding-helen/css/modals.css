@@ -1,0 +1,81 @@
+/* ══════════════════════════════════════════════════════════
+   modals.css — Shared modal base + hotspot modal content
+══════════════════════════════════════════════════════════ */
+
+/* ── MODAL BASE ──────────────────────────────────────── */
+.modal-backdrop {
+  display: none;
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(9,15,30,0.92);
+  backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.modal-backdrop.open { display: flex; animation: modalIn 0.3s ease; }
+
+.modal-inner {
+  max-width: 680px; width: 100%;
+  background: #111827;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+  animation: modalSlide 0.3s ease;
+}
+.modal-inner.wide { max-width: 860px; }
+
+.modal-header {
+  background: var(--navy);
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 3px solid var(--yellow);
+}
+.modal-header-text .modal-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 3px;
+}
+.modal-header-text .modal-title {
+  font-family: 'Merriweather', serif; font-size: 1rem; color: var(--white);
+}
+
+.modal-close {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  width: 36px; height: 36px;
+  border-radius: 50%; font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; flex-shrink: 0;
+}
+.modal-close:hover         { background: rgba(255,255,255,0.18); }
+.modal-close:focus-visible { outline: 3px solid var(--yellow); }
+
+.modal-body { padding: 28px; }
+.modal-footer {
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--border);
+}
+.modal-footer p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ── HOTSPOT MODAL CONTENT ───────────────────────────── */
+.hs-modal-tag {
+  display: inline-block;
+  padding: 4px 14px; border-radius: 12px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.tag-risk    { background: rgba(192,57,43,0.2);  color: #fc8181; border: 1px solid rgba(192,57,43,0.4); }
+.tag-concern { background: rgba(217,119,6,0.2);  color: #fde68a; border: 1px solid rgba(217,119,6,0.4); }
+.tag-positive{ background: rgba(5,150,105,0.2);  color: #6ee7b7; border: 1px solid rgba(5,150,105,0.4); }
+
+.hs-modal-title { font-family: 'Merriweather', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
+.hs-modal-body  { font-size: 0.92rem; color: #c5d3e8; line-height: 1.8; }
+.hs-modal-action {
+  margin-top: 20px; padding: 14px 18px;
+  background: rgba(1,151,222,0.1);
+  border: 1px solid rgba(1,151,222,0.25);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem; color: #c5d3e8; line-height: 1.65;
+}
+.hs-modal-action strong { color: var(--white); }

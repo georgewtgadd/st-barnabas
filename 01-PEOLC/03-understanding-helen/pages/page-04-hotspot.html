@@ -1,0 +1,77 @@
+<!-- PAGE 4 — HOTSPOT ACTIVITY -->
+<section class="page" id="page-4" aria-label="Hotspot activity — Helen's living room">
+  <div class="hotspot-wrap">
+
+    <div class="hotspot-header">
+      <div class="hotspot-header-text">
+        <div class="intro-eyebrow" style="margin-bottom:12px;">Environment Assessment</div>
+        <h2>Helen's Living Room</h2>
+        <p>
+          You are now in Helen's home. Before you begin your assessment, take a moment to explore the
+          room. Click each hotspot to identify what you notice — you must find all
+          <strong style="color:var(--white);">4 points of interest</strong> before you can continue.
+        </p>
+      </div>
+      <div class="hotspot-progress-pills" id="hs-pills" aria-live="polite" aria-label="Hotspot discovery progress">
+        <div class="hotspot-pill" id="pill-1"><div class="pill-dot"></div>Medication</div>
+        <div class="hotspot-pill" id="pill-2"><div class="pill-dot"></div>Trip hazard</div>
+        <div class="hotspot-pill" id="pill-3"><div class="pill-dot"></div>Television</div>
+        <div class="hotspot-pill" id="pill-6"><div class="pill-dot"></div>Isolation</div>
+      </div>
+    </div>
+
+    <!-- Scene image with hotspot buttons -->
+    <div class="hotspot-scene" role="img" aria-label="Helen's living room — click the numbered hotspots to explore">
+      <img src="images/helen_hotspot.png"
+           alt="Helen's living room with areas of clinical interest highlighted"
+           id="hs-image">
+
+      <button class="hs-btn" id="hs-1" style="left:22%; top:72%;"
+              onclick="clickHotspot(1)" aria-label="Explore this area">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="hs-tooltip">Click to explore</div>
+      </button>
+
+      <button class="hs-btn" id="hs-2" style="left:62%; top:87%;"
+              onclick="clickHotspot(2)" aria-label="Explore this area">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="hs-tooltip">Click to explore</div>
+      </button>
+
+      <button class="hs-btn" id="hs-3" style="left:83%; top:52%;"
+              onclick="clickHotspot(3)" aria-label="Explore this area">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="hs-tooltip">Click to explore</div>
+      </button>
+
+      <button class="hs-btn" id="hs-6" style="left:50%; top:28%;"
+              onclick="clickHotspot(6)" aria-label="Explore this area">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div class="hs-tooltip">Click to explore</div>
+      </button>
+    </div>
+
+    <!-- Continue row — locked until all found -->
+    <div class="hs-continue-wrap">
+      <div class="hs-locked-msg" id="hs-locked-msg">
+        <span aria-hidden="true">🔒</span>
+        <span id="hs-lock-text">Find all 4 hotspots to unlock the next section</span>
+      </div>
+      <button class="btn btn-primary" id="hs-continue-btn" disabled
+              onclick="goToPage(5)"
+              aria-label="Continue — locked until all hotspots found"
+              style="opacity:0.4; cursor:not-allowed;">
+        Continue →
+      </button>
+    </div>
+
+    <div style="margin-top:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(3)"
+              style="font-size:0.82rem; padding:10px 18px;"
+              aria-label="Back to the first visit">
+        <span aria-hidden="true">←</span> Back to The First Visit
+      </button>
+    </div>
+
+  </div>
+</section>
