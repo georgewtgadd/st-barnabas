@@ -1,0 +1,125 @@
+/* homeostasis.css — Page 7 — clean two-pathway layout */
+
+/* Set-point banner */
+.homeo-setpoint {
+  display: flex; align-items: center; gap: 16px;
+  background: rgba(0,168,142,0.1); border: 1px solid rgba(0,168,142,0.3);
+  border-radius: 12px; padding: 16px 22px; margin-bottom: 32px;
+}
+.hsp-icon { font-size: 1.6rem; flex-shrink: 0; }
+.hsp-text { display: flex; flex-direction: column; gap: 3px; }
+.hsp-text strong { font-family: 'Merriweather', serif; font-size: 0.95rem; color: var(--white); }
+.hsp-text span   { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Two-column layout */
+.homeo-pathways {
+  display: grid; grid-template-columns: 1fr 72px 1fr;
+  gap: 0; margin-bottom: 28px; align-items: start;
+}
+
+/* Vertical divider */
+.homeo-divider {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 0; padding-top: 72px;
+}
+.hd-line { width: 2px; flex: 1; background: rgba(255,255,255,0.1); min-height: 60px; }
+.hd-badge {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.15);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 0.9rem; line-height: 1.2;
+}
+.hd-badge span { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+
+/* Pathway headers */
+.pathway-header {
+  display: flex; align-items: center; gap: 14px;
+  border-radius: 12px 12px 0 0; padding: 16px 20px; margin-bottom: 0;
+}
+.high-header { background: rgba(249,115,22,0.15); border: 2px solid rgba(249,115,22,0.35); border-bottom: none; }
+.low-header  { background: rgba(1,151,222,0.12);  border: 2px solid rgba(1,151,222,0.35);  border-bottom: none; }
+.ph-arrow { font-size: 1.6rem; font-weight: 700; flex-shrink: 0; }
+.high-header .ph-arrow { color: #fb923c; }
+.low-header  .ph-arrow { color: #38bdf8; }
+.ph-label   { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--white); }
+.ph-trigger { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* Steps container */
+.pathway-steps {
+  display: flex; flex-direction: column;
+  border-left: 2px solid; border-right: 2px solid; padding: 12px;
+  gap: 0;
+}
+.high-pathway .pathway-steps { border-color: rgba(249,115,22,0.35); background: rgba(249,115,22,0.04); }
+.low-pathway  .pathway-steps { border-color: rgba(1,151,222,0.35);  background: rgba(1,151,222,0.04); }
+
+/* Individual step */
+.pstep {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 14px 16px; cursor: pointer;
+  transition: transform 0.15s, background 0.2s, border-color 0.2s;
+  text-align: left;
+}
+.pstep:hover { transform: translateX(3px); background: rgba(255,255,255,0.07); }
+.pstep:focus-visible { outline: 3px solid var(--yellow); }
+.high-pathway .pstep:hover { border-color: rgba(249,115,22,0.4); }
+.low-pathway  .pstep:hover { border-color: rgba(1,151,222,0.4); }
+
+.pstep-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 800;
+}
+.high-num { background: rgba(249,115,22,0.25); color: #fb923c; }
+.low-num  { background: rgba(1,151,222,0.25);  color: #38bdf8; }
+.pstep-body { flex: 1; }
+.pstep-title { font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.pstep-desc  { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+.pstep-icon  { font-size: 1.2rem; flex-shrink: 0; opacity: 0.8; }
+
+/* Connecting arrow between steps */
+.pstep-arrow {
+  text-align: center; font-size: 1.1rem; padding: 2px 0; line-height: 1;
+}
+.high-arrow { color: rgba(249,115,22,0.5); }
+.low-arrow  { color: rgba(1,151,222,0.5); }
+
+/* Result bar */
+.pathway-result {
+  border-radius: 0 0 12px 12px; padding: 12px 20px;
+  font-size: 0.82rem; font-weight: 700; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border-left: 2px solid; border-right: 2px solid; border-bottom: 2px solid;
+}
+.high-result { background: rgba(0,168,142,0.12); border-color: rgba(0,168,142,0.4); color: #5eead4; }
+.low-result  { background: rgba(0,168,142,0.12); border-color: rgba(0,168,142,0.4); color: #5eead4; }
+
+/* EoL note */
+.homeo-eol-note {
+  background: rgba(0,168,142,0.07); border: 1px solid rgba(0,168,142,0.2);
+  border-left: 4px solid var(--teal); border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+}
+.eol-note-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+.homeo-eol-note p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; }
+.homeo-eol-note strong { color: var(--white); }
+
+/* Modal body reused from homeostasis.js */
+.hm-detail { display: flex; flex-direction: column; gap: 14px; }
+.hm-steps { display: flex; flex-direction: column; gap: 10px; }
+.hm-step { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 12px 14px; }
+.hm-step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+.hm-step.high .hm-step-num { background: rgba(249,115,22,0.2); color: #fb923c; }
+.hm-step.low  .hm-step-num { background: rgba(1,151,222,0.2);  color: #38bdf8; }
+.hm-step p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+.hm-step strong { color: var(--white); }
+.hm-eol { background: rgba(0,168,142,0.08); border: 1px solid rgba(0,168,142,0.2); border-radius: 8px; padding: 12px 14px; }
+.hm-eol-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+.hm-eol p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+@media (max-width: 720px) {
+  .homeo-pathways { grid-template-columns: 1fr; }
+  .homeo-divider { flex-direction: row; padding-top: 0; padding: 12px 0; }
+  .hd-line { width: auto; height: 2px; flex: 1; min-height: auto; }
+}
