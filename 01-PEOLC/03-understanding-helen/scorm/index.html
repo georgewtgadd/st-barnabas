@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Helen | St Barnabas Hospice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/components/intro.css">
+  <link rel="stylesheet" href="css/components/profile.css">
+  <link rel="stylesheet" href="css/components/scenario.css">
+  <link rel="stylesheet" href="css/components/hotspot.css">
+  <link rel="stylesheet" href="css/components/pillars.css">
+  <link rel="stylesheet" href="css/components/sophie.css">
+  <link rel="stylesheet" href="css/components/acp.css">
+</head>
+<body>
+
+<!-- Skip to content (WCAG 2.4.1) -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════ -->
+<header role="banner">
+  <a href="index.html" class="brand" aria-label="St Barnabas Hospice — return to home">
+    <div class="brand-logo">
+      <img src="images/logo.jpg" alt="St Barnabas Hospice"
+           style="width:100%; height:100%; object-fit:contain; display:block;">
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">St Barnabas Hospice</span>
+      <span class="brand-tagline">E-Learning Platform</span>
+    </div>
+  </a>
+  <div class="module-label">
+    <strong>Understanding Helen</strong>
+    Person-Centred Care · Module 1
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PROGRESS NAV
+══════════════════════════════════════════════════════ -->
+<nav aria-label="Module progress" class="progress-nav">
+  <button class="nav-step current" id="nav-1" aria-current="step"
+          onclick="navClick(1)" aria-label="Step 1: Meet Helen">
+    <div class="nav-step-num" aria-hidden="true">1</div>
+    <span class="nav-step-label">Meet Helen</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-2" onclick="navClick(2)"
+          aria-label="Step 2: Her Profile" disabled>
+    <div class="nav-step-num" aria-hidden="true">2</div>
+    <span class="nav-step-label">Her Profile</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-3" onclick="navClick(3)"
+          aria-label="Step 3: The First Visit" disabled>
+    <div class="nav-step-num" aria-hidden="true">3</div>
+    <span class="nav-step-label">The First Visit</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-4" onclick="navClick(4)"
+          aria-label="Step 4: Helen's Living Room" disabled>
+    <div class="nav-step-num" aria-hidden="true">4</div>
+    <span class="nav-step-label">Helen's Living Room</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-5" onclick="navClick(5)"
+          aria-label="Step 5: Four Pillars of Wellness" disabled>
+    <div class="nav-step-num" aria-hidden="true">5</div>
+    <span class="nav-step-label">Four Pillars</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-6" onclick="navClick(6)"
+          aria-label="Step 6: Sophie and Claire" disabled>
+    <div class="nav-step-num" aria-hidden="true">6</div>
+    <span class="nav-step-label">Sophie &amp; Claire</span>
+  </button>
+
+  <div class="nav-divider" aria-hidden="true"></div>
+
+  <button class="nav-step" id="nav-7" onclick="navClick(7)"
+          aria-label="Step 7: Advance Care Plan" disabled>
+    <div class="nav-step-num" aria-hidden="true">7</div>
+    <span class="nav-step-label">Care Plan</span>
+  </button>
+</nav>
+
+<!-- Progress bar -->
+<div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label" aria-live="polite">0% complete</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN CONTENT — pages injected by page-loader.js
+══════════════════════════════════════════════════════ -->
+<main id="main-content">
+  <!-- Page fragments loaded dynamically via page-loader.js -->
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — PILLAR DETAIL
+══════════════════════════════════════════════════════ -->
+<div id="pillar-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pm-name">
+  <div class="modal-inner modal-wide">
+    <div class="pillar-modal-stripe" id="pm-stripe"></div>
+
+    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div class="pillar-modal-icon" id="pm-icon"></div>
+        <div>
+          <div class="pillar-modal-tag" id="pm-tag"></div>
+          <div class="pillar-modal-name" id="pm-name"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closePillarModal()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="pillar-section-label">About this Pillar</div>
+      <div class="pillar-definition" id="pm-definition"></div>
+      <div class="pillar-rule"></div>
+      <div class="pillar-section-label">Holistic Assessment Framework</div>
+      <div id="pm-key-grid"></div>
+    </div>
+
+    <div class="modal-footer">
+      <p id="pm-hint">Explore the remaining pillars, then continue.</p>
+      <button class="btn btn-primary" onclick="closePillarModal()" aria-label="Close and continue exploring">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — VIDEO (Scene 2)
+══════════════════════════════════════════════════════ -->
+<div id="video-modal" class="modal-backdrop" role="dialog" aria-modal="true"
+     aria-label="Scene 2 video — The Conversation Begins">
+  <div class="modal-inner wide">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-eyebrow">Scene 2 Unlocked</div>
+        <div class="modal-title">The Conversation Begins</div>
+      </div>
+      <button class="modal-close" onclick="closeVideoModal()" aria-label="Close video">✕</button>
+    </div>
+
+    <div style="position:relative; aspect-ratio:16/9; background:#0d1a33;">
+      <video id="modal-video" controls width="100%" height="100%"
+             style="display:block; width:100%; height:100%; object-fit:cover;"
+             aria-label="Scene 2 — Simon opens up about the family's situation">
+        <source src="video/simon_helen_video.mp4" type="video/mp4">
+        <!-- <track kind="captions" src="video/scene2_video.vtt" srclang="en" label="English" default> -->
+        Your browser does not support the video element.
+      </video>
+    </div>
+
+    <div class="modal-footer">
+      <p>Watch the scene, then continue to Helen's Living Room.</p>
+      <button class="btn btn-primary" onclick="closeVideoModal(); goToPage(4);"
+              aria-label="Continue to Helen's Living Room">
+        Continue to Helen's Living Room →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — HOTSPOT DETAIL
+══════════════════════════════════════════════════════ -->
+<div id="hs-modal" class="modal-backdrop" role="dialog" aria-modal="true"
+     aria-label="Hotspot detail">
+  <div class="modal-inner">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-eyebrow">Clinical Observation</div>
+        <div class="modal-title">What did you find?</div>
+      </div>
+      <button class="modal-close" onclick="closeHotspotModal()" aria-label="Close and continue exploring">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <span class="hs-modal-tag tag-risk" id="hs-modal-eyebrow">High Risk</span>
+      <div class="hs-modal-title" id="hs-modal-title"></div>
+      <div class="hs-modal-body"  id="hs-modal-body"></div>
+      <div class="hs-modal-action" id="hs-modal-action"></div>
+    </div>
+
+    <div class="modal-footer">
+      <p id="hs-modal-hint">Close this panel and continue exploring the room.</p>
+      <button class="btn btn-primary" onclick="closeHotspotModal()" aria-label="Close and continue exploring">
+        Continue Exploring →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — ACP HELEN'S NOTES
+══════════════════════════════════════════════════════ -->
+<div id="acp-notes-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="acp-notes-title">
+  <div class="modal-inner modal-wide">
+    <div style="height:5px; background:linear-gradient(90deg,var(--blue),var(--yellow));"></div>
+
+    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:42px; height:42px; border-radius:10px; background:rgba(1,151,222,0.15); display:flex; align-items:center; justify-content:center; font-size:1.2rem;" aria-hidden="true">📋</div>
+        <div>
+          <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:3px;">Reference</div>
+          <div id="acp-notes-title" style="font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--white);">Helen's Clinical Notes</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeAcpModal()" aria-label="Close Helen's notes">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="acp-notes-grid">
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Personal</div>
+          <p>Full name: <strong>Helen Marsh</strong>. Date of birth: <strong>14 March 1951</strong> (age 75). Lives at home with husband <strong>Simon Marsh (68)</strong> and granddaughter <strong>Sophie Marsh (14)</strong>. Faith: <strong>Christian</strong> — faith is central to her coping.</p>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Clinical</div>
+          <p>Stage 4 ovarian cancer with pulmonary metastases. Oxygen therapy 2L/min in place. Prognosis: weeks to months. DNR in place. Medication review due this visit.</p>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">What Matters to Helen</div>
+          <p>Helen values her <strong>dignity and privacy</strong> deeply. She does not want to be seen as a burden. She wants clinical discussions to take place sensitively, in her presence only. She prays regularly and finds faith her main source of peace.</p>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Care Preferences</div>
+          <p>Helen has expressed a <strong>strong wish to remain at home</strong> for as long as possible. She has not formally stated a preferred place of death but has expressed she does not want to die in hospital. She would consider the hospice if home care is no longer manageable.</p>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Family Context</div>
+          <p>Simon is primary carer — working night shifts while managing Helen's care, showing signs of <strong>carer strain</strong>. Sophie (14) has not been told the prognosis and is withdrawing — consider referral to youth bereavement services. Financial pressures noted (heating bills).</p>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Documents in Place</div>
+          <p>DNR / DNACPR confirmed. No LPA on file yet — to be discussed. No formal ACP documented. Medication list attached to care record. ReSPECT form not yet completed.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <p>Use these notes to guide your completion of the Advance Care Plan.</p>
+      <button class="btn btn-primary" onclick="closeAcpModal()" aria-label="Close notes and return to form">
+        Return to Form →
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<footer role="contentinfo">
+  <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG accessibility logo" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<!-- JS modules — order matters -->
+<script src="js/navigation.js"></script>
+<script src="js/scenario.js"></script>
+<script src="js/video-modal.js"></script>
+<script src="js/hotspot.js"></script>
+<script src="js/pillars.js"></script>
+<script src="js/acp.js"></script>
+<script src="js/page-loader.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
