@@ -1,0 +1,79 @@
+/* hormones.css — Page 6 */
+.hormones-layout { display: grid; grid-template-columns: 1fr 380px; gap: 36px; align-items: start; }
+.hormones-info { display: flex; flex-direction: column; gap: 16px; }
+
+.hormone-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 14px; padding: 18px 20px;
+}
+.hormone-card.adrenaline { border-left: 4px solid #ef4444; border-radius: 0 14px 14px 0; }
+.hormone-card.cortisol   { border-left: 4px solid #f97316; border-radius: 0 14px 14px 0; }
+.hormone-card.insulin-card { border-left: 4px solid var(--teal); border-radius: 0 14px 14px 0; }
+.hormone-card.glycogen-card { border-left: 4px solid var(--yellow); border-radius: 0 14px 14px 0; }
+
+.hc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.hc-badge {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; font-weight: 700; flex-shrink: 0;
+}
+.hc-badge.up      { background: rgba(239,68,68,0.2);   color: #fca5a5; }
+.hc-badge.down    { background: rgba(0,168,142,0.2);   color: #5eead4; }
+.hc-badge.neutral { background: rgba(253,202,15,0.15); color: #fde68a; font-size: 0.9rem; }
+.hc-name   { font-weight: 700; font-size: 0.95rem; color: var(--white); }
+.hc-source { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.04em; }
+.hc-body   { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+.hc-body strong { color: var(--white); }
+
+/* Elevator */
+.elevator-panel {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 20px; display: flex; flex-direction: column; align-items: center;
+  position: sticky; top: 88px;
+}
+.elevator-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+.elevator-display { display: flex; gap: 16px; align-items: flex-start; width: 100%; }
+
+.elevator-meter-wrap { display: flex; gap: 6px; align-items: stretch; }
+.elevator-meter {
+  width: 52px; height: 260px; border-radius: 10px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  position: relative; overflow: hidden;
+}
+.ez-zone { position: absolute; left: 0; right: 0; display: flex; align-items: center; justify-content: center; }
+.ez-zone span { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); opacity: 0.7; }
+.ez-zone.hypo   { background: rgba(239,68,68,0.15); }
+.ez-zone.normal { background: rgba(34,197,94,0.12); }
+.ez-zone.high   { background: rgba(249,115,22,0.12); }
+.ez-zone.dka    { background: rgba(220,38,38,0.2); }
+.ez-zone span   { color: var(--white); }
+
+.elevator-fill {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, rgba(34,197,94,0.5) 0%, rgba(0,197,220,0.3) 100%);
+  transition: height 0.8s cubic-bezier(0.4,0,0.2,1), background 0.8s;
+}
+.elevator-marker {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  background: var(--white); border-radius: 6px; padding: 3px 5px;
+  text-align: center; transition: bottom 0.8s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.em-value { font-size: 0.78rem; font-weight: 800; color: var(--navy); line-height: 1; }
+.em-unit  { font-size: 0.5rem; color: var(--navy); }
+
+.elevator-scale {
+  display: flex; flex-direction: column; justify-content: space-between;
+  height: 260px; font-size: 0.6rem; color: rgba(255,255,255,0.3);
+}
+
+.elevator-info-panel { flex: 1; display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
+.eip-label  { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+.eip-status { font-size: 0.88rem; font-weight: 700; color: var(--white); }
+.eip-last   { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
+.eip-risk   { font-size: 0.76rem; color: #fca5a5; line-height: 1.5; font-weight: 600; }
+
+@media (max-width: 900px) {
+  .hormones-layout { grid-template-columns: 1fr; }
+  .elevator-panel { position: static; }
+}

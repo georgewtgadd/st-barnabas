@@ -1,0 +1,105 @@
+<!-- PAGE 5 — ISLETS OF LANGERHANS -->
+<section class="page" id="page-5" aria-label="The Islets of Langerhans interactive activity">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Activity</div>
+    <h2 class="page-title">The Islets of Langerhans</h2>
+    <p class="page-sub">The endocrine pancreas contains four specialised cell types. Adjust the Beta cell percentage using the slider to see how insulin deficiency develops. When Beta cells drop below 70%, clinical diabetes becomes likely.</p>
+
+    <div class="islets-layout">
+
+      <!-- Left: cell type cards -->
+      <div class="islets-cells" role="list" aria-label="Cell types in the Islets of Langerhans">
+
+        <div class="islet-cell alpha" role="listitem" aria-label="Alpha cells — 20 percent — secrete glucagon">
+          <div class="ic-pct" id="pct-alpha">20%</div>
+          <div class="ic-label">Alpha Cells</div>
+          <div class="ic-function">Secrete <strong>glucagon</strong><br>↑ Raises blood sugar</div>
+        </div>
+
+        <div class="islet-cell beta" id="islet-beta" role="listitem" aria-label="Beta cells — 70 percent — secrete insulin">
+          <div class="ic-pct" id="pct-beta">70%</div>
+          <div class="ic-label">Beta Cells</div>
+          <div class="ic-function">Secrete <strong>insulin</strong><br>↓ Lowers blood sugar</div>
+          <div class="ic-warning" id="beta-warning" hidden aria-live="polite">
+            <span aria-hidden="true">⚠️</span> Insulin deficiency — diabetes onset
+          </div>
+        </div>
+
+        <div class="islet-cell delta" role="listitem" aria-label="Delta cells — 5 percent — secrete somatostatin">
+          <div class="ic-pct" id="pct-delta">5%</div>
+          <div class="ic-label">Delta Cells</div>
+          <div class="ic-function">Secrete <strong>somatostatin</strong><br>Regulates α &amp; β activity</div>
+        </div>
+
+        <div class="islet-cell fcell" role="listitem" aria-label="F cells — 5 percent — secrete pancreatic polypeptide">
+          <div class="ic-pct" id="pct-fcell">5%</div>
+          <div class="ic-label">F Cells</div>
+          <div class="ic-function">Secrete <strong>pancreatic polypeptide</strong><br>Regulates exocrine function</div>
+        </div>
+
+      </div>
+
+      <!-- Right: interactive panel -->
+      <div class="islets-interactive">
+
+        <!-- Donut chart -->
+        <div class="islet-donut-wrap" aria-hidden="true">
+          <svg class="islet-donut" viewBox="0 0 120 120" id="islet-donut-svg">
+            <!-- Will be drawn by islets.js -->
+          </svg>
+          <div class="donut-centre">
+            <div class="dc-label">Beta</div>
+            <div class="dc-value" id="dc-beta-val">70%</div>
+          </div>
+        </div>
+
+        <!-- Slider control -->
+        <div class="islet-slider-wrap" role="group" aria-label="Adjust beta cell percentage">
+          <label class="slider-label" for="beta-slider">
+            Beta Cell Percentage: <strong id="slider-val-display">70%</strong>
+          </label>
+          <input type="range" id="beta-slider" class="beta-range"
+                 min="0" max="100" value="70" step="5"
+                 aria-label="Beta cell percentage slider"
+                 oninput="updateIslets(this.value)">
+          <div class="slider-ticks" aria-hidden="true">
+            <span>0%</span><span>25%</span><span>50%</span><span>70%</span><span>100%</span>
+          </div>
+        </div>
+
+        <!-- Status panel -->
+        <div class="islet-status" id="islet-status">
+          <div class="is-normal" id="is-normal">
+            <div class="is-icon" aria-hidden="true">✅</div>
+            <div>
+              <strong>Normal Islet Function</strong>
+              <p>Beta cell mass is sufficient to produce adequate insulin. Blood glucose regulation is intact.</p>
+            </div>
+          </div>
+          <div class="is-warning" id="is-warning" hidden>
+            <div class="is-icon" aria-hidden="true">⚠️</div>
+            <div>
+              <strong>Impaired Insulin Secretion</strong>
+              <p>Beta cells are declining. Insulin production is insufficient — pre-diabetic state or early diabetes is likely.</p>
+            </div>
+          </div>
+          <div class="is-critical" id="is-critical" hidden>
+            <div class="is-icon" aria-hidden="true">🔴</div>
+            <div>
+              <strong>Severe Insulin Deficiency</strong>
+              <p>Critical loss of beta cell mass. Absolute insulin deficiency — characteristic of late Type 1 or advanced pancreatic disease. Without exogenous insulin, DKA is inevitable.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(4)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(6)">Continue <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>
