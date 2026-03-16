@@ -1,9 +1,12 @@
 /* ══════════════════════════════════════════════════════════
-   js/main.js  ·  Entry point — fires after pagesLoaded
+   js/main.js  ·  Entry point
 ══════════════════════════════════════════════════════════ */
 
-document.addEventListener('pagesLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+  // SCORM
   SCORM.initialize();
+
+  // Start on page 1
   goToPage(1);
 
   // Page-change hooks
