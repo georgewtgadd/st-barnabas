@@ -1,0 +1,49 @@
+<!-- PAGE 1 — VIDEO INTRODUCTION -->
+<section class="page active" id="page-1" aria-label="Introduction — Meet Helen">
+  <div class="intro-hero">
+
+    <div class="intro-text">
+      <div class="intro-eyebrow" role="note">Module Introduction</div>
+      <h1 class="intro-heading">Meet <em>Helen.</em><br>Her story matters.</h1>
+      <p class="intro-desc">
+        Helen is 75 years old and is receiving palliative care at home. She has a family who love her
+        deeply — and a family who are struggling. Before your first visit, take a moment to hear from
+        Helen herself.
+      </p>
+      <div class="intro-instruction" role="note">
+        <div class="intro-instruction-icon" aria-hidden="true">▶</div>
+        <p>
+          <strong>Watch Helen's introduction video below.</strong> She will tell you in her own words
+          what matters most to her. Listen carefully — her priorities will shape the choices you make
+          throughout this module.
+        </p>
+      </div>
+      <div class="continue-row">
+        <button class="btn btn-primary" onclick="goToPage(2)"
+                aria-label="Continue to Helen's Profile">
+          Continue to Her Profile <span aria-hidden="true">→</span>
+        </button>
+        <span style="font-size:0.78rem; color:var(--text-muted);">After watching the video</span>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <div>
+      <div class="video-container" role="region" aria-label="Helen's introduction video">
+        <video controls width="100%" height="100%"
+               poster="images/thumbnail.png"
+               style="display:block; width:100%; height:100%; object-fit:cover;"
+               aria-label="Helen introduces herself and shares what matters most to her">
+          <source src="video/intro_video.mp4" type="video/mp4">
+          <!-- Add captions for WCAG 1.2.2:
+          <track kind="captions" src="video/intro_video.vtt" srclang="en" label="English" default> -->
+          Your browser does not support the video element.
+        </video>
+      </div>
+      <p style="font-size:0.72rem; color:rgba(255,255,255,0.35); margin-top:10px; text-align:center; letter-spacing:0.04em;">
+        Add a .vtt captions file to meet WCAG 1.2.2
+      </p>
+    </div>
+
+  </div>
+</section>

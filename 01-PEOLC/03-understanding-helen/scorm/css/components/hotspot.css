@@ -1,0 +1,104 @@
+/* ══════════════════════════════════════════════════════════
+   components/hotspot.css — Page 4: Hotspot Activity
+══════════════════════════════════════════════════════════ */
+
+.hotspot-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 48px 56px; }
+
+.hotspot-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.hotspot-header-text h2 { font-family: 'Merriweather', serif; font-size: 1.6rem; color: var(--white); margin-bottom: 6px; }
+.hotspot-header-text p  { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 520px; }
+
+.hotspot-progress-pills { display: flex; gap: 8px; align-items: center; flex-shrink: 0; flex-wrap: wrap; }
+.hotspot-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 0.75rem; color: var(--text-muted);
+  transition: all 0.4s; white-space: nowrap;
+}
+.hotspot-pill.found { background: rgba(1,151,222,0.15); border-color: var(--blue); color: var(--white); }
+.hotspot-pill .pill-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background 0.4s; flex-shrink: 0; }
+.hotspot-pill.found .pill-dot { background: var(--blue); }
+
+.hotspot-scene {
+  position: relative;
+  border-radius: 14px; overflow: hidden; line-height: 0;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
+  margin-bottom: 24px;
+}
+.hotspot-scene img { width: 100%; display: block; border-radius: 14px; filter: brightness(0.88); transition: filter 0.3s; }
+.hotspot-scene:hover img { filter: brightness(0.96); }
+
+.hs-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  background: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.3s, border-color 0.3s;
+  z-index: 10;
+  padding: 0;
+}
+.hs-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.hs-btn.visited svg { stroke: var(--navy); }
+.hs-btn:not(.visited)      { animation: hspulsering 2.2s infinite; }
+.hs-btn:hover              { transform: translate(-50%, -50%) scale(1.18); }
+.hs-btn:focus-visible      { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.hs-btn.visited            { background: var(--yellow); border-color: var(--yellow); color: var(--navy); animation: none; box-shadow: none; }
+
+.hs-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%);
+  background: rgba(9,15,30,0.95);
+  border: 1px solid var(--yellow);
+  color: var(--white);
+  font-size: 0.75rem; font-weight: 600;
+  padding: 6px 12px; border-radius: 6px;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity 0.2s;
+  font-family: 'DM Sans', sans-serif; letter-spacing: 0.03em;
+  z-index: 20;
+}
+.hs-tooltip::after {
+  content: '';
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--yellow);
+}
+.hs-btn:hover .hs-tooltip,
+.hs-btn:focus-visible .hs-tooltip { opacity: 1; }
+
+.hs-continue-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px; margin-top: 24px;
+}
+.hs-locked-msg {
+  font-size: 0.82rem; color: var(--text-muted);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hotspot-header-text h2        { font-size: 1.4rem; }
+  .hotspot-header-text p         { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .hotspot-header                { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .hotspot-progress-pills        { width: 100%; flex-wrap: wrap; }
+  .hotspot-header-text h2        { font-size: 1.2rem; }
+  .hotspot-header-text p         { font-size: 0.84rem; }
+  .hs-continue-wrap              { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hs-continue-wrap .btn         { width: 100%; justify-content: center; }
+  /* Tooltips require hover — hide on touch */
+  .hs-tooltip                    { display: none; }
+}

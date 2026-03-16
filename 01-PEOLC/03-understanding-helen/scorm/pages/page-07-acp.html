@@ -1,0 +1,182 @@
+<!-- PAGE 7 — ADVANCE CARE PLAN ACTIVITY -->
+<section class="page" id="page-7" aria-label="Advance Care Plan activity">
+
+  <button class="acp-float-btn" onclick="openAcpModal()" aria-label="View Helen's notes">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Helen's Notes
+  </button>
+
+  <div class="acp-wrap">
+
+    <p class="pillars-page-eyebrow">Emergency Care Planning</p>
+    <h2 class="pillars-page-title">Helen's ReSPECT Form</h2>
+    <p class="pillars-page-sub" style="max-width:680px;">
+      Using everything you have learned about Helen, complete the ReSPECT sections below.
+      Fields highlight <span style="color:#6ee7b7; font-weight:600;">green</span> when correct
+      and <span style="color:#f87171; font-weight:600;">red</span> when a key detail needs attention.
+      Use <strong>Helen's Notes</strong> (floating bottom-right) at any time for reference.
+    </p>
+
+    <div class="acp-form" role="form" aria-label="Advance Care Plan form">
+
+      <div class="acp-section">
+        <div class="acp-section-header">
+          <div class="acp-section-num">1</div>
+          <h3 class="acp-section-title">Personal Details</h3>
+        </div>
+        <div class="acp-fields">
+          <div class="acp-field-row">
+            <div class="acp-field">
+              <label class="acp-label" for="respect-firstname">First name</label>
+              <input class="acp-input acp-validate" id="respect-firstname" type="text"
+                placeholder="Enter first name"
+                data-answer="helen" data-match="contains">
+            </div>
+            <div class="acp-field">
+              <label class="acp-label" for="respect-surname">Surname</label>
+              <input class="acp-input acp-validate" id="respect-surname" type="text"
+                placeholder="Enter surname"
+                data-answer="marsh" data-match="contains">
+            </div>
+          </div>
+          <div class="acp-field-row">
+            <div class="acp-field">
+              <label class="acp-label" for="respect-dob">Date of birth</label>
+              <input class="acp-input acp-validate" id="respect-dob" type="text"
+                placeholder="DD Month YYYY"
+                data-answer="1951" data-match="contains">
+            </div>
+            <div class="acp-field">
+              <label class="acp-label" for="respect-nhs">NHS / CHI Number</label>
+              <input class="acp-input" id="respect-nhs" type="text"
+                placeholder="Enter NHS number (if known)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acp-section">
+        <div class="acp-section-header">
+          <div class="acp-section-num">2</div>
+          <h3 class="acp-section-title">Involvement in Making the Plan</h3>
+        </div>
+        <div class="acp-fields">
+          <div class="acp-table-row acp-table-head">
+            <span>Name</span><span>Relationship</span><span>Involved in discussions?</span><span>Emergency Contact?</span>
+          </div>
+          <div class="acp-table-row">
+            <input class="acp-input acp-validate" type="text" placeholder="Full name"
+              aria-label="Contact 1 name" data-answer="simon" data-match="contains">
+            <input class="acp-input acp-validate" type="text" placeholder="e.g. husband"
+              aria-label="Relationship" data-answer="husband" data-match="contains">
+            <select class="acp-input acp-validate-select" aria-label="Involved" data-answer="yes">
+              <option value="">—</option><option value="yes">Yes</option><option value="no">No</option>
+            </select>
+            <select class="acp-input acp-validate-select" aria-label="Emergency contact" data-answer="yes">
+              <option value="">—</option><option value="yes">Yes</option><option value="no">No</option>
+            </select>
+          </div>
+          <div class="acp-table-row">
+            <input class="acp-input acp-validate" type="text" placeholder="Full name"
+              aria-label="Contact 2 name" data-answer="sophie" data-match="contains">
+            <input class="acp-input acp-validate" type="text" placeholder="e.g. granddaughter"
+              aria-label="Relationship" data-answer="granddaughter" data-match="contains">
+            <select class="acp-input" aria-label="Involved">
+              <option value="">—</option><option>Yes</option><option>No</option>
+            </select>
+            <select class="acp-input" aria-label="Emergency contact">
+              <option value="">—</option><option>Yes</option><option>No</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="acp-section">
+        <div class="acp-section-header">
+          <div class="acp-section-num">3</div>
+          <h3 class="acp-section-title">Clinical Recommendations for Emergency Care</h3>
+        </div>
+        <div class="acp-fields">
+          <div class="acp-field">
+            <label class="acp-label" for="respect-focus">Focus of care</label>
+            <textarea class="acp-input acp-textarea acp-validate" id="respect-focus" rows="2"
+              placeholder="e.g. Focus on symptom control and comfort at home"
+              data-answer="symptom control|comfort|home" data-match="contains-any"></textarea>
+          </div>
+          <div class="acp-field-row">
+            <div class="acp-field">
+              <label class="acp-label" for="respect-cpr">CPR Decision</label>
+              <select class="acp-input acp-validate-select" id="respect-cpr" data-answer="dnacpr">
+                <option value="">— Select CPR Status —</option>
+                <option value="cpr">For CPR</option>
+                <option value="dnacpr">DNACPR (Do Not Attempt CPR)</option>
+              </select>
+            </div>
+            <div class="acp-field">
+              <label class="acp-label" for="respect-hospital">Hospital Admission?</label>
+              <select class="acp-input acp-validate-select" id="respect-hospital" data-answer="no">
+                <option value="">— Select Preference —</option>
+                <option value="yes">Admit if necessary</option>
+                <option value="no">Avoid admission if possible</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acp-section">
+        <div class="acp-section-header">
+          <div class="acp-section-num">4</div>
+          <h3 class="acp-section-title">Personal Preferences to Guide Treatment</h3>
+        </div>
+        <div class="acp-fields">
+          <div class="acp-field">
+            <label class="acp-label" for="respect-matters">What is most important to Helen?</label>
+            <textarea class="acp-input acp-textarea acp-validate" id="respect-matters" rows="2"
+              placeholder="Focus on quality of life, comfort, meaningful places/people"
+              data-answer="home|dignity|faith|simon" data-match="contains-any"></textarea>
+          </div>
+          <div class="acp-field">
+            <label class="acp-label" for="respect-fears">What Helen wants to avoid</label>
+            <textarea class="acp-input acp-textarea acp-validate" id="respect-fears" rows="2"
+              placeholder="Are there specific places or interventions she fears?"
+              data-answer="hospital" data-match="contains"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="acp-section">
+        <div class="acp-section-header">
+          <div class="acp-section-num">5</div>
+          <h3 class="acp-section-title">Summary of Relevant Information</h3>
+        </div>
+        <div class="acp-fields">
+          <div class="acp-field">
+            <label class="acp-label" for="respect-diagnoses">Relevant medical history and diagnoses</label>
+            <textarea class="acp-input acp-textarea" id="respect-diagnoses" rows="2"
+              placeholder="Briefly outline the main medical conditions and reasons for this plan"></textarea>
+          </div>
+          <div class="acp-field">
+            <label class="acp-label" for="respect-capacity">Details of other documents in place</label>
+            <textarea class="acp-input acp-textarea" id="respect-capacity" rows="2"
+              placeholder="e.g. Lasting Power of Attorney, Advance Decision to Refuse Treatment"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div><div class="acp-form-footer">
+      <p class="acp-footer-note">Fields highlighted green contain a correct key detail. Red fields need attention before the plan is complete.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+        <button class="btn btn-secondary" onclick="goToPage(6)" aria-label="Back to Sophie and Claire">
+          <span aria-hidden="true">←</span> Back
+        </button>
+        <button class="btn btn-primary" onclick="printAcp()"
+                style="background:var(--yellow); color:var(--navy);"
+                aria-label="Print and save care plan">
+          🖨 Print &amp; Save
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
