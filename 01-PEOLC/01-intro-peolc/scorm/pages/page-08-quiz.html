@@ -5,17 +5,13 @@
       <p class="quiz-sub">True or False? Test your understanding of end of life palliative care. You need <strong>80%</strong> or above to pass.</p>
     </div>
 
-    <!-- FIX 1: ID changed from quiz-question-container → quiz-questions-container -->
-    <div id="quiz-questions-container">
+    <div id="quiz-question-container">
       <!-- Questions rendered by quiz.js -->
     </div>
 
     <div id="quiz-results" class="quiz-results" role="region" aria-label="Quiz results" aria-live="polite">
       <div class="quiz-results-icon" id="quiz-results-icon" aria-hidden="true"></div>
-
-      <!-- FIX 2: class="quiz-results-score" added alongside the id -->
       <div class="quiz-results-score" id="quiz-results-score"></div>
-
       <div class="quiz-results-label" id="quiz-results-label"></div>
       <div class="quiz-results-breakdown">
         <div class="quiz-result-stat">
@@ -34,13 +30,7 @@
       <div class="quiz-results-msg" id="quiz-results-msg"></div>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button class="btn btn-secondary" onclick="retryQuiz()" aria-label="Retry the quiz">↩ Try Again</button>
-
-        <!-- FIX 3: hidden removed; disabled + opacity used so the JS watcher can enable it -->
-        <button class="btn btn-primary" id="quiz-continue-btn"
-                onclick="goToPage(9)" aria-label="Continue to learning record"
-                disabled style="opacity:.4;cursor:not-allowed;">
-          Continue →
-        </button>
+        <button class="btn btn-primary" id="quiz-continue-btn" onclick="goToPage(9)" aria-label="Continue to learning record" hidden>Continue →</button>
       </div>
     </div>
 
@@ -48,4 +38,9 @@
       <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
     </nav>
   </div>
+
+  <!-- Initialise quiz.js as soon as this section is stamped into the DOM -->
+  <script>
+    if (typeof renderQuiz === 'function') { renderQuiz(); }
+  </script>
 </section>
