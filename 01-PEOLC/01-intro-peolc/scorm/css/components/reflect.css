@@ -1,0 +1,108 @@
+/* ── PAGE 4 — REFLECTIVE ACTIVITY (light bg) ────────── */
+.reflect-wrap {
+  max-width: 860px; margin: 0 auto; padding: 48px 48px 64px;
+}
+
+.reflect-title-area { text-align: center; margin-bottom: 36px; }
+.reflect-title-area h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.8rem; color: var(--navy); margin-bottom: 8px;
+}
+.reflect-title-area p { color: var(--light-muted); font-size: 0.92rem; line-height: 1.6; max-width: 560px; margin: 0 auto; }
+
+.reflect-question {
+  background: var(--light-card);
+  border: 1.5px solid var(--light-border);
+  border-radius: 12px; padding: 28px 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.reflect-q-text {
+  font-family: 'Merriweather', serif;
+  font-size: 1.05rem; color: var(--navy);
+  margin-bottom: 16px; line-height: 1.55;
+}
+.reflect-q-text strong { color: var(--blue-dark); }
+
+.reflect-prompts-label {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #7a8a9e; margin-bottom: 10px;
+}
+.reflect-prompts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.reflect-prompt-chip {
+  background: rgba(34,65,126,0.06);
+  border: 1.5px solid rgba(34,65,126,0.2);
+  color: var(--navy); border-radius: 20px;
+  padding: 5px 14px; font-size: 0.78rem; font-weight: 500;
+}
+
+.reflect-textarea {
+  width: 100%;
+  background: #f8fafb; border: 2px solid var(--light-border);
+  border-radius: 8px; padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+  color: #1e2d50; line-height: 1.65;
+  resize: vertical; min-height: 150px;
+  transition: border-color 0.2s;
+}
+.reflect-textarea:focus { outline: none; border-color: var(--navy); background: var(--white); }
+.reflect-textarea::placeholder { color: #9aabb8; }
+
+.reflect-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+
+.btn-save-reflect {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: var(--navy); color: var(--white);
+  border: 2px solid var(--navy); transition: background 0.2s, transform 0.15s;
+}
+.btn-save-reflect:hover        { background: var(--navy-light); transform: translateY(-1px); }
+.btn-save-reflect:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+.btn-model-answer {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: transparent; color: var(--navy);
+  border: 2px solid rgba(34,65,126,0.35); transition: all 0.2s;
+}
+.btn-model-answer:hover        { background: rgba(34,65,126,0.06); border-color: var(--navy); }
+.btn-model-answer:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+.btn-download-reflect {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; background: transparent; color: #5a6a82;
+  border: 2px solid rgba(90,106,130,0.3); transition: all 0.2s;
+}
+.btn-download-reflect:hover        { border-color: #5a6a82; color: var(--navy); }
+.btn-download-reflect:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+.reflect-saved-banner {
+  display: none; margin-top: 12px;
+  background: rgba(5,150,105,0.1);
+  border: 1px solid rgba(5,150,105,0.3);
+  border-left: 4px solid #059669;
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px; font-size: 0.84rem; color: #064e3b;
+  align-items: center; gap: 8px;
+}
+.reflect-saved-banner.show { display: flex; }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .reflect-wrap { padding: 32px 24px 48px; }
+}
+@media (max-width: 640px) {
+  .reflect-wrap { padding: 20px 16px 36px; }
+  .reflect-question { padding: 20px 18px; }
+  .reflect-title-area h2 { font-size: 1.5rem; }
+  .reflect-q-text { font-size: 0.95rem; }
+  .reflect-actions { flex-direction: column; align-items: stretch; }
+  .btn-save-reflect,
+  .btn-model-answer,
+  .btn-download-reflect { width: 100%; justify-content: center; }
+}
