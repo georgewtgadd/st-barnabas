@@ -9,20 +9,13 @@ document.addEventListener('pagesLoaded', () => {
   // Start on page 1
   goToPage(1);
 
-  // Render quiz
-  renderQuiz();
-
   // Page-change hooks
   document.addEventListener('pageChanged', e => {
     const p = e.detail.page;
 
-    // Page 8 — re-render quiz if re-visited after results shown
+    // Page 8 — render quiz fresh each time the user arrives
     if (p === 8) {
-      const container = document.getElementById('quiz-question-container');
-      if (container && container.style.display === 'none') {
-        // Quiz was in results state — reset for re-attempt
-        // (user can use Retry inside results panel)
-      }
+      renderQuiz();
     }
 
     // Page 9 — populate learning record
