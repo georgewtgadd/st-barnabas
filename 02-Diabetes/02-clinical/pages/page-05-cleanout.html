@@ -1,0 +1,71 @@
+<!-- PAGE 5 — MEDICATION CLEANOUT ACTIVITY -->
+<section class="page" id="page-5" aria-label="Interactive activity — Medication Rationalisation Challenge">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Activity</div>
+    <h2 class="page-title">The Rationalisation Challenge</h2>
+    <p class="page-sub">Drag each medication into the correct column. Should it be stopped, or continued? Read the scenario carefully before deciding.</p>
+
+    <div class="cleanout-wrap">
+
+      <div class="scenario-banner" role="note" aria-label="Patient scenario">
+        <div class="sb-label">📋 Patient Scenario</div>
+        <p class="sb-text">
+          <strong>Red Phase (Terminal)</strong> — prognosis of days. The patient is no longer eating and is taking only occasional sips of water. They are currently prescribed:
+          <strong>Metformin, a Statin, an Antihypertensive,</strong> and a <strong>Sulphonylurea</strong>.
+          <br><br>
+          Drag each medication to the correct column. On mobile, tap a chip and choose when prompted.
+        </p>
+      </div>
+
+      <!-- Drug bank -->
+      <div class="drug-bank" role="region" aria-label="Available medications — drag to Stop or Continue">
+        <div class="drug-bank-label">Medications to review — drag or tap to sort</div>
+        <div class="drug-chips" id="co-bank-items">
+          <!-- Populated by cleanout.js -->
+        </div>
+      </div>
+
+      <!-- Sort columns -->
+      <div class="sort-columns">
+
+        <div class="sort-col col-stop" id="co-col-stop" role="region" aria-label="Stop — medications to discontinue"
+             ondragover="coDragOver(event,'stop')" ondragleave="coDragLeave('stop')" ondrop="coDrop(event,'stop')">
+          <div class="col-heading-row stop-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fca5a5" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Stop — Discontinue
+          </div>
+          <span class="col-empty-hint" id="co-empty-stop">Drop medications here to stop them</span>
+          <div class="placed-items" id="co-placed-stop"></div>
+        </div>
+
+        <div class="sort-col col-cont" id="co-col-continue" role="region" aria-label="Continue — medications to keep"
+             ondragover="coDragOver(event,'continue')" ondragleave="coDragLeave('continue')" ondrop="coDrop(event,'continue')">
+          <div class="col-heading-row cont-head">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86efac" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Continue — Keep
+          </div>
+          <span class="col-empty-hint" id="co-empty-continue">Drop medications here to continue them</span>
+          <div class="placed-items" id="co-placed-continue"></div>
+        </div>
+
+      </div>
+
+      <!-- Feedback -->
+      <div class="cleanout-feedback" id="co-feedback" role="alert" aria-live="polite"></div>
+
+      <!-- Action row -->
+      <div class="check-row">
+        <button class="btn btn-primary" onclick="checkCleanout()">Check Answers</button>
+        <button class="btn btn-secondary" onclick="resetCleanout()">↺ Reset</button>
+      </div>
+
+    </div>
+
+    <div class="page-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(4)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(6)">Continue <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>

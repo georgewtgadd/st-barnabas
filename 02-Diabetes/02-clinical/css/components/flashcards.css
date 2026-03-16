@@ -1,0 +1,63 @@
+/* flashcards.css — Page 8: Emergency Flashcards */
+.flashcards-wrap { display: flex; flex-direction: column; gap: 28px; }
+
+.flashcard-instruction {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 0.86rem; color: var(--text-muted); display: flex; align-items: center; gap: 10px;
+}
+.flashcard-instruction strong { color: var(--white); }
+
+.flashcards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.flashcard {
+  min-height: 260px; border-radius: 16px; cursor: pointer;
+  position: relative; overflow: hidden;
+  border: 2px solid var(--border);
+  transition: border-color 0.3s, transform 0.15s;
+}
+.flashcard:hover { transform: translateY(-3px); }
+.flashcard:focus-visible { outline: 3px solid var(--yellow); }
+.flashcard.flipped .fc-front { display: none; }
+.flashcard.flipped .fc-back  { display: flex; }
+.flashcard.flipped { border-color: rgba(34,197,94,0.5); }
+
+.fc-front, .fc-back {
+  position: absolute; inset: 0; padding: 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.fc-back { display: none; }
+
+/* Front face */
+.fc-front { background: rgba(255,255,255,0.04); }
+.fc-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(224,85,71,0.3); color: #fca5a5;
+  font-size: 0.78rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px; flex-shrink: 0;
+}
+.fc-scenario-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-light); margin-bottom: 8px; }
+.fc-symptoms { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.4; flex: 1; }
+.fc-tap-hint { font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; align-self: flex-end; }
+
+/* Back face */
+.fc-back { background: rgba(0,0,0,0.3); }
+.fc-answer-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #86efac; margin-bottom: 6px; }
+.fc-diagnosis { font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+.fc-action-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); margin-bottom: 6px; }
+.fc-action { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; }
+.fc-action strong { color: var(--white); }
+.fc-flip-back { font-size: 0.7rem; color: rgba(255,255,255,0.3); align-self: flex-end; }
+
+.fc-card-1 .fc-front { background: linear-gradient(135deg, rgba(239,68,68,0.12) 0%, rgba(239,68,68,0.04) 100%); }
+.fc-card-2 .fc-front { background: linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(249,115,22,0.04) 100%); }
+
+.flashcard-reset {
+  display: flex; justify-content: flex-end;
+}
+
+@media (max-width: 640px) {
+  .flashcards-grid { grid-template-columns: 1fr; }
+  .flashcard { min-height: 200px; }
+}

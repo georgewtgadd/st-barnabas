@@ -1,0 +1,39 @@
+/* priorities.css — Page 2: Shifting Priorities */
+.priorities-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 32px;
+}
+.priority-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 22px 24px;
+}
+.priority-card.reduced   { border-left: 4px solid rgba(255,255,255,0.3); border-radius: 0 14px 14px 0; }
+.priority-card.symptom   { border-left: 4px solid var(--coral); border-radius: 0 14px 14px 0; }
+.priority-card.hypo-avoid{ border-left: 4px solid #ef4444; border-radius: 0 14px 14px 0; }
+.priority-card.freedom   { border-left: 4px solid #22c55e; border-radius: 0 14px 14px 0; }
+
+.pc-icon { font-size: 1.8rem; margin-bottom: 10px; }
+.pc-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.reduced    .pc-label { color: rgba(255,255,255,0.5); }
+.symptom    .pc-label { color: var(--coral-light); }
+.hypo-avoid .pc-label { color: #fca5a5; }
+.freedom    .pc-label { color: #86efac; }
+.pc-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--white); }
+.pc-body  { font-size: 0.84rem; color: var(--text-muted); line-height: 1.7; }
+.pc-body strong { color: var(--white); }
+
+.shift-banner {
+  background: rgba(224,85,71,0.1); border: 1px solid rgba(224,85,71,0.3);
+  border-radius: 12px; padding: 18px 22px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.shift-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
+.shift-banner strong { color: var(--white); font-size: 0.92rem; display: block; margin-bottom: 4px; }
+.shift-banner p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; }
+
+@media (max-width: 640px) {
+  .priorities-grid { grid-template-columns: 1fr; }
+}
