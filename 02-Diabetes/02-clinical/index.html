@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EoL Clinical Management &amp; Medication Safety | St Barnabas Hospice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/components/outcomes.css">
+  <link rel="stylesheet" href="css/components/priorities.css">
+  <link rel="stylesheet" href="css/components/targets.css">
+  <link rel="stylesheet" href="css/components/medication.css">
+  <link rel="stylesheet" href="css/components/cleanout.css">
+  <link rel="stylesheet" href="css/components/hypo.css">
+  <link rel="stylesheet" href="css/components/hyper.css">
+  <link rel="stylesheet" href="css/components/flashcards.css">
+  <link rel="stylesheet" href="css/components/type1.css">
+  <link rel="stylesheet" href="css/components/quiz.css">
+  <link rel="stylesheet" href="css/components/interactive.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header role="banner">
+  <a href="index.html" class="brand" aria-label="St Barnabas Hospice — return to start">
+    <div class="brand-logo">
+      <img src="images/logo.jpg" alt="St Barnabas Hospice" style="width:100%;height:100%;object-fit:contain;display:block;">
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">St Barnabas Hospice</span>
+      <span class="brand-tagline">E-Learning Platform</span>
+    </div>
+  </a>
+  <div class="module-label">
+    <strong>EoL Clinical Management &amp; Medication Safety</strong>
+    Diabetes at End of Life · Module 3
+  </div>
+</header>
+
+<nav aria-label="Module progress" class="progress-nav">
+  <button class="nav-step current" id="nav-1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Outcomes">
+    <div class="nav-step-num" aria-hidden="true">1</div>
+    <span class="nav-step-label">Outcomes</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-2" onclick="navClick(2)" aria-label="Step 2: Priorities" disabled>
+    <div class="nav-step-num" aria-hidden="true">2</div>
+    <span class="nav-step-label">Priorities</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-3" onclick="navClick(3)" aria-label="Step 3: Targets" disabled>
+    <div class="nav-step-num" aria-hidden="true">3</div>
+    <span class="nav-step-label">Targets</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-4" onclick="navClick(4)" aria-label="Step 4: Medication" disabled>
+    <div class="nav-step-num" aria-hidden="true">4</div>
+    <span class="nav-step-label">Medication</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-5" onclick="navClick(5)" aria-label="Step 5: Risk Matcher" disabled>
+    <div class="nav-step-num" aria-hidden="true">5</div>
+    <span class="nav-step-label">Risk Matcher</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-6" onclick="navClick(6)" aria-label="Step 6: Rationalisation" disabled>
+    <div class="nav-step-num" aria-hidden="true">6</div>
+    <span class="nav-step-label">Rationalisation</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-7" onclick="navClick(7)" aria-label="Step 7: Hypo Scenarios" disabled>
+    <div class="nav-step-num" aria-hidden="true">7</div>
+    <span class="nav-step-label">Hypo Scenarios</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-8" onclick="navClick(8)" aria-label="Step 8: Hypo Guide" disabled>
+    <div class="nav-step-num" aria-hidden="true">8</div>
+    <span class="nav-step-label">Hypo Guide</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-9" onclick="navClick(9)" aria-label="Step 9: Dose Adjust" disabled>
+    <div class="nav-step-num" aria-hidden="true">9</div>
+    <span class="nav-step-label">Dose Adjust</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-10" onclick="navClick(10)" aria-label="Step 10: Hyper" disabled>
+    <div class="nav-step-num" aria-hidden="true">10</div>
+    <span class="nav-step-label">Hyper</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-11" onclick="navClick(11)" aria-label="Step 11: Flashcards" disabled>
+    <div class="nav-step-num" aria-hidden="true">11</div>
+    <span class="nav-step-label">Flashcards</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-12" onclick="navClick(12)" aria-label="Step 12: Type 1" disabled>
+    <div class="nav-step-num" aria-hidden="true">12</div>
+    <span class="nav-step-label">Type 1</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-13" onclick="navClick(13)" aria-label="Step 13: Quiz" disabled>
+    <div class="nav-step-num" aria-hidden="true">13</div>
+    <span class="nav-step-label">Quiz</span>
+  </button>
+</nav>
+
+<div class="module-progress-bar"
+     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+     aria-label="Module completion progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label" aria-live="polite">0% complete</div>
+</div>
+
+<main id="main-content"></main>
+
+<footer role="contentinfo">
+  <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG 2.2 AA" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<script src="js/scorm.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/med-matcher.js"></script>
+<script src="js/cleanout.js"></script>
+<script src="js/hypo-decision.js"></script>
+<script src="js/dose-adjust.js"></script>
+<script src="js/flashcards.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/page-loader.js"></script>
+<script>
+  function finishModule() {
+    if (typeof SCORM !== 'undefined') SCORM.finish();
+    const main = document.getElementById('main-content');
+    if (main) main.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:40px 24px;">
+        <div style="font-size:3rem;margin-bottom:20px;">🎓</div>
+        <h2 style="font-family:'Merriweather',serif;font-size:1.8rem;font-weight:700;margin-bottom:14px;">Module Complete</h2>
+        <p style="color:var(--text-muted);max-width:480px;line-height:1.7;margin-bottom:28px;">Well done. You have completed <strong style="color:var(--white);">EoL Clinical Management &amp; Medication Safety</strong>. Your progress has been recorded.</p>
+        <button class="btn btn-primary" onclick="location.reload()">↩ Review from Start</button>
+      </div>`;
+  }
+</script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!-- PAGE 8 — EMERGENCY FLASHCARDS -->
+<section class="page" id="page-8" aria-label="Interactive Flashcards — Symptom Sorter">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Activity</div>
+    <h2 class="page-title">Emergency Flashcards — Symptom Sorter</h2>
+    <p class="page-sub">Read each patient presentation and decide: hypoglycaemia or hyperglycaemia? Tap or click each card to reveal the diagnosis and immediate action.</p>
+
+    <div class="flashcards-wrap">
+
+      <div class="flashcard-instruction" role="note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span><strong>Tap any card</strong> to flip it and reveal the answer. Tap again to flip back.</span>
+      </div>
+
+      <div class="flashcards-grid">
+
+        <!-- Card 1 -->
+        <div class="flashcard fc-card-1" id="fc-1"
+             onclick="flipCard(1)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(1)"
+             tabindex="0" role="button" aria-label="Click to reveal answer">
+          <div class="fc-front">
+            <div>
+              <div class="fc-num">1</div>
+              <div class="fc-scenario-label">Patient Presentation</div>
+              <div class="fc-symptoms">Patient is cool and clammy to touch, visibly anxious, shaking, and has become suddenly confused over the last 10 minutes.</div>
+            </div>
+            <div class="fc-tap-hint">Tap to reveal → </div>
+          </div>
+          <div class="fc-back">
+            <div>
+              <div class="fc-answer-label">✓ Diagnosis</div>
+              <div class="fc-diagnosis">Hypoglycaemia</div>
+              <div class="fc-action-label">Immediate Action</div>
+              <p class="fc-action">
+                <strong>If safe to swallow:</strong> give 150–200ml of a sugary drink (fruit juice, Lucozade) or glucose tablets immediately. Retest in 10–15 minutes.<br><br>
+                <strong>If unable to swallow:</strong> consider Glucagon IM/SC or call 999. Do not attempt to give anything by mouth to an unconscious patient.
+              </p>
+            </div>
+            <div class="fc-flip-back">← Tap to flip back</div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flashcard fc-card-2" id="fc-2"
+             onclick="flipCard(2)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(2)"
+             tabindex="0" role="button" aria-label="Click to reveal answer">
+          <div class="fc-front">
+            <div>
+              <div class="fc-num">2</div>
+              <div class="fc-scenario-label">Patient Presentation</div>
+              <div class="fc-symptoms">Patient has deep, laboured breathing and their breath smells of "pear drops". They are extremely thirsty and have been very drowsy since this morning.</div>
+            </div>
+            <div class="fc-tap-hint">Tap to reveal → </div>
+          </div>
+          <div class="fc-back">
+            <div>
+              <div class="fc-answer-label">✓ Diagnosis</div>
+              <div class="fc-diagnosis">Hyperglycaemia / DKA</div>
+              <div class="fc-action-label">Immediate Action</div>
+              <p class="fc-action">
+                <strong>Check the Advance Care Plan</strong> immediately. DKA cannot be managed in a community setting.<br><br>
+                If the patient wishes <strong>comfort care at home</strong>: focus on symptom control, call the palliative team.<br><br>
+                If hospital transfer is in keeping with their wishes: call 999 and document clinical findings.
+              </p>
+            </div>
+            <div class="fc-flip-back">← Tap to flip back</div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flashcard fc-card-1" id="fc-3"
+             onclick="flipCard(3)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(3)"
+             tabindex="0" role="button" aria-label="Click to reveal answer">
+          <div class="fc-front">
+            <div>
+              <div class="fc-num">3</div>
+              <div class="fc-scenario-label">Patient Presentation</div>
+              <div class="fc-symptoms">During a routine visit, the patient seems more drowsy than usual and their carer reports they haven't eaten since yesterday. They are on a Sulphonylurea.</div>
+            </div>
+            <div class="fc-tap-hint">Tap to reveal → </div>
+          </div>
+          <div class="fc-back">
+            <div>
+              <div class="fc-answer-label">✓ Likely Diagnosis</div>
+              <div class="fc-diagnosis">Hypoglycaemia (risk)</div>
+              <div class="fc-action-label">Immediate Action</div>
+              <p class="fc-action">
+                <strong>Test blood glucose immediately.</strong> A patient on a sulphonylurea who hasn't eaten is at very high hypoglycaemia risk — the drug continues stimulating insulin regardless of intake.<br><br>
+                If blood glucose is below 4.0 mmol/L, treat as hypoglycaemia. <strong>Contact the prescriber urgently to review/stop the sulphonylurea.</strong>
+              </p>
+            </div>
+            <div class="fc-flip-back">← Tap to flip back</div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="flashcard fc-card-2" id="fc-4"
+             onclick="flipCard(4)" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard(4)"
+             tabindex="0" role="button" aria-label="Click to reveal answer">
+          <div class="fc-front">
+            <div>
+              <div class="fc-num">4</div>
+              <div class="fc-scenario-label">Patient Presentation</div>
+              <div class="fc-symptoms">An elderly Type 2 patient has become increasingly confused over three days. Very high blood glucose reading (34 mmol/L). No fruity breath. Severely dehydrated.</div>
+            </div>
+            <div class="fc-tap-hint">Tap to reveal → </div>
+          </div>
+          <div class="fc-back">
+            <div>
+              <div class="fc-answer-label">✓ Diagnosis</div>
+              <div class="fc-diagnosis">HHS — Hyperosmolar Hyperglycaemic State</div>
+              <div class="fc-action-label">Immediate Action</div>
+              <p class="fc-action">
+                HHS develops slowly and is an emergency requiring hospital-level IV fluid management.<br><br>
+                <strong>Check the Advance Care Plan</strong> before transferring. The absence of ketones and fruity breath distinguishes this from DKA. Gradual, careful rehydration is key — rapid correction can cause cerebral oedema.
+              </p>
+            </div>
+            <div class="fc-flip-back">← Tap to flip back</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flashcard-reset">
+        <button class="btn btn-secondary btn-sm" onclick="resetFlashcards()">↺ Reset All Cards</button>
+      </div>
+
+    </div>
+
+    <div class="page-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(7)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(9)">Continue <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>

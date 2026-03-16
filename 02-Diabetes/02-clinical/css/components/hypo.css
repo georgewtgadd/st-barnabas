@@ -1,0 +1,58 @@
+/* hypo.css — Page 6: Managing Hypoglycaemia */
+.clinical-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+
+.signs-card {
+  background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 14px; padding: 22px;
+}
+.sc-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.sc-icon { font-size: 1.6rem; flex-shrink: 0; }
+.sc-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.sc-label.danger-label { color: #fca5a5; }
+.sc-label.amber-label  { color: #fed7aa; }
+.sc-label.safe-label   { color: #86efac; }
+.sc-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-top: 2px; }
+.signs-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.signs-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.86rem; color: var(--text-muted); line-height: 1.5;
+}
+.sign-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.danger-dot { background: #ef4444; }
+.amber-dot  { background: #f97316; }
+
+.management-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 22px;
+}
+.mgmt-steps { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.mgmt-step {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 12px 14px;
+}
+.ms-num {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--coral); color: var(--white);
+  font-size: 0.7rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+.ms-text { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
+.ms-text strong { color: var(--white); }
+
+.risk-factors {
+  background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 12px; padding: 18px 22px;
+}
+.rf-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #fed7aa; margin-bottom: 12px; }
+.rf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rf-item {
+  background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.15);
+  border-radius: 8px; padding: 8px 12px;
+  font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;
+}
+
+@media (max-width: 760px) {
+  .clinical-layout { grid-template-columns: 1fr; }
+  .rf-grid         { grid-template-columns: 1fr; }
+}

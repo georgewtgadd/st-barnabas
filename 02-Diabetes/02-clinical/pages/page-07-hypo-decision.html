@@ -1,0 +1,25 @@
+<!-- PAGE 7 — HYPO DECISION TREE -->
+<section class="page" id="page-7" aria-label="Interactive — Hypoglycaemia Management Decision Tree">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Scenario</div>
+    <h2 class="page-title">Hypoglycaemia: What Would You Do?</h2>
+    <p class="page-sub">Work through the following three patient scenarios. Each one requires a different management decision. Choose your response and see whether you made the right call.</p>
+
+    <div id="hypo-dt-wrap" style="display:flex;flex-direction:column;gap:28px;">
+      <!-- Rendered by hypo-decision.js -->
+    </div>
+
+    <div id="hypo-dt-complete" hidden style="background:rgba(0,168,142,0.1);border:1px solid rgba(0,168,142,0.3);border-radius:14px;padding:24px;margin-top:12px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">✅</div>
+      <div style="font-family:'Merriweather',serif;font-size:1.1rem;font-weight:700;margin-bottom:8px;">All three scenarios completed</div>
+      <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.7;">Hypoglycaemia management at end of life depends heavily on what the patient <em>can</em> do — their swallowing ability, their care plan, and their current level of consciousness all shape the response.</p>
+    </div>
+
+    <div class="page-nav-row" style="margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(6)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(8)">Continue <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,98 @@
+<!-- PAGE 5 — MEDICATION RISK MATCHER -->
+<section class="page" id="page-5" aria-label="Interactive — Medication Risk Matcher">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Activity</div>
+    <h2 class="page-title">Medication Risk Matcher</h2>
+    <p class="page-sub">Each medication below carries a specific risk profile at end of life. Drag — or tap — each drug to the correct risk category. All five must be placed before you can check.</p>
+
+    <div class="matcher-wrap" id="matcher-wrap">
+
+      <!-- Drug chips -->
+      <div class="drug-bank" role="region" aria-label="Medications to sort">
+        <div class="drug-bank-label">Drag each medication to its risk category</div>
+        <div class="drug-chips" id="mm-bank-items"></div>
+      </div>
+
+      <!-- Risk zones -->
+      <div class="matcher-zones">
+
+        <div class="matcher-zone zone-hypo" id="mm-zone-hypo"
+             ondragover="mmDragOver(event,'hypo')" ondragleave="mmDragLeave('hypo')" ondrop="mmDrop(event,'hypo')"
+             role="region" aria-label="Hypoglycaemia risk zone">
+          <div class="mz-header">
+            <div class="mz-icon" aria-hidden="true">📉</div>
+            <div>
+              <div class="mz-label">Risk Category A</div>
+              <div class="mz-title">Hypoglycaemia Risk</div>
+              <div class="mz-sub">Stimulates insulin release regardless of food intake</div>
+            </div>
+          </div>
+          <div class="mz-items" id="mm-placed-hypo"></div>
+          <div class="mz-hint" id="mm-hint-hypo">Drop here</div>
+        </div>
+
+        <div class="matcher-zone zone-dka" id="mm-zone-dka"
+             ondragover="mmDragOver(event,'dka')" ondragleave="mmDragLeave('dka')" ondrop="mmDrop(event,'dka')"
+             role="region" aria-label="DKA risk zone">
+          <div class="mz-header">
+            <div class="mz-icon" aria-hidden="true">⚡</div>
+            <div>
+              <div class="mz-label">Risk Category B</div>
+              <div class="mz-title">DKA / Ketoacidosis Risk</div>
+              <div class="mz-sub">Can trigger ketoacidosis even with near-normal glucose</div>
+            </div>
+          </div>
+          <div class="mz-items" id="mm-placed-dka"></div>
+          <div class="mz-hint" id="mm-hint-dka">Drop here</div>
+        </div>
+
+        <div class="matcher-zone zone-gi" id="mm-zone-gi"
+             ondragover="mmDragOver(event,'gi')" ondragleave="mmDragLeave('gi')" ondrop="mmDrop(event,'gi')"
+             role="region" aria-label="GI disturbance and renal risk zone">
+          <div class="mz-header">
+            <div class="mz-icon" aria-hidden="true">🔄</div>
+            <div>
+              <div class="mz-label">Risk Category C</div>
+              <div class="mz-title">GI Disturbance / Renal Risk</div>
+              <div class="mz-sub">Problematic with reduced intake and renal deterioration</div>
+            </div>
+          </div>
+          <div class="mz-items" id="mm-placed-gi"></div>
+          <div class="mz-hint" id="mm-hint-gi">Drop here</div>
+        </div>
+
+        <div class="matcher-zone zone-nobenefit" id="mm-zone-nobenefit"
+             ondragover="mmDragOver(event,'nobenefit')" ondragleave="mmDragLeave('nobenefit')" ondrop="mmDrop(event,'nobenefit')"
+             role="region" aria-label="No benefit at end of life zone">
+          <div class="mz-header">
+            <div class="mz-icon" aria-hidden="true">⬛</div>
+            <div>
+              <div class="mz-label">Risk Category D</div>
+              <div class="mz-title">No Benefit at End of Life</div>
+              <div class="mz-sub">Prevents long-term events — irrelevant in terminal phase</div>
+            </div>
+          </div>
+          <div class="mz-items" id="mm-placed-nobenefit"></div>
+          <div class="mz-hint" id="mm-hint-nobenefit">Drop here</div>
+        </div>
+
+      </div>
+
+      <!-- Feedback -->
+      <div class="cleanout-feedback" id="mm-feedback" role="alert" aria-live="polite"></div>
+
+      <div class="check-row">
+        <button class="btn btn-primary" onclick="checkMatcher()">Check Answers</button>
+        <button class="btn btn-secondary" onclick="resetMatcher()">↺ Reset</button>
+      </div>
+
+    </div>
+
+    <div class="page-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(4)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(6)">Continue to Activity <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>
