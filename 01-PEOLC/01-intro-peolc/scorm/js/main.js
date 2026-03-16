@@ -3,8 +3,9 @@
 ══════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // SCORM
-  SCORM.initialize();
+
+  // SCORM — wrapped so a missing runtime doesn't break the module
+  try { SCORM.initialize(); } catch(e) { console.warn('SCORM not available:', e); }
 
   // Start on page 1
   goToPage(1);
@@ -13,12 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('pageChanged', e => {
     const p = e.detail.page;
 
-    // Page 8 — render (or re-render) the quiz each time the user arrives
     if (p === 8) {
       renderQuiz();
     }
 
-    // Page 9 — populate learning record
     if (p === 9) {
       populateLearningRecord();
     }
@@ -39,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.addEventListener('beforeunload', () => {
-    SCORM.finish();
+    try { SCORM.finish(); } catch(e) {}
   });
+
 });
