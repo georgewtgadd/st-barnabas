@@ -1,0 +1,144 @@
+<section id="page-5" class="page" aria-label="Phases and Layers of End of Life Care">
+  <div class="phases-wrap">
+    <h2 class="phases-page-title">Phases &amp; Layers of Care</h2>
+    <p class="phases-page-sub">
+      Select each phase and each layer to explore what they involve.
+      Open at least <strong>4 phases</strong> to continue.
+    </p>
+
+    <!-- Timeline -->
+    <div class="phases-timeline-wrap">
+      <div class="phases-timeline-label">End of Life Care Phases — Wong et al. (2024)</div>
+      <div class="phases-row" role="list" aria-label="Five phases of end of life care">
+
+        <button class="phase-btn phase-1" id="phase-btn-1" role="listitem"
+                onclick="openPhaseDetail('phase',1)"
+                aria-label="Phase 1: Stable — click to learn more">
+          <div class="phase-marker" style="background:#0197de;"></div>
+          <div class="phase-label">Phase 1</div>
+          <div class="phase-title">Stable</div>
+          <div class="phase-hint">Condition managed — planning begins</div>
+        </button>
+
+        <button class="phase-btn phase-2" id="phase-btn-2" role="listitem"
+                onclick="openPhaseDetail('phase',2)"
+                aria-label="Phase 2: Unstable — click to learn more">
+          <div class="phase-marker" style="background:#0d9488;"></div>
+          <div class="phase-label">Phase 2</div>
+          <div class="phase-title">Unstable</div>
+          <div class="phase-hint">Unpredictable changes in condition</div>
+        </button>
+
+        <button class="phase-btn phase-3" id="phase-btn-3" role="listitem"
+                onclick="openPhaseDetail('phase',3)"
+                aria-label="Phase 3: Deteriorating — click to learn more">
+          <div class="phase-marker" style="background:#fdca0f;"></div>
+          <div class="phase-label">Phase 3</div>
+          <div class="phase-title">Deteriorating</div>
+          <div class="phase-hint">Gradual, expected decline</div>
+        </button>
+
+        <button class="phase-btn phase-4" id="phase-btn-4" role="listitem"
+                onclick="openPhaseDetail('phase',4)"
+                aria-label="Phase 4: Terminal — click to learn more">
+          <div class="phase-marker" style="background:#ef4444;"></div>
+          <div class="phase-label">Phase 4</div>
+          <div class="phase-title">Terminal</div>
+          <div class="phase-hint">Final hours to days of life</div>
+        </button>
+
+        <button class="phase-btn phase-5" id="phase-btn-5" role="listitem"
+                onclick="openPhaseDetail('phase',5)"
+                aria-label="Phase 5: Bereavement — click to learn more">
+          <div class="phase-marker" style="background:#7c6ef5;"></div>
+          <div class="phase-label">Phase 5</div>
+          <div class="phase-title">Bereavement</div>
+          <div class="phase-hint">Support for families after death</div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Layers -->
+    <div class="layers-section">
+      <div class="layers-section-label">The Six Layers of Palliative Support</div>
+      <div class="layers-grid" role="list" aria-label="Six layers of palliative care support">
+
+        <button class="layer-btn" id="layer-btn-1" role="listitem"
+                onclick="openPhaseDetail('layer',1)"
+                aria-label="Layer 1: Physical Care — click to learn more">
+          <div class="layer-icon" aria-hidden="true">🩺</div>
+          <div>
+            <div class="layer-title">Physical Care</div>
+            <div class="layer-sub">Symptom control &amp; comfort</div>
+          </div>
+        </button>
+
+        <button class="layer-btn" id="layer-btn-2" role="listitem"
+                onclick="openPhaseDetail('layer',2)"
+                aria-label="Layer 2: Psychological &amp; Emotional — click to learn more">
+          <div class="layer-icon" aria-hidden="true">🕊️</div>
+          <div>
+            <div class="layer-title">Psychological &amp; Emotional</div>
+            <div class="layer-sub">Mental wellbeing &amp; support</div>
+          </div>
+        </button>
+
+        <button class="layer-btn" id="layer-btn-3" role="listitem"
+                onclick="openPhaseDetail('layer',3)"
+                aria-label="Layer 3: Social &amp; Practical — click to learn more">
+          <div class="layer-icon" aria-hidden="true">🤝</div>
+          <div>
+            <div class="layer-title">Social &amp; Practical</div>
+            <div class="layer-sub">Day-to-day needs &amp; networks</div>
+          </div>
+        </button>
+
+        <button class="layer-btn" id="layer-btn-4" role="listitem"
+                onclick="openPhaseDetail('layer',4)"
+                aria-label="Layer 4: Spiritual &amp; Cultural — click to learn more">
+          <div class="layer-icon" aria-hidden="true">✨</div>
+          <div>
+            <div class="layer-title">Spiritual &amp; Cultural</div>
+            <div class="layer-sub">Beliefs, values &amp; identity</div>
+          </div>
+        </button>
+
+        <button class="layer-btn" id="layer-btn-5" role="listitem"
+                onclick="openPhaseDetail('layer',5)"
+                aria-label="Layer 5: Communication &amp; ACP — click to learn more">
+          <div class="layer-icon" aria-hidden="true">💬</div>
+          <div>
+            <div class="layer-title">Communication &amp; ACP</div>
+            <div class="layer-sub">Conversations &amp; advance planning</div>
+          </div>
+        </button>
+
+        <button class="layer-btn" id="layer-btn-6" role="listitem"
+                onclick="openPhaseDetail('layer',6)"
+                aria-label="Layer 6: Coordination &amp; MDT — click to learn more">
+          <div class="layer-icon" aria-hidden="true">🔗</div>
+          <div>
+            <div class="layer-title">Coordination &amp; MDT</div>
+            <div class="layer-sub">Joined-up, team-based care</div>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="phases-hint" aria-live="polite" id="phases-hint">
+      Tap any phase or layer to explore it
+    </div>
+
+    <div class="hs-continue-wrap">
+      <button class="btn btn-secondary" style="border-color:rgba(255,255,255,.25);color:#fff;" onclick="goToPage(4)">← Back</button>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+        <div class="hs-locked-msg" id="phases-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span>&nbsp;Open at least 4 phases to continue
+        </div>
+        <button class="btn btn-primary" id="phases-continue-btn" onclick="goToPage(6)" hidden>Continue →</button>
+      </div>
+    </div>
+  </div>
+</section>
