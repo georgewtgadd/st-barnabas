@@ -7,17 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     :root {
-      --navy:       #22417e;
-      --navy-dark:  #182f5c;
-      --navy-mid:   #1e3570;
-      --yellow:     #fdca0f;
-      --white:      #ffffff;
-      --text-muted: #c5d3e8;
-      --surface:    rgba(255,255,255,0.05);
-      --border:     rgba(255,255,255,0.10);
-      --border-hover: rgba(253,202,15,0.45);
+      --navy:        #22417e;
+      --navy-dark:   #182f5c;
+      --yellow:      #fdca0f;
+      --white:       #ffffff;
+      --text-muted:  #c5d3e8;
+      --surface:     rgba(255,255,255,0.05);
+      --border:      rgba(255,255,255,0.10);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,176 +33,94 @@
       line-height: 1.6;
     }
 
-    /* ── Header ─────────────────────────────────────── */
-    .header {
-      text-align: center;
-      margin-bottom: 56px;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
     }
+
+    @keyframes fillIn {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+
+    /* Header */
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(253,202,15,0.1);
-      border: 1px solid rgba(253,202,15,0.28);
-      color: var(--yellow);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 22px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(253,202,15,0.1); border: 1px solid rgba(253,202,15,0.28);
+      color: var(--yellow); padding: 6px 16px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 22px;
     }
-    .eyebrow::before {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
+    .eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%;
       background: var(--yellow);
       animation: blink 2s ease infinite;
     }
-    @keyframes blink {
-      0%,100% { opacity: 1; } 50% { opacity: 0.25; }
-    }
-    h1 {
+    .page-title {
       font-family: 'Merriweather', serif;
       font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 14px;
-    }
-    .subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin: 0 auto;
+      font-weight: 700; line-height: 1.25; margin-bottom: 14px;
     }
 
-    /* ── Progress reset notice ───────────────────────── */
-    .reset-row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
+    /* Reset button */
     .reset-btn {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.35);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.72rem;
-      padding: 5px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
+      background: transparent; border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.35); font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; padding: 5px 14px; border-radius: 20px;
+      cursor: pointer; transition: color 0.2s, border-color 0.2s;
     }
     .reset-btn:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.3); }
 
-    /* ── Three-column grid ───────────────────────────── */
+    /* Columns */
     .columns {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      max-width: 1080px;
-      margin: 0 auto;
+      gap: 28px; max-width: 1080px; margin: 0 auto;
     }
 
-    /* ── Column ─────────────────────────────────────── */
-    .col {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
     .col-heading {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--yellow);
-      padding-bottom: 12px;
-      margin-bottom: 14px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--yellow);
+      padding-bottom: 12px; margin-bottom: 14px;
       border-bottom: 1px solid rgba(253,202,15,0.2);
     }
-    .col-modules {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
 
-    /* ── Module card ────────────────────────────────── */
+    /* Module card */
     .mod-card {
-      display: block;
-      text-decoration: none;
-      color: var(--white);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 18px 14px;
+      display: block; text-decoration: none; color: var(--white);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 18px 14px;
       transition: border-color 0.2s, background 0.2s, transform 0.18s, box-shadow 0.18s;
-      position: relative;
+      margin-bottom: 10px;
     }
     .mod-card:hover {
-      border-color: var(--border-hover);
+      border-color: rgba(253,202,15,0.45);
       background: rgba(253,202,15,0.07);
       transform: translateY(-3px);
       box-shadow: 0 8px 28px rgba(0,0,0,0.32);
     }
-    .mod-card:focus-visible {
-      outline: 3px solid var(--yellow);
-      outline-offset: 2px;
-    }
+    .mod-card:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    .mod-card:hover .card-arrow { opacity: 1; transform: translateX(3px); }
 
-    .mod-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
     .mod-num {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: rgba(34,65,126,0.7);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--yellow);
-      font-family: 'Merriweather', serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(34,65,126,0.7); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--yellow); font-family: 'Merriweather', serif;
+      font-size: 0.78rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .mod-title {
-      font-family: 'Merriweather', serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      line-height: 1.4;
-      flex: 1;
+    .card-arrow {
+      color: var(--yellow); font-size: 1rem; opacity: 0.4; flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.2s; margin-top: 3px;
     }
-    .mod-arrow {
-      color: var(--yellow);
-      font-size: 1rem;
-      opacity: 0.4;
-      flex-shrink: 0;
-      transition: opacity 0.2s, transform 0.2s;
-      margin-top: 3px;
-    }
-    .mod-card:hover .mod-arrow { opacity: 1; transform: translateX(3px); }
 
-    /* ── Progress bar ───────────────────────────────── */
-    .mod-progress {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    /* Progress bar */
     .prog-track {
-      flex: 1;
-      height: 4px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 4px;
-      overflow: hidden;
+      flex: 1; height: 4px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden;
     }
     .prog-fill {
-      height: 100%;
-      border-radius: 4px;
-      width: 0%;
+      height: 100%; border-radius: 4px; width: 0%;
       background: rgba(255,255,255,0.18);
       transition: width 0.6s cubic-bezier(0.4,0,0.2,1), background 0.4s;
     }
@@ -209,48 +128,26 @@
       width: 100%;
       background: linear-gradient(90deg, var(--yellow) 0%, #ffe566 100%);
     }
-    .prog-label {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.25);
-      white-space: nowrap;
-      min-width: 46px;
-      text-align: right;
-      transition: color 0.3s;
-    }
-    .prog-label.visited { color: var(--yellow); }
 
-    /* ── Placeholder card (coming soon) ─────────────── */
-    .mod-card.coming-soon {
-      opacity: 0.42;
-      pointer-events: none;
-      cursor: default;
+    /* Coming soon card */
+    .mod-card.coming {
+      opacity: 0.4; pointer-events: none; cursor: default; margin-bottom: 10px;
     }
     .coming-tag {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.35);
-      padding: 2px 9px;
-      border-radius: 10px;
+      display: inline-block; margin-top: 8px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.35);
+      padding: 2px 9px; border-radius: 10px;
     }
 
-    /* ── Footer ─────────────────────────────────────── */
+    /* Footer */
     .footer {
-      text-align: center;
-      margin-top: 64px;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.22);
-      letter-spacing: 0.04em;
+      text-align: center; margin-top: 64px;
+      font-size: 0.72rem; color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
     }
 
-    /* ── Responsive ─────────────────────────────────── */
+    /* Responsive */
     @media (max-width: 860px) {
       .columns { grid-template-columns: 1fr 1fr; }
     }
@@ -261,177 +158,179 @@
   </style>
 </head>
 <body>
+  <div id="root"></div>
 
-  <div class="header">
-    <div class="eyebrow">St Barnabas Hospice</div>
-    <h1>PEOLC for Registered Professionals</h1>
-    <p class="subtitle">Select a learning package below to begin. Your progress is saved automatically.</p>
-  </div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-  <div class="reset-row">
-    <button class="reset-btn" onclick="resetProgress()">↺ Reset my progress</button>
-  </div>
+    // ── Data ────────────────────────────────────────────────────────────────────
+    const COLUMNS = [
+      {
+        id: 'peolc',
+        heading: 'Palliative & End of Life Care',
+        modules: [
+          { key: 'peolc-01', num: '01', title: 'Intro to PEoLC',               href: '01-PEOLC/01-intro-peolc/' },
+          { key: 'peolc-02', num: '02', title: 'Deterioration & Recognition',  href: '01-PEOLC/02-deterioration-recognition/' },
+          { key: 'peolc-03', num: '03', title: 'Understanding Helen',           href: '01-PEOLC/03-understanding-helen/' },
+        ],
+      },
+      {
+        id: 'diabetes',
+        heading: 'Diabetes at End of Life',
+        modules: [
+          { key: 'diab-01', num: '01', title: 'End of Life Diabetes Management', href: 'https://georgewtgadd.github.io/st-barnabas/02-Diabetes/01-eol-diabetes/', external: true },
+          { key: 'diab-02', num: '02', title: 'Insulin Management in EoL Care',  coming: true },
+        ],
+      },
+      {
+        id: 'sepsis',
+        heading: 'Sepsis & Recognition of the Dying Patient',
+        modules: [
+          { key: 'sep-01', num: '01', title: 'Recognising Sepsis',              coming: true },
+          { key: 'sep-02', num: '02', title: 'Recognition of the Dying Patient', coming: true },
+        ],
+      },
+    ];
 
-  <div class="columns" id="module-grid">
-
-    <!-- ── Column 1: PEOLC ─────────────────────────── -->
-    <div class="col">
-      <div class="col-heading">Palliative &amp; End of Life Care</div>
-      <div class="col-modules">
-
-        <a class="mod-card"
-           href="01-PEOLC/01-intro-peolc/"
-           data-key="peolc-01"
-           onclick="markVisited('peolc-01')">
-          <div class="mod-top">
-            <div class="mod-num">01</div>
-            <div class="mod-title">Intro to PEoLC</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <div class="mod-progress">
-            <div class="prog-track"><div class="prog-fill" id="fill-peolc-01"></div></div>
-            <span class="prog-label" id="label-peolc-01">Not started</span>
-          </div>
-        </a>
-
-        <a class="mod-card"
-           href="01-PEOLC/02-deterioration-recognition/"
-           data-key="peolc-02"
-           onclick="markVisited('peolc-02')">
-          <div class="mod-top">
-            <div class="mod-num">02</div>
-            <div class="mod-title">Deterioration &amp; Recognition</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <div class="mod-progress">
-            <div class="prog-track"><div class="prog-fill" id="fill-peolc-02"></div></div>
-            <span class="prog-label" id="label-peolc-02">Not started</span>
-          </div>
-        </a>
-
-        <a class="mod-card"
-           href="01-PEOLC/03-understanding-helen/"
-           data-key="peolc-03"
-           onclick="markVisited('peolc-03')">
-          <div class="mod-top">
-            <div class="mod-num">03</div>
-            <div class="mod-title">Understanding Helen</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <div class="mod-progress">
-            <div class="prog-track"><div class="prog-fill" id="fill-peolc-03"></div></div>
-            <span class="prog-label" id="label-peolc-03">Not started</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- ── Column 2: Diabetes ─────────────────────── -->
-    <div class="col">
-      <div class="col-heading">Diabetes at End of Life</div>
-      <div class="col-modules">
-
-        <a class="mod-card"
-           href="https://georgewtgadd.github.io/st-barnabas/02-Diabetes/01-eol-diabetes/"
-           data-key="diab-01"
-           onclick="markVisited('diab-01')"
-           target="_blank" rel="noopener">
-          <div class="mod-top">
-            <div class="mod-num">01</div>
-            <div class="mod-title">End of Life Diabetes Management</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <div class="mod-progress">
-            <div class="prog-track"><div class="prog-fill" id="fill-diab-01"></div></div>
-            <span class="prog-label" id="label-diab-01">Not started</span>
-          </div>
-        </a>
-
-        <div class="mod-card coming-soon">
-          <div class="mod-top">
-            <div class="mod-num">02</div>
-            <div class="mod-title">Insulin Management in EoL Care</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <span class="coming-tag">Coming soon</span>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ── Column 3: Sepsis ───────────────────────── -->
-    <div class="col">
-      <div class="col-heading">Sepsis &amp; Recognition of the Dying Patient</div>
-      <div class="col-modules">
-
-        <div class="mod-card coming-soon">
-          <div class="mod-top">
-            <div class="mod-num">01</div>
-            <div class="mod-title">Recognising Sepsis</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <span class="coming-tag">Coming soon</span>
-        </div>
-
-        <div class="mod-card coming-soon">
-          <div class="mod-top">
-            <div class="mod-num">02</div>
-            <div class="mod-title">Recognition of the Dying Patient</div>
-            <div class="mod-arrow">→</div>
-          </div>
-          <span class="coming-tag">Coming soon</span>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <p class="footer">© 2026 St Barnabas Hospice · All rights reserved</p>
-
-  <script>
     const STORAGE_KEY = 'sbh_progress_v1';
 
-    function getProgress() {
+    function loadProgress() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
       catch { return {}; }
     }
 
-    function markVisited(key) {
-      const p = getProgress();
-      p[key] = true;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
-      applyProgress(key, true);
+    function saveProgress(progress) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     }
 
-    function applyProgress(key, visited) {
-      const fill  = document.getElementById('fill-' + key);
-      const label = document.getElementById('label-' + key);
-      if (!fill || !label) return;
-      if (visited) {
-        fill.classList.add('visited');
-        label.classList.add('visited');
-        label.textContent = '✓ Visited';
+    // ── Components ──────────────────────────────────────────────────────────────
+
+    function ProgressBar({ visited }) {
+      return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div className="prog-track">
+            <div className={`prog-fill${visited ? ' visited' : ''}`} />
+          </div>
+          <span style={{
+            fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.06em',
+            color: visited ? 'var(--yellow)' : 'rgba(255,255,255,0.25)',
+            whiteSpace: 'nowrap', minWidth: 52, textAlign: 'right',
+            transition: 'color 0.3s',
+          }}>
+            {visited ? '✓ Visited' : 'Not started'}
+          </span>
+        </div>
+      );
+    }
+
+    function ModuleCard({ mod, visited, onVisit }) {
+      if (mod.coming) {
+        return (
+          <div className="mod-card coming">
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+              <div className="mod-num">{mod.num}</div>
+              <div style={{ fontFamily: "'Merriweather', serif", fontSize: '0.88rem', fontWeight: 700, lineHeight: 1.4 }}>
+                {mod.title}
+              </div>
+            </div>
+            <span className="coming-tag">Coming soon</span>
+          </div>
+        );
       }
+
+      return (
+        <a
+          className="mod-card"
+          href={mod.href}
+          target={mod.external ? '_blank' : undefined}
+          rel={mod.external ? 'noopener noreferrer' : undefined}
+          onClick={() => onVisit(mod.key)}
+        >
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 12 }}>
+            <div className="mod-num">{mod.num}</div>
+            <div style={{ fontFamily: "'Merriweather', serif", fontSize: '0.88rem', fontWeight: 700, lineHeight: 1.4, flex: 1 }}>
+              {mod.title}
+            </div>
+            <div className="card-arrow">→</div>
+          </div>
+          <ProgressBar visited={visited} />
+        </a>
+      );
     }
 
-    function resetProgress() {
-      if (!confirm('Reset your visited progress for all modules?')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      document.querySelectorAll('.prog-fill').forEach(el => el.classList.remove('visited'));
-      document.querySelectorAll('.prog-label').forEach(el => {
-        el.classList.remove('visited');
-        el.textContent = 'Not started';
-      });
+    function Column({ col, progress, onVisit }) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="col-heading">{col.heading}</div>
+          <div>
+            {col.modules.map(mod => (
+              <ModuleCard
+                key={mod.key}
+                mod={mod}
+                visited={!!progress[mod.key]}
+                onVisit={onVisit}
+              />
+            ))}
+          </div>
+        </div>
+      );
     }
 
-    // Restore on load
-    (function() {
-      const p = getProgress();
-      Object.keys(p).forEach(key => { if (p[key]) applyProgress(key, true); });
-    })();
+    // ── App ─────────────────────────────────────────────────────────────────────
+
+    function App() {
+      const [progress, setProgress] = useState(loadProgress);
+
+      // Persist whenever progress changes
+      useEffect(() => { saveProgress(progress); }, [progress]);
+
+      function handleVisit(key) {
+        setProgress(prev => ({ ...prev, [key]: true }));
+      }
+
+      function handleReset() {
+        if (!confirm('Reset your visited progress for all modules?')) return;
+        setProgress({});
+      }
+
+      return (
+        <>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div className="eyebrow">
+              <span className="eyebrow-dot" />
+              St Barnabas Hospice
+            </div>
+            <h1 className="page-title">PEOLC for Registered Professionals</h1>
+            <p style={{ fontSize: '1rem', color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto' }}>
+              Select a learning package below to begin. Your progress is saved automatically.
+            </p>
+          </div>
+
+          {/* Reset row */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}>
+            <button className="reset-btn" onClick={handleReset}>↺ Reset my progress</button>
+          </div>
+
+          {/* Module grid */}
+          <div className="columns">
+            {COLUMNS.map(col => (
+              <Column
+                key={col.id}
+                col={col}
+                progress={progress}
+                onVisit={handleVisit}
+              />
+            ))}
+          </div>
+
+          {/* Footer */}
+          <p className="footer">© 2026 St Barnabas Hospice · All rights reserved</p>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
-
 </body>
 </html>
