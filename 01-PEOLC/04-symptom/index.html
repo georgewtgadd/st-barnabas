@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symptom Management &amp; Emergencies | St Barnabas Hospice</title>
+  <title>Symptom Management &amp; Emergencies | SBH Education</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,47 +13,49 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
+<!-- ══ HEADER ══ -->
 <header role="banner">
-  <a href="#" class="brand" aria-label="St Barnabas Hospice — return to home">
+  <a href="index.html" class="brand" aria-label="SBH Education — return to home">
     <div class="brand-logo">
-      <svg width="100" height="44" viewBox="0 0 100 44" aria-label="St Barnabas Hospice" role="img">
-        <rect width="100" height="44" rx="4" fill="rgba(255,255,255,0.12)"/>
-        <text x="50" y="28" font-family="Merriweather,serif" font-size="13" font-weight="700" fill="#fdca0f" text-anchor="middle">St Barnabas</text>
-      </svg>
+      <img src="images/logo.jpg" alt="SBH Education" style="width:100%;height:100%;object-fit:contain;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="brand-logo-fallback" style="display:none;align-items:center;justify-content:center;width:100%;height:100%;">
+        <span style="font-family:'Merriweather',serif;font-size:.85rem;font-weight:700;color:var(--yellow);">SBH</span>
+      </div>
     </div>
     <div class="brand-text">
-      <span class="brand-name">St Barnabas Hospice</span>
-      <span class="brand-tagline">E-Learning Platform</span>
+      <span class="brand-name">SBH Education</span>
+      <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
     </div>
   </a>
   <div class="module-label">
     <strong>Symptom Management &amp; Emergencies</strong>
-    Palliative Care Fundamentals · Package 4
+    Clinical Excellence · Module 4
   </div>
 </header>
 
+<!-- ══ PROGRESS NAV ══ -->
 <nav aria-label="Module progress" class="progress-nav">
   <button class="nav-step current" id="nav-1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Introduction"><div class="nav-step-num">1</div><span class="nav-step-label">Intro</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-2" onclick="navClick(2)" disabled aria-label="Step 2: Respiratory"><div class="nav-step-num">2</div><span class="nav-step-label">Respiratory</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-3" onclick="navClick(3)" disabled aria-label="Step 3: GI Tract"><div class="nav-step-num">3</div><span class="nav-step-label">GI Tract</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-4" onclick="navClick(4)" disabled aria-label="Step 4: Emergencies"><div class="nav-step-num">4</div><span class="nav-step-label">Emergencies</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-5" onclick="navClick(5)" disabled aria-label="Step 5: Haemorrhage"><div class="nav-step-num">5</div><span class="nav-step-label">Haemorrhage</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-6" onclick="navClick(6)" disabled aria-label="Step 6: Hypercalcaemia"><div class="nav-step-num">6</div><span class="nav-step-label">Hypercalcaemia</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-7" onclick="navClick(7)" disabled aria-label="Step 7: MSCC"><div class="nav-step-num">7</div><span class="nav-step-label">MSCC</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-8" onclick="navClick(8)" disabled aria-label="Step 8: SVCO"><div class="nav-step-num">8</div><span class="nav-step-label">SVCO</span></button>
-  <div class="nav-divider"></div>
+  <div class="nav-divider" aria-hidden="true"></div>
   <button class="nav-step" id="nav-9" onclick="navClick(9)" disabled aria-label="Step 9: Seizures"><div class="nav-step-num">9</div><span class="nav-step-label">Seizures</span></button>
-  <div class="nav-divider"></div>
-  <button class="nav-step" id="nav-10" onclick="navClick(10)" disabled aria-label="Step 10: Quiz"><div class="nav-step-num">10</div><span class="nav-step-label">Quiz</span></button>
-  <div class="nav-divider"></div>
-  <button class="nav-step" id="nav-11" onclick="navClick(11)" disabled aria-label="Step 11: My Record"><div class="nav-step-num">11</div><span class="nav-step-label">My Record</span></button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-10" onclick="navClick(10)" disabled aria-label="Step 10: Case Studies"><div class="nav-step-num">10</div><span class="nav-step-label">Cases</span></button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-11" onclick="navClick(11)" disabled aria-label="Step 11: My Learning Record"><div class="nav-step-num">11</div><span class="nav-step-label">My Record</span></button>
 </nav>
 
 <div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress">
@@ -63,54 +65,54 @@
 
 <main id="main-content">
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 1 — INTRODUCTION
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page active" id="page-1" aria-label="Introduction">
   <div class="intro-hero">
     <div class="intro-text">
       <h1 class="intro-heading">Symptom Management<br>&amp; <em>Emergencies</em></h1>
       <p class="intro-desc">
-        This module moves from the routine management of chronic symptoms to the high-stakes environment of acute palliative emergencies. We focus on maintaining patient dignity while managing clinical crises with confidence and compassion.
+        This module moves from routine symptom management to the high-stakes environment of acute palliative emergencies. We focus on maintaining patient dignity while managing clinical crises with confidence and compassion.
       </p>
       <div class="intro-instruction" role="note">
         <div class="intro-instruction-icon" aria-hidden="true">⚡</div>
-        <p><strong>Work through each section in order.</strong> This package includes drag-and-drop activities, clickable clinical diagrams, process ordering exercises, and a rapid-fire knowledge check.</p>
+        <p><strong>Work through each section in order.</strong> This module includes drag-and-drop activities, clickable clinical diagrams, a drag-to-reorder sequencing exercise, and five real-world case study MCQs.</p>
       </div>
       <div class="continue-row">
         <button class="btn btn-primary" onclick="goToPage(2)">Begin Module <span aria-hidden="true">→</span></button>
       </div>
     </div>
 
-    <div class="intro-facts-panel" role="complementary" aria-label="Learning outcomes for this module">
+    <div class="intro-facts-panel" role="complementary" aria-label="Learning outcomes">
       <div class="facts-panel-header">
         <div class="facts-panel-eyebrow">Learning Outcomes</div>
         <div class="facts-panel-title">By the end of this module you will be able to</div>
       </div>
       <div class="facts-panel-body" style="gap:0;padding:16px 22px;">
         <div class="fact-item" style="padding:10px 0;">
-          <div class="fact-icon-num">1</div>
+          <div class="fact-icon" style="font-size:1rem;background:rgba(253,202,15,.12);border:1px solid rgba(253,202,15,.25);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--yellow);flex-shrink:0;">1</div>
           <div><div class="fact-label">Analyse</div><p class="fact-text">The pathophysiology of end-of-life symptoms including respiratory secretions and nausea</p></div>
         </div>
         <div class="fact-divider"></div>
         <div class="fact-item" style="padding:10px 0;">
-          <div class="fact-icon-num">2</div>
-          <div><div class="fact-label">Identify</div><p class="fact-text">Red flag clinical signs of palliative emergencies including MSCC and SVCO</p></div>
+          <div class="fact-icon" style="background:rgba(253,202,15,.12);border:1px solid rgba(253,202,15,.25);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--yellow);flex-shrink:0;">2</div>
+          <div><div class="fact-label">Identify</div><p class="fact-text">Red flag signs of palliative emergencies — MSCC, SVCO, hypercalcaemia, and haemorrhage</p></div>
         </div>
         <div class="fact-divider"></div>
         <div class="fact-item" style="padding:10px 0;">
-          <div class="fact-icon-num">3</div>
-          <div><div class="fact-label">Apply</div><p class="fact-text">The ABC framework to manage a catastrophic haemorrhage safely and with dignity</p></div>
+          <div class="fact-icon" style="background:rgba(253,202,15,.12);border:1px solid rgba(253,202,15,.25);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--yellow);flex-shrink:0;">3</div>
+          <div><div class="fact-label">Apply</div><p class="fact-text">The ABC framework to manage catastrophic haemorrhage calmly and effectively</p></div>
         </div>
         <div class="fact-divider"></div>
         <div class="fact-item" style="padding:10px 0;">
-          <div class="fact-icon-num">4</div>
-          <div><div class="fact-label">Evaluate</div><p class="fact-text">The appropriate use of anticipatory medications in the final days of life</p></div>
+          <div class="fact-icon" style="background:rgba(253,202,15,.12);border:1px solid rgba(253,202,15,.25);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--yellow);flex-shrink:0;">4</div>
+          <div><div class="fact-label">Sequence</div><p class="fact-text">The correct clinical steps for managing a prolonged seizure in community and hospice settings</p></div>
         </div>
         <div class="fact-divider"></div>
         <div class="fact-item" style="padding:10px 0;">
-          <div class="fact-icon-num">5</div>
-          <div><div class="fact-label">Sequence</div><p class="fact-text">Correct clinical steps for managing seizures in community and hospice settings</p></div>
+          <div class="fact-icon" style="background:rgba(253,202,15,.12);border:1px solid rgba(253,202,15,.25);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--yellow);flex-shrink:0;">5</div>
+          <div><div class="fact-label">Evaluate</div><p class="fact-text">Apply your knowledge to five real-world clinical case presentations across all emergency types</p></div>
         </div>
       </div>
     </div>
@@ -118,282 +120,327 @@
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 2 — RESPIRATORY
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page" id="page-2" aria-label="Managing the Respiratory Tract">
-  <div class="content-wrap light-bg">
+  <div class="definition-wrap">
     <div class="definition-header">
       <h2>Managing the Respiratory Tract</h2>
       <p>Breathlessness (dyspnoea) and terminal secretions are two of the most distressing respiratory symptoms in palliative care — often more frightening for the family than for the patient themselves.</p>
     </div>
 
-    <div class="callout-box navy" role="note">
-      <div class="callout-icon">💧</div>
-      <div>
-        <div class="callout-title">Terminal Secretions — the "Death Rattle"</div>
-        <p class="callout-body">As patients become unable to swallow, secretions pool in the throat producing a gurgling sound. Research consistently shows this is <strong>rarely distressing to the unconscious patient</strong> — but it can be deeply upsetting for families. Your role includes explaining this clearly and sensitively.</p>
+    <div class="definition-not" role="note" style="border-color:rgba(1,151,222,.3);background:rgba(1,151,222,.08);">
+      <div class="definition-not-title" style="color:#7dd3fc;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Terminal Secretions — the "Death Rattle"
       </div>
+      <p style="font-size:.88rem;color:var(--text-muted);line-height:1.75;">As patients become unable to swallow, secretions pool in the throat producing a gurgling sound. Research consistently shows this is <strong style="color:var(--white);">rarely distressing to the unconscious patient</strong> — but it can be deeply upsetting for families. Your role includes explaining this clearly and sensitively.</p>
     </div>
 
     <!-- Drag and Drop Activity -->
-    <div class="activity-box">
-      <div class="activity-eyebrow">🎯 Interactive Activity — Drag &amp; Drop</div>
-      <div class="activity-title">Match each intervention to the correct symptom</div>
-      <p class="activity-desc">Drag the intervention cards into the correct column. Each symptom has three matching interventions.</p>
+    <div class="dnd-activity-wrap">
+      <div class="pdfv-why-label" style="color:var(--yellow);margin-bottom:6px;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;">🎯 Activity — Drag &amp; Drop</div>
+      <div style="font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:6px;">Match each intervention to the correct symptom</div>
+      <p style="font-size:.86rem;color:var(--text-muted);line-height:1.6;margin-bottom:22px;">Drag each card into the correct column. If you check your answers and a card is incorrect, it will be returned to the pool so you can try again.</p>
 
-      <div class="dnd-layout">
-        <div class="dnd-cards-pool" id="dnd-pool" aria-label="Interventions to sort">
-          <div class="dnd-card" draggable="true" data-category="breathlessness" id="dc-1" tabindex="0">🌬️ Fan therapy (moving air across the face)</div>
-          <div class="dnd-card" draggable="true" data-category="breathlessness" id="dc-2" tabindex="0">🧘 Calm, reassuring presence</div>
-          <div class="dnd-card" draggable="true" data-category="secretions" id="dc-3" tabindex="0">🔄 Side-lying positioning</div>
-          <div class="dnd-card" draggable="true" data-category="breathlessness" id="dc-4" tabindex="0">🪑 Upright / sitting forward positioning</div>
-          <div class="dnd-card" draggable="true" data-category="secretions" id="dc-5" tabindex="0">💬 Explain physiology to family to reduce anxiety</div>
-          <div class="dnd-card" draggable="true" data-category="secretions" id="dc-6" tabindex="0">👄 Mouth care to keep lips and tongue moist</div>
+      <div class="dnd-columns">
+        <!-- Pool column -->
+        <div class="dnd-pool-col">
+          <div class="dnd-pool-label">Intervention cards</div>
+          <div class="dnd-pool" id="dnd-pool" aria-label="Drag from here">
+            <div class="dnd-card" draggable="true" data-id="dc1" data-cat="breathlessness" tabindex="0">🌬️ Fan therapy — moving air across the face</div>
+            <div class="dnd-card" draggable="true" data-id="dc2" data-cat="breathlessness" tabindex="0">🧘 Calm, reassuring presence and steady voice</div>
+            <div class="dnd-card" draggable="true" data-id="dc3" data-cat="secretions"     tabindex="0">🔄 Side-lying / recovery positioning</div>
+            <div class="dnd-card" draggable="true" data-id="dc4" data-cat="breathlessness" tabindex="0">🪑 Sitting upright or leaning forward</div>
+            <div class="dnd-card" draggable="true" data-id="dc5" data-cat="secretions"     tabindex="0">💬 Explain physiology to family to reduce anxiety</div>
+            <div class="dnd-card" draggable="true" data-id="dc6" data-cat="secretions"     tabindex="0">👄 Regular mouth care — moist swabs and lip balm</div>
+          </div>
         </div>
 
-        <div class="dnd-targets">
-          <div class="dnd-zone" id="zone-breathlessness" data-category="breathlessness"
-               ondragover="allowDrop(event)" ondrop="dropCard(event,'breathlessness')" aria-label="Breathlessness drop zone">
-            <div class="dnd-zone-header" style="color:#0197de;">🫁 Breathlessness</div>
-            <div class="dnd-zone-hint">Drop interventions here</div>
-            <div class="dnd-zone-cards" id="dropped-breathlessness"></div>
+        <!-- Drop zones side by side -->
+        <div class="dnd-zones-col">
+          <div class="dnd-zone-wrap">
+            <div class="dnd-zone" id="zone-breathlessness" data-cat="breathlessness"
+                 ondragover="dndOver(event)" ondragleave="dndLeave(event)" ondrop="dndDrop(event,'breathlessness')"
+                 aria-label="Breathlessness drop zone">
+              <div class="dnd-zone-title" style="color:#7dd3fc;">🫁 Breathlessness</div>
+              <div class="dnd-zone-hint">Drop interventions here</div>
+              <div class="dnd-zone-cards" id="zone-breathlessness-cards"></div>
+            </div>
           </div>
-          <div class="dnd-zone" id="zone-secretions" data-category="secretions"
-               ondragover="allowDrop(event)" ondrop="dropCard(event,'secretions')" aria-label="Secretions drop zone">
-            <div class="dnd-zone-header" style="color:#fdca0f;">🌊 Terminal Secretions</div>
-            <div class="dnd-zone-hint">Drop interventions here</div>
-            <div class="dnd-zone-cards" id="dropped-secretions"></div>
+          <div class="dnd-zone-wrap">
+            <div class="dnd-zone" id="zone-secretions" data-cat="secretions"
+                 ondragover="dndOver(event)" ondragleave="dndLeave(event)" ondrop="dndDrop(event,'secretions')"
+                 aria-label="Terminal Secretions drop zone">
+              <div class="dnd-zone-title" style="color:var(--yellow);">🌊 Terminal Secretions</div>
+              <div class="dnd-zone-hint">Drop interventions here</div>
+              <div class="dnd-zone-cards" id="zone-secretions-cards"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="dnd-feedback" id="dnd-feedback" aria-live="polite"></div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
-        <button class="btn-activity" onclick="checkDnD()">✓ Check My Answers</button>
-        <button class="btn-activity-secondary" onclick="resetDnD()">↺ Reset</button>
+      <div class="dnd-feedback" id="dnd-feedback" role="alert" aria-live="polite"></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+        <button class="btn btn-primary" onclick="dndCheck()" style="font-size:.88rem;padding:11px 22px;">✓ Check My Answers</button>
+        <button class="btn btn-secondary" onclick="dndReset()" style="font-size:.88rem;padding:11px 22px;">↺ Reset All</button>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
       <button class="btn btn-secondary" onclick="goToPage(1)">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(3)">Continue to GI Tract →</button>
+      <button class="btn btn-primary"   onclick="goToPage(3)">Continue to GI Tract →</button>
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 3 — GI TRACT
-════════════════════════ -->
-<section class="page" id="page-3" aria-label="The Gastrointestinal Tract">
-  <div class="content-wrap light-bg">
-    <div class="definition-header">
+═════════════════════════════════════════════ -->
+<section class="page" id="page-3" aria-label="Gastrointestinal Tract">
+  <div class="dod-wrap">
+    <div class="outcomes-title-area">
       <h2>Managing the Gastrointestinal Tract</h2>
       <p>Nausea and dehydration at end of life require a patient-centred approach that challenges some common assumptions about nutrition and hydration.</p>
     </div>
 
-    <div class="two-col-grid">
-      <div class="info-card">
-        <div class="info-card-icon" style="background:rgba(239,68,68,0.12);">🤢</div>
-        <div class="info-card-title">Managing Nausea</div>
-        <p class="info-card-body">Nausea is multifactorial in palliative care — causes include constipation, opioids, raised intracranial pressure, or metabolic disturbance. Matching the antiemetic to the cause (e.g. haloperidol for opioid-induced nausea) is more effective than a one-size-fits-all approach.</p>
-        <ul class="info-card-list">
-          <li>Review all medications — is an opioid dose adjustment needed?</li>
+    <div class="dod-grid" role="list" style="grid-template-columns:1fr 1fr;margin-bottom:28px;">
+      <div class="dod-sign" role="listitem" style="flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="dod-sign-icon">🤢</div>
+          <div class="dod-sign-title" style="font-size:.95rem;">Managing Nausea</div>
+        </div>
+        <p class="dod-sign-body">Nausea is multifactorial — causes include constipation, opioids, raised intracranial pressure, or metabolic disturbance. Matching the antiemetic to the cause is more effective than a one-size-fits-all approach.</p>
+        <ul style="padding-left:18px;font-size:.84rem;color:#4a5a72;line-height:1.7;display:flex;flex-direction:column;gap:5px;">
+          <li>Review all medications — opioid dose adjustment may be needed</li>
           <li>Constipation is a common, treatable cause — assess bowel function at every visit</li>
           <li>Small, frequent, cold meals may be better tolerated than hot food</li>
-          <li>Ginger, acupressure, and positioning (upright after eating) can all help</li>
+          <li>Ginger, acupressure, and upright positioning can all help</li>
         </ul>
       </div>
-      <div class="info-card">
-        <div class="info-card-icon" style="background:rgba(1,151,222,0.12);">💧</div>
-        <div class="info-card-title">Hydration &amp; the Dry Mouth Myth</div>
-        <p class="info-card-body">One of the most important clinical conversations in end-of-life care is about artificial hydration. Evidence consistently shows that IV or subcutaneous fluids rarely relieve thirst at end of life and can <em>increase</em> suffering.</p>
-        <ul class="info-card-list">
-          <li>Thirst is driven by dry mouth, not dehydration — treat the mouth, not the blood tests</li>
-          <li>IV fluids at end of life risk: pulmonary oedema, peripheral oedema, and prolonged dying</li>
-          <li>Regular mouth care (moistened swabs, lip balm) relieves thirst and dry mouth effectively</li>
-          <li>Families often equate fluids with care — a sensitive conversation about quality over quantity is essential</li>
+      <div class="dod-sign" role="listitem" style="flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="dod-sign-icon">💧</div>
+          <div class="dod-sign-title" style="font-size:.95rem;">Hydration &amp; the Dry Mouth Myth</div>
+        </div>
+        <p class="dod-sign-body">Evidence consistently shows IV or subcutaneous fluids rarely relieve thirst at end of life and can <em>increase</em> suffering. Thirst is driven by dry mouth, not dehydration — treat the mouth, not the blood tests.</p>
+        <ul style="padding-left:18px;font-size:.84rem;color:#4a5a72;line-height:1.7;display:flex;flex-direction:column;gap:5px;">
+          <li>IV fluids at end of life risk: pulmonary oedema and prolonged dying</li>
+          <li>Moist swabs, lip balm, mouth sprays relieve thirst effectively</li>
+          <li>Families equate fluids with care — a sensitive conversation is essential</li>
+          <li>Mouth care every 1–2 hours provides more relief than a bag of IV fluids</li>
         </ul>
       </div>
     </div>
 
-    <div class="callout-box teal" role="note">
-      <div class="callout-icon">🩺</div>
+    <div class="dod-gsf-banner" role="note" style="background:var(--navy);">
+      <div class="dod-gsf-icon">💊</div>
       <div>
-        <div class="callout-title">Clinical Pearl: Mouth Care Over IV Fluids</div>
-        <p class="callout-body">A simple protocol — moist swabs every 1–2 hours, petroleum jelly for lips, flavoured mouth sprays — has been shown to provide more relief than a bag of IV fluids. More importantly, it keeps the family involved in active, meaningful care at the bedside.</p>
+        <div class="dod-gsf-title">Mouth Care Over IV Fluids</div>
+        <p class="dod-gsf-body">A simple protocol — moist swabs every 1–2 hours, petroleum jelly for lips, flavoured mouth sprays — provides more relief than IV hydration at end of life. More importantly, it keeps the family involved in active, meaningful care at the bedside.</p>
       </div>
     </div>
 
-    <div class="callout-box red" role="note">
-      <div class="callout-icon">⚠️</div>
+    <div class="dod-gsf-banner" role="note" style="background:#fff8f0;border:1.5px solid rgba(200,80,0,.2);">
+      <div class="dod-gsf-icon">⚠️</div>
       <div>
-        <div class="callout-title">When Clinically Assisted Hydration May Be Appropriate</div>
-        <p class="callout-body">There are situations where hydration is clinically justified — for example, when opioid toxicity is suspected, when the patient remains alert and expresses thirst, or where reversible dehydration (e.g. from a treatable cause such as vomiting) is the primary problem. The decision must always be individualised and re-evaluated regularly.</p>
+        <div class="dod-gsf-title" style="color:#c85000;">When Clinically Assisted Hydration May Be Appropriate</div>
+        <p class="dod-gsf-body" style="color:#5a3020;">There are situations where hydration is clinically justified — when opioid toxicity is suspected, when the patient remains alert and expresses thirst, or where reversible dehydration from a treatable cause is the primary problem. The decision must always be individualised.</p>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
-      <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(4)">Continue to Emergencies →</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,.3);" onclick="goToPage(2)">← Back</button>
+      <button class="btn btn-primary"   style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(4)">Continue to Emergencies →</button>
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 4 — PALLIATIVE EMERGENCIES
-════════════════════════ -->
-<section class="page" id="page-4" aria-label="Introduction to Palliative Emergencies">
-  <div class="content-wrap dark-bg">
+═════════════════════════════════════════════ -->
+<section class="page" id="page-4" aria-label="Palliative Emergencies">
+  <div class="definition-wrap">
     <div class="definition-header">
-      <h2 style="color:var(--white);">Palliative Emergencies</h2>
-      <p style="color:var(--text-muted);">A palliative emergency is a sudden change in a patient's condition that, if not recognised and managed promptly, will cause extreme distress or rapid irreversible deterioration.</p>
+      <h2>Palliative Emergencies</h2>
+      <p style="color:var(--text-muted);">A palliative emergency is a sudden change that, if not managed promptly, will cause extreme distress or rapid irreversible deterioration. Knowing the difference between expected decline and a clinical emergency is a fundamental skill.</p>
     </div>
 
-    <div class="def-lead-box">
-      <p>Not every change in a palliative patient's condition is an emergency. Knowing the difference between <strong>expected deterioration</strong> and a <strong>clinical emergency requiring urgent action</strong> is a fundamental skill — and can mean the difference between comfort and catastrophe.</p>
+    <div class="definition-lead" role="note">
+      Not every change in a palliative patient's condition is an emergency. Knowing the difference between <em>expected deterioration</em> and a <em>clinical emergency requiring urgent action</em> can mean the difference between comfort and catastrophe.
     </div>
 
-    <!-- Categorisation Activity -->
-    <div class="activity-box dark">
-      <div class="activity-eyebrow">🎯 Interactive Activity — Categorise Each Condition</div>
-      <div class="activity-title">Expected Deterioration or Palliative Emergency?</div>
-      <p class="activity-desc" style="color:var(--text-muted);">Click the correct category button for each clinical condition below. Some may surprise you.</p>
+    <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;">🎯 Activity — Click the correct category for each condition</div>
 
-      <div class="cat-cards" id="cat-cards">
-        <div class="cat-card" id="cat-1" data-answer="expected">
+    <div class="cat-grid" id="cat-grid">
+
+      <div class="cat-card" id="cc-1" data-answer="expected">
+        <div class="cat-card-body">
           <div class="cat-card-title">Terminal Restlessness</div>
           <div class="cat-card-desc">Increasing agitation and confusion in the final hours of life</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-1','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-1','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-1-result"></div>
         </div>
-        <div class="cat-card" id="cat-2" data-answer="emergency">
-          <div class="cat-card-title">Metastatic Spinal Cord Compression</div>
-          <div class="cat-card-desc">New back pain with leg weakness or sensory changes</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-2','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-2','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-2-result"></div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-1','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-1','emergency',this)">Palliative Emergency</button>
         </div>
-        <div class="cat-card" id="cat-3" data-answer="expected">
-          <div class="cat-card-title">Skin Breakdown</div>
-          <div class="cat-card-desc">Pressure sore development in a bed-bound patient</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-3','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-3','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-3-result"></div>
-        </div>
-        <div class="cat-card" id="cat-4" data-answer="emergency">
-          <div class="cat-card-title">Superior Vena Cava Obstruction</div>
-          <div class="cat-card-desc">Facial swelling, distended neck veins, breathlessness</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-4','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-4','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-4-result"></div>
-        </div>
-        <div class="cat-card" id="cat-5" data-answer="expected">
-          <div class="cat-card-title">Incontinence</div>
-          <div class="cat-card-desc">Loss of bladder and bowel control as function declines</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-5','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-5','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-5-result"></div>
-        </div>
-        <div class="cat-card" id="cat-6" data-answer="emergency">
-          <div class="cat-card-title">Catastrophic Haemorrhage</div>
-          <div class="cat-card-desc">Sudden major bleed from tumour erosion of a vessel</div>
-          <div class="cat-btns">
-            <button onclick="catAnswer('cat-6','expected',this)" class="cat-btn">Expected</button>
-            <button onclick="catAnswer('cat-6','emergency',this)" class="cat-btn">Emergency</button>
-          </div>
-          <div class="cat-result" id="cat-6-result"></div>
-        </div>
+        <div class="cat-result" id="cc-1-result"></div>
       </div>
 
-      <div class="cat-score" id="cat-score" aria-live="polite"></div>
+      <div class="cat-card" id="cc-2" data-answer="emergency">
+        <div class="cat-card-body">
+          <div class="cat-card-title">Metastatic Spinal Cord Compression</div>
+          <div class="cat-card-desc">New back pain with leg weakness or sensory changes</div>
+        </div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-2','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-2','emergency',this)">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-2-result"></div>
+      </div>
+
+      <div class="cat-card" id="cc-3" data-answer="expected">
+        <div class="cat-card-body">
+          <div class="cat-card-title">Skin Breakdown</div>
+          <div class="cat-card-desc">Pressure sore development in a bed-bound patient</div>
+        </div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-3','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-3','emergency',this)">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-3-result"></div>
+      </div>
+
+      <div class="cat-card" id="cc-4" data-answer="emergency">
+        <div class="cat-card-body">
+          <div class="cat-card-title">Superior Vena Cava Obstruction</div>
+          <div class="cat-card-desc">Facial swelling, distended neck veins, dyspnoea</div>
+        </div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-4','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-4','emergency',this)">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-4-result"></div>
+      </div>
+
+      <div class="cat-card" id="cc-5" data-answer="expected">
+        <div class="cat-card-body">
+          <div class="cat-card-title">Incontinence</div>
+          <div class="cat-card-desc">Loss of bladder and bowel control as function declines</div>
+        </div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-5','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-5','emergency',this)">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-5-result"></div>
+      </div>
+
+      <div class="cat-card" id="cc-6" data-answer="emergency">
+        <div class="cat-card-body">
+          <div class="cat-card-title">Catastrophic Haemorrhage</div>
+          <div class="cat-card-desc">Sudden major bleed from tumour erosion of a blood vessel</div>
+        </div>
+        <div class="cat-btns">
+          <button class="cat-btn" onclick="catAnswer('cc-6','expected',this)">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-6','emergency',this)">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-6-result"></div>
+      </div>
+
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div class="cat-score-box" id="cat-score-box" style="display:none;" aria-live="polite"></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
       <button class="btn btn-secondary" onclick="goToPage(3)">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(5)">Continue to Haemorrhage →</button>
     </div>
   </div>
 </section>
 
+<!-- PAGE 4 — CATEGORY DETAIL MODAL -->
+<div class="modal-backdrop" id="cat-modal" role="dialog" aria-modal="true" aria-labelledby="cat-modal-title">
+  <div class="modal-inner">
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-eyebrow" id="cat-modal-eyebrow">Clinical Detail</div>
+        <div class="modal-title" id="cat-modal-title">More Information</div>
+      </div>
+      <button class="modal-close" onclick="closeCatModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="cat-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="closeCatModal()" style="font-size:.85rem;padding:10px 22px;">Close</button>
+    </div>
+  </div>
+</div>
 
-<!-- ════════════════════════
-     PAGE 5 — HAEMORRHAGE
-════════════════════════ -->
-<section class="page" id="page-5" aria-label="Terminal Haemorrhage — The ABC Approach">
-  <div class="content-wrap light-bg">
+
+<!-- ════════════════════════════════════════════
+     PAGE 5 — TERMINAL HAEMORRHAGE
+═════════════════════════════════════════════ -->
+<section class="page" id="page-5" aria-label="Terminal Haemorrhage — ABC Approach">
+  <div class="definition-wrap">
     <div class="definition-header">
       <h2>Terminal Haemorrhage</h2>
-      <p>Catastrophic haemorrhage is rare but can occur when a tumour erodes a major vessel — most commonly in head and neck cancers or those involving the carotid artery. It requires a calm, structured response.</p>
+      <p style="color:var(--text-muted);">Catastrophic haemorrhage is rare but can occur when a tumour erodes a major vessel — most commonly in head and neck cancers or those involving the carotid artery. It requires a calm, structured response.</p>
     </div>
 
-    <div class="callout-box red" role="note">
-      <div class="callout-icon">🩸</div>
-      <div>
-        <div class="callout-title">At-Risk Patients</div>
-        <p class="callout-body">Patients with head and neck tumours, or those with a history of haemoptysis (coughing blood) or melaena, are at higher risk. Anticipatory medication (typically Midazolam IM/SC) should already be prescribed. Dark-coloured towels should be kept available in the home environment.</p>
+    <div class="definition-not" role="note" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08);">
+      <div class="definition-not-title" style="color:#fca5a5;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        At-Risk Patients
       </div>
-    </div>
-
-    <!-- ABC Activity -->
-    <div class="activity-box">
-      <div class="activity-eyebrow">🎯 Interactive Activity — The ABC Strategy</div>
-      <div class="activity-title">A patient has a major bleed. Click the steps in the correct order.</div>
-      <p class="activity-desc">Select the actions below in the sequence you would carry them out. Click "Check Order" when done.</p>
-
-      <div class="abc-steps-pool" id="abc-pool">
-        <div class="abc-step-card" data-order="3" data-label="C" onclick="selectABC(this)">
-          <div class="abc-letter">C</div>
-          <div class="abc-content">
-            <div class="abc-step-title">Comfort, Cover &amp; Call</div>
-            <div class="abc-step-desc">Use dark towels to cover the wound, administer Midazolam if prescribed, and call for senior support</div>
-          </div>
-        </div>
-        <div class="abc-step-card" data-order="1" data-label="A" onclick="selectABC(this)">
-          <div class="abc-letter">A</div>
-          <div class="abc-content">
-            <div class="abc-step-title">Assure</div>
-            <div class="abc-step-desc">Calmly reassure the patient — your composure directly reduces their fear and distress</div>
-          </div>
-        </div>
-        <div class="abc-step-card" data-order="2" data-label="B" onclick="selectABC(this)">
-          <div class="abc-letter">B</div>
-          <div class="abc-content">
-            <div class="abc-step-title">Be There</div>
-            <div class="abc-step-desc">Do not leave the patient alone — presence is the most powerful therapeutic tool you have</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="abc-sequence-display" id="abc-sequence" aria-label="Your selected sequence">
-        <div class="abc-seq-label">Your sequence:</div>
-        <div class="abc-seq-slots" id="abc-slots">
-          <div class="abc-slot" id="abc-slot-0">1st</div>
-          <div class="abc-slot" id="abc-slot-1">2nd</div>
-          <div class="abc-slot" id="abc-slot-2">3rd</div>
-        </div>
-      </div>
-      <div class="abc-feedback" id="abc-feedback" aria-live="polite"></div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
-        <button class="btn-activity" onclick="checkABC()">✓ Check Order</button>
-        <button class="btn-activity-secondary" onclick="resetABC()">↺ Reset</button>
+      <div class="definition-not-grid">
+        <div class="not-item"><span class="not-item-icon">!</span><span>Head and neck cancer patients — particularly those with carotid artery involvement</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Any patient with a history of haemoptysis (coughing blood) or melaena</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Anticipatory medication (typically Midazolam IM/SC) should already be prescribed</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Dark-coloured towels should be kept available in the home environment</span></div>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:28px;">
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;">🎯 Activity — The ABC Strategy</div>
+      <div style="font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:6px;">A patient has a major bleed. Click the three steps in the correct order.</div>
+      <p style="font-size:.86rem;color:var(--text-muted);margin-bottom:22px;line-height:1.6;">The cards below show actions without labels. Select them in the order you would act — think about what matters first when a patient is distressed and bleeding.</p>
+
+      <div class="abc-pool" id="abc-pool">
+        <div class="abc-card" data-order="3" data-label="C" onclick="abcSelect(this)" tabindex="0" onkeydown="if(event.key==='Enter')abcSelect(this)">
+          <div class="abc-card-body">
+            <div class="abc-card-title">Use dark-coloured towels to cover the wound area, administer the prescribed sedative medication, and call immediately for senior support</div>
+          </div>
+          <div class="abc-card-num" aria-hidden="true"></div>
+        </div>
+        <div class="abc-card" data-order="1" data-label="A" onclick="abcSelect(this)" tabindex="0" onkeydown="if(event.key==='Enter')abcSelect(this)">
+          <div class="abc-card-body">
+            <div class="abc-card-title">Speak calmly and directly to the patient — your composure is the most powerful tool you have in reducing their fear and distress</div>
+          </div>
+          <div class="abc-card-num" aria-hidden="true"></div>
+        </div>
+        <div class="abc-card" data-order="2" data-label="B" onclick="abcSelect(this)" tabindex="0" onkeydown="if(event.key==='Enter')abcSelect(this)">
+          <div class="abc-card-body">
+            <div class="abc-card-title">Remain physically present with the patient — do not leave them alone under any circumstances</div>
+          </div>
+          <div class="abc-card-num" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="abc-sequence-row" id="abc-seq-row">
+        <div class="abc-seq-slot" id="abc-seq-0"><span>1st action</span></div>
+        <div class="abc-seq-slot" id="abc-seq-1"><span>2nd action</span></div>
+        <div class="abc-seq-slot" id="abc-seq-2"><span>3rd action</span></div>
+      </div>
+
+      <div class="abc-feedback" id="abc-feedback" role="alert" aria-live="polite"></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+        <button class="btn btn-primary" onclick="abcCheck()" style="font-size:.88rem;padding:11px 22px;">✓ Check Order</button>
+        <button class="btn btn-secondary" onclick="abcReset()" style="font-size:.88rem;padding:11px 22px;">↺ Reset</button>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <button class="btn btn-secondary" onclick="goToPage(4)">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(6)">Continue to Hypercalcaemia →</button>
     </div>
@@ -401,92 +448,107 @@
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 6 — HYPERCALCAEMIA
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page" id="page-6" aria-label="Hypercalcaemia">
-  <div class="content-wrap dark-bg">
+  <div class="definition-wrap">
     <div class="definition-header">
-      <h2 style="color:var(--white);">Hypercalcaemia</h2>
-      <p style="color:var(--text-muted);">Malignant hypercalcaemia occurs most commonly in squamous cell lung cancer and breast cancer. It is the most common metabolic emergency in oncology and is both treatable and life-limiting.</p>
+      <h2>Hypercalcaemia</h2>
+      <p style="color:var(--text-muted);">Malignant hypercalcaemia is most common in squamous cell lung cancer and breast cancer. It is the most common metabolic emergency in oncology — and it is treatable.</p>
     </div>
 
-    <div class="def-lead-box">
-      <p>Hypercalcaemia can be remembered using the mnemonic <strong style="color:var(--yellow);">"Stones, Bones, Groans, and Moans"</strong> — a systematic reminder of the four domains of symptoms. Click each section below to reveal the clinical features.</p>
+    <div class="definition-lead" role="note">
+      Remembered using the mnemonic <em>"Stones, Bones, Groans &amp; Moans"</em> — a systematic reminder of the four clinical domains. Click each card to reveal the features and mechanism.
     </div>
 
-    <div class="hypercal-grid" role="list">
-      <div class="hypercal-card" id="hc-stones" role="listitem" tabindex="0" onclick="toggleHC('hc-stones')" onkeydown="if(event.key==='Enter')toggleHC('hc-stones')" aria-expanded="false" aria-label="Stones — click to reveal symptoms">
-        <div class="hc-icon">🪨</div>
-        <div class="hc-title">Stones</div>
-        <div class="hc-subtitle">Renal / Urinary</div>
-        <div class="hc-body" id="hc-stones-body">
+    <div class="hc-grid" role="list">
+      <div class="hc-card" id="hc-stones" role="listitem" tabindex="0" onclick="toggleHC('hc-stones')" onkeydown="if(event.key==='Enter')toggleHC('hc-stones')" aria-expanded="false">
+        <div class="hc-card-top">
+          <span class="hc-emoji">🪨</span>
+          <div>
+            <div class="hc-name">Stones</div>
+            <div class="hc-domain">Renal / Urinary</div>
+          </div>
+          <div class="hc-chevron" id="hc-stones-chev">↓</div>
+        </div>
+        <div class="hc-card-body" id="hc-stones-body">
           <ul>
             <li>Polyuria (excessive urination)</li>
             <li>Polydipsia (excessive thirst)</li>
             <li>Nephrocalcinosis (calcium deposits in kidney)</li>
-            <li>Renal stones (in chronic cases)</li>
           </ul>
-          <div class="hc-mechanism">High calcium reduces kidney's ability to concentrate urine, leading to dehydration and a vicious cycle of worsening hypercalcaemia.</div>
+          <div class="hc-mechanism">High calcium reduces the kidney's ability to concentrate urine, creating a vicious cycle of dehydration and worsening hypercalcaemia.</div>
         </div>
-        <div class="hc-click-hint" id="hc-stones-hint">↓ click to reveal</div>
       </div>
-      <div class="hypercal-card" id="hc-bones" role="listitem" tabindex="0" onclick="toggleHC('hc-bones')" onkeydown="if(event.key==='Enter')toggleHC('hc-bones')" aria-expanded="false" aria-label="Bones — click to reveal symptoms">
-        <div class="hc-icon">🦴</div>
-        <div class="hc-title">Bones</div>
-        <div class="hc-subtitle">Musculoskeletal</div>
-        <div class="hc-body" id="hc-bones-body">
+
+      <div class="hc-card" id="hc-bones" role="listitem" tabindex="0" onclick="toggleHC('hc-bones')" onkeydown="if(event.key==='Enter')toggleHC('hc-bones')" aria-expanded="false">
+        <div class="hc-card-top">
+          <span class="hc-emoji">🦴</span>
+          <div>
+            <div class="hc-name">Bones</div>
+            <div class="hc-domain">Musculoskeletal</div>
+          </div>
+          <div class="hc-chevron" id="hc-bones-chev">↓</div>
+        </div>
+        <div class="hc-card-body" id="hc-bones-body">
           <ul>
             <li>Deep, aching bone pain</li>
             <li>Pathological fractures</li>
             <li>Proximal muscle weakness</li>
-            <li>Hypotonia (reduced muscle tone)</li>
           </ul>
-          <div class="hc-mechanism">Osteolytic metastases release calcium directly from bone; PTHrP secreted by tumours stimulates osteoclastic bone resorption.</div>
+          <div class="hc-mechanism">Osteolytic metastases release calcium directly from bone; PTHrP from tumours stimulates osteoclastic bone resorption.</div>
         </div>
-        <div class="hc-click-hint" id="hc-bones-hint">↓ click to reveal</div>
       </div>
-      <div class="hypercal-card" id="hc-groans" role="listitem" tabindex="0" onclick="toggleHC('hc-groans')" onkeydown="if(event.key==='Enter')toggleHC('hc-groans')" aria-expanded="false" aria-label="Groans — click to reveal symptoms">
-        <div class="hc-icon">😫</div>
-        <div class="hc-title">Groans</div>
-        <div class="hc-subtitle">Gastrointestinal</div>
-        <div class="hc-body" id="hc-groans-body">
+
+      <div class="hc-card" id="hc-groans" role="listitem" tabindex="0" onclick="toggleHC('hc-groans')" onkeydown="if(event.key==='Enter')toggleHC('hc-groans')" aria-expanded="false">
+        <div class="hc-card-top">
+          <span class="hc-emoji">😫</span>
+          <div>
+            <div class="hc-name">Groans</div>
+            <div class="hc-domain">Gastrointestinal</div>
+          </div>
+          <div class="hc-chevron" id="hc-groans-chev">↓</div>
+        </div>
+        <div class="hc-card-body" id="hc-groans-body">
           <ul>
             <li>Nausea and vomiting</li>
             <li>Constipation (most common GI feature)</li>
-            <li>Abdominal pain or cramping</li>
-            <li>Anorexia and weight loss</li>
+            <li>Abdominal pain and anorexia</li>
           </ul>
-          <div class="hc-mechanism">Calcium reduces smooth muscle excitability, slowing GI motility. This contributes to constipation, nausea, and bloating.</div>
+          <div class="hc-mechanism">Calcium reduces smooth muscle excitability, slowing GI motility — contributing to constipation, nausea, and bloating.</div>
         </div>
-        <div class="hc-click-hint" id="hc-groans-hint">↓ click to reveal</div>
       </div>
-      <div class="hypercal-card" id="hc-moans" role="listitem" tabindex="0" onclick="toggleHC('hc-moans')" onkeydown="if(event.key==='Enter')toggleHC('hc-moans')" aria-expanded="false" aria-label="Moans — click to reveal symptoms">
-        <div class="hc-icon">😵</div>
-        <div class="hc-title">Moans</div>
-        <div class="hc-subtitle">Neuropsychiatric</div>
-        <div class="hc-body" id="hc-moans-body">
+
+      <div class="hc-card" id="hc-moans" role="listitem" tabindex="0" onclick="toggleHC('hc-moans')" onkeydown="if(event.key==='Enter')toggleHC('hc-moans')" aria-expanded="false">
+        <div class="hc-card-top">
+          <span class="hc-emoji">😵</span>
+          <div>
+            <div class="hc-name">Moans</div>
+            <div class="hc-domain">Neuropsychiatric</div>
+          </div>
+          <div class="hc-chevron" id="hc-moans-chev">↓</div>
+        </div>
+        <div class="hc-card-body" id="hc-moans-body">
           <ul>
             <li>Confusion and cognitive impairment</li>
             <li>Lethargy and profound fatigue</li>
-            <li>Depression and anxiety</li>
-            <li>Coma (in severe cases)</li>
+            <li>Depression, anxiety, and in severe cases — coma</li>
           </ul>
-          <div class="hc-mechanism">Calcium affects neuronal membrane potentials and neurotransmitter release, causing CNS depression that ranges from mild confusion to coma.</div>
+          <div class="hc-mechanism">Calcium affects neuronal membrane potentials and neurotransmitter release, causing CNS depression from mild confusion to coma.</div>
         </div>
-        <div class="hc-click-hint" id="hc-moans-hint">↓ click to reveal</div>
       </div>
     </div>
 
-    <div class="callout-box teal" role="note">
-      <div class="callout-icon">💊</div>
+    <div class="dod-gsf-banner" role="note" style="background:var(--navy);">
+      <div class="dod-gsf-icon">💊</div>
       <div>
-        <div class="callout-title">Treatment: IV Bisphosphonates</div>
-        <p class="callout-body">Confirmed malignant hypercalcaemia (corrected serum calcium &gt;2.6 mmol/L) is treated with IV hydration followed by IV bisphosphonate (typically Zoledronic acid or Pamidronate). The calcium-lowering effect takes 2–4 days. It is a reversible emergency — but in advanced cancer, it often recurs and may signal a shift in prognosis.</p>
+        <div class="dod-gsf-title">Treatment: IV Bisphosphonates</div>
+        <p class="dod-gsf-body">Confirmed malignant hypercalcaemia (corrected serum calcium &gt;2.6 mmol/L) is treated with IV hydration followed by IV bisphosphonate (Zoledronic acid or Pamidronate). The calcium-lowering effect takes 2–4 days. In advanced cancer, it often recurs and may signal a shift in prognosis.</p>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <button class="btn btn-secondary" onclick="goToPage(5)">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(7)">Continue to MSCC →</button>
     </div>
@@ -494,150 +556,116 @@
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 7 — MSCC
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page" id="page-7" aria-label="Metastatic Spinal Cord Compression">
-  <div class="content-wrap light-bg">
-    <div class="definition-header">
+  <div class="dod-wrap">
+    <div class="outcomes-title-area">
       <h2>Metastatic Spinal Cord Compression (MSCC)</h2>
       <p>MSCC is an oncological emergency. Early identification and prompt action can mean the difference between walking and permanent paralysis. Delay in diagnosis is the most common reason for poor outcomes.</p>
     </div>
 
-    <div class="callout-box red" role="alert">
-      <div class="callout-icon">🚨</div>
+    <div style="background:#fff3f3;border:1.5px solid rgba(220,38,38,.3);border-left:4px solid #dc2626;border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:24px;display:flex;gap:12px;align-items:flex-start;" role="alert">
+      <div style="font-size:1.4rem;">🚨</div>
       <div>
-        <div class="callout-title">If you suspect MSCC — act within hours, not days</div>
-        <p class="callout-body">NICE guidance (NG127) recommends that all suspected MSCC is treated as an emergency. The patient should be nursed <strong>flat with log-rolling precautions</strong> until MSCC is excluded. Do not wait for imaging before implementing spinal precautions.</p>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:#991b1b;margin-bottom:6px;">If you suspect MSCC — act within hours, not days</div>
+        <p style="font-size:.86rem;color:#7f1d1d;line-height:1.7;">NICE guidance (NG127) requires all suspected MSCC be treated as an emergency. The patient should be <strong>nursed flat with log-rolling precautions</strong> until MSCC is excluded. Do not wait for imaging before implementing spinal precautions.</p>
       </div>
     </div>
 
-    <div class="two-col-grid">
-      <div class="info-card red-accent">
-        <div class="info-card-title" style="color:#991b1b;">🚩 Red Flag Symptoms</div>
-        <ul class="info-card-list red">
-          <li><strong>New or worsening back or neck pain</strong> — especially band-like pain that radiates around the chest or abdomen</li>
+    <div class="dod-grid" role="list" style="grid-template-columns:1fr 1fr;">
+      <div class="dod-sign" role="listitem" style="flex-direction:column;gap:10px;border-left:3px solid #dc2626;">
+        <div class="dod-sign-title" style="color:#991b1b;">🚩 Red Flag Symptoms</div>
+        <ul style="padding-left:18px;font-size:.84rem;color:#4a5a72;line-height:1.7;display:flex;flex-direction:column;gap:6px;">
+          <li><strong>New or worsening back or neck pain</strong> — especially band-like pain around the chest or abdomen</li>
           <li><strong>"Heavy" or weak legs</strong> — difficulty walking, stumbling, or inability to stand</li>
-          <li><strong>Sensory changes</strong> — numbness, tingling, or a "level" below which sensation is reduced</li>
-          <li><strong>Bladder or bowel dysfunction</strong> — retention, incontinence, or constipation of sudden onset</li>
+          <li><strong>Sensory changes</strong> — numbness, tingling, or a level below which sensation is reduced</li>
+          <li><strong>Bladder or bowel dysfunction</strong> — retention, incontinence, or sudden-onset constipation</li>
         </ul>
       </div>
-      <div class="info-card">
-        <div class="info-card-icon" style="background:rgba(34,65,126,0.1);">📋</div>
-        <div class="info-card-title">Immediate Management</div>
-        <ul class="info-card-list">
+      <div class="dod-sign" role="listitem" style="flex-direction:column;gap:10px;">
+        <div class="dod-sign-title">📋 Immediate Management</div>
+        <ul style="padding-left:18px;font-size:.84rem;color:#4a5a72;line-height:1.7;display:flex;flex-direction:column;gap:6px;">
           <li><strong>Nurse flat</strong> — spinal precautions until imaging confirms or excludes compression</li>
           <li><strong>High-dose dexamethasone</strong> — reduces spinal cord oedema (typically 16mg immediately)</li>
           <li><strong>Urgent MRI whole spine</strong> — within 24 hours of suspected diagnosis</li>
           <li><strong>Refer urgently</strong> — to oncology or spinal surgery team immediately</li>
-          <li><strong>Pain control</strong> — ensure adequate analgesia throughout</li>
         </ul>
       </div>
     </div>
 
-    <div class="evidence-banner">
-      <div class="evidence-eyebrow">📘 NICE NG127 (2023)</div>
-      <p class="evidence-body">All patients with cancer and new back pain should be assessed for MSCC. Approximately 5% of cancer patients will develop MSCC. The thoracic spine is most commonly affected (70%), followed by lumbar (20%) and cervical (10%) regions.</p>
+    <div class="dod-gsf-banner" role="note" style="background:var(--navy);">
+      <div class="dod-gsf-icon">📘</div>
+      <div>
+        <div class="dod-gsf-title">NICE NG127 (2023)</div>
+        <p class="dod-gsf-body">All patients with cancer and new back pain should be assessed for MSCC. Approximately 5% of cancer patients will develop MSCC. The thoracic spine is most commonly affected (70%), followed by lumbar (20%) and cervical (10%) regions.</p>
+      </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
-      <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(8)">Continue to SVCO →</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,.3);" onclick="goToPage(6)">← Back</button>
+      <button class="btn btn-primary"   style="background:var(--navy);color:var(--white);border-color:var(--navy);" onclick="goToPage(8)">Continue to SVCO →</button>
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 8 — SVCO
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page" id="page-8" aria-label="Superior Vena Cava Obstruction">
-  <div class="content-wrap dark-bg">
+  <div class="definition-wrap">
     <div class="definition-header">
-      <h2 style="color:var(--white);">Superior Vena Cava Obstruction (SVCO)</h2>
+      <h2>Superior Vena Cava Obstruction (SVCO)</h2>
       <p style="color:var(--text-muted);">SVCO occurs when a tumour in the mediastinum compresses the superior vena cava, obstructing venous return from the upper body. It presents dramatically and requires urgent treatment.</p>
     </div>
 
-    <div class="def-lead-box">
-      <p>SVCO most commonly occurs in <strong style="color:var(--yellow);">lung cancer</strong> and <strong style="color:var(--yellow);">mediastinal lymphoma</strong>. Symptoms develop because blood cannot drain from the head, neck, and arms back to the heart. Click on the numbered areas of the diagram below to learn about each clinical feature.</p>
+    <div class="definition-lead" role="note">
+      SVCO most commonly occurs in <em>lung cancer</em> and <em>mediastinal lymphoma</em>. Symptoms develop because blood cannot drain from the head, neck, and arms back to the heart. Click each numbered area on the diagram to learn about each clinical feature.
     </div>
 
-    <!-- Visual symptom checker -->
-    <div class="activity-box dark">
-      <div class="activity-eyebrow">🎯 Interactive Activity — Visual Symptom Checker</div>
-      <div class="activity-title">Click on each numbered area to reveal the SVCO symptom</div>
-
-      <div class="svco-layout">
-        <div class="svco-diagram-wrap">
-          <svg viewBox="0 0 200 340" class="svco-svg" aria-label="Body diagram for SVCO symptoms" role="img">
-            <!-- Simple body outline -->
-            <ellipse cx="100" cy="40" rx="28" ry="32" fill="rgba(197,211,232,0.12)" stroke="rgba(197,211,232,0.3)" stroke-width="1.5"/>
-            <!-- neck -->
-            <rect x="91" y="68" width="18" height="20" rx="4" fill="rgba(197,211,232,0.12)" stroke="rgba(197,211,232,0.3)" stroke-width="1.5"/>
-            <!-- torso -->
-            <rect x="68" y="88" width="64" height="90" rx="10" fill="rgba(197,211,232,0.12)" stroke="rgba(197,211,232,0.3)" stroke-width="1.5"/>
-            <!-- left arm -->
-            <rect x="36" y="90" width="28" height="70" rx="12" fill="rgba(197,211,232,0.12)" stroke="rgba(197,211,232,0.3)" stroke-width="1.5"/>
-            <!-- right arm -->
-            <rect x="136" y="90" width="28" height="70" rx="12" fill="rgba(197,211,232,0.12)" stroke="rgba(197,211,232,0.3)" stroke-width="1.5"/>
-
-            <!-- Clickable hotspots -->
-            <!-- 1 - facial oedema -->
-            <circle cx="100" cy="38" r="18" fill="rgba(253,202,15,0.15)" stroke="var(--yellow)" stroke-width="2" class="svco-hotspot" onclick="showSVCO(1)" style="cursor:pointer;" aria-label="Facial area">
-            </circle>
-            <text x="100" y="43" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="var(--yellow)" pointer-events="none">1</text>
-
-            <!-- 2 - neck veins -->
-            <circle cx="100" cy="77" r="13" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2" class="svco-hotspot" onclick="showSVCO(2)" style="cursor:pointer;">
-            </circle>
-            <text x="100" y="82" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#fca5a5" pointer-events="none">2</text>
-
-            <!-- 3 - arm swelling left -->
-            <circle cx="50" cy="125" r="13" fill="rgba(1,151,222,0.2)" stroke="var(--blue)" stroke-width="2" class="svco-hotspot" onclick="showSVCO(3)" style="cursor:pointer;">
-            </circle>
-            <text x="50" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7dd3fc" pointer-events="none">3</text>
-
-            <!-- 4 - arm swelling right -->
-            <circle cx="150" cy="125" r="13" fill="rgba(1,151,222,0.2)" stroke="var(--blue)" stroke-width="2" class="svco-hotspot" onclick="showSVCO(3)" style="cursor:pointer;">
-            </circle>
-            <text x="150" y="130" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#7dd3fc" pointer-events="none">3</text>
-
-            <!-- 5 - chest / SVC -->
-            <circle cx="100" cy="115" r="16" fill="rgba(124,110,245,0.15)" stroke="#7c6ef5" stroke-width="2" class="svco-hotspot" onclick="showSVCO(4)" style="cursor:pointer;">
-            </circle>
-            <text x="100" y="120" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#c4b5fd" pointer-events="none">4</text>
-          </svg>
+    <div class="svco-layout">
+      <div class="svco-img-wrap">
+        <img src="images/svco.png" alt="Body diagram showing areas affected by SVCO" class="svco-img">
+        <div class="svco-hotspot-layer" aria-hidden="true">
+          <!-- Hotspot buttons overlaid on image; positions are % based -->
+          <button class="svco-hs" style="top:8%;left:38%;"  onclick="showSVCO(1)" aria-label="Click for facial oedema">1</button>
+          <button class="svco-hs" style="top:22%;left:38%;" onclick="showSVCO(2)" aria-label="Click for neck veins">2</button>
+          <button class="svco-hs" style="top:35%;left:10%;" onclick="showSVCO(3)" aria-label="Click for arm swelling">3</button>
+          <button class="svco-hs" style="top:35%;left:66%;" onclick="showSVCO(3)" aria-label="Click for arm swelling right">3</button>
+          <button class="svco-hs" style="top:35%;left:38%;" onclick="showSVCO(4)" aria-label="Click for chest symptoms">4</button>
         </div>
+      </div>
 
-        <div class="svco-panel-wrap">
-          <div class="svco-panel" id="svco-default">
-            <p style="color:var(--text-muted);font-size:.9rem;padding:20px;">Click a numbered area on the diagram to learn about that SVCO symptom.</p>
-          </div>
-          <div class="svco-panel" id="svco-1" style="display:none;">
-            <div class="svco-panel-title" style="color:var(--yellow);">① Facial &amp; Periorbital Oedema</div>
-            <p>Progressive swelling of the face, particularly around the eyes, is one of the most visible and distressing signs of SVCO. Patients often describe their face feeling "full" or "puffy." The conjunctivae may appear reddened.</p>
-            <div class="svco-panel-note">Often worse in the morning — fluid redistributes when the patient has been lying flat overnight.</div>
-          </div>
-          <div class="svco-panel" id="svco-2" style="display:none;">
-            <div class="svco-panel-title" style="color:#fca5a5;">② Distended Neck Veins</div>
-            <p>Non-pulsatile distension of the external jugular veins, visible even when the patient is sitting upright. This occurs because venous blood cannot drain past the obstruction. In severe cases, veins may be visible across the chest wall.</p>
-            <div class="svco-panel-note">Distinguish from pulsatile JVP elevation (which suggests cardiac causes) — in SVCO the veins are non-pulsatile.</div>
-          </div>
-          <div class="svco-panel" id="svco-3" style="display:none;">
-            <div class="svco-panel-title" style="color:#7dd3fc;">③ Arm Swelling (Bilateral)</div>
-            <p>Swelling of both arms occurs as venous drainage from the upper limbs is obstructed. The skin may feel tense and pitting oedema is common. Patients may find it difficult to wear clothing or jewellery.</p>
-            <div class="svco-panel-note">IV access in the arms should be avoided — venous pressure is elevated and infusions may not drain effectively.</div>
-          </div>
-          <div class="svco-panel" id="svco-4" style="display:none;">
-            <div class="svco-panel-title" style="color:#c4b5fd;">④ Breathlessness &amp; Chest Pain</div>
-            <p>Compression of airways by the mediastinal tumour causes dyspnoea, which may be severe. Patients often report a sense of suffocation. Chest pain may be present if the pleura or pericardium is involved.</p>
-            <div class="svco-panel-note">Treatment: High-dose dexamethasone, urgent radiotherapy or stenting, and position the patient upright to reduce venous engorgement.</div>
-          </div>
+      <div class="svco-panels">
+        <div class="svco-panel active" id="svco-default">
+          <div class="svco-hint">👆 Click a numbered area on the diagram to explore each SVCO symptom.</div>
+        </div>
+        <div class="svco-panel" id="svco-1">
+          <div class="svco-panel-eyebrow" style="color:var(--yellow);">① Facial &amp; Periorbital Oedema</div>
+          <p>Progressive swelling of the face, particularly around the eyes, is one of the most visible signs of SVCO. Often worse in the morning as fluid redistributes overnight. The conjunctivae may appear reddened.</p>
+          <div class="svco-note">Often described by patients as their face feeling "full" or "puffy" — can be mistaken initially for an allergic reaction.</div>
+        </div>
+        <div class="svco-panel" id="svco-2">
+          <div class="svco-panel-eyebrow" style="color:#fca5a5;">② Distended Neck Veins</div>
+          <p>Non-pulsatile distension of the external jugular veins, visible even when sitting upright. In severe cases, veins may be visible across the chest wall (collateral veins).</p>
+          <div class="svco-note">Distinguish from pulsatile JVP elevation (which suggests cardiac causes) — in SVCO the veins are non-pulsatile and do not vary with respiration.</div>
+        </div>
+        <div class="svco-panel" id="svco-3">
+          <div class="svco-panel-eyebrow" style="color:#7dd3fc;">③ Bilateral Arm Swelling</div>
+          <p>Swelling of both arms as venous drainage from the upper limbs is obstructed. The skin feels tense and pitting oedema is common. Patients may be unable to wear clothing or jewellery.</p>
+          <div class="svco-note">IV access in the arms should be avoided — venous pressure is elevated and infusions may not drain effectively. Use the foot or femoral route if IV access is essential.</div>
+        </div>
+        <div class="svco-panel" id="svco-4">
+          <div class="svco-panel-eyebrow" style="color:#c4b5fd;">④ Dyspnoea &amp; Chest Symptoms</div>
+          <p>Compression of airways by the mediastinal tumour causes dyspnoea, which can be severe. Patients often describe a sense of suffocation. Chest pain may occur if the pleura or pericardium is involved.</p>
+          <div class="svco-note">Treatment: High-dose dexamethasone immediately, urgent radiotherapy or SVC stenting. Position the patient upright to reduce venous engorgement and ease breathing.</div>
         </div>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
       <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
       <button class="btn btn-primary" onclick="goToPage(9)">Continue to Seizures →</button>
     </div>
@@ -645,241 +673,243 @@
 </section>
 
 
-<!-- ════════════════════════
-     PAGE 9 — SEIZURES
-════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE 9 — SEIZURES (draggable reorder)
+═════════════════════════════════════════════ -->
 <section class="page" id="page-9" aria-label="Managing Seizures">
-  <div class="content-wrap light-bg">
+  <div class="definition-wrap">
     <div class="definition-header">
       <h2>Managing Seizures</h2>
-      <p>Seizures in palliative patients may occur due to brain metastases, metabolic disturbance, or medication. Management in the community or hospice requires a calm, structured approach.</p>
+      <p style="color:var(--text-muted);">Seizures in palliative patients may occur due to brain metastases, metabolic disturbance, or medication. Management requires a calm, structured approach — particularly in community and hospice settings.</p>
     </div>
 
-    <div class="callout-box navy" role="note">
-      <div class="callout-icon">⏱️</div>
-      <div>
-        <div class="callout-title">When to Intervene</div>
-        <p class="callout-body">A generalised tonic-clonic seizure lasting <strong>less than 5 minutes</strong> should be observed and the patient kept safe but does not require emergency medication. A seizure lasting <strong>5 minutes or more</strong> (or two seizures without recovery between them) constitutes status epilepticus and requires immediate pharmacological intervention.</p>
+    <div class="definition-not" role="note" style="border-color:rgba(1,151,222,.3);background:rgba(1,151,222,.08);">
+      <div class="definition-not-title" style="color:#7dd3fc;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        When to Intervene
       </div>
-    </div>
-
-    <!-- Process Ordering Activity -->
-    <div class="activity-box">
-      <div class="activity-eyebrow">🎯 Interactive Activity — Sequence the Steps</div>
-      <div class="activity-title">Order the management steps for a seizure lasting &gt;5 minutes</div>
-      <p class="activity-desc">Click the steps in the correct clinical order. They will appear in your sequence below.</p>
-
-      <div class="seq-pool" id="seq-pool">
-        <div class="seq-card" data-order="3" onclick="selectSeq(this)" tabindex="0">
-          <div class="seq-num">?</div>
-          <div class="seq-content">
-            <div class="seq-title">Administer Buccal Midazolam (or SC if access is ready)</div>
-            <div class="seq-desc">First-line anticonvulsant in community settings — typically 10mg buccal. Follow prescribed protocol.</div>
-          </div>
-        </div>
-        <div class="seq-card" data-order="1" onclick="selectSeq(this)" tabindex="0">
-          <div class="seq-num">?</div>
-          <div class="seq-content">
-            <div class="seq-title">Safe Environment &amp; Airway</div>
-            <div class="seq-desc">Move hazards away, do not restrain, place recovery position after tonic-clonic phase, check airway</div>
-          </div>
-        </div>
-        <div class="seq-card" data-order="4" onclick="selectSeq(this)" tabindex="0">
-          <div class="seq-num">?</div>
-          <div class="seq-content">
-            <div class="seq-title">Monitor &amp; Seek Specialist Advice</div>
-            <div class="seq-desc">Record duration and nature of seizure. Inform the palliative care team. Review anticipatory prescribing.</div>
-          </div>
-        </div>
-        <div class="seq-card" data-order="2" onclick="selectSeq(this)" tabindex="0">
-          <div class="seq-num">?</div>
-          <div class="seq-content">
-            <div class="seq-title">Check Blood Glucose (BM)</div>
-            <div class="seq-desc">Exclude hypoglycaemia as a reversible cause before administering anticonvulsants</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="seq-result" id="seq-result">
-        <div class="seq-result-label">Your sequence:</div>
-        <div class="seq-result-slots" id="seq-slots">
-          <div class="seq-slot empty" id="seq-slot-0"><span>Step 1</span></div>
-          <div class="seq-slot empty" id="seq-slot-1"><span>Step 2</span></div>
-          <div class="seq-slot empty" id="seq-slot-2"><span>Step 3</span></div>
-          <div class="seq-slot empty" id="seq-slot-3"><span>Step 4</span></div>
-        </div>
-      </div>
-
-      <div class="seq-feedback" id="seq-feedback" aria-live="polite"></div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
-        <button class="btn-activity" onclick="checkSeq()">✓ Check Order</button>
-        <button class="btn-activity-secondary" onclick="resetSeq()">↺ Reset</button>
+      <div class="definition-not-grid">
+        <div class="not-item"><span class="not-item-icon" style="color:#7dd3fc;">✓</span><span>A seizure lasting <strong>&lt;5 minutes</strong> — observe, keep safe, no emergency medication needed</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>A seizure lasting <strong>≥5 minutes</strong> constitutes status epilepticus — act immediately</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Two seizures <strong>without recovery</strong> between them also requires immediate intervention</span></div>
+        <div class="not-item"><span class="not-item-icon">!</span><span>Always review anticipatory prescribing and inform the palliative care team after any seizure</span></div>
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:28px;">
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;">🎯 Activity — Drag to Reorder</div>
+      <div style="font-family:'Merriweather',serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:6px;">Arrange the management steps in the correct order for a seizure lasting &gt;5 minutes</div>
+      <p style="font-size:.86rem;color:var(--text-muted);margin-bottom:22px;line-height:1.6;">Drag the steps up or down to reorder them. Change your mind as many times as you like before checking.</p>
+
+      <ul class="seq-list" id="seq-list" aria-label="Reorder seizure management steps">
+        <li class="seq-item" draggable="true" data-order="4" id="seqi-4">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Monitor &amp; Seek Specialist Advice</div>
+            <div class="seq-item-desc">Record duration and nature. Inform the palliative care team. Review anticipatory prescribing to prevent recurrence.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-4-badge"></div>
+        </li>
+        <li class="seq-item" draggable="true" data-order="3" id="seqi-3">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Administer Buccal Midazolam (or SC if access is ready)</div>
+            <div class="seq-item-desc">First-line anticonvulsant in community settings — typically 10mg buccal. Follow the prescribed protocol.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-3-badge"></div>
+        </li>
+        <li class="seq-item" draggable="true" data-order="1" id="seqi-1">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Safe Environment &amp; Airway</div>
+            <div class="seq-item-desc">Move hazards away, do not restrain, place in recovery position after tonic-clonic phase, check airway patency.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-1-badge"></div>
+        </li>
+        <li class="seq-item" draggable="true" data-order="2" id="seqi-2">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Check Blood Glucose (BM)</div>
+            <div class="seq-item-desc">Exclude hypoglycaemia as a reversible, treatable cause before administering anticonvulsants.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-2-badge"></div>
+        </li>
+      </ul>
+
+      <div class="seq-feedback" id="seq-feedback" role="alert" aria-live="polite"></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;">
+        <button class="btn btn-primary" onclick="seqCheck()" style="font-size:.88rem;padding:11px 22px;">✓ Check Order</button>
+        <button class="btn btn-secondary" onclick="seqReset()" style="font-size:.88rem;padding:11px 22px;">↺ Reset</button>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(10)">Continue to Quiz →</button>
+      <button class="btn btn-primary" onclick="goToPage(10)">Continue to Case Studies →</button>
     </div>
   </div>
 </section>
 
 
-<!-- ════════════════════════
-     PAGE 10 — RAPID FIRE QUIZ
-════════════════════════ -->
-<section class="page" id="page-10" aria-label="Test Your Understanding — Rapid Fire">
-  <div class="content-wrap dark-bg">
-    <div class="definition-header">
-      <h2 style="color:var(--white);">Test Your Understanding</h2>
-      <p style="color:var(--text-muted);">Three rapid-fire cards to test your recognition of the key emergencies covered in this module. Click each card to reveal the answer.</p>
+<!-- ════════════════════════════════════════════
+     PAGE 10 — CASE STUDY MCQs (5 patients)
+═════════════════════════════════════════════ -->
+<section class="page" id="page-10" aria-label="Case Study MCQ — Five Patients">
+  <div class="mcq-wrap">
+    <div class="mcq-header">
+      <h2 style="font-family:'Merriweather',serif;font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:8px;">Who Am I?</h2>
+      <p style="font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:560px;margin:0 auto;">Five clinical presentations. Read each patient's description, then answer the question that follows. You must score 80% or above to continue.</p>
     </div>
 
-    <div class="rf-cards-grid" role="list">
+    <div class="mcq-progress" id="mcq-dots" role="status" aria-live="polite" aria-label="MCQ progress" style="margin:24px 0;"></div>
+    <div id="mcq-questions-container"></div>
+    <div class="mcq-results" id="mcq-results" role="region" aria-label="MCQ results" aria-live="polite"></div>
 
-      <div class="rf-card" tabindex="0" role="listitem" onclick="flipRF(this)" onkeydown="if(event.key==='Enter')flipRF(this)" aria-label="Who Am I? Card 1 — click to flip">
-        <div class="rf-card-inner">
-          <div class="rf-front">
-            <div class="rf-eyebrow">Who Am I?</div>
-            <div class="rf-question">"I have lung cancer and I've noticed my face is swelling up — especially around my eyes in the mornings. Both my arms feel heavy and tight. I've also been more breathless."</div>
-            <div class="rf-click-hint">Click to reveal</div>
-          </div>
-          <div class="rf-back" style="border-top:4px solid #7c6ef5;">
-            <div class="rf-answer-label">Diagnosis</div>
-            <div class="rf-answer-title">Superior Vena Cava Obstruction (SVCO)</div>
-            <div class="rf-answer-body">
-              <p>Classic SVCO presentation: facial oedema (worse in the morning), bilateral arm swelling, and dyspnoea from airway compression.</p>
-              <div class="rf-action">Urgent referral for dexamethasone and oncological review (radiotherapy or stenting).</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rf-card" tabindex="0" role="listitem" onclick="flipRF(this)" onkeydown="if(event.key==='Enter')flipRF(this)" aria-label="Who Am I? Card 2 — click to flip">
-        <div class="rf-card-inner">
-          <div class="rf-front">
-            <div class="rf-eyebrow">Who Am I?</div>
-            <div class="rf-question">"My back has been aching for weeks but now it feels like a tight band around my chest. My legs feel really heavy and I tripped going up the stairs today."</div>
-            <div class="rf-click-hint">Click to reveal</div>
-          </div>
-          <div class="rf-back" style="border-top:4px solid #ef4444;">
-            <div class="rf-answer-label">Diagnosis</div>
-            <div class="rf-answer-title">Metastatic Spinal Cord Compression (MSCC)</div>
-            <div class="rf-answer-body">
-              <p>Red flags: progressive back pain, band-like thoracic pain, and motor weakness (heavy legs, difficulty climbing stairs).</p>
-              <div class="rf-action">Nurse flat immediately. High-dose dexamethasone. Urgent MRI whole spine. Do not wait for imaging before implementing spinal precautions.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rf-card" tabindex="0" role="listitem" onclick="flipRF(this)" onkeydown="if(event.key==='Enter')flipRF(this)" aria-label="Who Am I? Card 3 — click to flip">
-        <div class="rf-card-inner">
-          <div class="rf-front">
-            <div class="rf-eyebrow">Who Am I?</div>
-            <div class="rf-question">Your patient with advanced head and neck cancer suddenly begins to bleed heavily from the mouth. You are alone with them in their home.</div>
-            <div class="rf-click-hint">Click to reveal</div>
-          </div>
-          <div class="rf-back" style="border-top:4px solid #ef4444;">
-            <div class="rf-answer-label">Situation</div>
-            <div class="rf-answer-title">Catastrophic Terminal Haemorrhage</div>
-            <div class="rf-answer-body">
-              <p>Apply the ABC framework immediately:</p>
-              <div class="rf-abc-row"><span class="rf-abc-badge">A</span> Assure — stay calm, speak calmly to the patient</div>
-              <div class="rf-abc-row"><span class="rf-abc-badge">B</span> Be There — do not leave them alone</div>
-              <div class="rf-abc-row"><span class="rf-abc-badge">C</span> Comfort, Cover &amp; Call — dark towels, Midazolam if prescribed, call senior</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="rf-complete-msg" id="rf-complete" style="display:none;" role="status">
-      <div class="rf-complete-icon">🌟</div>
-      <div class="rf-complete-title">All three cards reviewed!</div>
-      <p>You've completed the rapid-fire knowledge check. Continue to save your learning record.</p>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);">
       <button class="btn btn-secondary" onclick="goToPage(9)">← Back</button>
-      <button class="btn btn-primary" onclick="goToPage(11)">My Learning Record →</button>
+      <button class="btn btn-primary" id="mcq-continue-btn" style="opacity:.4;cursor:not-allowed;" disabled aria-label="Complete all questions to continue" onclick="goToPage(11)">
+        My Learning Record →
+      </button>
     </div>
   </div>
+
+  <script>
+  (function(){
+    var CHECK=setInterval(function(){
+      var res=document.getElementById('mcq-results');
+      if(res&&res.classList.contains('show')){
+        clearInterval(CHECK);
+        var scoreEl=res.querySelector('.quiz-results-score');
+        var passed=false;
+        if(scoreEl){
+          var parts=scoreEl.textContent.split('/');
+          if(parts.length===2){var c=parseInt(parts[0]),t=parseInt(parts[1]);if(!isNaN(c)&&!isNaN(t)&&t>0)passed=(c/t)>=0.8;}
+        }
+        var btn=document.getElementById('mcq-continue-btn');
+        if(!btn)return;
+        if(passed){
+          btn.disabled=false;btn.style.opacity='1';btn.style.cursor='pointer';
+          btn.setAttribute('aria-label','Continue to My Learning Record');
+        } else {
+          var ex=document.getElementById('mcq-fail-msg');
+          if(!ex){var m=document.createElement('p');m.id='mcq-fail-msg';m.setAttribute('role','alert');m.style.cssText='text-align:center;color:#fca5a5;font-size:.87rem;margin-top:14px;line-height:1.6;';m.innerHTML='⚠️ You need <strong>80% or above</strong> to continue. Review the module and try again.';btn.parentNode.insertBefore(m,btn.nextSibling);}
+        }
+      }
+    },300);
+  })();
+  </script>
 </section>
 
 
-<!-- ════════════════════════
+<!-- ════════════════════════════════════════════
      PAGE 11 — LEARNING RECORD
-════════════════════════ -->
+═════════════════════════════════════════════ -->
 <section class="page" id="page-11" aria-label="My Learning Record" style="background:#f0f4f9;min-height:calc(100vh - 164px);">
   <div style="max-width:860px;margin:0 auto;padding:48px 32px 80px;">
+
     <div style="text-align:center;margin-bottom:36px;">
       <h2 style="font-family:'Merriweather',serif;font-size:1.75rem;color:var(--navy);margin-bottom:8px;">My Learning Record</h2>
-      <p style="color:#5a6a82;font-size:.92rem;line-height:1.7;max-width:560px;margin:0 auto;">A summary of your engagement with Package 4. Export as PDF to keep as evidence of your learning.</p>
+      <p style="color:#5a6a82;font-size:.92rem;line-height:1.7;max-width:560px;margin:0 auto;">A summary of your engagement with Module 4. Export as PDF to keep as evidence of learning.</p>
     </div>
 
     <div style="display:flex;justify-content:flex-end;margin-bottom:28px;">
-      <button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <button onclick="exportLearningRecord()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Export as PDF
       </button>
     </div>
 
     <div id="learning-record-body">
 
+      <!-- Module info -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">Module</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:.88rem;color:#4a5a72;">
-          <div><strong style="color:var(--navy);">Package:</strong> Symptom Management &amp; Emergencies</div>
-          <div><strong style="color:var(--navy);">Organisation:</strong> St Barnabas Hospice</div>
-          <div><strong style="color:var(--navy);">Completed:</strong> <span id="record-date"></span></div>
+          <div><strong style="color:var(--navy);">Module:</strong> Symptom Management &amp; Emergencies</div>
+          <div><strong style="color:var(--navy);">Organisation:</strong> SBH Education</div>
+          <div><strong style="color:var(--navy);">Completed:</strong> <span id="export-date"></span></div>
           <div><strong style="color:var(--navy);">Status:</strong> <span style="color:#059669;font-weight:600;">Complete</span></div>
         </div>
       </div>
 
+      <!-- Page 2 DnD -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 2 — Respiratory</div>
-        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Drag &amp; Drop: Intervention Matching</div>
-        <div id="record-dnd" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;"></div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Intervention Matching — Drag &amp; Drop</div>
+        <div id="record-dnd" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed.</div>
       </div>
 
+      <!-- Page 4 Cat -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 4 — Emergencies</div>
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 4 — Palliative Emergencies</div>
         <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Categorisation Score</div>
-        <div id="record-cat" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;"></div>
+        <div id="record-cat" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed.</div>
       </div>
 
+      <!-- Page 5 ABC -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 5 — Haemorrhage</div>
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 5 — Terminal Haemorrhage</div>
         <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">ABC Sequence Result</div>
-        <div id="record-abc" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;"></div>
+        <div id="record-abc" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed.</div>
       </div>
 
+      <!-- Page 9 Seizure -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
-        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 — Seizures</div>
-        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Seizure Management Sequence</div>
-        <div id="record-seq" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;"></div>
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 9 — Seizure Management</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Step Sequencing Result</div>
+        <div id="record-seq" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed.</div>
       </div>
 
+      <!-- Page 10 MCQ -->
+      <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Page 10 — Case Study Assessment</div>
+        <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:12px;">Who Am I? — MCQ Score</div>
+        <div id="record-mcq" style="background:#f8fafc;border:1px solid #e2eaf4;border-radius:8px;padding:14px 16px;font-size:.88rem;color:#4a5a72;line-height:1.75;min-height:40px;">Not yet completed.</div>
+        <div id="record-mcq-detail" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+      </div>
+
+      <!-- Reflections -->
       <div style="background:#fff;border:1px solid #d0daea;border-radius:12px;padding:20px 24px;margin-bottom:28px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
         <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;">Optional</div>
         <div style="font-family:'Merriweather',serif;font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;">Additional Reflections</div>
-        <p style="font-size:.84rem;color:#5a6a82;margin-bottom:10px;">Any changes to your practice, questions for your supervisor, or key learning points from this module.</p>
-        <textarea id="record-extra" style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;min-height:100px;background:#f8fafc;box-sizing:border-box;" placeholder="Add your reflections here…"></textarea>
+        <p style="font-size:.84rem;color:#5a6a82;margin-bottom:10px;">Changes to your practice, questions for your supervisor, or key learning points.</p>
+        <textarea id="export-extra-notes" style="width:100%;font-family:'DM Sans',sans-serif;font-size:.88rem;color:#1e2d50;border:1px solid #c8d8e8;border-radius:8px;padding:12px 14px;line-height:1.7;resize:vertical;min-height:100px;background:#f8fafc;box-sizing:border-box;" placeholder="Add your reflections here…"></textarea>
       </div>
-
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <button class="btn btn-secondary" style="color:var(--navy);border-color:rgba(34,65,126,.3);" onclick="goToPage(10)">← Back</button>
-      <button onclick="finishModule()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--yellow);color:var(--navy);border:2px solid var(--yellow);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        Finish Module
-      </button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button onclick="exportLearningRecord()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#fff;color:var(--navy);border:2px solid #d0daea;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export as PDF
+        </button>
+        <button onclick="finishModule()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--yellow);color:var(--navy);border:2px solid var(--yellow);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Finish Module
+        </button>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ══ COMPLETION OVERLAY ══ -->
+<div id="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete"
+     style="display:none;position:fixed;inset:0;background:rgba(10,20,48,.92);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:linear-gradient(160deg,#0f1c34,#1a3466);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:48px 40px;max-width:480px;width:90%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.5);">
+    <div style="font-size:3rem;margin-bottom:16px;" aria-hidden="true">🎓</div>
+    <div style="font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;">Module Complete</div>
+    <h2 style="font-family:'Merriweather',serif;font-size:1.6rem;color:#fff;margin-bottom:12px;">Well done!</h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:28px;">Your progress has been recorded. Export your Learning Record below, or close this window.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-secondary" onclick="document.getElementById('finish-overlay').style.display='none';goToPage(11);" style="font-size:.85rem;">📄 View My Record</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('finish-overlay').style.display='none';goToPage(1);" style="font-size:.85rem;">↩ Review Module</button>
+      <button onclick="document.getElementById('finish-overlay').style.display='none';" style="padding:10px 22px;background:var(--yellow);color:var(--navy);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
 
 <style>
 @media print {
@@ -890,10 +920,65 @@
 }
 </style>
 
+<script>
+function populateLearningRecord(){
+  var d=new Date();
+  var el=document.getElementById('export-date');
+  if(el) el.textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+  var dnd=document.getElementById('record-dnd');
+  if(dnd&&window._dndResult) dnd.innerHTML=window._dndResult;
+
+  var cat=document.getElementById('record-cat');
+  if(cat&&window._catResult) cat.textContent=window._catResult;
+
+  var abc=document.getElementById('record-abc');
+  if(abc&&window._abcResult) abc.textContent=window._abcResult;
+
+  var seq=document.getElementById('record-seq');
+  if(seq&&window._seqResult) seq.textContent=window._seqResult;
+
+  // MCQ score
+  var mcqEl=document.getElementById('record-mcq');
+  var mcqDetail=document.getElementById('record-mcq-detail');
+  var scoreDiv=document.getElementById('mcq-results');
+  if(mcqEl&&scoreDiv&&scoreDiv.classList.contains('show')){
+    var scoreNum=scoreDiv.querySelector('.quiz-results-score');
+    var rawScore=scoreNum?scoreNum.textContent.trim():'—';
+    var parts=rawScore.split('/');
+    var passed=false;
+    if(parts.length===2){var c=parseInt(parts[0]),t=parseInt(parts[1]);if(!isNaN(c)&&!isNaN(t)&&t>0)passed=(c/t)>=0.8;}
+    mcqEl.innerHTML='<strong style="color:var(--navy);">Score: '+rawScore+'</strong> &nbsp;&nbsp; <span style="font-weight:700;color:'+(passed?'#059669':'#dc2626')+'">'+(passed?'✓ Pass':'✗ Did not reach 80% pass mark')+'</span>';
+
+    if(mcqDetail){
+      mcqDetail.innerHTML='';
+      document.querySelectorAll('.mcq-q-card').forEach(function(card,i){
+        var qText=card.querySelector('.mcq-q-text');
+        var feedback=card.querySelector('.mcq-feedback');
+        var correct=feedback&&feedback.classList.contains('correct');
+        var badge=feedback?feedback.querySelector('.mcq-feedback-badge'):null;
+        var div=document.createElement('div');
+        div.style.cssText='background:#f8fafc;border:1px solid #e2eaf4;border-left:4px solid '+(correct?'#059669':'#dc2626')+';border-radius:0 8px 8px 0;padding:10px 14px;font-size:.83rem;line-height:1.6;';
+        div.innerHTML='<div style="font-weight:700;color:var(--navy);">Q'+(i+1)+': '+(qText?qText.textContent.trim():'')+'</div><div style="color:'+(correct?'#059669':'#dc2626')+';font-weight:600;">'+(badge?badge.textContent.trim():(correct?'✓ Correct':'✗ Incorrect'))+'</div>';
+        mcqDetail.appendChild(div);
+      });
+    }
+  }
+}
+
+function exportLearningRecord(){ window.print(); }
+
+function finishModule(){
+  if(typeof SCORM!=='undefined'&&SCORM.isInitialized()) SCORM.finish('completed');
+  var overlay=document.getElementById('finish-overlay');
+  if(overlay) overlay.style.display='flex';
+}
+</script>
+
 </main>
 
 <footer role="contentinfo">
-  <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  <div class="footer-copy">© 2026 SBH Education · All rights reserved</div>
   <div class="footer-wcag">
     <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG 2.2 AA" role="img">
       <rect width="55" height="55" rx="6" fill="#003366"/>
