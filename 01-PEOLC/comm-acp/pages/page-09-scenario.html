@@ -1,0 +1,263 @@
+<section id="page-8" class="page" aria-label="Best Interests Conversation — Branching Scenario">
+  <div class="scenario-wrap">
+
+    <div class="activity-header">
+      <div class="activity-title">The Best Interests Conversation</div>
+      <p class="activity-sub">
+        Apply the 7-38-55 Rule and the Mental Capacity Act (2005) to a challenging family meeting.
+        Navigate all three stages — the image will change as the scenario unfolds.
+      </p>
+    </div>
+
+    <!-- ══ ALWAYS-VISIBLE: Patient context ══════════════════ -->
+    <div class="scenario-patient-card" role="region" aria-label="Patient information">
+      <div class="scenario-patient-icon" aria-hidden="true">🧓</div>
+      <div>
+        <div class="scenario-patient-label">Patient</div>
+        <div class="scenario-patient-name">Arthur, 84 — Advanced Dementia</div>
+        <p class="scenario-patient-detail">
+          Arthur has advanced dementia and a severe chest infection. He can no longer swallow safely.
+          There is <strong>no Lasting Power of Attorney</strong> and <strong>no Advance Decision to Refuse Treatment</strong>.
+          You are meeting with his two children — <strong>David</strong> (angry, protective) and
+          <strong>Sarah</strong> (distressed, recalls Arthur's past wishes) — to discuss a clinically
+          indicated PEG feeding tube.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══ SCENE IMAGE — swaps on every stage / outcome ════ -->
+    <div class="scene-image-wrap" id="scene-image-wrap" aria-live="polite" aria-label="Scene illustration">
+
+      <!-- Intro scene -->
+      <div class="scene-image active" id="scene-intro"
+           style="background:linear-gradient(135deg,#0f1c34 0%,#1a3466 100%);"
+           role="img" aria-label="A hospital family room — quiet, before the meeting begins">
+        <div class="scene-figures">
+          <span class="scene-fig scene-fig-door" aria-hidden="true">🚪</span>
+          <span class="scene-fig scene-fig-room" aria-hidden="true">🛋️</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag">Briefing</span>
+          <span class="scene-caption-text">The family room — David and Sarah are waiting</span>
+        </div>
+      </div>
+
+      <!-- Stage 1 wrong -->
+      <div class="scene-image" id="scene-s1-wrong"
+           style="background:linear-gradient(135deg,#3d0a0a 0%,#7f1d1d 100%);"
+           role="img" aria-label="Clinician standing at the door — family looks more distressed">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:2rem;opacity:.5;" aria-hidden="true">🧑‍⚕️</span>
+          <span class="scene-fig" style="font-size:2.2rem;" aria-hidden="true">😤</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">😢</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(220,38,38,.3);color:#fca5a5;">Stage 1 — Communication Failure</span>
+          <span class="scene-caption-text">David snaps: "You're just treating him like a bed number!"</span>
+        </div>
+      </div>
+
+      <!-- Stage 1 correct -->
+      <div class="scene-image" id="scene-s1-correct"
+           style="background:linear-gradient(135deg,#052e16 0%,#065f46 100%);"
+           role="img" aria-label="Clinician seated at eye level — family beginning to settle">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">🧑‍⚕️</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">👦</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">👩</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(5,150,105,.35);color:#6ee7b7;">Stage 1 — Success</span>
+          <span class="scene-caption-text">Sarah stops crying. David's shoulders relax.</span>
+        </div>
+      </div>
+
+      <!-- Stage 2 wrong -->
+      <div class="scene-image" id="scene-s2-wrong"
+           style="background:linear-gradient(135deg,#3d0a0a 0%,#7f1d1d 100%);"
+           role="img" aria-label="Conflict — David leans away, arms crossed">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:2.2rem;" aria-hidden="true">😠</span>
+          <span class="scene-fig" style="font-size:1.6rem;opacity:.6;" aria-hidden="true">🧑‍⚕️</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">😟</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(220,38,38,.3);color:#fca5a5;">Stage 2 — Communication Failure</span>
+          <span class="scene-caption-text">David: "I want to speak to your manager."</span>
+        </div>
+      </div>
+
+      <!-- Stage 2 correct -->
+      <div class="scene-image" id="scene-s2-correct"
+           style="background:linear-gradient(135deg,#052e16 0%,#065f46 100%);"
+           role="img" aria-label="Collaborative discussion — family reflecting together">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">🧑‍⚕️</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">🤔</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">💭</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(5,150,105,.35);color:#6ee7b7;">Stage 2 — Success</span>
+          <span class="scene-caption-text">David: "He was a very independent man. He hated being fussed over."</span>
+        </div>
+      </div>
+
+      <!-- Stage 3 wrong -->
+      <div class="scene-image" id="scene-s3-wrong"
+           style="background:linear-gradient(135deg,#3d0a0a 0%,#7f1d1d 100%);"
+           role="img" aria-label="Family excluded from decision — Sarah crying again">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:1.5rem;opacity:.5;" aria-hidden="true">📋</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">😞</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">😢</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(220,38,38,.3);color:#fca5a5;">Stage 3 — Clinical/Legal Failure</span>
+          <span class="scene-caption-text">The family feel the decision was done to them, not with them.</span>
+        </div>
+      </div>
+
+      <!-- Stage 3 correct / complete -->
+      <div class="scene-image" id="scene-s3-correct"
+           style="background:linear-gradient(135deg,#0c1a3a 0%,#1e3a5f 100%);"
+           role="img" aria-label="Peaceful agreement — family feels Arthur's voice was heard">
+        <div class="scene-figures">
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">🧑‍⚕️</span>
+          <span class="scene-fig" style="font-size:2.2rem;" aria-hidden="true">🤝</span>
+          <span class="scene-fig" style="font-size:2rem;" aria-hidden="true">💙</span>
+        </div>
+        <div class="scene-caption">
+          <span class="scene-stage-tag" style="background:rgba(1,151,222,.3);color:#7dd3fc;">Scenario Complete</span>
+          <span class="scene-caption-text">The family agrees. They feel Arthur's voice was heard through them.</span>
+        </div>
+      </div>
+
+    </div><!-- /scene-image-wrap -->
+
+    <!-- ══ INTRO PANEL ═══════════════════════════════════════ -->
+    <div id="scenario-intro-panel">
+      <div class="scenario-context">
+        <div class="scenario-context-eyebrow">📋 Your Task</div>
+        <p>
+          You will navigate three stages of this family meeting. At each stage, choose the response
+          that best applies <strong>Mehrabian's 7-38-55 Rule</strong> and the
+          <strong>MCA (2005) Best Interests framework</strong>.
+          If you choose incorrectly, you will receive feedback and can try again from that stage.
+        </p>
+      </div>
+      <button class="btn btn-primary" onclick="startScenario()" aria-label="Begin the scenario">
+        Proceed →
+      </button>
+    </div>
+
+    <!-- ══ ALL STAGES — revealed in sequence ════════════════ -->
+    <div id="scenario-stages-wrap" style="display:none;">
+
+      <!-- Stage tracker -->
+      <div class="scenario-tracker" role="region" aria-label="Stage progress" style="margin-bottom:20px;">
+        <div class="tracker-dot current" id="tracker-dot-1" aria-label="Stage 1"></div>
+        <div style="flex:1;height:2px;background:rgba(255,255,255,.1);border-radius:2px;"></div>
+        <div class="tracker-dot" id="tracker-dot-2" aria-label="Stage 2"></div>
+        <div style="flex:1;height:2px;background:rgba(255,255,255,.1);border-radius:2px;"></div>
+        <div class="tracker-dot" id="tracker-dot-3" aria-label="Stage 3"></div>
+        <span class="tracker-label" id="tracker-label" aria-live="polite">Stage 1 of 3</span>
+      </div>
+
+      <!-- ── Stage 1 ──────────────────────────────────────── -->
+      <div class="scenario-stage active" id="stage-1">
+        <div class="stage-header">
+          <span class="stage-badge">Stage 1 of 3</span>
+          <span class="stage-title">The Opening</span>
+        </div>
+        <div class="stage-context">
+          You enter the family room. David looks angry; Sarah is crying.
+          <div class="stage-question">How do you begin?</div>
+        </div>
+        <div class="stage-options" role="group" aria-label="Stage 1 options">
+          <button class="stage-option" id="s1-opt-A" onclick="chooseOption(1,'A')" aria-label="Option A">
+            <span class="stage-opt-letter" aria-hidden="true">A</span>
+            <span class="stage-opt-text">Stand by the door and say, "I'm here to discuss the PEG tube. We need a decision quickly as the ward is very busy."</span>
+          </button>
+          <button class="stage-option" id="s1-opt-B" onclick="chooseOption(1,'B')" aria-label="Option B">
+            <span class="stage-opt-letter" aria-hidden="true">B</span>
+            <span class="stage-opt-text">Sit down at the table, lean forward slightly, and say in a calm, soft tone: "Thank you for meeting me. I can see this is incredibly difficult. Before we talk about medical options, could you tell me more about what Arthur was like before he became unwell?"</span>
+          </button>
+        </div>
+        <div class="stage-feedback" id="stage-1-feedback" role="alert" aria-live="polite"></div>
+        <div class="stage-actions" id="stage-1-actions" style="display:none;">
+          <button class="btn btn-secondary" id="stage-1-retry" onclick="retryStage(1)" hidden>↩ Try Again</button>
+          <button class="btn btn-primary"   id="stage-1-next"  onclick="nextStage(1)"  hidden>Next Stage →</button>
+        </div>
+      </div>
+
+      <!-- ── Stage 2 ──────────────────────────────────────── -->
+      <div class="scenario-stage" id="stage-2">
+        <div class="stage-header">
+          <span class="stage-badge">Stage 2 of 3</span>
+          <span class="stage-title">Navigating Conflict</span>
+        </div>
+        <div class="stage-context">
+          David says, "He needs the tube! You can't just let him starve."
+          Sarah whispers, "But Dad always said he never wanted to be a burden or hooked up to machines."
+          <div class="stage-question">How do you respond?</div>
+        </div>
+        <div class="stage-options" role="group" aria-label="Stage 2 options">
+          <button class="stage-option" id="s2-opt-A" onclick="chooseOption(2,'A')" aria-label="Option A">
+            <span class="stage-opt-letter" aria-hidden="true">A</span>
+            <span class="stage-opt-text">"Sarah is right — we have to follow the least restrictive option. A feeding tube is quite invasive, so we should probably avoid it."</span>
+          </button>
+          <button class="stage-option" id="s2-opt-B" onclick="chooseOption(2,'B')" aria-label="Option B">
+            <span class="stage-opt-letter" aria-hidden="true">B</span>
+            <span class="stage-opt-text">"David, I hear your concern about his comfort. Sarah, you've mentioned his past wishes. Under the Mental Capacity Act, our goal isn't to choose what you want, but to work together to figure out what Arthur would want if he could speak for himself today."</span>
+          </button>
+        </div>
+        <div class="stage-feedback" id="stage-2-feedback" role="alert" aria-live="polite"></div>
+        <div class="stage-actions" id="stage-2-actions" style="display:none;">
+          <button class="btn btn-secondary" id="stage-2-retry" onclick="retryStage(2)" hidden>↩ Try Again</button>
+          <button class="btn btn-primary"   id="stage-2-next"  onclick="nextStage(2)"  hidden>Next Stage →</button>
+        </div>
+      </div>
+
+      <!-- ── Stage 3 ──────────────────────────────────────── -->
+      <div class="scenario-stage" id="stage-3">
+        <div class="stage-header">
+          <span class="stage-badge">Stage 3 of 3</span>
+          <span class="stage-title">The Recommendation</span>
+        </div>
+        <div class="stage-context">
+          The MDT has assessed that a PEG tube would not improve Arthur's quality of life and may
+          cause him distress. Based on everything you have heard from the family, you need to
+          communicate the clinical recommendation.
+          <div class="stage-question">How do you deliver this?</div>
+        </div>
+        <div class="stage-options" role="group" aria-label="Stage 3 options">
+          <button class="stage-option" id="s3-opt-A" onclick="chooseOption(3,'A')" aria-label="Option A">
+            <span class="stage-opt-letter" aria-hidden="true">A</span>
+            <span class="stage-opt-text">"The MDT has decided a PEG isn't in his Best Interests. We will start end-of-life care instead. Do you have any questions?"</span>
+          </button>
+          <button class="stage-option" id="s3-opt-B" onclick="chooseOption(3,'B')" aria-label="Option B">
+            <span class="stage-opt-letter" aria-hidden="true">B</span>
+            <span class="stage-opt-text">"Based on what you've told me about Arthur's love for independence, and our clinical assessment that a tube wouldn't help him get stronger, we recommend focusing on his comfort — careful hand feeding for pleasure, rather than a tube. How does that sound in light of what Arthur valued?"</span>
+          </button>
+        </div>
+        <div class="stage-feedback" id="stage-3-feedback" role="alert" aria-live="polite"></div>
+        <div class="stage-actions" id="stage-3-actions" style="display:none;">
+          <button class="btn btn-secondary" id="stage-3-retry" onclick="retryStage(3)" hidden>↩ Try Again</button>
+        </div>
+      </div>
+
+    </div><!-- /scenario-stages-wrap -->
+
+    <!-- ══ NAV ═══════════════════════════════════════════════ -->
+    <div class="dark-page-nav" style="margin-top:32px;">
+      <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
+      <div class="dark-page-nav-right">
+        <div class="dark-locked-msg" id="scenario-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Complete all three stages to continue
+        </div>
+        <button class="btn btn-primary" id="scenario-continue-btn" onclick="goToPage(9)" hidden>Continue →</button>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,133 @@
+/* ══════════════════════════════════════════════════════════
+   css/layout.css  ·  Header + progress navigation
+══════════════════════════════════════════════════════════ */
+
+header {
+  background: var(--brand-header);
+  border-bottom: 4px solid var(--yellow);
+  padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.brand {
+  display: flex; align-items: center;
+  text-decoration: none; color: inherit; flex-shrink: 0;
+}
+.brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+
+/* Wraps the logo image (or fallback text) + tagline in a column */
+.brand-logo-wrap {
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 3px;
+}
+
+/* The logo image itself */
+.brand-logo-img {
+  height: 44px; width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Shown only when the image fails to load */
+.brand-logo-fallback {
+  display: none;
+  font-family: 'Merriweather', serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+/* Tagline always sits beneath the logo/fallback */
+.brand-tagline {
+  font-size: 0.62rem; color: var(--yellow);
+  font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; line-height: 1;
+}
+
+/* Keep old .brand-text hidden if still present in markup */
+.brand-text { display: none; }
+
+.module-label {
+  font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-align: right; line-height: 1.4;
+}
+.module-label strong {
+  display: block; color: var(--white);
+  font-size: 0.85rem; letter-spacing: 0.02em;
+}
+
+.progress-nav {
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex; align-items: center;
+  min-height: 52px; flex-wrap: nowrap;
+  overflow-x: auto; scrollbar-width: none;
+}
+.progress-nav::-webkit-scrollbar { display: none; }
+
+.nav-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; height: 52px; cursor: default;
+  border: none; border-bottom: 3px solid transparent;
+  background: transparent; color: inherit;
+  font-family: inherit; white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.2s;
+}
+.nav-step.done           { border-color: var(--blue); cursor: pointer; }
+.nav-step.done:hover     { background: rgba(1,151,222,0.1); }
+.nav-step.done:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+.nav-step.current        { border-color: var(--yellow); cursor: default; }
+.nav-step:disabled       { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.nav-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.nav-step.done    .nav-step-num { background: var(--blue);   border-color: var(--blue);   color: var(--white); }
+.nav-step.current .nav-step-num { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
+
+.nav-step-label {
+  font-size: 0.74rem; font-weight: 500;
+  color: rgba(255,255,255,0.35); transition: color 0.3s;
+}
+.nav-step.done    .nav-step-label { color: var(--text-muted); }
+.nav-step.current .nav-step-label { color: var(--white); font-weight: 600; }
+
+.nav-divider {
+  width: 20px; height: 1px;
+  background: rgba(255,255,255,0.12); flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  header                { padding: 0 20px; height: 60px; }
+  .brand-logo-img       { height: 36px; max-width: 130px; }
+  .brand-logo-fallback  { font-size: 0.9rem; }
+  .brand-tagline        { font-size: 0.56rem; }
+  .module-label         { font-size: 0.66rem; }
+  .module-label strong  { font-size: 0.75rem; }
+  .progress-nav         { padding: 0 12px; }
+  .nav-step             { padding: 0 8px; gap: 6px; }
+  .nav-step-label       { display: none; }
+  .nav-divider          { width: 12px; }
+}
+
+@media (max-width: 640px) {
+  header                { padding: 0 16px; height: 56px; }
+  .brand-logo-img       { height: 30px; max-width: 110px; }
+  .brand-tagline        { display: none; }   /* too cramped — hide on smallest screens */
+  .module-label         { display: none; }
+  .progress-nav         { padding: 0 8px; min-height: 44px; }
+  .nav-step             { padding: 0 4px; height: 44px; }
+  .nav-step-num         { width: 22px; height: 22px; font-size: 0.65rem; }
+  .nav-divider          { width: 6px; }
+}
