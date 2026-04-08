@@ -1,0 +1,121 @@
+<section id="page-7" class="page" aria-label="Advance Care Planning Tools — matching activity">
+  <div class="content-wrap">
+    <div class="content-header">
+      <h2>Advance Care Planning Tools</h2>
+      <p>Match each ACP document to its correct legal status. Select a document on the left, then select its status on the right.</p>
+    </div>
+
+    <p class="match-instruction" aria-label="Matching instructions">
+      Click a <strong>document</strong> on the left, then click its matching <strong>legal status</strong> on the right.
+    </p>
+
+    <!-- Matching grid -->
+    <div class="toolmatch-grid" aria-label="Tool matching activity">
+
+      <!-- Left: Documents -->
+      <div>
+        <div class="toolmatch-col-label">ACP Document</div>
+        <div class="toolmatch-tools" role="list" aria-label="Documents to match">
+
+          <button class="tool-chip" id="tool-adrt" role="listitem"
+                  onclick="selectTool('adrt')"
+                  aria-label="Document: ADRT — Advance Decision to Refuse Treatment">
+            <span class="tool-chip-icon" aria-hidden="true">📄</span>
+            <div class="tool-chip-text">
+              <div class="tool-chip-title">ADRT</div>
+              <div class="tool-chip-sub">Advance Decision to Refuse Treatment</div>
+            </div>
+          </button>
+
+          <button class="tool-chip" id="tool-respect" role="listitem"
+                  onclick="selectTool('respect')"
+                  aria-label="Document: ReSPECT Form">
+            <span class="tool-chip-icon" aria-hidden="true">📋</span>
+            <div class="tool-chip-text">
+              <div class="tool-chip-title">ReSPECT Form</div>
+              <div class="tool-chip-sub">Recommended Summary Plan for Emergency Care and Treatment</div>
+            </div>
+          </button>
+
+          <button class="tool-chip" id="tool-ppcare" role="listitem"
+                  onclick="selectTool('ppcare')"
+                  aria-label="Document: Preferred Place of Care Plan">
+            <span class="tool-chip-icon" aria-hidden="true">🏡</span>
+            <div class="tool-chip-text">
+              <div class="tool-chip-title">Preferred Place of Care</div>
+              <div class="tool-chip-sub">Patient's documented care location preference</div>
+            </div>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Centre: Connectors -->
+      <div class="toolmatch-connectors" aria-hidden="true">
+        <div class="connector-line" id="connector-1"></div>
+        <div class="connector-line" id="connector-2"></div>
+        <div class="connector-line" id="connector-3"></div>
+      </div>
+
+      <!-- Right: Legal statuses -->
+      <div>
+        <div class="toolmatch-col-label">Legal Status</div>
+        <div class="toolmatch-labels" role="list" aria-label="Legal statuses to match">
+
+          <button class="label-chip" id="label-legal" role="listitem"
+                  onclick="selectLabel('legal')"
+                  aria-label="Status: Legally Binding">
+            <span style="flex:1;text-align:right;">Legally Binding</span>
+            <span aria-hidden="true" style="font-size:1rem;">⚖️</span>
+          </button>
+
+          <button class="label-chip" id="label-clinical" role="listitem"
+                  onclick="selectLabel('clinical')"
+                  aria-label="Status: Clinical Recommendation">
+            <span style="flex:1;text-align:right;">Clinical Recommendation</span>
+            <span aria-hidden="true" style="font-size:1rem;">🩺</span>
+          </button>
+
+          <button class="label-chip" id="label-wish" role="listitem"
+                  onclick="selectLabel('wish')"
+                  aria-label="Status: Patient Wish (not legally binding)">
+            <span style="flex:1;text-align:right;">Patient Wish</span>
+            <span aria-hidden="true" style="font-size:1rem;">💭</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Feedback -->
+    <div id="match-feedback" class="toolmatch-feedback" role="alert" aria-live="polite"></div>
+
+    <div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;">
+      <button class="activity-reset-btn" onclick="resetMatch()" style="background:transparent;color:var(--light-muted);border:2px solid var(--light-border);padding:10px 20px;border-radius:8px;font-family:DM Sans,sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;" aria-label="Reset the matching activity">
+        Reset
+      </button>
+    </div>
+
+    <!-- Context callout -->
+    <div class="info-callout">
+      <p>
+        <strong>The ReSPECT process</strong> is a person-centred conversation that creates a shared
+        understanding between patient, family and clinical team about goals and priorities for future
+        emergency care. While not legally binding, a well-completed ReSPECT form guides emergency
+        clinicians when time is short. It should reflect the patient's wishes and clinical realities —
+        completed <em>with</em> the patient, not done <em>to</em> them.
+      </p>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <button class="btn btn-secondary light" onclick="goToPage(6)">← Back</button>
+      <div class="page-nav-right">
+        <div class="locked-msg" id="match-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Match all documents to continue
+        </div>
+        <button class="btn btn-primary" id="match-continue-btn" onclick="goToPage(8)" hidden>Continue →</button>
+      </div>
+    </nav>
+  </div>
+</section>
