@@ -1,0 +1,49 @@
+<section id="page-10" class="page" aria-label="Knowledge Check — multiple choice quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-title">Knowledge Check</div>
+      <p class="quiz-sub">
+        Five questions covering the MCA (2005), communication principles, and ACP tools.
+        You need <strong>80%</strong> or above to pass.
+      </p>
+    </div>
+
+    <div id="quiz-question-container">
+      <!-- Rendered by js/quiz.js -->
+    </div>
+
+    <div id="quiz-results" class="quiz-results" role="region" aria-label="Quiz results" aria-live="polite">
+      <div class="quiz-results-icon" id="quiz-results-icon" aria-hidden="true"></div>
+      <div class="quiz-results-score" id="quiz-results-score"></div>
+      <div class="quiz-results-label" id="quiz-results-label"></div>
+      <div class="quiz-results-breakdown">
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num stat-correct" id="stat-correct">0</div>
+          <div class="quiz-result-stat-lbl">Correct</div>
+        </div>
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num stat-incorrect" id="stat-incorrect">0</div>
+          <div class="quiz-result-stat-lbl">Incorrect</div>
+        </div>
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num" style="color:var(--text-muted);" id="stat-total">0</div>
+          <div class="quiz-result-stat-lbl">Total</div>
+        </div>
+      </div>
+      <div class="quiz-results-msg" id="quiz-results-msg"></div>
+      <div style="background:rgba(1,151,222,.07);border:1px solid rgba(1,151,222,.2);border-radius:10px;padding:14px 18px;font-size:.84rem;color:var(--text-muted);line-height:1.65;margin-bottom:24px;text-align:left;">
+        <strong style="color:var(--white);">Remember:</strong> Advance Care Planning is a process, not just a form.
+        The most important tool in your ACP toolkit is a compassionate, honest conversation — held at the right time,
+        in the right environment, with the patient at the centre.
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="retryQuiz()" aria-label="Retry the quiz">↩ Try Again</button>
+        <button class="btn btn-primary" id="quiz-continue-btn" onclick="goToPage(11)" aria-label="Continue to learning record" hidden>Continue →</button>
+      </div>
+    </div>
+
+    <nav class="page-nav" id="quiz-back-nav" aria-label="Page navigation" style="margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(9)">← Back</button>
+    </nav>
+  </div>
+</section>
