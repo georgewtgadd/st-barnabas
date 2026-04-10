@@ -1,0 +1,90 @@
+<section id="page-9" class="page" aria-label="Managing Seizures">
+  <div class="sz-wrap">
+    <div class="sz-header">
+      <h2>Managing Seizures</h2>
+      <p style="color:var(--text-muted);">Seizures in palliative patients may occur due to brain metastases, metabolic disturbance, or medication. Management requires a calm, structured approach — particularly in community and hospice settings.</p>
+    </div>
+
+    <div class="sz-callout" role="note">
+      <div class="sz-callout-icon" aria-hidden="true">⏱️</div>
+      <div style="flex:1;">
+        <div class="sz-callout-title">When to Intervene</div>
+        <div class="sz-callout-grid">
+          <div class="sz-callout-item"><span class="sz-callout-item-ok" aria-hidden="true">✓</span><span>A seizure lasting <strong>&lt;5 minutes</strong> — observe, keep safe, no emergency medication needed</span></div>
+          <div class="sz-callout-item"><span class="sz-callout-item-warn" aria-hidden="true">!</span><span>A seizure lasting <strong>≥5 minutes</strong> constitutes status epilepticus — act immediately</span></div>
+          <div class="sz-callout-item"><span class="sz-callout-item-warn" aria-hidden="true">!</span><span>Two seizures <strong>without recovery</strong> between them also requires immediate intervention</span></div>
+          <div class="sz-callout-item"><span class="sz-callout-item-warn" aria-hidden="true">!</span><span>Always review anticipatory prescribing and inform the palliative care team after any seizure</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sz-activity-wrap">
+      <div class="activity-eyebrow">🎯 Activity — Drag to Reorder</div>
+      <div class="activity-title">Arrange the management steps in the correct order for a seizure lasting &gt;5 minutes</div>
+      <p class="activity-desc">
+        Drag the steps up or down to reorder them, or use the <strong>↑ ↓ arrow keys</strong> when a step is focused.
+        Change your mind as many times as you like before checking. You must check your answer to continue.
+      </p>
+
+      <ul class="seq-list" id="seq-list" aria-label="Drag to reorder management steps">
+
+        <li class="seq-item" draggable="true" data-order="4" id="seqi-4" tabindex="0"
+            aria-label="Step: Monitor and seek specialist advice — drag to reorder, use arrow keys to move">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Monitor &amp; Seek Specialist Palliative Advice</div>
+            <div class="seq-item-desc">Record the duration and nature of the seizure. Inform the palliative care team. Review anticipatory prescribing to prevent recurrence.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-4-badge" aria-hidden="true"></div>
+        </li>
+
+        <li class="seq-item" draggable="true" data-order="3" id="seqi-3" tabindex="0"
+            aria-label="Step: Administer Buccal Midazolam — drag to reorder, use arrow keys to move">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Administer Buccal Midazolam (or SC if access is ready)</div>
+            <div class="seq-item-desc">First-line anticonvulsant in community and hospice settings — typically 10mg buccal. Follow the prescribed anticipatory protocol.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-3-badge" aria-hidden="true"></div>
+        </li>
+
+        <li class="seq-item" draggable="true" data-order="1" id="seqi-1" tabindex="0"
+            aria-label="Step: Safe environment and airway — drag to reorder, use arrow keys to move">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Safe Environment &amp; Airway</div>
+            <div class="seq-item-desc">Move hazards away, do not restrain. Place in recovery position after the tonic-clonic phase. Check airway patency.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-1-badge" aria-hidden="true"></div>
+        </li>
+
+        <li class="seq-item" draggable="true" data-order="2" id="seqi-2" tabindex="0"
+            aria-label="Step: Check blood glucose — drag to reorder, use arrow keys to move">
+          <div class="seq-handle" aria-hidden="true">⠿</div>
+          <div class="seq-item-body">
+            <div class="seq-item-title">Check Blood Glucose (BM)</div>
+            <div class="seq-item-desc">Exclude hypoglycaemia as a reversible, treatable cause before administering any anticonvulsant medication.</div>
+          </div>
+          <div class="seq-item-badge" id="seqi-2-badge" aria-hidden="true"></div>
+        </li>
+
+      </ul>
+
+      <div class="seq-feedback" id="seq-feedback" role="alert" aria-live="polite"></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+        <button class="btn btn-primary" onclick="seqCheck()" style="font-size:.88rem;padding:11px 22px;">✓ Check Order</button>
+        <button class="btn btn-secondary" onclick="seqReset()" style="font-size:.88rem;padding:11px 22px;">↺ Shuffle &amp; Reset</button>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+      <div class="page-nav-right">
+        <div class="locked-msg" id="seq-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Check your answer to continue
+        </div>
+        <button class="btn btn-primary" id="seq-continue-btn" onclick="goToPage(10)" hidden>Continue to Case Studies →</button>
+      </div>
+    </nav>
+  </div>
+</section>

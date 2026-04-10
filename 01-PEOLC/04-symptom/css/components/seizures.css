@@ -1,0 +1,63 @@
+/* ── PAGE 9 — SEIZURES drag-to-reorder (dark) ────── */
+.sz-wrap   { max-width: 860px; margin: 0 auto; padding: 48px 48px 64px; }
+.sz-header { text-align: center; margin-bottom: 36px; }
+.sz-header h2 { font-family: 'Merriweather', serif; font-size: 1.9rem; margin-bottom: 10px; }
+.sz-header p  { font-size: .95rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+.sz-callout {
+  background: rgba(1,151,222,.1); border: 1px solid rgba(1,151,222,.25);
+  border-radius: 12px; padding: 18px 22px; margin-bottom: 28px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.sz-callout-icon  { font-size: 1.4rem; flex-shrink: 0; }
+.sz-callout-title { font-family: 'Merriweather', serif; font-size: .95rem; font-weight: 700; color: #7dd3fc; margin-bottom: 5px; }
+.sz-callout-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.sz-callout-item  {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 7px; padding: 8px 11px;
+  font-size: .83rem; color: var(--text-muted); line-height: 1.45;
+}
+.sz-callout-item-ok   { color: #6ee7b7; flex-shrink: 0; font-weight: 700; }
+.sz-callout-item-warn { color: #f87171; flex-shrink: 0; font-weight: 700; }
+
+/* Drag-to-reorder list */
+.sz-activity-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px; margin-bottom: 28px;
+}
+
+.seq-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; padding: 0; }
+
+.seq-item {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,.06); border: 2px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  cursor: grab; transition: border-color .2s, box-shadow .2s;
+  user-select: none;
+}
+.seq-item:active { cursor: grabbing; }
+.seq-item.seq-drag-over-top    { border-top:    3px solid var(--yellow); }
+.seq-item.seq-drag-over-bottom { border-bottom: 3px solid var(--yellow); }
+.seq-item.seq-dragging-src     { opacity: .4; }
+.seq-item:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+.seq-handle { font-size: 1.2rem; color: rgba(255,255,255,.25); flex-shrink: 0; cursor: grab; line-height: 1; }
+.seq-item-body  { flex: 1; }
+.seq-item-title { font-weight: 700; color: var(--white); font-size: .9rem; margin-bottom: 3px; }
+.seq-item-desc  { font-size: .82rem; color: var(--text-muted); line-height: 1.5; }
+.seq-item-badge {
+  width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.3);
+  transition: all .3s; flex-shrink: 0;
+}
+.seq-item-badge.correct { background: #059669; border-color: #059669; color: var(--white); }
+.seq-item-badge.wrong   { background: #dc2626; border-color: #dc2626; color: var(--white); }
+
+.seq-feedback { border-radius: 10px; padding: 14px 18px; font-size: .88rem; line-height: 1.65; display: none; }
+.seq-feedback.show-correct { display: block; background: rgba(5,150,105,.15); border: 1px solid rgba(5,150,105,.4); color: #6ee7b7; }
+.seq-feedback.show-wrong   { display: block; background: rgba(220,38,38,.12);  border: 1px solid rgba(220,38,38,.35); color: #fca5a5; }
+
+@media (max-width: 900px) { .sz-wrap { padding: 32px 24px 48px; } .sz-callout-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .sz-wrap { padding: 20px 16px 36px; } .sz-header h2 { font-size: 1.5rem; } }

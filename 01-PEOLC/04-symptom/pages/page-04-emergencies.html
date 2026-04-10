@@ -1,0 +1,90 @@
+<section id="page-4" class="page" aria-label="Palliative Emergencies — Categorisation Activity">
+  <div class="emg-wrap">
+    <div class="emg-header">
+      <h2>Palliative Emergencies</h2>
+      <p style="color:var(--text-muted);">A palliative emergency is a sudden change that, if not managed promptly, will cause extreme distress or rapid irreversible deterioration. Knowing the difference between expected decline and a clinical emergency requiring urgent action is a fundamental skill.</p>
+    </div>
+
+    <div class="emg-lead" role="note">
+      Not every change in a palliative patient's condition is an emergency. Knowing the difference between <em>expected deterioration</em> and a <em>clinical emergency requiring urgent action</em> can mean the difference between comfort and catastrophe.
+    </div>
+
+    <div class="emg-activity-label">🎯 Activity — Click the correct category for each condition. Select "More info" after each answer for full clinical detail.</div>
+
+    <div class="cat-grid" role="list">
+
+      <div class="cat-card" id="cc-1" data-answer="expected" role="listitem">
+        <div class="cat-card-title">Terminal Restlessness</div>
+        <div class="cat-card-desc">Increasing agitation and confusion in the final hours of life</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-1','expected',this)"  aria-label="Terminal Restlessness is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-1','emergency',this)" aria-label="Terminal Restlessness is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-1-result" aria-live="polite"></div>
+      </div>
+
+      <div class="cat-card" id="cc-2" data-answer="emergency" role="listitem">
+        <div class="cat-card-title">Metastatic Spinal Cord Compression</div>
+        <div class="cat-card-desc">New back pain with leg weakness or sensory changes</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-2','expected',this)"  aria-label="MSCC is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-2','emergency',this)" aria-label="MSCC is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-2-result" aria-live="polite"></div>
+      </div>
+
+      <div class="cat-card" id="cc-3" data-answer="expected" role="listitem">
+        <div class="cat-card-title">Skin Breakdown</div>
+        <div class="cat-card-desc">Pressure sore development in a bed-bound patient</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-3','expected',this)"  aria-label="Skin Breakdown is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-3','emergency',this)" aria-label="Skin Breakdown is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-3-result" aria-live="polite"></div>
+      </div>
+
+      <div class="cat-card" id="cc-4" data-answer="emergency" role="listitem">
+        <div class="cat-card-title">Superior Vena Cava Obstruction</div>
+        <div class="cat-card-desc">Facial swelling, distended neck veins, dyspnoea</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-4','expected',this)"  aria-label="SVCO is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-4','emergency',this)" aria-label="SVCO is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-4-result" aria-live="polite"></div>
+      </div>
+
+      <div class="cat-card" id="cc-5" data-answer="expected" role="listitem">
+        <div class="cat-card-title">Incontinence</div>
+        <div class="cat-card-desc">Loss of bladder and bowel control as function declines</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-5','expected',this)"  aria-label="Incontinence is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-5','emergency',this)" aria-label="Incontinence is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-5-result" aria-live="polite"></div>
+      </div>
+
+      <div class="cat-card" id="cc-6" data-answer="emergency" role="listitem">
+        <div class="cat-card-title">Catastrophic Haemorrhage</div>
+        <div class="cat-card-desc">Sudden major bleed from tumour erosion of a blood vessel</div>
+        <div class="cat-btns">
+          <button class="cat-btn"         onclick="catAnswer('cc-6','expected',this)"  aria-label="Haemorrhage is Expected Deterioration">Expected Deterioration</button>
+          <button class="cat-btn cat-btn-emg" onclick="catAnswer('cc-6','emergency',this)" aria-label="Haemorrhage is a Palliative Emergency">Palliative Emergency</button>
+        </div>
+        <div class="cat-result" id="cc-6-result" aria-live="polite"></div>
+      </div>
+
+    </div>
+
+    <div class="cat-score-box" id="cat-score-box" aria-live="polite"></div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <button class="btn btn-secondary" onclick="goToPage(3)">← Back</button>
+      <div class="page-nav-right">
+        <div class="locked-msg" id="cat-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Answer all 6 conditions to continue
+        </div>
+        <button class="btn btn-primary" id="cat-continue-btn" onclick="goToPage(5)" hidden>Continue →</button>
+      </div>
+    </nav>
+  </div>
+</section>

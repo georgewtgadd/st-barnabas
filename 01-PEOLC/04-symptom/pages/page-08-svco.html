@@ -1,0 +1,58 @@
+<section id="page-8" class="page" aria-label="Superior Vena Cava Obstruction">
+  <div class="svco-wrap">
+    <div class="svco-header">
+      <h2>Superior Vena Cava Obstruction (SVCO)</h2>
+      <p style="color:var(--text-muted);">SVCO occurs when a tumour in the mediastinum compresses the superior vena cava, obstructing venous return from the upper body. It presents dramatically and requires urgent treatment.</p>
+    </div>
+
+    <div class="svco-lead" role="note">
+      SVCO most commonly occurs in <em>lung cancer</em> and <em>mediastinal lymphoma</em>. Symptoms develop because blood cannot drain from the head, neck, and arms back to the heart. Click each numbered hotspot on the diagram to explore each clinical feature.
+    </div>
+
+    <div class="svco-layout">
+      <!-- Image with hotspot overlay -->
+      <div class="svco-img-wrap">
+        <img src="images/svco.png" alt="Body diagram showing areas affected by SVCO — click the numbered areas to learn more" class="svco-img">
+        <div class="svco-hotspot-layer" aria-hidden="true">
+          <button class="svco-hs" style="top:12%;left:42%;" onclick="showSVCO(1)" tabindex="0" aria-label="Hotspot 1: Facial oedema">1</button>
+          <button class="svco-hs" style="top:24%;left:42%;" onclick="showSVCO(2)" tabindex="0" aria-label="Hotspot 2: Neck veins">2</button>
+          <button class="svco-hs" style="top:38%;left:12%;" onclick="showSVCO(3)" tabindex="0" aria-label="Hotspot 3: Arm swelling left">3</button>
+          <button class="svco-hs" style="top:38%;left:70%;" onclick="showSVCO(3)" tabindex="0" aria-label="Hotspot 3: Arm swelling right">3</button>
+          <button class="svco-hs" style="top:36%;left:42%;" onclick="showSVCO(4)" tabindex="0" aria-label="Hotspot 4: Chest symptoms">4</button>
+        </div>
+      </div>
+
+      <!-- Info panels -->
+      <div>
+        <div class="svco-panel active" id="svco-default">
+          <p class="svco-hint">👆 Click a numbered area on the diagram to explore each SVCO symptom in detail.</p>
+        </div>
+        <div class="svco-panel" id="svco-1">
+          <div class="svco-panel-eyebrow" style="color:var(--yellow);">① Facial &amp; Periorbital Oedema</div>
+          <p>Progressive swelling of the face, particularly around the eyes, is one of the most visible signs of SVCO. Often worse in the morning as fluid redistributes overnight when the patient has been lying flat.</p>
+          <div class="svco-note">Often described as the face feeling "full" or "puffy" — can initially be mistaken for an allergic reaction. The periorbital distribution is characteristic.</div>
+        </div>
+        <div class="svco-panel" id="svco-2">
+          <div class="svco-panel-eyebrow" style="color:#fca5a5;">② Distended Neck Veins</div>
+          <p>Non-pulsatile distension of the external jugular veins, visible even when sitting upright. In severe cases, collateral veins may be visible across the anterior chest wall.</p>
+          <div class="svco-note">Distinguish from pulsatile JVP elevation (which suggests cardiac causes) — in SVCO the veins are non-pulsatile and do not vary with respiration.</div>
+        </div>
+        <div class="svco-panel" id="svco-3">
+          <div class="svco-panel-eyebrow" style="color:#7dd3fc;">③ Bilateral Arm Swelling</div>
+          <p>Swelling of both arms as venous drainage from the upper limbs is obstructed. The skin feels tense, pitting oedema is common, and patients may be unable to wear clothing or jewellery.</p>
+          <div class="svco-note">IV access in the arms should be avoided — elevated venous pressure means infusions may not drain effectively. Use the foot or femoral route if essential.</div>
+        </div>
+        <div class="svco-panel" id="svco-4">
+          <div class="svco-panel-eyebrow" style="color:#c4b5fd;">④ Dyspnoea &amp; Chest Symptoms</div>
+          <p>Compression of airways by the mediastinal tumour causes dyspnoea which can be severe. Patients often describe a sense of suffocation. Chest pain may occur if the pleura or pericardium is involved.</p>
+          <div class="svco-note">Treatment: high-dose dexamethasone immediately, sit patient upright, urgent radiotherapy or SVC stenting. Position upright to reduce venous engorgement and ease breathing.</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(9)">Continue to Seizures →</button>
+    </nav>
+  </div>
+</section>
