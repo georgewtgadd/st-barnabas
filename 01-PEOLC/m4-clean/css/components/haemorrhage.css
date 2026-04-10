@@ -1,0 +1,65 @@
+/* ── PAGE 5 — HAEMORRHAGE ABC (dark) ────────────── */
+.hm-wrap   { max-width: 860px; margin: 0 auto; padding: 48px 48px 64px; }
+.hm-header { text-align: center; margin-bottom: 36px; }
+.hm-header h2 { font-family: 'Merriweather', serif; font-size: 1.9rem; margin-bottom: 10px; }
+.hm-header p  { font-size: .95rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+.hm-risk {
+  background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.3);
+  border-radius: 12px; padding: 20px 24px; margin-bottom: 28px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.hm-risk-icon  { font-size: 1.4rem; flex-shrink: 0; }
+.hm-risk-title { font-family: 'Merriweather', serif; font-size: .95rem; font-weight: 700; color: #fca5a5; margin-bottom: 8px; }
+.hm-risk-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.hm-risk-item  {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 7px; padding: 8px 11px;
+  font-size: .83rem; color: var(--text-muted); line-height: 1.45;
+}
+.hm-risk-item-icon { color: #f87171; flex-shrink: 0; font-weight: 700; }
+
+/* ABC Activity */
+.abc-activity-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px; margin-bottom: 28px;
+}
+.abc-pool { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+
+.abc-card {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,.06); border: 2px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+  cursor: pointer; transition: all .2s; user-select: none;
+}
+.abc-card:hover:not(.abc-placed) { border-color: var(--yellow); background: rgba(253,202,15,.07); transform: translateX(3px); }
+.abc-card.abc-placed { opacity: .28; pointer-events: none; }
+.abc-card:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.abc-card-body  { flex: 1; }
+.abc-card-title { font-size: .88rem; color: var(--white); line-height: 1.55; }
+.abc-card-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(253,202,15,.12); border: 2px solid rgba(253,202,15,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .88rem; color: var(--yellow);
+  flex-shrink: 0; transition: all .3s; margin-left: 8px;
+}
+
+.abc-seq-row   { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.abc-seq-slot  {
+  flex: 1; min-width: 130px; background: rgba(255,255,255,.04);
+  border: 2px dashed var(--border); border-radius: 8px;
+  padding: 10px 14px; font-size: .82rem; color: rgba(255,255,255,.3);
+  text-align: center; transition: all .3s;
+}
+.abc-seq-slot.filled  { border-color: var(--yellow); background: rgba(253,202,15,.08); color: var(--yellow); font-weight: 600; }
+.abc-seq-slot.correct { border-color: #059669; background: rgba(5,150,105,.12); color: #6ee7b7; font-weight: 600; }
+.abc-seq-slot.wrong   { border-color: #dc2626; background: rgba(220,38,38,.1);  color: #fca5a5; font-weight: 600; }
+
+.abc-feedback { border-radius: 10px; padding: 14px 18px; font-size: .88rem; line-height: 1.65; display: none; }
+.abc-feedback.show-correct { display: block; background: rgba(5,150,105,.15); border: 1px solid rgba(5,150,105,.4); color: #6ee7b7; }
+.abc-feedback.show-wrong   { display: block; background: rgba(220,38,38,.12);  border: 1px solid rgba(220,38,38,.35); color: #fca5a5; }
+
+@media (max-width: 900px) { .hm-wrap { padding: 32px 24px 48px; } .hm-risk-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .hm-wrap { padding: 20px 16px 36px; } .hm-header h2 { font-size: 1.5rem; } .abc-seq-row { flex-direction: column; } }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="SBH_MODULE_04_SYMPTOM_MGMT" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2
+    imscp_rootv1p1p2.xsd
+    http://www.imsglobal.org/xsd/imsmd_rootv1p2p1
+    imsmd_rootv1p2p1.xsd
+    http://www.adlnet.org/xsd/adlcp_rootv1p2
+    adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1">
+      <general>
+        <title>
+          <langstring xml:lang="en-GB">Symptom Management &amp; Emergencies</langstring>
+        </title>
+        <description>
+          <langstring xml:lang="en-GB">
+            Clinical Excellence in Symptom Management and Palliative Emergencies.
+            Module 4 of the SBH Education Palliative Care series. Covers respiratory
+            tract management, GI symptoms, hypercalcaemia, MSCC, SVCO, terminal
+            haemorrhage, and seizure management.
+          </langstring>
+        </description>
+        <language>en-GB</language>
+      </general>
+      <lifecycle>
+        <version>
+          <langstring xml:lang="en-GB">1.0</langstring>
+        </version>
+        <contribute>
+          <role><source><langstring xml:lang="en-GB">LOMv1.0</langstring></source><value><langstring xml:lang="en-GB">Author</langstring></value></role>
+          <centity><vcard>BEGIN:VCARD&#13;FN:SBH Education&#13;END:VCARD</vcard></centity>
+        </contribute>
+      </lifecycle>
+      <technical>
+        <format>text/html</format>
+      </technical>
+    </lom>
+  </metadata>
+
+  <organizations default="ORG_SBH_M04">
+    <organization identifier="ORG_SBH_M04">
+      <title>Symptom Management &amp; Emergencies — Module 4</title>
+      <item identifier="ITEM_M04" identifierref="RES_SCO_M04">
+        <title>Symptom Management &amp; Emergencies</title>
+        <adlcp:prerequisites type="aicc_script"/>
+        <adlcp:maxtimeallowed/>
+        <adlcp:timelimitaction>continue,no message</adlcp:timelimitaction>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="RES_SCO_M04" type="webcontent"
+              adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <!-- Pages -->
+      <file href="pages/page-01-intro.html"/>
+      <file href="pages/page-02-respiratory.html"/>
+      <file href="pages/page-03-gi.html"/>
+      <file href="pages/page-04-emergencies.html"/>
+      <file href="pages/page-05-haemorrhage.html"/>
+      <file href="pages/page-06-hypercal.html"/>
+      <file href="pages/page-07-mscc.html"/>
+      <file href="pages/page-08-svco.html"/>
+      <file href="pages/page-09-seizures.html"/>
+      <file href="pages/page-10-cases.html"/>
+      <file href="pages/page-11-record.html"/>
+      <!-- Core CSS -->
+      <file href="css/base.css"/>
+      <file href="css/layout.css"/>
+      <file href="css/buttons.css"/>
+      <file href="css/modals.css"/>
+      <!-- Component CSS -->
+      <file href="css/components/intro.css"/>
+      <file href="css/components/respiratory.css"/>
+      <file href="css/components/gi.css"/>
+      <file href="css/components/emergencies.css"/>
+      <file href="css/components/haemorrhage.css"/>
+      <file href="css/components/hypercal.css"/>
+      <file href="css/components/mscc.css"/>
+      <file href="css/components/svco.css"/>
+      <file href="css/components/seizures.css"/>
+      <file href="css/components/cases.css"/>
+      <file href="css/components/record.css"/>
+      <!-- JavaScript -->
+      <file href="js/scorm.js"/>
+      <file href="js/navigation.js"/>
+      <file href="js/dnd.js"/>
+      <file href="js/categorisation.js"/>
+      <file href="js/abc.js"/>
+      <file href="js/hypercal.js"/>
+      <file href="js/svco.js"/>
+      <file href="js/seizures.js"/>
+      <file href="js/cases.js"/>
+      <file href="js/record.js"/>
+      <file href="js/page-loader.js"/>
+      <file href="js/main.js"/>
+      <!-- Images -->
+      <file href="images/logo.png"/>
+      <file href="images/svco.png"/>
+    </resource>
+  </resources>
+
+</manifest>
