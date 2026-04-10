@@ -1,0 +1,116 @@
+<!-- PAGE 6 — COUNTER-REGULATORY HORMONES -->
+<section class="page" id="page-6" aria-label="Counter-Regulatory Hormones — The Glucose Elevator">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Interactive Activity</div>
+    <h2 class="page-title">Counter-Regulatory Hormones</h2>
+    <p class="page-sub">Normal glucose homeostasis depends chiefly on <strong>insulin lowering glucose</strong> and <strong>glucagon raising it</strong>, but stress hormones such as adrenaline and cortisol can also drive blood sugar upward. Use the Glucose Elevator to see these effects in action.</p>
+
+    <div class="hormones-layout">
+
+      <!-- Left: hormone info cards -->
+      <div class="hormones-info">
+
+        <div class="hormone-card adrenaline" role="region" aria-label="Adrenaline">
+          <div class="hc-header">
+            <div class="hc-badge up" aria-label="Raises blood glucose">↑</div>
+            <div>
+              <div class="hc-name">Adrenaline</div>
+              <div class="hc-source">Adrenal Medulla</div>
+            </div>
+          </div>
+          <p class="hc-body">Rapidly increases blood glucose to provide immediate energy for fight-or-flight. In EoL care, uncontrolled pain or agitation can trigger adrenaline surges — elevating glucose and exacerbating symptoms in diabetic patients.</p>
+          <button class="btn-elevator up-btn" onclick="elevatorAction('adrenaline')" aria-label="Simulate adrenaline injection">
+            💉 Inject Adrenaline
+          </button>
+        </div>
+
+        <div class="hormone-card cortisol" role="region" aria-label="Cortisol and Cortisone">
+          <div class="hc-header">
+            <div class="hc-badge up" aria-label="Raises blood glucose">↑</div>
+            <div>
+              <div class="hc-name">Cortisol &amp; Steroids</div>
+              <div class="hc-source">Adrenal Cortex (steroids)</div>
+            </div>
+          </div>
+          <p class="hc-body">Cortisol and prescribed corticosteroids increase hepatic glucose production and worsen insulin resistance. In practice, steroid therapy can <strong>unmask diabetes in previously undiagnosed people</strong> or significantly worsen glycaemic control in those with established diabetes, so capillary glucose should be monitored and treatment actively adjusted.</p>
+          <button class="btn-elevator up-btn" onclick="elevatorAction('cortisol')" aria-label="Simulate cortisol dose">
+            💊 Give Steroids
+          </button>
+        </div>
+
+        <div class="hormone-card insulin-card" role="region" aria-label="Insulin">
+          <div class="hc-header">
+            <div class="hc-badge down" aria-label="Lowers blood glucose">↓</div>
+            <div>
+              <div class="hc-name">Insulin</div>
+              <div class="hc-source">Beta Cells (pancreas)</div>
+            </div>
+          </div>
+          <p class="hc-body">The body's primary glucose-lowering hormone — the "key" that unlocks cells to allow glucose entry for energy production. Without insulin, glucose accumulates in the blood while cells starve.</p>
+          <button class="btn-elevator down-btn" onclick="elevatorAction('insulin')" aria-label="Simulate insulin release">
+            🔑 Release Insulin
+          </button>
+        </div>
+
+        <div class="hormone-card glycogen-card" role="region" aria-label="Glucagon">
+          <div class="hc-header">
+            <div class="hc-badge neutral" aria-label="Stored form">📦</div>
+            <div>
+              <div class="hc-name">Glucagon</div>
+              <div class="hc-source">Alpha Cells → Liver</div>
+            </div>
+          </div>
+          <p class="hc-body">Glucagon is released from <strong>alpha cells</strong> when blood glucose falls. It acts mainly on the liver to promote glycogenolysis and gluconeogenesis, raising glucose between meals. In malnourished patients, however, glycogen stores may be depleted, so this rescue mechanism becomes unreliable.</p>
+          <button class="btn-elevator neutral-btn" onclick="elevatorAction('glycogen')" aria-label="Simulate glucagon release">
+            🧪 Release Glucagon
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right: glucose elevator -->
+      <div class="elevator-panel" role="region" aria-label="Glucose elevator simulation">
+        <div class="elevator-title">The Glucose Elevator</div>
+
+        <div class="elevator-display">
+          <div class="elevator-meter-wrap">
+            <div class="elevator-meter" aria-label="Blood glucose meter">
+              <!-- Zone labels -->
+              <div class="ez-zone hypo" style="bottom:0;height:22%;" aria-label="Hypoglycaemia zone"><span>Hypo</span></div>
+              <div class="ez-zone normal" style="bottom:22%;height:30%;" aria-label="Normal zone"><span>Normal</span></div>
+              <div class="ez-zone high" style="bottom:52%;height:24%;" aria-label="High zone"><span>High</span></div>
+              <div class="ez-zone dka" style="bottom:76%;height:24%;" aria-label="DKA risk zone"><span>DKA Risk</span></div>
+              <!-- Liquid fill -->
+              <div class="elevator-fill" id="elevator-fill" style="height:38%;"></div>
+              <!-- Marker -->
+              <div class="elevator-marker" id="elevator-marker" style="bottom:38%;" role="img" aria-label="Current glucose level indicator">
+                <div class="em-value" id="em-value">5.8</div>
+                <div class="em-unit">mmol/L</div>
+              </div>
+            </div>
+            <div class="elevator-scale" aria-hidden="true">
+              <span>15+</span><span>12</span><span>10</span><span>8</span><span>6</span><span>4</span><span>2</span><span>0</span>
+            </div>
+          </div>
+
+          <div class="elevator-info-panel">
+            <div class="eip-label">Current Status</div>
+            <div class="eip-status" id="eip-status">Normal Range</div>
+            <div class="eip-last" id="eip-last">Use the buttons to simulate hormone effects</div>
+            <div class="eip-risk" id="eip-risk"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" onclick="resetElevator()" style="margin-top:16px;font-size:0.8rem;" aria-label="Reset glucose to normal">↺ Reset to Normal</button>
+      </div>
+
+    </div>
+
+    <div class="page-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(5)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+      <button class="btn btn-primary" onclick="goToPage(7)">Continue <span aria-hidden="true">→</span></button>
+    </div>
+
+  </div>
+</section>

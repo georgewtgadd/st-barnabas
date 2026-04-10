@@ -1,0 +1,96 @@
+<!-- PAGE 9 — TYPES OF DIABETES -->
+<section class="page" id="page-9" aria-label="Different Types of Diabetes">
+  <div class="content-wrap">
+
+    <div class="page-eyebrow">Click to Explore</div>
+    <h2 class="page-title">The Spectrum of Diabetes</h2>
+    <p class="page-sub">Diabetes is not limited to Type 1 and Type 2. Explore these five important classifications to understand how normal physiology breaks down in different ways and why management must be tailored to the underlying cause.</p>
+
+    <div class="types-grid" role="list" aria-label="Five important diabetes classifications">
+
+      <div class="type-card" id="tc-1" role="listitem"
+           onclick="openTypeModal(1)"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openTypeModal(1)"
+           tabindex="0"
+           aria-label="Type 1 Diabetes — click to explore">
+        <div class="tc-badge tc-badge-1">Type I</div>
+        <div class="tc-title">Absolute Insulin<br>Deficiency</div>
+        <div class="tc-mechanism">Autoimmune beta-cell destruction</div>
+        <div class="tc-key-fact">Insulin is required for survival</div>
+        <div class="tc-visited-mark" id="tv-1" hidden aria-label="Explored">✓</div>
+        <div class="tc-cta" aria-hidden="true">Click to explore →</div>
+      </div>
+
+      <div class="type-card" id="tc-2" role="listitem"
+           onclick="openTypeModal(2)"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openTypeModal(2)"
+           tabindex="0"
+           aria-label="Type 2 Diabetes — click to explore">
+        <div class="tc-badge tc-badge-2">Type II</div>
+        <div class="tc-title">Insulin Resistance &amp;<br>Relative Deficiency</div>
+        <div class="tc-mechanism">Resistance plus beta-cell exhaustion</div>
+        <div class="tc-key-fact">Steroids often worsen control</div>
+        <div class="tc-visited-mark" id="tv-2" hidden aria-label="Explored">✓</div>
+        <div class="tc-cta" aria-hidden="true">Click to explore →</div>
+      </div>
+
+      <div class="type-card" id="tc-3" role="listitem"
+           onclick="openTypeModal(3)"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openTypeModal(3)"
+           tabindex="0"
+           aria-label="Type 3c Diabetes — click to explore">
+        <div class="tc-badge tc-badge-3">Type 3c</div>
+        <div class="tc-title">Pancreatogenic<br>Diabetes</div>
+        <div class="tc-mechanism">Exocrine pancreatic damage</div>
+        <div class="tc-key-fact">Commonly missed after pancreatitis or cancer</div>
+        <div class="tc-visited-mark" id="tv-3" hidden aria-label="Explored">✓</div>
+        <div class="tc-cta" aria-hidden="true">Click to explore →</div>
+      </div>
+
+      <div class="type-card" id="tc-4" role="listitem"
+           onclick="openTypeModal(4)"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openTypeModal(4)"
+           tabindex="0"
+           aria-label="Malnutrition-related and severe insulin-deficient diabetes — click to explore">
+        <div class="tc-badge tc-badge-4">MRD / SIDD</div>
+        <div class="tc-title">Malnutrition-Related<br>Diabetes</div>
+        <div class="tc-mechanism">Lean severe insulin-deficient phenotype</div>
+        <div class="tc-key-fact">Nutrition status is central</div>
+        <div class="tc-visited-mark" id="tv-4" hidden aria-label="Explored">✓</div>
+        <div class="tc-cta" aria-hidden="true">Click to explore →</div>
+      </div>
+
+      <div class="type-card" id="tc-5" role="listitem"
+           onclick="openTypeModal(5)"
+           onkeydown="if(event.key==='Enter'||event.key===' ')openTypeModal(5)"
+           tabindex="0"
+           aria-label="Monogenic diabetes MODY — click to explore">
+        <div class="tc-badge tc-badge-5">MODY</div>
+        <div class="tc-title">Monogenic<br>Diabetes</div>
+        <div class="tc-mechanism">Single gene mutation</div>
+        <div class="tc-key-fact">Family history is a major clue</div>
+        <div class="tc-visited-mark" id="tv-5" hidden aria-label="Explored">✓</div>
+        <div class="tc-cta" aria-hidden="true">Click to explore →</div>
+      </div>
+
+    </div>
+
+    <div class="types-continue-wrap">
+      <div class="hs-locked-msg" id="types-locked-msg">
+        <span aria-hidden="true">🔒</span>
+        <span id="types-lock-text">Explore all 5 classifications to continue</span>
+      </div>
+      <button class="btn btn-primary" id="types-continue-btn" disabled
+              onclick="goToPage(10)"
+              style="opacity:0.4;cursor:not-allowed;"
+              aria-label="Continue — locked until all classifications explored">
+        Continue to Quiz →
+      </button>
+    </div>
+
+    <div style="margin-top:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(8)" style="font-size:0.82rem;padding:10px 18px;"><span aria-hidden="true">←</span> Back</button>
+    </div>
+
+  </div>
+</section>
