@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EoL Clinical Management &amp; Medication Safety | St Barnabas Hospice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ══════ HEADER ══════ -->
+<header role="banner">
+  <a href="index.html" class="brand" aria-label="St Barnabas Hospice — return to home">
+    <div class="brand-logo">
+      <img src="images/logo.jpg" alt="St Barnabas Hospice" style="width:100%;height:100%;object-fit:contain;display:block;">
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">SBH Education</span>
+      <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
+    </div>
+  </a>
+  <div class="module-label">
+    <strong>EoL Clinical Management</strong>
+    Diabetes at End of Life · Module 2
+  </div>
+</header>
+
+<!-- ══════ PROGRESS NAV ══════ -->
+<nav aria-label="Module progress" class="progress-nav">
+  <button class="nav-step current" id="nav-1"  aria-current="step" onclick="navClick(1)"  aria-label="Step 1: Introduction"><div class="nav-step-num">1</div><span class="nav-step-label">Intro</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-2"  onclick="navClick(2)"  disabled aria-label="Step 2: Priorities"><div class="nav-step-num">2</div><span class="nav-step-label">Priorities</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-3"  onclick="navClick(3)"  disabled aria-label="Step 3: BG Targets"><div class="nav-step-num">3</div><span class="nav-step-label">Targets</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-4"  onclick="navClick(4)"  disabled aria-label="Step 4: Medication Review"><div class="nav-step-num">4</div><span class="nav-step-label">Medications</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-5"  onclick="navClick(5)"  disabled aria-label="Step 5: Risk Matcher"><div class="nav-step-num">5</div><span class="nav-step-label">Risk Matcher</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-6"  onclick="navClick(6)"  disabled aria-label="Step 6: Rationalisation"><div class="nav-step-num">6</div><span class="nav-step-label">Rationalise</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-7"  onclick="navClick(7)"  disabled aria-label="Step 7: Hypo Scenarios"><div class="nav-step-num">7</div><span class="nav-step-label">Hypo</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-8"  onclick="navClick(8)"  disabled aria-label="Step 8: Emergencies"><div class="nav-step-num">8</div><span class="nav-step-label">Emergencies</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-9"  onclick="navClick(9)"  disabled aria-label="Step 9: Dose Simulator"><div class="nav-step-num">9</div><span class="nav-step-label">Dose Sim</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-10" onclick="navClick(10)" disabled aria-label="Step 10: MCQ"><div class="nav-step-num">10</div><span class="nav-step-label">MCQ</span></button>
+  <div class="nav-divider"></div>
+  <button class="nav-step" id="nav-11" onclick="navClick(11)" disabled aria-label="Step 11: My Learning Record"><div class="nav-step-num">11</div><span class="nav-step-label">My Record</span></button>
+</nav>
+
+<div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress">
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label">0% complete</div>
+</div>
+
+<main id="main-content">
+
+<!-- ════════════════════════════════════
+     PAGE 1 — INTRODUCTION
+════════════════════════════════════ -->
+<section class="page active" id="page-1" aria-label="Introduction">
+  <div class="intro-hero">
+    <div class="intro-text">
+      <h1 class="intro-heading">EoL Clinical<br><em>Management</em></h1>
+      <p class="intro-desc">
+        When a patient reaches the end of life, the entire goal of diabetes management changes. This module focuses on safe, compassionate rationalisation of therapy — protecting patients from preventable harm while keeping comfort at the centre of every decision.
+      </p>
+      <div class="intro-instruction" role="note">
+        <div class="intro-instruction-icon" aria-hidden="true">📋</div>
+        <p><strong>Work through each section in order.</strong> The module includes a blood glucose zones reference, two drag-and-drop activities, sequential hypo scenarios, an insulin dose simulator, and a five-question MCQ — with a full Learning Record at the end.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="goToPage(2)">Begin Module <span aria-hidden="true">→</span></button>
+        <span style="font-size:0.78rem;color:var(--text-muted);">⏱ ~25 mins &nbsp;·&nbsp; 10 pages &nbsp;·&nbsp; 5 interactive activities</span>
+      </div>
+    </div>
+
+    <!-- Learning Outcomes — matching Module 1 style exactly -->
+    <div class="intro-facts-panel" role="complementary" aria-label="Learning outcomes for this module">
+      <div class="facts-panel-header">
+        <div class="facts-panel-eyebrow">Learning Outcomes</div>
+        <div class="facts-panel-title">By the end of this module you will be able to</div>
+      </div>
+      <div class="facts-panel-body">
+        <div class="fact-item">
+          <div class="fact-icon" aria-hidden="true">1</div>
+          <div>
+            <div class="fact-label">Apply</div>
+            <p class="fact-text">Appropriate glycaemic targets for patients in the dying phase of illness</p>
+          </div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item">
+          <div class="fact-icon" aria-hidden="true">2</div>
+          <div>
+            <div class="fact-label">Rationalise</div>
+            <p class="fact-text">Non-insulin drug therapies to minimise risk and reduce unnecessary pill burden at end of life</p>
+          </div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item">
+          <div class="fact-icon" aria-hidden="true">3</div>
+          <div>
+            <div class="fact-label">Identify &amp; Manage</div>
+            <p class="fact-text">Hypoglycaemia and hyperglycaemic emergencies (DKA/HHS) in a palliative setting</p>
+          </div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item">
+          <div class="fact-icon" aria-hidden="true">4</div>
+          <div>
+            <div class="fact-label">Adjust</div>
+            <p class="fact-text">Insulin doses for Type 1 patients as consciousness and oral intake decline</p>
+          </div>
+        </div>
+        <div class="fact-divider"></div>
+        <div class="fact-item">
+          <div class="fact-icon" aria-hidden="true">5</div>
+          <div>
+            <div class="fact-label">Explain</div>
+            <p class="fact-text">Why patient-centred values and Advance Care Plans must guide all clinical decisions at end of life</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 2 — SHIFTING PRIORITIES
+════════════════════════════════════ -->
+<section class="page" id="page-2" aria-label="Shifting priorities in care">
+  <div class="light-wrap">
+    <div class="light-header">
+      <h2>A Fundamental Shift in Goals</h2>
+      <p>As a patient enters the end-of-life phase, the entire purpose of diabetes management changes. Understanding this is the foundation of everything that follows.</p>
+    </div>
+
+    <div class="principle-banner" style="margin-bottom:20px;">
+      <div class="principle-banner-title">⚖️ From long-term prevention → to immediate comfort and dignity</div>
+      <div class="principle-banner-body">The clinical evidence base for tight glycaemic control is built on preventing complications over years and decades. At end of life, those timescales no longer apply. The goal is no longer a perfect reading — it is a comfortable, dignified death.</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="info-card">
+        <div class="info-card-icon">📉</div>
+        <div class="info-card-title">Relax Glucose Targets</div>
+        <div class="info-card-body">Tight "normal" ranges are no longer the goal. Long-term complications are irrelevant when prognosis is weeks to months. Aggressive monitoring can cause unnecessary distress and offers no clinical benefit.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🩺</div>
+        <div class="info-card-title">Prioritise Symptom Control</div>
+        <div class="info-card-body">The clinical goal becomes avoiding the distressing extremes — hypoglycaemia (confusion, seizures, loss of consciousness) and severe hyperglycaemia (thirst, polyuria, infections) — rather than achieving tight control.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">💊</div>
+        <div class="info-card-title">Rationalise Medications</div>
+        <div class="info-card-body">Many medications that were essential months ago now carry more risk than benefit. A structured medication review should be triggered when a patient enters the terminal phase or when oral intake falls significantly.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📋</div>
+        <div class="info-card-title">Honour Advance Care Plans</div>
+        <div class="info-card-body">All clinical decisions — including whether to treat an emergency — must be guided by the patient's documented wishes. A high blood glucose reading does not override a clearly stated preference to remain at home for comfort care.</div>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <div class="alert-banner-icon">⚠️</div>
+      <div>
+        <div class="alert-banner-title">Trigger Point for Review</div>
+        <div class="alert-banner-body">A structured medication review should be triggered: when a patient enters the <strong>red/terminal phase</strong>, when they are <strong>no longer eating and drinking</strong>, when there is a <strong>significant reduction in renal function</strong>, or when <strong>swallowing medications becomes unsafe</strong>.</div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary-light" onclick="goToPage(1)">← Back</button>
+      <button class="btn btn-primary-navy" onclick="goToPage(3)">Continue to BG Targets →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 3 — GLYCAEMIC TARGETS
+════════════════════════════════════ -->
+<section class="page" id="page-3" aria-label="Glycaemic targets at end of life">
+  <div class="targets-wrap">
+    <h2>Blood Glucose Zones</h2>
+    <p class="sub">For patients in the terminal phase, glucose targets are deliberately relaxed. The goal is avoiding distressing symptoms at both extremes — not achieving a perfect reading.</p>
+
+    <div class="bg-zones" role="list">
+      <div class="bg-zone zone-dka" role="listitem">
+        <div class="bg-zone-bar" style="background:#ef4444;"></div>
+        <div class="bg-zone-range" style="color:#fca5a5;">20+ mmol/L</div>
+        <div>
+          <div class="bg-zone-label" style="color:#fca5a5;">⚠️ DKA / HHS Risk</div>
+          <div class="bg-zone-desc">Severe hyperglycaemia — symptoms likely. Risk of DKA (Type 1) or HHS (Type 2). Consider whether hospital-level care aligns with the care plan.</div>
+        </div>
+      </div>
+      <div class="bg-zone zone-caution" role="listitem">
+        <div class="bg-zone-bar" style="background:#fdca0f;"></div>
+        <div class="bg-zone-range" style="color:#fde68a;">15–20 mmol/L</div>
+        <div>
+          <div class="bg-zone-label" style="color:#fde68a;">🟡 Caution Zone</div>
+          <div class="bg-zone-desc">Elevated but not immediately dangerous. Monitor symptoms — thirst, confusion, dry mouth. Review medication regimen. Test once daily or when symptomatic.</div>
+        </div>
+      </div>
+      <div class="bg-zone zone-target" role="listitem">
+        <div class="bg-zone-bar" style="background:#22c55e;"></div>
+        <div class="bg-zone-range" style="color:#86efac;">6–15 mmol/L</div>
+        <div>
+          <div class="bg-zone-label" style="color:#86efac;">✓ Comfort Target — Terminal Phase</div>
+          <div class="bg-zone-desc"><strong style="color:var(--white);">This is the recommended target range.</strong> At 6–15 mmol/L, most patients will be free from the symptoms of both extremes. Finger-prick testing should be minimised — once daily or when symptomatic is usually sufficient.</div>
+        </div>
+      </div>
+      <div class="bg-zone zone-hypo" role="listitem">
+        <div class="bg-zone-bar" style="background:#7c3aed;"></div>
+        <div class="bg-zone-range" style="color:#c4b5fd;">Below 4 mmol/L</div>
+        <div>
+          <div class="bg-zone-label" style="color:#c4b5fd;">🔴 Hypoglycaemia</div>
+          <div class="bg-zone-desc">Treat immediately. Below 4 mmol/L causes confusion, sweating, seizures and loss of consciousness. This is preventable, reversible, and distressing — it must be avoided with appropriate medication rationalisation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="targets-tips">
+      <div class="target-tip">
+        <div class="target-tip-icon">🩸</div>
+        <div>
+          <div class="target-tip-title">Testing Frequency</div>
+          <div class="target-tip-body">Minimise finger-prick testing. In the final days, <strong style="color:var(--white);">once daily</strong> — or only when symptomatic — is usually sufficient. Testing causes distress without clinical benefit in the terminal phase.</div>
+        </div>
+      </div>
+      <div class="target-tip">
+        <div class="target-tip-icon">📋</div>
+        <div>
+          <div class="target-tip-title">Symptom-Led Monitoring</div>
+          <div class="target-tip-body">If the patient appears suddenly confused, shaky, or disorientated, <strong style="color:var(--white);">test first</strong> if possible — then treat. In the absence of equipment, treat presumptively based on clinical signs.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(4)">Continue to Medications →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 4 — MEDICATION REVIEW
+════════════════════════════════════ -->
+<section class="page" id="page-4" aria-label="Medication review at end of life">
+  <div class="light-wrap">
+    <div class="light-header">
+      <h2>Medication Review: Stop &amp; Think</h2>
+      <p>Non-insulin drug therapies must be reviewed as the patient deteriorates. Many medications that were once essential now carry more risk than benefit. This table is your clinical reference.</p>
+    </div>
+
+    <table class="med-table" role="table">
+      <thead>
+        <tr>
+          <th>Drug / Class</th>
+          <th>Recommendation</th>
+          <th>Risk &amp; Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Metformin</strong></td>
+          <td><span class="med-badge badge-stop">⛔ Consider Stopping</span></td>
+          <td>Reduced fluid intake at end of life impairs renal clearance, raising the risk of <strong>lactic acidosis</strong>. Stop if nausea, vomiting, diarrhoea, or eGFR declining.</td>
+        </tr>
+        <tr>
+          <td><strong>Sulphonylureas</strong><br><small style="color:#5a6a82;">(e.g. Gliclazide)</small></td>
+          <td><span class="med-badge badge-stop">⛔ Usually Stop</span></td>
+          <td>Stimulate insulin secretion <em>regardless of food intake</em>. High risk of <strong>hypoglycaemia</strong> when a patient is eating poorly or erratically. Should usually be stopped or significantly dose-reduced as oral intake falls.</td>
+        </tr>
+        <tr>
+          <td><strong>SGLT2 Inhibitors</strong><br><small style="color:#5a6a82;">(e.g. Empagliflozin)</small></td>
+          <td><span class="med-badge badge-stop">⛔ Stop</span></td>
+          <td>Can trigger <strong>euglycaemic DKA</strong> — ketoacidosis with near-normal blood glucose, making it easy to miss. Volume depletion from reduced intake worsens this risk. Stop proactively.</td>
+        </tr>
+        <tr>
+          <td><strong>Statins</strong></td>
+          <td><span class="med-badge badge-stop">⛔ Stop</span></td>
+          <td>Prevent long-term cardiovascular events over years. At end of life, this benefit is irrelevant. Stopping removes pill burden and potential myopathy risk.</td>
+        </tr>
+        <tr>
+          <td><strong>Antihypertensives</strong></td>
+          <td><span class="med-badge badge-review">⚠️ Review</span></td>
+          <td>Preventing stroke / MI over years is no longer a clinical goal. Continuing may cause <strong>symptomatic hypotension</strong>, dizziness, and falls. Usually stop unless controlling a specific symptom.</td>
+        </tr>
+        <tr>
+          <td><strong>Basal Insulin</strong><br><small style="color:#5a6a82;">(Type 1)</small></td>
+          <td><span class="med-badge badge-continue">✅ Continue — Adjust</span></td>
+          <td>In Type 1 diabetes, insulin is a <strong>physiological necessity</strong>, not just a blood glucose tool. Stopping it causes DKA. Doses should be <em>reduced</em> as intake falls — never stopped without specialist advice.</td>
+        </tr>
+        <tr>
+          <td><strong>Insulin (Type 2)</strong></td>
+          <td><span class="med-badge badge-review">⚠️ Review &amp; Reduce</span></td>
+          <td>May be reduceable or stopped in Type 2 depending on clinical context. If the patient's blood glucose remains within the 6–15 mmol/L comfort range without insulin, stopping may be appropriate — with specialist input.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary-light" onclick="goToPage(3)">← Back</button>
+      <button class="btn btn-primary-navy" onclick="goToPage(5)">Try the Risk Matcher Activity →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 5 — INTERACTIVE: MED RISK MATCHER
+════════════════════════════════════ -->
+<section class="page" id="page-5" aria-label="Medication risk matcher activity">
+  <div class="drag-wrap">
+    <h2>Interactive Activity — Medication Risk Matcher</h2>
+    <p class="sub">Each medication below carries a specific risk profile at end of life. Drag — or tap — each drug to the correct risk category. All five must be placed before you can check.</p>
+
+    <div class="drag-scenario">
+      <div class="drag-scenario-label">📋 How to use</div>
+      <div class="drag-scenario-text">Drag each medication chip from the bank below into the correct risk category. On mobile, tap a chip then tap the target zone. You can return a chip to the bank by clicking it in its zone.</div>
+    </div>
+
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Medications to categorise — drag to the correct zone</div>
+    <div class="drag-chips-bank" id="matcher-bank" role="group" aria-label="Medication chips"></div>
+
+    <div class="drag-columns drag-columns-2" style="margin-top:16px;">
+      <div class="drop-zone" id="zone-hypo" data-context="matcher" role="region">
+        <div class="drop-zone-label" style="color:#f87171;">📉 Hypoglycaemia Risk</div>
+        <div class="drop-zone-title">Stimulates insulin secretion regardless of food intake</div>
+        <div class="drop-zone-chips" id="zone-hypo-chips">
+          <span class="drop-placeholder">Drop here</span>
+        </div>
+      </div>
+      <div class="drop-zone" id="zone-dka" data-context="matcher" role="region">
+        <div class="drop-zone-label" style="color:#fde68a;">⚡ DKA / Ketoacidosis Risk</div>
+        <div class="drop-zone-title">Can trigger ketoacidosis even with near-normal glucose</div>
+        <div class="drop-zone-chips" id="zone-dka-chips">
+          <span class="drop-placeholder">Drop here</span>
+        </div>
+      </div>
+      <div class="drop-zone" id="zone-renal" data-context="matcher" role="region">
+        <div class="drop-zone-label" style="color:#6ee7b7;">🔄 GI &amp; Renal Risk</div>
+        <div class="drop-zone-title">Problematic with reduced intake and renal deterioration</div>
+        <div class="drop-zone-chips" id="zone-renal-chips">
+          <span class="drop-placeholder">Drop here</span>
+        </div>
+      </div>
+      <div class="drop-zone" id="zone-nob" data-context="matcher" role="region">
+        <div class="drop-zone-label" style="color:#c4b5fd;">⛔ No Benefit at End of Life</div>
+        <div class="drop-zone-title">Prevent long-term events — irrelevant in terminal phase</div>
+        <div class="drop-zone-chips" id="zone-nob-chips">
+          <span class="drop-placeholder">Drop here</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drag-feedback" id="matcher-feedback"></div>
+
+    <div class="drag-actions">
+      <button class="drag-check-btn" id="matcher-check-btn" onclick="checkMatcher()" disabled>Check Answers</button>
+      <button class="drag-reset-btn" onclick="resetMatcher()">↺ Reset</button>
+      <span style="font-size:0.78rem;color:var(--text-muted);">Note: Statin and Antihypertensive both belong in the same category.</span>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(4)">← Back</button>
+      <button class="btn btn-primary" id="matcher-continue-btn" onclick="goToPage(6)"
+              disabled style="opacity:0.4;cursor:not-allowed;">
+        Continue to Rationalisation →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 6 — INTERACTIVE: RATIONALISATION
+════════════════════════════════════ -->
+<section class="page" id="page-6" aria-label="Rationalisation challenge activity">
+  <div class="drag-wrap">
+    <h2>Interactive Activity — The Rationalisation Challenge</h2>
+    <p class="sub">Read the scenario carefully, then drag each medication into the correct column — should it be stopped, or continued?</p>
+
+    <div class="drag-scenario">
+      <div class="drag-scenario-label">📋 Patient Scenario</div>
+      <div class="drag-scenario-text"><strong style="color:var(--white);">Red Phase (Terminal)</strong> — prognosis of days. The patient is no longer eating and is taking only occasional sips of water. They have <strong style="color:var(--white);">Type 1 Diabetes</strong> and are currently prescribed: Metformin, a Statin, an Antihypertensive, a Sulphonylurea, and Basal Insulin.</div>
+    </div>
+
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Medications to review</div>
+    <div class="drag-chips-bank" id="ration-bank" role="group" aria-label="Medication chips for rationalisation"></div>
+
+    <div class="drag-columns drag-columns-2" style="margin-top:16px;">
+      <div class="drop-zone" id="ration-stop" data-context="ration" role="region">
+        <div class="drop-zone-label" style="color:#f87171;">⛔ Stop — Discontinue</div>
+        <div class="drop-zone-hint">These medications carry more risk than benefit at this stage</div>
+        <div class="drop-zone-chips" id="ration-stop-chips">
+          <span class="drop-placeholder">Drop medications here to stop them</span>
+        </div>
+      </div>
+      <div class="drop-zone" id="ration-continue" data-context="ration" role="region">
+        <div class="drop-zone-label" style="color:#6ee7b7;">✅ Continue — Keep</div>
+        <div class="drop-zone-hint">Essential for patient safety and comfort</div>
+        <div class="drop-zone-chips" id="ration-continue-chips">
+          <span class="drop-placeholder">Drop medications here to continue them</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drag-feedback" id="ration-feedback"></div>
+
+    <div class="drag-actions">
+      <button class="drag-check-btn" id="ration-check-btn" onclick="checkRation()" disabled>Check Answers</button>
+      <button class="drag-reset-btn" onclick="resetRation()">↺ Reset</button>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:28px;">
+      <button class="btn btn-secondary" onclick="goToPage(5)">← Back</button>
+      <button class="btn btn-primary" id="ration-continue-btn" onclick="goToPage(7)"
+              disabled style="opacity:0.4;cursor:not-allowed;">
+        Continue to Hypo Scenarios →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 7 — INTERACTIVE: HYPO SCENARIOS (SEQUENTIAL)
+════════════════════════════════════ -->
+<section class="page" id="page-7" aria-label="Hypoglycaemia decision scenarios">
+  <div class="hypo-wrap">
+    <h2>Hypoglycaemia — What Would You Do?</h2>
+    <p class="sub">Work through the scenarios below. Each requires a different management decision. Answer the first scenario to unlock the next.</p>
+
+    <!-- Scenarios are built and injected by JS -->
+    <div id="hypo-scenarios-wrap"></div>
+
+    <!-- All done message -->
+    <div class="hypo-all-done" id="hypo-all-done">
+      <div class="hypo-all-done-title">✅ All three scenarios completed</div>
+      <div class="hypo-all-done-sub">Hypoglycaemia management at end of life depends on swallowing ability, care plan, and consciousness. No two patients are the same.</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(6)">← Back</button>
+      <button class="btn btn-primary" id="hypo-continue-btn" onclick="goToPage(8)"
+              disabled style="opacity:0.4;cursor:not-allowed;">
+        Continue to Emergencies →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 8 — HYPERGLYCAEMIA & TYPE 1
+════════════════════════════════════ -->
+<section class="page" id="page-8" aria-label="Hyperglycaemic emergencies and Type 1 diabetes">
+  <div class="light-wrap">
+    <div class="light-header">
+      <h2>Hyperglycaemia, Emergencies &amp; Type 1</h2>
+      <p>Severe hyperglycaemia can escalate to two distinct emergencies. Recognising the signs — and knowing when to act — is critical. However, any escalation must always be guided by the patient's Advance Care Plan.</p>
+    </div>
+
+    <div class="two-col-grid">
+      <div class="condition-card">
+        <div class="condition-card-head dka">DKA — Diabetic Ketoacidosis</div>
+        <div class="condition-card-body">
+          <p style="font-size:0.78rem;color:#5a6a82;margin-bottom:10px;font-weight:600;">Primarily Type 1 · Also SGLT2-associated</p>
+          <ul class="sym-list">
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Extreme thirst and dry mouth</li>
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Polyuria (large-volume, frequent urination)</li>
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Deep, laboured breathing (Kussmaul)</li>
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Fruity / pear-drop smelling breath</li>
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Nausea, vomiting, abdominal pain</li>
+            <li><div class="sym-dot" style="background:#ef4444;"></div>Confusion or altered consciousness</li>
+          </ul>
+          <div style="margin-top:12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;padding:10px 12px;font-size:0.8rem;color:#991b1b;font-weight:600;">⚠️ SGLT2 inhibitors can cause euglycaemic DKA — ketoacidosis with near-normal glucose readings. Do not rule out DKA based on BG alone.</div>
+        </div>
+      </div>
+      <div class="condition-card">
+        <div class="condition-card-head hhs">HHS — Hyperosmolar Hyperglycaemic State</div>
+        <div class="condition-card-body">
+          <p style="font-size:0.78rem;color:#5a6a82;margin-bottom:10px;font-weight:600;">Primarily Type 2 · Often older patients</p>
+          <ul class="sym-list">
+            <li><div class="sym-dot" style="background:#d97706;"></div>Very high BG — often above 30 mmol/L</li>
+            <li><div class="sym-dot" style="background:#d97706;"></div>Progressive drowsiness and confusion</li>
+            <li><div class="sym-dot" style="background:#d97706;"></div>Severe dehydration — dry mouth, sunken eyes</li>
+            <li><div class="sym-dot" style="background:#d97706;"></div>Develops over days (unlike DKA, which is faster)</li>
+            <li><div class="sym-dot" style="background:#d97706;"></div>No significant ketones or acidosis</li>
+            <li><div class="sym-dot" style="background:#d97706;"></div>High risk of thrombosis</li>
+          </ul>
+          <div style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:10px 12px;font-size:0.8rem;color:#854d0e;font-weight:600;">💡 Both DKA and HHS require hospital-level care. Always check the patient's ACP before escalating.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type1-banner">
+      <div class="type1-banner-title">⚠️ Type 1 Diabetes — A Fundamentally Different Approach</div>
+      <div class="type1-banner-body">In Type 1, insulin is not a drug of choice — it is a physiological necessity. The body produces <em>no insulin</em> whatsoever. Stopping insulin in a Type 1 patient causes DKA within hours to days. This is a painful, distressing, and entirely preventable outcome.</div>
+      <div class="type1-principles">
+        <div class="t1p">
+          <div class="t1p-title">Adjust — Don't Stop</div>
+          <div class="t1p-body">Continue basal insulin as long as the patient is conscious. As intake falls, reduce the dose — but never withdraw without specialist advice.</div>
+        </div>
+        <div class="t1p">
+          <div class="t1p-title">Reduce the Basal</div>
+          <div class="t1p-body">As appetite declines, hepatic glucose output falls. An unchanged basal dose causes progressive overnight hypoglycaemia.</div>
+        </div>
+        <div class="t1p">
+          <div class="t1p-title">Stop the Bolus</div>
+          <div class="t1p-body">Bolus insulin covers post-meal glucose. Without food, giving bolus insulin causes hypoglycaemia without any physiological purpose.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary-light" onclick="goToPage(7)">← Back</button>
+      <button class="btn btn-primary-navy" onclick="goToPage(9)">Continue to Dose Simulator →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 9 — INTERACTIVE: DOSE SIMULATOR
+════════════════════════════════════ -->
+<section class="page" id="page-9" aria-label="Insulin dose adjustment simulator">
+  <div class="sim-wrap">
+    <h2>Insulin Dose Adjustment Simulator</h2>
+    <p class="sub">As a Type 1 patient deteriorates, insulin doses must be carefully adjusted. Use the sliders to set the patient's current oral intake and consciousness level — then review the recommended approach.</p>
+
+    <div class="sim-sliders">
+      <div class="sim-slider-block">
+        <div class="sim-slider-eyebrow">Oral Intake Level</div>
+        <div class="sim-slider-title">What is the patient eating?</div>
+        <div class="sim-slider-value" id="intake-value-label">Full meals (100%)</div>
+        <input type="range" class="sim-range" id="intake-slider"
+               min="0" max="4" value="4" step="1"
+               aria-label="Oral intake level — drag to change"
+               oninput="updateDoseSim()">
+        <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:5px;">
+          <span>← Nothing</span>
+          <span>Full meals →</span>
+        </div>
+      </div>
+      <div class="sim-slider-block">
+        <div class="sim-slider-eyebrow">Consciousness Level</div>
+        <div class="sim-slider-title">How responsive is the patient?</div>
+        <div class="sim-slider-value" id="conscious-value-label">Fully alert and orientated</div>
+        <input type="range" class="sim-range" id="conscious-slider"
+               min="0" max="3" value="3" step="1"
+               aria-label="Consciousness level — drag to change"
+               oninput="updateDoseSim()">
+        <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:5px;">
+          <span>← Unconscious</span>
+          <span>Fully alert →</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Recommended insulin adjustment</div>
+    <div class="sim-output" id="dose-output">
+      <div style="color:var(--text-muted);font-size:0.88rem;">Adjust the sliders above to generate a recommendation.</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+      <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(10)">Continue to MCQ →</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 10 — INTERACTIVE: MCQ
+════════════════════════════════════ -->
+<section class="page" id="page-10" aria-label="Knowledge check — multiple choice questions">
+  <div class="mcq-wrap">
+    <h2>Knowledge Check</h2>
+    <p class="sub">Five questions based on this module. Select your answer for immediate feedback. 80% or above to continue.</p>
+
+    <div class="mcq-progress" id="quiz-dots" role="status" aria-live="polite"></div>
+    <div id="quiz-questions"></div>
+    <div class="mcq-results" id="quiz-results" role="region" aria-live="polite"></div>
+
+    <!-- Nav row pinned to bottom -->
+    <div class="mcq-nav-row">
+      <button class="btn btn-secondary" onclick="goToPage(9)">← Back</button>
+      <button class="btn btn-primary" id="quiz-continue-btn"
+              onclick="finish()"
+              disabled style="opacity:0.4;cursor:not-allowed;"
+              aria-label="Complete the quiz to continue">
+        View My Learning Record →
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PAGE 11 — LEARNING RECORD
+════════════════════════════════════ -->
+<section class="page" id="page-11" aria-label="My Learning Record">
+  <div class="record-wrap">
+
+    <div style="text-align:center;margin-bottom:32px;">
+      <h2 style="font-family:'Merriweather',serif;font-size:1.75rem;color:var(--navy);margin-bottom:8px;">My Learning Record</h2>
+      <p style="color:#5a6a82;font-size:0.92rem;line-height:1.7;max-width:540px;margin:0 auto;">
+        A summary of everything you completed in this module. Review your activity results, then export or print as evidence of your learning.
+      </p>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+      <button onclick="exportLearningRecord()"
+              style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--navy);color:var(--white);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export as PDF
+      </button>
+    </div>
+
+    <!-- Module info -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Module</div>
+      <div class="record-section-title">Completion Details</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:0.88rem;color:#4a5a72;">
+        <div><strong style="color:var(--navy);">Module:</strong> EoL Clinical Management &amp; Medication Safety</div>
+        <div><strong style="color:var(--navy);">Organisation:</strong> St Barnabas Hospice</div>
+        <div><strong style="color:var(--navy);">Completed:</strong> <span id="rec-date"></span></div>
+        <div><strong style="color:var(--navy);">Status:</strong> <span style="color:#059669;font-weight:600;">Complete</span></div>
+      </div>
+    </div>
+
+    <!-- Activity 1 — Matcher -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Page 5 — Interactive Activity</div>
+      <div class="record-section-title">Medication Risk Matcher</div>
+      <div class="record-field" id="rec-matcher">Not yet completed.</div>
+    </div>
+
+    <!-- Activity 2 — Rationalisation -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Page 6 — Interactive Activity</div>
+      <div class="record-section-title">Rationalisation Challenge</div>
+      <div class="record-field" id="rec-ration">Not yet completed.</div>
+    </div>
+
+    <!-- Activity 3 — Hypo Scenarios -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Page 7 — Interactive Scenarios</div>
+      <div class="record-section-title">Hypoglycaemia Scenarios</div>
+      <div class="record-field" id="rec-hypo">Not yet completed.</div>
+    </div>
+
+    <!-- Activity 5 — MCQ -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Page 10 — Knowledge Check</div>
+      <div class="record-section-title">MCQ Score</div>
+      <div class="record-field" id="rec-mcq">Not yet completed.</div>
+    </div>
+
+    <!-- Reflections -->
+    <div class="record-section">
+      <div class="record-section-eyebrow">Optional</div>
+      <div class="record-section-title">Additional Reflections</div>
+      <p style="font-size:0.84rem;color:#5a6a82;margin-bottom:10px;">Any changes to your practice, questions for your supervisor, or key learning points.</p>
+      <textarea id="rec-extra" class="record-extra-textarea" placeholder="Add any reflections here…"></textarea>
+    </div>
+
+    <div class="record-nav-row">
+      <button class="btn btn-primary-navy" onclick="goToPage(10)">← Back</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button onclick="exportLearningRecord()"
+                style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--white);color:var(--navy);border:2px solid #d0daea;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export as PDF
+        </button>
+        <button onclick="finishModule()"
+                style="display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--yellow);color:var(--navy);border:2px solid var(--yellow);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Finish Module
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ══════ COMPLETION OVERLAY ══════ -->
+<div id="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete">
+  <div class="finish-box">
+    <div class="finish-emoji">🎓</div>
+    <div class="finish-eyebrow">Module Complete</div>
+    <h2 class="finish-title">Well done!</h2>
+    <p class="finish-msg">Your progress has been recorded. You can export your Learning Record or return to review the module at any time.</p>
+    <div class="finish-btns">
+      <button class="btn btn-secondary"
+              onclick="goToPage(11); document.getElementById('finish-overlay').classList.remove('show');"
+              style="font-size:0.85rem;">📄 View My Record</button>
+      <button class="btn btn-secondary"
+              onclick="goToPage(1); document.getElementById('finish-overlay').classList.remove('show');"
+              style="font-size:0.85rem;">↩ Review from Start</button>
+      <button onclick="closeOverlay()"
+              style="padding:10px 22px;background:var(--yellow);color:var(--navy);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PRINT STYLES ══════ -->
+<style>
+  @media print {
+    header, nav, .module-progress-bar, footer { display: none !important; }
+    .page:not(#page-11) { display: none !important; }
+    #page-11 { display: block !important; background: var(--white) !important; }
+    #page-11 * { color: #000 !important; background: var(--white) !important; border-color: #ccc !important; box-shadow: none !important; }
+    .record-nav-row, #page-11 button { display: none !important; }
+    body { background: var(--white); }
+  }
+</style>
+
+<footer role="contentinfo">
+  <div class="footer-copy">© 2026 SBH Education · All rights reserved</div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG 2.2 AA" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<script src="js/scripts.js"></script>
+</body>
+</html>
