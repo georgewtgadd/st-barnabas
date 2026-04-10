@@ -20,23 +20,26 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header>
-    <a href="#" class="brand" onclick="navClick(1); return false;">
-      <div class="brand-logo">
-        <svg width="120" height="52" viewBox="0 0 120 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="120" height="52" rx="4" fill="white" fill-opacity="0.1"/>
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Merriweather" font-weight="bold" font-size="14">SBH EDUCATION</text>
-        </svg>
-      </div>
-      <div class="brand-text">
-        <span class="brand-name">SBH Education</span>
-        <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
-      </div>
-    </a>
-    <div class="module-label">
-      Module 2 <strong>Clinical Management</strong>
+<header role="banner">
+  <a href="index.html" class="brand" aria-label="SBH Education — return to home">
+    <div class="brand-logo-wrap">
+
+      <img
+        src="images/logo.png"
+        alt="SBH Education"
+        class="brand-logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <span class="brand-logo-fallback" aria-hidden="true">SBH Education</span>
+      <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
     </div>
-  </header>
+  </a>
+  <div class="module-label">
+    <strong>Communication &amp; Advance Care Planning</strong>
+    Insulin Management in EoL Care · Module 2
+  </div>
+</header>
+
 
   <nav class="progress-nav" aria-label="Module navigation">
     <button class="nav-step current" id="nav-1" onclick="navClick(1)">
