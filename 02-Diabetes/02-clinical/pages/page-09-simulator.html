@@ -1,0 +1,46 @@
+<!-- PAGE 9 — INTERACTIVE: DOSE SIMULATOR -->
+<section class="page" id="page-9" aria-label="Insulin dose adjustment simulator">
+  <div class="sim-wrap">
+    <h2>Insulin Dose Adjustment Simulator</h2>
+    <p class="sub">As a Type 1 patient deteriorates, insulin doses must be carefully adjusted. Use the sliders to set the patient's current oral intake and consciousness level — then review the recommended approach.</p>
+
+    <div class="sim-sliders">
+      <div class="sim-slider-block">
+        <div class="sim-slider-eyebrow">Oral Intake Level</div>
+        <div class="sim-slider-title">What is the patient eating?</div>
+        <div class="sim-slider-value" id="intake-value-label">Full meals (100%)</div>
+        <input type="range" class="sim-range" id="intake-slider"
+               min="0" max="4" value="4" step="1"
+               aria-label="Oral intake level — drag to change"
+               oninput="updateDoseSim()">
+        <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:5px;">
+          <span>← Nothing</span>
+          <span>Full meals →</span>
+        </div>
+      </div>
+      <div class="sim-slider-block">
+        <div class="sim-slider-eyebrow">Consciousness Level</div>
+        <div class="sim-slider-title">How responsive is the patient?</div>
+        <div class="sim-slider-value" id="conscious-value-label">Fully alert and orientated</div>
+        <input type="range" class="sim-range" id="conscious-slider"
+               min="0" max="4" value="4" step="1"
+               aria-label="Consciousness level — drag to change"
+               oninput="updateDoseSim()">
+        <div style="display:flex;justify-content:space-between;font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:5px;">
+          <span>← Unconscious</span>
+          <span>Fully alert →</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Recommended insulin adjustment</div>
+    <div class="sim-output" id="dose-output">
+      <div style="color:var(--text-muted);font-size:0.88rem;">Adjust the sliders above to generate a recommendation.</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-top:32px;">
+      <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+      <button class="btn btn-primary" onclick="goToPage(10)">Continue to MCQ →</button>
+    </div>
+  </div>
+</section>
