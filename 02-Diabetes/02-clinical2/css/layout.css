@@ -1,0 +1,73 @@
+/* ── HEADER ─────────────────────────────────────────── */
+header {
+  background: var(--brand-header);
+  border-bottom: 4px solid var(--yellow);
+  padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+.brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+.brand-logo { width: 120px; height: 52px; background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-name  { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--white); }
+.brand-tagline { font-size: 0.7rem; color: var(--yellow); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.module-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; text-align: right; line-height: 1.4; }
+.module-label strong { display: block; color: var(--white); font-size: 0.85rem; letter-spacing: 0.02em; }
+
+/* ── PROGRESS NAV ───────────────────────────────────── */
+.progress-nav {
+  background: var(--navy); border-bottom: 1px solid var(--border);
+  padding: 0 32px; display: flex; align-items: center;
+  min-height: 52px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+}
+.progress-nav::-webkit-scrollbar { display: none; }
+.nav-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; height: 52px; cursor: default;
+  border: none; border-bottom: 3px solid transparent;
+  background: transparent; color: inherit; font-family: inherit;
+  white-space: nowrap; flex-shrink: 0; transition: border-color 0.3s, background 0.2s;
+}
+.nav-step.done { border-color: var(--blue); cursor: pointer; }
+.nav-step.done:hover { background: rgba(1,151,222,0.1); }
+.nav-step.done:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+.nav-step.current { border-color: var(--yellow); cursor: default; }
+.nav-step:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+.nav-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.4);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.nav-step.done    .nav-step-num { background: var(--blue);   border-color: var(--blue);   color: var(--white); }
+.nav-step.current .nav-step-num { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
+.nav-step-label { font-size: 0.74rem; font-weight: 500; color: rgba(255,255,255,0.35); transition: color 0.3s; }
+.nav-step.done    .nav-step-label { color: var(--text-muted); }
+.nav-step.current .nav-step-label { color: var(--white); font-weight: 600; }
+.nav-divider { width: 20px; height: 1px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+/* ── PROGRESS BAR ────────────────────────────────────── */
+.module-progress-bar {
+  background: rgba(0,0,0,0.25); border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 48px; height: 40px; display: flex; align-items: center; gap: 14px;
+}
+.progress-track { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 10px; overflow: hidden; }
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--blue) 0%, var(--yellow) 100%);
+  border-radius: 10px; transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
+  width: 0%; box-shadow: 0 0 8px rgba(253,202,15,0.3);
+}
+.progress-label { font-size: 0.68rem; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.07em; white-space: nowrap; min-width: 70px; text-align: right; }
+
+/* ── FOOTER ─────────────────────────────────────────── */
+footer {
+  background: var(--navy); border-top: 1px solid var(--border);
+  padding: 24px 48px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+.footer-wcag { display: flex; align-items: center; gap: 10px; }
+.wcag-icon { width: 32px; height: 32px; border-radius: 4px; }
+.footer-wcag-text { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
