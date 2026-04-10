@@ -1,0 +1,39 @@
+/* ── PAGE 11 — LEARNING RECORD ─────────────────────── */
+.record-wrap { max-width: 900px; margin: 0 auto; padding: 56px 48px; }
+.record-section {
+  background: var(--white); border: 1.5px solid #d0daea;
+  border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.record-section-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.record-section-title   { font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.record-field { font-size: 0.9rem; color: #4a5a72; line-height: 1.65; }
+.record-field strong { color: var(--navy); }
+
+.record-extra-textarea {
+  width: 100%; min-height: 120px; padding: 16px;
+  border: 1.5px solid #d0daea; border-radius: 10px;
+  font-family: inherit; font-size: 0.9rem; color: #4a5a72;
+  background: #f8fafc; resize: vertical; transition: border-color 0.2s;
+}
+.record-extra-textarea:focus { outline: none; border-color: var(--blue); background: var(--white); }
+
+.record-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+
+/* ── COMPLETION OVERLAY ─────────────────────────────── */
+#finish-overlay {
+  position: fixed; inset: 0; background: rgba(24,47,92,0.95);
+  display: none; align-items: center; justify-content: center;
+  z-index: 1000; padding: 24px; backdrop-filter: blur(8px);
+}
+#finish-overlay.show { display: flex; animation: fadeIn 0.4s ease; }
+.finish-box {
+  background: var(--white); border-radius: 24px; padding: 48px 40px;
+  max-width: 520px; width: 100%; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.finish-emoji { font-size: 4rem; margin-bottom: 20px; }
+.finish-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.finish-title { font-family: 'Merriweather', serif; font-size: 2rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.finish-msg { font-size: 1rem; color: #5a6a82; line-height: 1.7; margin-bottom: 32px; }
+.finish-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
