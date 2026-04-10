@@ -1,0 +1,84 @@
+/* types.css — Page 9 */
+.types-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-bottom: 32px;
+}
+@media (min-width: 1024px) {
+  .types-grid { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 600px) {
+  .types-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.type-card {
+  background: rgba(255,255,255,0.04); border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 20px 12px; text-align: center;
+  cursor: pointer; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.type-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+.type-card:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.type-card.visited { border-color: rgba(0,168,142,0.5); background: rgba(0,168,142,0.07); }
+
+.tc-badge {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; color: var(--white);
+  margin-bottom: 4px;
+}
+.tc-badge-1 { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+.tc-badge-2 { background: linear-gradient(135deg,#0178b0,#38bdf8); }
+.tc-badge-3 { background: linear-gradient(135deg,#d97706,#fbbf24); }
+.tc-badge-4 { background: linear-gradient(135deg,#16a34a,#4ade80); }
+.tc-badge-5 { background: linear-gradient(135deg,#dc2626,#f87171); }
+.tc-badge-6 { background: linear-gradient(135deg,#ec4899,#f472b6); }
+
+.tc-title     { font-size: 0.78rem; font-weight: 700; color: var(--white); line-height: 1.3; }
+.tc-mechanism { font-size: 0.68rem; color: var(--text-muted); line-height: 1.4; }
+.tc-key-fact  { font-size: 0.65rem; color: var(--teal); font-weight: 500; }
+.tc-visited-mark {
+  position: absolute; top: 8px; right: 8px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--teal); color: var(--white);
+  font-size: 0.65rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.tc-cta { font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-top: auto; }
+
+/* Lock / unlock */
+.types-continue-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hs-locked-msg {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 10px 16px;
+  font-size: 0.82rem; color: var(--text-muted);
+}
+
+/* Type modal body */
+.tm-section { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+.tm-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+.tm-section-body  { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; }
+.tm-section-body strong { color: var(--white); }
+
+.tm-eol-box { background: rgba(0,168,142,0.08); border: 1px solid rgba(0,168,142,0.25); border-radius: 10px; padding: 14px 16px; }
+.tm-eol-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #5eead4; margin-bottom: 8px; }
+.tm-eol-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; }
+.tm-eol-body strong { color: var(--white); }
+
+.type-modal-stripe { height: 5px; }
+.tms-1 { background: #7c3aed; }
+.tms-2 { background: #0178b0; }
+.tms-3 { background: #d97706; }
+.tms-4 { background: #16a34a; }
+.tms-5 { background: #dc2626; }
+.tms-6 { background: #ec4899; }
+
+.type-modal-badge { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--white); flex-shrink: 0; }
+.tmb-1 { background: #7c3aed; }
+.tmb-2 { background: #0178b0; }
+.tmb-3 { background: #d97706; }
+.tmb-4 { background: #16a34a; }
+.tmb-5 { background: #dc2626; }
+.tmb-6 { background: #ec4899; }
+
+.type-modal-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 3px; }
