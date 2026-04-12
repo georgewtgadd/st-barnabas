@@ -12,7 +12,24 @@ header {
 }
 .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
 .brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
-.brand-logo { width: 120px; height: 52px; background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* The logo image itself */
+.brand-logo-img {
+  height: 44px; width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Responsive overrides */
+@media (max-width: 900px) {
+  .brand-logo-img { height: 36px; max-width: 130px; }
+}
+
+@media (max-width: 640px) {
+  .brand-logo-img { height: 30px; max-width: 110px; }
+}
+
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 .brand-name { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--white); letter-spacing: 0.01em; }
 .brand-tagline { font-size: 0.7rem; color: var(--teal); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
