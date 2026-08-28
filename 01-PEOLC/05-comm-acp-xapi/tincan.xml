@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+
+  <activities>
+
+    <activity id="https://www.stbarnabashospice.co.uk/xapi/comm-acp"
+              type="http://adlnet.gov/expapi/activities/course">
+      <name lang="en-GB">Communication &amp; Advance Care Planning</name>
+      <description lang="en-GB">
+        Palliative Care Fundamentals — Module 5. Covers person-centred communication
+        (the 7-38-55 Rule), mental capacity and the Mental Capacity Act (2005),
+        legal protections in advance care planning, and a branching scenario on
+        conducting a Best Interests conversation with family members.
+      </description>
+      <launch lang="en-GB">index.html</launch>
+    </activity>
+
+    <activity id="https://www.stbarnabashospice.co.uk/xapi/comm-acp/scenario/best-interests"
+              type="http://adlnet.gov/expapi/activities/simulation">
+      <name lang="en-GB">The Best Interests Conversation</name>
+      <description lang="en-GB">
+        A branching scenario in which the learner conducts a Best Interests
+        conversation with a patient's family under the Mental Capacity Act (2005).
+        Choices genuinely diverge: an early misstep changes the subsequent stages
+        and can end the meeting early, rather than simply prompting an immediate retry.
+      </description>
+    </activity>
+
+    <activity id="https://www.stbarnabashospice.co.uk/xapi/comm-acp/quiz"
+              type="http://adlnet.gov/expapi/activities/assessment">
+      <name lang="en-GB">Knowledge Check Quiz</name>
+    </activity>
+
+  </activities>
+
+</tincan>

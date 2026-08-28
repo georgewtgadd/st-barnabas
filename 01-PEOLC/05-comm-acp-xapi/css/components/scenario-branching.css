@@ -1,0 +1,113 @@
+/* ══════════════════════════════════════════════════════════
+   css/components/scenario-branching.css
+   Additions for the full divergent-tree Best Interests scenario.
+   Reuses .scenario-stage / .stage-* / .scene-* classes from pages.css
+   — this file only adds what's new: avatars, breadcrumb, endings, reset.
+══════════════════════════════════════════════════════════ */
+
+/* ── Illustrated avatars (replace emoji figures) ────────────── */
+.scene-avatar {
+  width: 52px; height: 52px; flex-shrink: 0;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+@media (max-width: 640px) { .scene-avatar { width: 40px; height: 40px; } }
+
+.mood-angry-clinician,
+.mood-neutral-clinician  { color: #7dd3fc; }
+.mood-warm-clinician     { color: #fdca0f; }
+.mood-angry              { color: #fca5a5; }
+.mood-sad                { color: #93c5fd; }
+.mood-defensive          { color: #f5a5a5; }
+.mood-calm               { color: #6ee7b7; }
+.mood-warm               { color: #fdca0f; }
+.mood-reflective         { color: #c4b5fd; }
+.mood-relieved           { color: #6ee7b7; }
+.mood-walkaway           { color: #94a3b8; }
+.mood-object             { color: rgba(255,255,255,.55); }
+
+/* ── Scene mood backgrounds (swap the panel gradient by class) ─ */
+.scene-mood-neutral  { background: linear-gradient(135deg,#0f1c34 0%,#1a3466 100%); }
+.scene-mood-fail     { background: linear-gradient(135deg,#3d0a0a 0%,#7f1d1d 100%); }
+.scene-mood-success  { background: linear-gradient(135deg,#052e16 0%,#065f46 100%); }
+.scene-mood-best     { background: linear-gradient(135deg,#0c1a3a 0%,#1e3a5f 100%); }
+.scene-mood-weak     { background: linear-gradient(135deg,#3a2e0a 0%,#5f4a1e 100%); }
+.scene-mood-earlyfail{ background: linear-gradient(135deg,#2a0505 0%,#5c1414 100%); }
+
+.scene-stage-tag.tag-fail    { background: rgba(220,38,38,.3);  color: #fca5a5; }
+.scene-stage-tag.tag-success { background: rgba(5,150,105,.35); color: #6ee7b7; }
+.scene-stage-tag.tag-best    { background: rgba(1,151,222,.3);  color: #7dd3fc; }
+.scene-stage-tag.tag-weak    { background: rgba(217,158,21,.3); color: var(--yellow); }
+
+/* ── Breadcrumb (variable-length path, replaces fixed 3-dot tracker) ─ */
+.scenario-breadcrumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin-bottom: 20px; min-height: 28px;
+}
+.breadcrumb-step {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 20px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  font-size: 0.72rem; color: var(--text-muted); white-space: nowrap;
+}
+.breadcrumb-step.step-current { background: rgba(253,202,15,.15); border-color: rgba(253,202,15,.35); color: var(--yellow); }
+.breadcrumb-step.step-off-track { background: rgba(220,38,38,.15); border-color: rgba(220,38,38,.3); color: #fca5a5; }
+.breadcrumb-arrow { color: rgba(255,255,255,.25); font-size: 0.7rem; }
+
+/* ── Reset control ──────────────────────────────────────────── */
+.scenario-reset-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-muted); font-size: 0.76rem;
+  padding: 6px 12px; border-radius: 20px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  margin-left: auto;
+}
+.scenario-reset-btn:hover { border-color: rgba(255,255,255,.4); color: var(--white); background: rgba(255,255,255,.06); }
+.scenario-reset-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.scenario-header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+
+/* ── Ending panel ───────────────────────────────────────────── */
+.scenario-ending {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 26px 26px 24px; margin-bottom: 14px;
+  animation: pageIn 0.4s ease;
+}
+.ending-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.ending-tag.tag-best  { background: rgba(1,151,222,.2);  color: #7dd3fc; border: 1px solid rgba(1,151,222,.35); }
+.ending-tag.tag-good  { background: rgba(5,150,105,.2);  color: #6ee7b7; border: 1px solid rgba(5,150,105,.3); }
+.ending-tag.tag-weak  { background: rgba(217,158,21,.2); color: var(--yellow); border: 1px solid rgba(217,158,21,.35); }
+.ending-tag.tag-fail  { background: rgba(220,38,38,.2);  color: #fca5a5; border: 1px solid rgba(220,38,38,.3); }
+
+.ending-title {
+  font-family: 'Merriweather', serif; font-size: 1.25rem; font-weight: 700;
+  color: var(--white); margin-bottom: 10px; line-height: 1.3;
+}
+.ending-narrative {
+  font-size: 0.92rem; color: rgba(255,255,255,.85); font-style: italic;
+  line-height: 1.7; margin-bottom: 14px; border-left: 3px solid rgba(255,255,255,.15);
+  padding-left: 14px;
+}
+.ending-feedback {
+  font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 18px;
+}
+.ending-feedback strong { color: var(--white); }
+.ending-feedback em { color: #93c5fd; }
+
+.ending-path-summary {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;
+}
+.ending-path-summary .breadcrumb-step { font-size: 0.68rem; }
+
+.ending-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 640px) {
+  .scenario-ending { padding: 20px 18px; }
+  .ending-title { font-size: 1.08rem; }
+  .scenario-reset-btn { margin-left: 0; }
+  .scenario-header-row { flex-wrap: wrap; }
+}

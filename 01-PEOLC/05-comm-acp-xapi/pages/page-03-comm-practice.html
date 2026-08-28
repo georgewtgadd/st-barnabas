@@ -1,0 +1,100 @@
+<section id="page-3" class="page" aria-label="Communication in Practice — select-three activity">
+  <div class="activity-wrap">
+    <div class="activity-header">
+      <div class="activity-title">Communication in Practice</div>
+      <p class="activity-sub">
+        Apply the 7-38-55 Rule to a real clinical scenario. Select the <strong>three most effective actions</strong>
+        to ensure your communication impact is maximised.
+      </p>
+    </div>
+
+    <!-- Scenario -->
+    <div class="scenario-context" role="region" aria-label="Clinical scenario">
+      <div class="scenario-context-eyebrow">📋 Clinical Scenario</div>
+      <p>
+        You enter a <strong>curtained bed space</strong> on a busy ward to discuss a patient's preferred place of care.
+        The patient is lying flat, looking at the ceiling. The television is on in the background.
+        You have been asked to begin an initial conversation about their wishes for the future.
+      </p>
+    </div>
+
+    <!-- Counter -->
+    <div class="select-instruction" aria-live="polite">
+      Select exactly 3 actions:
+      <span class="select-counter" id="comm-counter" aria-label="Selected count">0 / 3 selected</span>
+    </div>
+
+    <!-- Options -->
+    <div class="select-options" role="group" aria-label="Choose three effective actions">
+
+      <button class="select-option" id="comm-opt-A" onclick="commSelect('A')"
+              aria-label="Option A: Stand at the foot of the bed">
+        <div class="select-option-letter" aria-hidden="true">A</div>
+        <div class="select-option-text">
+          Stand at the foot of the bed so they can see you clearly.
+          <div class="select-option-verdict" aria-hidden="true"></div>
+        </div>
+      </button>
+
+      <button class="select-option" id="comm-opt-B" onclick="commSelect('B')"
+              aria-label="Option B: Ask to turn off the television and draw the curtains fully">
+        <div class="select-option-letter" aria-hidden="true">B</div>
+        <div class="select-option-text">
+          Ask to turn off the television and draw the curtains fully to create a private space.
+          <div class="select-option-verdict" aria-hidden="true"></div>
+        </div>
+      </button>
+
+      <button class="select-option" id="comm-opt-C" onclick="commSelect('C')"
+              aria-label="Option C: Sit at eye level with open body language">
+        <div class="select-option-letter" aria-hidden="true">C</div>
+        <div class="select-option-text">
+          Sit at eye level with the patient and maintain open, relaxed body language.
+          <div class="select-option-verdict" aria-hidden="true"></div>
+        </div>
+      </button>
+
+      <button class="select-option" id="comm-opt-D" onclick="commSelect('D')"
+              aria-label="Option D: Speak loudly and quickly before a doctor arrives">
+        <div class="select-option-letter" aria-hidden="true">D</div>
+        <div class="select-option-text">
+          Speak loudly and quickly to get the information across before a doctor arrives.
+          <div class="select-option-verdict" aria-hidden="true"></div>
+        </div>
+      </button>
+
+      <button class="select-option" id="comm-opt-E" onclick="commSelect('E')"
+              aria-label="Option E: Check if the patient is comfortable and in pain before starting">
+        <div class="select-option-letter" aria-hidden="true">E</div>
+        <div class="select-option-text">
+          Check whether the patient is comfortable and in pain before beginning the conversation.
+          <div class="select-option-verdict" aria-hidden="true"></div>
+        </div>
+      </button>
+
+    </div>
+
+    <!-- Feedback -->
+    <div id="comm-feedback" class="activity-feedback" role="alert" aria-live="polite"></div>
+
+    <!-- Actions -->
+    <div class="activity-actions">
+      <button class="activity-check-btn" onclick="checkComm()" aria-label="Check your selected actions">
+        Check Answers
+      </button>
+      <button class="activity-reset-btn" onclick="resetComm()" aria-label="Reset the activity">
+        Reset
+      </button>
+    </div>
+
+    <div class="dark-page-nav" style="margin-top:32px;">
+      <button class="btn btn-secondary" onclick="goToPage(2)">← Back</button>
+      <div class="dark-page-nav-right">
+        <div class="dark-locked-msg" id="comm-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Select the correct actions to continue
+        </div>
+        <button class="btn btn-primary" id="comm-continue-btn" onclick="goToPage(4)" hidden>Continue →</button>
+      </div>
+    </div>
+  </div>
+</section>
