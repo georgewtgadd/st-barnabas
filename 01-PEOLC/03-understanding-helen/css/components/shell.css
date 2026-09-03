@@ -1,0 +1,147 @@
+/* ══════════════════════════════════════════════════════════
+   css/components/shell.css
+   Launch gate · burger/drawer navigation · header & footer tidy-up
+   Addresses content being squeezed inside a small LMS iframe.
+══════════════════════════════════════════════════════════ */
+
+/* ── Launch gate ─────────────────────────────────────────────
+   Shown once, before the module content, so "expand" is the very
+   first and only thing on screen — guaranteed visible regardless
+   of how small the surrounding iframe is.                        */
+.launch-gate {
+  position: fixed; inset: 0; z-index: 1000;
+  background: linear-gradient(160deg, var(--navy-dark) 0%, #0c1a3a 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 24px;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.launch-gate.launch-gate-closed {
+  opacity: 0; visibility: hidden; pointer-events: none;
+}
+.launch-gate-inner {
+  max-width: 560px; width: 100%; text-align: center;
+}
+.launch-gate-logo {
+  height: 48px; width: auto; max-width: 200px; object-fit: contain;
+  margin: 0 auto 20px; display: block;
+}
+.launch-gate-eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 10px;
+}
+.launch-gate-title {
+  font-family: 'Merriweather', serif; font-size: 1.7rem; font-weight: 700;
+  color: var(--white); line-height: 1.25; margin-bottom: 16px;
+}
+.launch-gate-copy {
+  font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;
+  max-width: 440px; margin: 0 auto 28px;
+}
+.launch-gate-actions {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+  margin-bottom: 18px;
+}
+.launch-gate-btn { font-size: 0.92rem; padding: 13px 22px; }
+.launch-gate-skip {
+  background: none; border: none; color: rgba(255,255,255,.5);
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+  text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+  padding: 8px;
+}
+.launch-gate-skip:hover         { color: rgba(255,255,255,.8); }
+.launch-gate-skip:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; border-radius: 4px; }
+
+@media (max-width: 640px) {
+  .launch-gate-title { font-size: 1.35rem; }
+  .launch-gate-actions { flex-direction: column; }
+  .launch-gate-btn { width: 100%; justify-content: center; }
+}
+
+/* ── Burger / mobile progress bar (replaces the horizontal step
+   bar once it would otherwise start squeezing) ─────────────── */
+.progress-nav-mobile {
+  display: none;
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  align-items: center; gap: 12px;
+  padding: 0 16px; min-height: 52px;
+}
+.burger-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+  color: var(--white); border-radius: 8px;
+  padding: 8px 12px; min-height: 40px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; flex-shrink: 0; transition: all 0.2s;
+}
+.burger-btn:hover         { background: rgba(255,255,255,.12); }
+.burger-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.progress-nav-mobile-current {
+  font-size: 0.78rem; color: var(--text-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ── Drawer (off-canvas) navigation panel ───────────────────── */
+.drawer-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(9,15,30,0.7); backdrop-filter: blur(3px);
+}
+.drawer-backdrop.open { display: block; animation: modalIn 0.25s ease; }
+
+.drawer-inner {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 300px; max-width: 85vw;
+  background: #101f3d; box-shadow: 8px 0 32px rgba(0,0,0,.4);
+  display: flex; flex-direction: column;
+  animation: drawerSlide 0.25s ease;
+}
+@keyframes drawerSlide { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 16px 12px; border-bottom: 1px solid rgba(255,255,255,.1);
+  flex-shrink: 0;
+}
+.drawer-title {
+  font-family: 'Merriweather', serif; font-weight: 700; color: var(--white); font-size: 1rem;
+}
+.drawer-note {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 0.78rem; color: var(--text-muted); line-height: 1.55;
+  padding: 12px 16px; margin: 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  flex-shrink: 0;
+}
+.drawer-nav-list {
+  display: flex; flex-direction: column; overflow-y: auto; flex: 1; padding: 6px 0;
+}
+
+/* Vertical variant of .nav-step for use inside the drawer */
+.drawer-nav-list .nav-step {
+  display: flex; align-items: center; gap: 12px;
+  height: auto; min-height: 48px; width: 100%;
+  padding: 10px 16px; white-space: normal; text-align: left;
+  border-bottom: none; border-left: 3px solid transparent;
+}
+.drawer-nav-list .nav-step.done           { border-left-color: var(--blue); }
+.drawer-nav-list .nav-step.current        { border-left-color: var(--yellow); background: rgba(253,202,15,.08); }
+.drawer-nav-list .nav-step:disabled       { opacity: 0.4; }
+.drawer-nav-list .nav-step-label          { display: inline; font-size: 0.86rem; }
+.drawer-nav-list .nav-step-lock           { display: none; margin-left: auto; opacity: 0.55; font-size: 0.85rem; flex-shrink: 0; }
+.drawer-nav-list .nav-step:disabled .nav-step-lock { display: inline; }
+
+@media (max-width: 900px) {
+  .progress-nav        { display: none; }
+  .progress-nav-mobile { display: flex; }
+}
+
+/* ── Header tidy-up: give the Expand/New-tab controls more room
+   now that the long module title has moved to the footer ───── */
+@media (max-width: 480px) {
+  .header-expand-controls { gap: 6px; }
+}
+
+/* ── Footer module label (moved out of the header) ──────────── */
+.footer-left { display: flex; flex-direction: column; gap: 4px; }
+.footer-module {
+  font-size: 0.74rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em;
+}

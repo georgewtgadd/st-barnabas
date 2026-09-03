@@ -1,0 +1,159 @@
+<section id="page-9" class="page" aria-label="My Learning Record">
+  <div class="record-wrap">
+    <div class="record-page-header">
+      <h2>My Learning Record</h2>
+      <p>A summary of your activity in this module. Export it as a PDF for your CPD portfolio or personal records.</p>
+    </div>
+
+    <!-- Module info -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(34,65,126,.1);" aria-hidden="true">📘</div>
+          <div class="record-section-title">Module Details</div>
+        </div>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Module</span>
+          <span class="record-data-value">Understanding Helen</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Series</span>
+          <span class="record-data-value">Palliative &amp; End of Life Care · Module 3</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Organisation</span>
+          <span class="record-data-value">St Barnabas Hospice</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Date Completed</span>
+          <span class="record-data-value" id="rec-date">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Introduction video -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(1,151,222,.1);" aria-hidden="true">🎥</div>
+          <div class="record-section-title">Helen's Introduction Video</div>
+        </div>
+        <span class="record-badge" id="rec-video-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Status</span>
+          <span class="record-data-value" id="rec-video-status">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branching scenario -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(253,202,15,.1);" aria-hidden="true">💬</div>
+          <div class="record-section-title">The First Visit — Branching Scenario</div>
+        </div>
+        <span class="record-badge" id="rec-scenario-badge">—</span>
+      </div>
+      <div class="record-data-row" id="rec-scenario-detail">
+        <div class="record-data-item">
+          <span class="record-data-label">Beat 1 — How you responded to Simon</span>
+          <span class="record-data-value" id="rec-scenario-1">—</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Beat 2 — What you did about Sophie</span>
+          <span class="record-data-value" id="rec-scenario-2">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home safety assessment -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(13,148,136,.1);" aria-hidden="true">🔍</div>
+          <div class="record-section-title">Helen's Living Room — Home Safety Assessment</div>
+        </div>
+        <span class="record-badge" id="rec-hotspot-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Risks identified</span>
+          <span class="record-data-value" id="rec-hotspot-score">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Four Pillars -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(124,110,245,.1);" aria-hidden="true">🧭</div>
+          <div class="record-section-title">Four Pillars of Holistic Wellbeing</div>
+        </div>
+        <span class="record-badge" id="rec-pillars-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Pillars explored</span>
+          <span class="record-data-value" id="rec-pillars-score">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Knowledge check -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(5,150,105,.1);" aria-hidden="true">✅</div>
+          <div class="record-section-title">Check Your Understanding</div>
+        </div>
+        <span class="record-badge" id="rec-quiz-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Score</span>
+          <span class="record-data-value" id="rec-quiz-score">—</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Result</span>
+          <span class="record-data-value" id="rec-quiz-result">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional notes -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(5,150,105,.1);" aria-hidden="true">📝</div>
+          <div class="record-section-title">Additional Notes</div>
+        </div>
+      </div>
+      <label for="rec-notes" class="sr-only">Additional notes for your learning record</label>
+      <textarea
+        id="rec-notes"
+        class="record-notes-textarea"
+        placeholder="Add any personal notes, reflections or actions for your CPD record…"
+        aria-label="Additional notes"
+      ></textarea>
+    </div>
+
+    <div class="record-actions">
+      <button class="btn-export-record" onclick="exportLearningRecordPDF()" aria-label="Export learning record as a PDF">
+        <span aria-hidden="true">⬇</span> Export as PDF
+      </button>
+      <button class="btn-finish-module" onclick="finishModule()" aria-label="Finish module">
+        🎓 Finish Module
+      </button>
+    </div>
+
+    <nav style="margin-top:24px;" aria-label="Page navigation">
+      <button class="btn btn-secondary btn-on-light" onclick="goToPage(8)">← Back</button>
+    </nav>
+  </div>
+</section>
