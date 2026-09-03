@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+
+  <activities>
+    <activity id="https://sbheducation.org/xapi/activities/understanding-helen" type="http://adlnet.gov/expapi/activities/course">
+      <name lang="en-GB">Understanding Helen</name>
+      <description lang="en-GB">
+        Palliative Care Fundamentals, Module 3 — an interactive module in which learners meet Helen,
+        a 75-year-old receiving palliative care at home, and her family, and practise the decisions
+        that shape holistic, person-centred care.
+      </description>
+      <launch lang="en-GB">index.html</launch>
+    </activity>
+  </activities>
+
+</tincan>
