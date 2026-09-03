@@ -1,0 +1,233 @@
+/* ── PAGE 3 — MYTH OR FACT? sort activity ───────────── */
+
+/* Mobile instruction banner — hidden on desktop */
+.sort-touch-hint {
+  display: none;
+  background: rgba(1,151,222,0.08);
+  border: 1px solid rgba(1,151,222,0.2);
+  border-left: 4px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  font-size: 0.84rem;
+  color: #2c4a6e;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+@media (hover: none) and (pointer: coarse) {
+  .sort-touch-hint { display: flex; gap: 10px; align-items: flex-start; }
+  .sort-touch-hint-icon { font-size: 1.1rem; flex-shrink: 0; }
+}
+
+/* Statement pool */
+.sort-pool-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.sort-stmt {
+  background: var(--light-card);
+  border: 2px solid var(--light-border);
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  color: var(--light-text);
+  line-height: 1.5;
+  cursor: grab;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s, opacity 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;          /* prevents page scroll interfering with touch drag */
+}
+.sort-stmt:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.sort-stmt:hover         { border-color: var(--navy); background: #e8eef8; }
+.sort-stmt.selected      { border-color: var(--blue); background: rgba(1,151,222,0.08); box-shadow: 0 0 0 3px rgba(1,151,222,0.2); }
+.sort-stmt.dragging      { opacity: 0.35; transform: scale(0.97); }
+.sort-stmt.placed        { opacity: 0.25; pointer-events: none; }
+
+/* On touch devices make statements larger / easier to tap */
+@media (hover: none) and (pointer: coarse) {
+  .sort-stmt {
+    cursor: default;
+    padding: 13px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Drop columns */
+.sort-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sort-col {
+  background: var(--light-card);
+  border: 2px dashed var(--light-border);
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 140px;              /* taller target on mobile */
+  transition: border-color 0.2s, background 0.2s;
+}
+.sort-col.drag-over {
+  border-color: var(--blue);
+  background: rgba(1,151,222,0.06);
+  border-style: solid;
+}
+
+/* On touch devices make drop zones even taller */
+@media (hover: none) and (pointer: coarse) {
+  .sort-col { min-height: 180px; }
+}
+
+.sort-col-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--light-border);
+}
+.myth-title { color: #dc2626; border-bottom-color: rgba(220,38,38,0.25); }
+.fact-title { color: #059669; border-bottom-color: rgba(5,150,105,0.25); }
+
+/* Placed items inside drop zones */
+.sort-placed {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid var(--light-border);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-size: 0.84rem;
+  color: var(--light-text);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.sort-placed.myth { border-left: 3px solid rgba(220,38,38,0.5); }
+.sort-placed.fact { border-left: 3px solid rgba(5,150,105,0.5); }
+
+/* After checkSort() — correct/incorrect state */
+.sort-placed.checked-correct {
+  background: rgba(5,150,105,0.07);
+  border-color: rgba(5,150,105,0.4);
+  border-left-color: #059669;
+}
+.sort-placed.checked-wrong {
+  background: rgba(220,38,38,0.06);
+  border-color: rgba(220,38,38,0.35);
+  border-left-color: #dc2626;
+}
+
+.sort-placed-text { flex: 1; }
+
+.sort-placed-status {
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  line-height: 1;
+  margin-top: 1px;
+}
+.sort-placed.checked-correct .sort-placed-status { color: #059669; }
+.sort-placed.checked-wrong   .sort-placed-status { color: #dc2626; }
+
+.sort-placed-remove {
+  cursor: pointer;
+  color: #9aabb8;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  line-height: 1;
+}
+.sort-placed-remove:hover { color: #dc2626; background: rgba(220,38,38,0.08); }
+
+/* ── KEYBOARD / TAP PLACEMENT BUTTONS ───────────────── */
+#keyboard-sort-btns {
+  flex-wrap: wrap;
+}
+.sort-place-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.sort-place-btn-myth {
+  background: rgba(220,38,38,0.07);
+  border-color: rgba(220,38,38,0.35);
+  color: #991b1b;
+}
+.sort-place-btn-myth:hover  { background: rgba(220,38,38,0.15); border-color: #dc2626; }
+.sort-place-btn-fact {
+  background: rgba(5,150,105,0.07);
+  border-color: rgba(5,150,105,0.35);
+  color: #065f46;
+}
+.sort-place-btn-fact:hover  { background: rgba(5,150,105,0.15); border-color: #059669; }
+.sort-place-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+/* Feedback banner */
+.sort-feedback {
+  display: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.sort-feedback.show         { display: block; }
+.sort-feedback.all-correct  { background: rgba(5,150,105,.1);  border: 1px solid rgba(5,150,105,.3);  border-left: 4px solid #059669; color: #064e3b; }
+.sort-feedback.some-wrong   { background: rgba(253,202,15,.12); border: 1px solid rgba(253,202,15,.35); border-left: 4px solid var(--yellow); color: #78350f; }
+
+/* Action buttons */
+.sort-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.sort-check-btn,
+.sort-reset-btn {
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sort-check-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: 2px solid var(--navy);
+}
+.sort-check-btn:hover         { background: var(--navy-light); }
+.sort-check-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.sort-reset-btn {
+  background: transparent;
+  color: var(--light-muted);
+  border: 2px solid var(--light-border);
+}
+.sort-reset-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .sort-cols          { grid-template-columns: 1fr; gap: 12px; }
+  .sort-stmt          { font-size: 0.86rem; }
+  .sort-actions       { flex-direction: column; }
+  .sort-check-btn,
+  .sort-reset-btn     { width: 100%; text-align: center; justify-content: center; }
+}
