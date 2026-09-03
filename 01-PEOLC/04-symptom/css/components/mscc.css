@@ -1,0 +1,41 @@
+/* ── PAGE 7 — MSCC (light bg) ───────────────────── */
+.mscc-wrap   { max-width: 960px; margin: 0 auto; padding: 48px 48px 64px; }
+.mscc-header { text-align: center; margin-bottom: 36px; }
+.mscc-header h2 { font-family: 'Merriweather', serif; font-size: 1.9rem; color: var(--navy); margin-bottom: 10px; }
+.mscc-header p  { font-size: .95rem; color: var(--light-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+.mscc-alert {
+  background: rgba(220,38,38,.07); border: 1.5px solid rgba(220,38,38,.3);
+  border-left: 5px solid #dc2626; border-radius: 0 12px 12px 0;
+  padding: 18px 22px; margin-bottom: 24px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.mscc-alert-icon  { font-size: 1.4rem; flex-shrink: 0; }
+.mscc-alert-title { font-family: 'Merriweather', serif; font-size: .95rem; font-weight: 700; color: #991b1b; margin-bottom: 6px; }
+.mscc-alert-body  { font-size: .86rem; color: #7f1d1d; line-height: 1.72; }
+.mscc-alert-body strong { color: #7f1d1d; }
+
+.mscc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px; }
+.mscc-card {
+  background: var(--light-card); border: 1.5px solid var(--light-border);
+  border-radius: 12px; padding: 20px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+.mscc-card.red-left { border-left: 4px solid #dc2626; }
+.mscc-card-title { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.mscc-card-title.red { color: #991b1b; }
+.mscc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.mscc-list li { font-size: .84rem; color: #3d4f65; line-height: 1.6; padding-left: 14px; position: relative; }
+.mscc-list li::before { content: '•'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+.mscc-list.red li::before { color: #dc2626; }
+
+.mscc-evidence {
+  background: var(--navy); border-radius: 12px; padding: 18px 24px; margin-bottom: 28px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.mscc-evidence-icon  { font-size: 1.2rem; flex-shrink: 0; }
+.mscc-evidence-title { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--yellow); margin-bottom: 6px; }
+.mscc-evidence-body  { font-size: .86rem; color: var(--text-muted); line-height: 1.72; }
+
+@media (max-width: 900px) { .mscc-wrap { padding: 32px 24px 48px; } .mscc-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .mscc-wrap { padding: 20px 16px 36px; } .mscc-header h2 { font-size: 1.5rem; } }

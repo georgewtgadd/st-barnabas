@@ -1,0 +1,30 @@
+<section id="page-10" class="page" aria-label="Case Study MCQ — Five Patients">
+  <div class="cases-wrap">
+
+    <div class="cases-header">
+      <h2 class="cases-title">Who Am I?</h2>
+      <p class="cases-sub">Five clinical presentations. Read each patient's description, then answer the question that follows. You need <strong>80% or above</strong> to unlock your learning record.</p>
+    </div>
+
+    <div class="cases-progress" id="cases-dots" role="status" aria-label="Case study progress" aria-live="polite"></div>
+
+    <div id="cases-questions-container">
+      <!-- Rendered by js/cases.js renderCases() -->
+    </div>
+
+    <div class="cases-results" id="cases-results" role="region" aria-label="Assessment results" aria-live="polite">
+      <!-- Populated by js/cases.js showResults() -->
+    </div>
+
+    <nav class="page-nav" aria-label="Page navigation" style="margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);">
+      <button class="btn btn-secondary" onclick="goToPage(9)">← Back</button>
+      <div class="page-nav-right">
+        <div class="locked-msg" id="cases-locked-msg" aria-live="polite">
+          <span aria-hidden="true">🔒</span> Score 80% or above to unlock your learning record
+        </div>
+        <button class="btn btn-primary" id="cases-continue-btn" onclick="goToPage(11)" hidden>My Learning Record →</button>
+      </div>
+    </nav>
+
+  </div>
+</section>

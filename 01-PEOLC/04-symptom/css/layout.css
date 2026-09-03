@@ -1,0 +1,150 @@
+/* ══════════════════════════════════════════════════════════
+   SBH EDUCATION — Module 4
+   css/layout.css · Header + progress navigation
+══════════════════════════════════════════════════════════ */
+
+/* ── HEADER ─────────────────────────────────────────── */
+header {
+  background: var(--brand-header);
+  border-bottom: 4px solid var(--yellow);
+  padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 80px; position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+/* Brand link */
+.brand {
+  display: flex; align-items: center;
+  text-decoration: none; color: inherit;
+}
+.brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 4px; }
+
+/* Logo block: image above, tagline below */
+.brand-logo-block {
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: 4px;
+}
+/* The logo image itself */
+.brand-logo-img {
+  height: 44px; width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Responsive overrides */
+@media (max-width: 900px) {
+  .brand-logo-img { height: 36px; max-width: 130px; }
+}
+
+@media (max-width: 640px) {
+  .brand-logo-img { height: 30px; max-width: 110px; }
+}
+/* Module label (right side) */
+.module-label {
+  font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  text-align: right; line-height: 1.4;
+}
+.module-label strong {
+  display: block; color: var(--white);
+  font-size: 0.85rem; letter-spacing: 0.02em;
+}
+
+.header-right {
+  display: flex; align-items: center; gap: 20px;
+}
+.header-expand-controls {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.header-icon-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+  color: var(--white); border-radius: 8px;
+  padding: 8px 12px; min-height: 36px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.76rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.header-icon-btn:hover         { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.3); }
+.header-icon-btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.header-icon-btn svg { flex-shrink: 0; }
+
+/* ── PROGRESS NAV ─────────────────────────────────── */
+.progress-nav {
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex; align-items: center;
+  min-height: 52px; flex-wrap: nowrap;
+  overflow-x: auto; scrollbar-width: none;
+}
+.progress-nav::-webkit-scrollbar { display: none; }
+
+.nav-step {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; height: 52px; cursor: default;
+  border: none; border-bottom: 3px solid transparent;
+  background: transparent; color: inherit;
+  font-family: inherit; white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.2s;
+}
+.nav-step.done           { border-color: var(--blue); cursor: pointer; }
+.nav-step.done:hover     { background: rgba(1,151,222,0.1); }
+.nav-step.done:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+.nav-step.current        { border-color: var(--yellow); cursor: default; }
+.nav-step:disabled       { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.nav-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700;
+  border: 2px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.4);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.nav-step.done    .nav-step-num { background: var(--blue);   border-color: var(--blue);   color: var(--white); }
+.nav-step.current .nav-step-num { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
+
+.nav-step-label {
+  font-size: 0.74rem; font-weight: 500;
+  color: rgba(255,255,255,0.35); transition: color 0.3s;
+}
+.nav-step.done    .nav-step-label { color: var(--text-muted); }
+.nav-step.current .nav-step-label { color: var(--white); font-weight: 600; }
+
+.nav-divider {
+  width: 20px; height: 1px;
+  background: rgba(255,255,255,0.12); flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 900px) {
+  header              { padding: 0 20px; height: 72px; }
+  .brand-logo         { width: 100px; height: 38px; }
+  .brand-tagline      { font-size: 0.55rem; }
+  .header-right        { gap: 12px; }
+  .progress-nav       { padding: 0 12px; }
+  .nav-step           { padding: 0 8px; gap: 6px; }
+  .nav-step-label     { display: none; }
+  .nav-divider        { width: 12px; }
+}
+@media (max-width: 640px) {
+  header              { padding: 0 16px; height: 64px; }
+
+   .brand-tagline {
+  font-size: 0.7rem; color: var(--yellow);
+  font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+}
+   
+   .brand-logo         { width: 100px; height: 40px; }
+  .header-right         { gap: 8px; }
+  .header-icon-btn-label { display: none; }
+  .header-icon-btn       { padding: 8px; min-width: 36px; justify-content: center; }
+  .progress-nav       { padding: 0 8px; min-height: 44px; }
+  .nav-step           { padding: 0 4px; height: 44px; }
+  .nav-step-num       { width: 22px; height: 22px; font-size: 0.65rem; }
+  .nav-divider        { width: 6px; }
+}
