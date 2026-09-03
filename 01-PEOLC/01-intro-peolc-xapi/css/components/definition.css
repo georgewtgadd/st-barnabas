@@ -1,0 +1,113 @@
+/* ── PAGE 2 — WHAT IS IT? (light bg) ────────────────── */
+.definition-wrap {
+  max-width: 1000px; margin: 0 auto; padding: 48px 48px 64px;
+}
+
+.definition-header { text-align: center; margin-bottom: 36px; }
+.definition-header h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.9rem; color: var(--navy); margin-bottom: 10px;
+}
+.definition-header p { font-size: 0.95rem; color: var(--light-muted); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+.definition-lead {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 18px rgba(34,65,126,0.15);
+}
+
+.definition-lead-source {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.definition-lead-source::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(253,202,15,0.25);
+}
+
+.definition-lead-text {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  color: #e2eaf6;
+  line-height: 1.82;
+  margin: 0;
+}
+.definition-lead-text em {
+  color: var(--yellow);
+  font-style: italic;
+}
+
+.definition-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 32px;
+}
+
+.def-card {
+  background: var(--light-card);
+  border: 1.5px solid var(--light-border);
+  border-radius: 12px; padding: 22px 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.def-card:hover {
+  box-shadow: 0 6px 20px rgba(34,65,126,0.12);
+  transform: translateY(-2px);
+}
+.def-card-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.def-card-title {
+  font-family: 'Merriweather', serif;
+  font-size: 0.95rem; font-weight: 700;
+  margin-bottom: 6px; color: var(--navy);
+}
+.def-card-body { font-size: 0.88rem; color: #4a5a72; line-height: 1.7; }
+
+.definition-not {
+  background: rgba(1,151,222,0.05);
+  border: 1.5px solid rgba(1,151,222,0.15);
+  border-radius: 12px; padding: 20px 24px; margin-bottom: 36px;
+}
+.definition-not-title {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue-dark); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.definition-not-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.not-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(1,151,222,0.04);
+  border: 1px solid rgba(1,151,222,0.1);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 0.85rem; color: #3d4f65; line-height: 1.45;
+}
+.not-item-icon { color: #dc2626; flex-shrink: 0; font-weight: 700; }
+.not-item strong { color: var(--navy); }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .definition-wrap { padding: 32px 24px 48px; }
+  .definition-grid,
+  .definition-not-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .definition-wrap { padding: 20px 16px 36px; }
+  .definition-header h2 { font-size: 1.5rem; }
+  .definition-lead { font-size: 0.95rem; padding: 16px 18px; }
+}
