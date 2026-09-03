@@ -1,0 +1,41 @@
+<section id="page-8" class="page" aria-label="Knowledge check quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-title">Knowledge Check</div>
+      <p class="quiz-sub">True or False? Test your understanding of end of life palliative care. You need <strong>80%</strong> or above to pass.</p>
+    </div>
+
+    <div id="quiz-question-container">
+      <!-- Questions rendered by quiz.js -->
+    </div>
+
+    <div id="quiz-results" class="quiz-results" role="region" aria-label="Quiz results" aria-live="polite">
+      <div class="quiz-results-icon" id="quiz-results-icon" aria-hidden="true"></div>
+      <div class="quiz-results-score" id="quiz-results-score"></div>
+      <div class="quiz-results-label" id="quiz-results-label"></div>
+      <div class="quiz-results-breakdown">
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num stat-correct" id="stat-correct">0</div>
+          <div class="quiz-result-stat-lbl">Correct</div>
+        </div>
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num stat-incorrect" id="stat-incorrect">0</div>
+          <div class="quiz-result-stat-lbl">Incorrect</div>
+        </div>
+        <div class="quiz-result-stat">
+          <div class="quiz-result-stat-num" style="color:var(--text-muted);" id="stat-total">0</div>
+          <div class="quiz-result-stat-lbl">Total</div>
+        </div>
+      </div>
+      <div class="quiz-results-msg" id="quiz-results-msg"></div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="retryQuiz()" aria-label="Retry the quiz">↩ Try Again</button>
+        <button class="btn btn-primary" id="quiz-continue-btn" onclick="goToPage(9)" aria-label="Continue to learning record" hidden>Continue →</button>
+      </div>
+    </div>
+
+    <nav class="page-nav" id="quiz-back-nav" aria-label="Page navigation" style="margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(7)">← Back</button>
+    </nav>
+  </div>
+</section>
