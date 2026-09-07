@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding Helen | SBH Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/components/shell.css">
+  <link rel="stylesheet" href="css/components/intro.css">
+  <link rel="stylesheet" href="css/components/profile.css">
+  <link rel="stylesheet" href="css/components/scenario.css">
+  <link rel="stylesheet" href="css/components/hotspot.css">
+  <link rel="stylesheet" href="css/components/pillars.css">
+  <link rel="stylesheet" href="css/components/sophie.css">
+  <link rel="stylesheet" href="css/components/acp.css">
+  <link rel="stylesheet" href="css/components/quiz.css">
+  <link rel="stylesheet" href="css/components/record.css">
+</head>
+<body>
+
+<!-- Skip to content (WCAG 2.4.1) -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ══ LAUNCH GATE — shown once before the module content.
+     Guarantees the "expand" option is visible even in a very
+     small LMS iframe, since it's the only thing on screen. ══ -->
+<div id="launch-gate" class="launch-gate" role="dialog" aria-modal="true" aria-labelledby="launch-gate-title">
+  <div class="launch-gate-inner">
+    <img src="images/logo.png" alt="SBH Education" class="launch-gate-logo" onerror="this.style.display='none';">
+    <div class="launch-gate-eyebrow">Palliative &amp; End of Life Care · Module 3</div>
+    <h1 id="launch-gate-title" class="launch-gate-title">Understanding Helen</h1>
+    <p class="launch-gate-copy">
+      This module includes video, a branching conversation and several interactive activities, and
+      works best with plenty of screen space. If this looks cramped inside your LMS window, expand it first.
+    </p>
+    <div class="launch-gate-actions">
+      <button type="button" class="btn btn-primary launch-gate-btn" onclick="gateExpandAndStart()">
+        ⤢ Expand to fullscreen &amp; start
+      </button>
+      <button type="button" class="btn btn-secondary launch-gate-btn" onclick="gateNewTabAndStart()">
+        ↗ Open in a new tab &amp; start
+      </button>
+    </div>
+    <button type="button" class="launch-gate-skip" onclick="dismissLaunchGate();">
+      Continue here without expanding →
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════════ -->
+<header role="banner" inert>
+  <a href="index.html" class="brand" aria-label="SBH Education — return to home">
+    <div class="brand-logo-wrap">
+      <!--
+        Logo image: tagline sits beneath it automatically.
+        If the image fails to load, onerror hides it and shows
+        the .brand-logo-fallback text instead.
+      -->
+      <img
+        src="images/logo.png"
+        alt="SBH Education"
+        class="brand-logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
+    </div>
+  </a>
+  <div class="header-right">
+    <div class="header-expand-controls" role="group" aria-label="Display options">
+      <button type="button" class="header-icon-btn" id="expand-fullscreen-btn" onclick="toggleModuleFullscreen()" aria-label="Expand module to fill your screen" title="Expand to fill screen">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        <span class="header-icon-btn-label" id="expand-fullscreen-label">Expand</span>
+      </button>
+      <button type="button" class="header-icon-btn" id="expand-popout-btn" onclick="openModuleInNewTab()" aria-label="Open this module in a new browser tab" title="Open in new tab">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+        <span class="header-icon-btn-label">New tab</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PROGRESS NAV
+══════════════════════════════════════════════════════ -->
+<nav aria-label="Module progress" class="progress-nav" inert>
+  <button class="nav-step current" id="nav-1" data-step="1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Meet Helen">
+    <div class="nav-step-num" aria-hidden="true">1</div>
+    <span class="nav-step-label">Meet Helen</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-2" data-step="2" onclick="navClick(2)" aria-label="Step 2: Her Profile" disabled>
+    <div class="nav-step-num" aria-hidden="true">2</div>
+    <span class="nav-step-label">Her Profile</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-3" data-step="3" onclick="navClick(3)" aria-label="Step 3: The First Visit" disabled>
+    <div class="nav-step-num" aria-hidden="true">3</div>
+    <span class="nav-step-label">The First Visit</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-4" data-step="4" onclick="navClick(4)" aria-label="Step 4: Helen's Living Room" disabled>
+    <div class="nav-step-num" aria-hidden="true">4</div>
+    <span class="nav-step-label">Helen's Living Room</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-5" data-step="5" onclick="navClick(5)" aria-label="Step 5: Four Pillars of Wellness" disabled>
+    <div class="nav-step-num" aria-hidden="true">5</div>
+    <span class="nav-step-label">Four Pillars</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-6" data-step="6" onclick="navClick(6)" aria-label="Step 6: Sophie and Claire" disabled>
+    <div class="nav-step-num" aria-hidden="true">6</div>
+    <span class="nav-step-label">Sophie &amp; Claire</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-7" data-step="7" onclick="navClick(7)" aria-label="Step 7: Advance Care Plan" disabled>
+    <div class="nav-step-num" aria-hidden="true">7</div>
+    <span class="nav-step-label">Care Plan</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-8" data-step="8" onclick="navClick(8)" aria-label="Step 8: Check Your Understanding" disabled>
+    <div class="nav-step-num" aria-hidden="true">8</div>
+    <span class="nav-step-label">Check Yourself</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-9" data-step="9" onclick="navClick(9)" aria-label="Step 9: My Learning Record" disabled>
+    <div class="nav-step-num" aria-hidden="true">9</div>
+    <span class="nav-step-label">My Record</span>
+  </button>
+</nav>
+
+<!-- ══ Burger nav — replaces the bar above once it would squeeze ══ -->
+<div class="progress-nav-mobile" inert>
+  <button type="button" class="burger-btn" id="burger-btn" onclick="toggleProgressDrawer()" aria-expanded="false" aria-controls="progress-drawer" aria-label="Open section menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span>Sections</span>
+  </button>
+  <div class="progress-nav-mobile-current" id="progress-nav-mobile-current" aria-live="polite">Step 1 of 9 — Meet Helen</div>
+</div>
+
+<div class="drawer-backdrop" id="progress-drawer-backdrop">
+  <nav class="drawer-inner" id="progress-drawer" aria-label="Module sections">
+    <div class="drawer-header">
+      <span class="drawer-title">Sections</span>
+      <button type="button" class="modal-close" onclick="closeProgressDrawer()" aria-label="Close section menu">✕</button>
+    </div>
+    <p class="drawer-note">
+      <span aria-hidden="true">🔒</span>
+      <span>The First Visit, Helen's Living Room and Four Pillars need to be completed in order — everything else is yours to explore freely.</span>
+    </p>
+    <div class="drawer-nav-list">
+      <button class="nav-step current" id="drawer-nav-1" data-step="1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Meet Helen">
+        <div class="nav-step-num" aria-hidden="true">1</div><span class="nav-step-label">Meet Helen</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-2" data-step="2" onclick="navClick(2)" aria-label="Step 2: Her Profile" disabled>
+        <div class="nav-step-num" aria-hidden="true">2</div><span class="nav-step-label">Her Profile</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-3" data-step="3" onclick="navClick(3)" aria-label="Step 3: The First Visit" disabled>
+        <div class="nav-step-num" aria-hidden="true">3</div><span class="nav-step-label">The First Visit</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-4" data-step="4" onclick="navClick(4)" aria-label="Step 4: Helen's Living Room" disabled>
+        <div class="nav-step-num" aria-hidden="true">4</div><span class="nav-step-label">Helen's Living Room</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-5" data-step="5" onclick="navClick(5)" aria-label="Step 5: Four Pillars of Wellness" disabled>
+        <div class="nav-step-num" aria-hidden="true">5</div><span class="nav-step-label">Four Pillars</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-6" data-step="6" onclick="navClick(6)" aria-label="Step 6: Sophie and Claire" disabled>
+        <div class="nav-step-num" aria-hidden="true">6</div><span class="nav-step-label">Sophie &amp; Claire</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-7" data-step="7" onclick="navClick(7)" aria-label="Step 7: Advance Care Plan" disabled>
+        <div class="nav-step-num" aria-hidden="true">7</div><span class="nav-step-label">Care Plan</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-8" data-step="8" onclick="navClick(8)" aria-label="Step 8: Check Your Understanding" disabled>
+        <div class="nav-step-num" aria-hidden="true">8</div><span class="nav-step-label">Check Yourself</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+      <button class="nav-step" id="drawer-nav-9" data-step="9" onclick="navClick(9)" aria-label="Step 9: My Learning Record" disabled>
+        <div class="nav-step-num" aria-hidden="true">9</div><span class="nav-step-label">My Record</span><span class="nav-step-lock" aria-hidden="true">🔒</span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<!-- Progress bar -->
+<div class="module-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Module completion progress" inert>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label" aria-live="polite">0% complete</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MAIN CONTENT — pages injected by page-loader.js
+══════════════════════════════════════════════════════ -->
+<main id="main-content" inert>
+  <!-- Page fragments loaded dynamically via page-loader.js -->
+</main>
+
+<!-- ══ COMPLETION OVERLAY ════════════════════════════════════════ -->
+<div id="finish-overlay" class="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete">
+  <div class="finish-overlay-inner">
+    <div class="finish-overlay-icon" aria-hidden="true">🎓</div>
+    <div class="finish-overlay-eyebrow">Module Complete</div>
+    <h2 class="finish-overlay-title">Well done!</h2>
+    <p id="finish-overlay-msg" class="finish-overlay-msg">Your progress has been recorded. You may now close this window.</p>
+    <div class="finish-overlay-btns">
+      <button class="btn btn-secondary" style="font-size:.85rem;"
+              onclick="goToPage(1);document.getElementById('finish-overlay').classList.remove('show');">
+        ↩ Review from Start
+      </button>
+      <button class="finish-close-btn" onclick="closeOrRedirect()">Close Window</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — PILLAR DETAIL
+══════════════════════════════════════════════════════ -->
+<div id="pillar-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pm-name">
+  <div class="modal-inner modal-wide">
+    <div class="pillar-modal-stripe" id="pm-stripe"></div>
+
+    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div class="pillar-modal-icon" id="pm-icon"></div>
+        <div>
+          <div class="pillar-modal-tag" id="pm-tag"></div>
+          <div class="pillar-modal-name" id="pm-name"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closePillarModal()" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="pillar-section-label">About this Pillar</div>
+      <div class="pillar-definition" id="pm-definition"></div>
+      <div class="pillar-rule"></div>
+      <div class="pillar-section-label">Holistic Assessment Framework</div>
+      <div id="pm-key-grid"></div>
+    </div>
+
+    <div class="modal-footer">
+      <p id="pm-hint">Explore the remaining pillars, then continue.</p>
+      <button class="btn btn-primary" onclick="closePillarModal()" aria-label="Close and continue exploring">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — VIDEO (Scene 2)
+══════════════════════════════════════════════════════ -->
+<div id="video-modal" class="modal-backdrop" role="dialog" aria-modal="true"
+     aria-label="Scene 2 video — The Conversation Begins">
+  <div class="modal-inner wide">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-eyebrow">Scene 2 Unlocked</div>
+        <div class="modal-title">The Conversation Begins</div>
+      </div>
+      <button class="modal-close" onclick="closeVideoModal()" aria-label="Close video">✕</button>
+    </div>
+
+    <div style="position:relative; aspect-ratio:16/9; background:#0d1a33;">
+      <video id="modal-video" controls width="100%" height="100%"
+             style="display:block; width:100%; height:100%; object-fit:cover;"
+             aria-label="Scene 2 — Simon opens up about the family's situation">
+        <source src="video/simon_helen_video.mp4" type="video/mp4">
+        <!-- <track kind="captions" src="video/scene2_video.vtt" srclang="en" label="English" default> -->
+        Your browser does not support the video element.
+      </video>
+    </div>
+
+    <div class="modal-footer">
+      <p>Watch the scene, then continue the visit.</p>
+      <button class="btn btn-primary" id="video-modal-continue-btn" onclick="closeVideoModal(); advanceScenarioAfterVideo();"
+              aria-label="Continue the visit">
+        Continue →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — HOTSPOT DETAIL
+══════════════════════════════════════════════════════ -->
+<div id="hs-modal" class="modal-backdrop" role="dialog" aria-modal="true"
+     aria-label="Hotspot detail">
+  <div class="modal-inner">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <div class="modal-eyebrow">Clinical Observation</div>
+        <div class="modal-title">What did you find?</div>
+      </div>
+      <button class="modal-close" onclick="closeHotspotModal()" aria-label="Close and continue exploring">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <span class="hs-modal-tag tag-risk" id="hs-modal-eyebrow">High Risk</span>
+      <div class="hs-modal-title" id="hs-modal-title"></div>
+      <div class="hs-modal-body"  id="hs-modal-body"></div>
+      <div class="hs-modal-action" id="hs-modal-action"></div>
+    </div>
+
+    <div class="modal-footer">
+      <p id="hs-modal-hint">Close this panel and continue exploring the room.</p>
+      <button class="btn btn-primary" onclick="closeHotspotModal()" aria-label="Close and continue exploring">
+        Continue Exploring →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     MODAL — ACP HELEN'S NOTES
+══════════════════════════════════════════════════════ -->
+<div id="acp-notes-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="acp-notes-title">
+  <div class="modal-inner modal-wide">
+    <div style="height:5px; background:linear-gradient(90deg,var(--blue),var(--yellow));"></div>
+
+    <div class="modal-header" style="background:#0f1c34; border-bottom:1px solid rgba(255,255,255,0.07);">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="width:42px; height:42px; border-radius:10px; background:rgba(1,151,222,0.15); display:flex; align-items:center; justify-content:center; font-size:1.2rem;" aria-hidden="true">📋</div>
+        <div>
+          <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:3px;">Reference</div>
+          <div id="acp-notes-title" style="font-family:'Merriweather',serif; font-size:1rem; font-weight:700; color:var(--white);">Helen's Clinical Notes</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeAcpModal()" aria-label="Close Helen's notes">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="acp-notes-grid">
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Personal</div>
+          <ul class="acp-note-list">
+            <li><strong>Helen Marsh</strong>, born 14 March 1951 (age 75)</li>
+            <li>Lives with husband <strong>Simon (68)</strong> and granddaughter <strong>Sophie (14)</strong></li>
+            <li>Faith: <strong>Christian</strong> — central to her coping</li>
+          </ul>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Clinical</div>
+          <ul class="acp-note-list">
+            <li>Stage 4 ovarian cancer, pulmonary metastases</li>
+            <li>Oxygen therapy 2L/min in place</li>
+            <li>Prognosis: <strong>weeks to months</strong></li>
+            <li>DNR in place · medication review due</li>
+          </ul>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">What Matters to Helen</div>
+          <ul class="acp-note-list">
+            <li>Values her <strong>dignity and privacy</strong> deeply</li>
+            <li>Does not want to be seen as a burden</li>
+            <li>Wants discussions handled sensitively, in her presence only</li>
+          </ul>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Care Preferences</div>
+          <ul class="acp-note-list">
+            <li><strong>Strong wish to remain at home</strong> as long as possible</li>
+            <li>Does not want to die in hospital</li>
+            <li>Would consider the hospice if home care becomes unmanageable</li>
+          </ul>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Family Context</div>
+          <ul class="acp-note-list">
+            <li>Simon: primary carer, night shifts — showing <strong>carer strain</strong></li>
+            <li>Sophie (14): not told the prognosis, withdrawing — consider bereavement referral</li>
+            <li>Financial pressure noted (heating bills)</li>
+          </ul>
+        </div>
+
+        <div class="acp-note-card">
+          <div class="acp-note-label">Documents in Place</div>
+          <ul class="acp-note-list">
+            <li>DNR / DNACPR confirmed</li>
+            <li>No LPA on file yet — to be discussed</li>
+            <li>No formal ACP or ReSPECT form completed yet</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <p>Use these notes to guide your completion of the Advance Care Plan.</p>
+      <button class="btn btn-primary" onclick="closeAcpModal()" aria-label="Close notes and return to form">
+        Return to Form →
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<footer role="contentinfo" inert>
+  <div class="footer-left">
+    <div class="footer-module">Understanding Helen · Palliative &amp; End of Life Care, Module 3</div>
+    <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  </div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG accessibility logo" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<!-- JS modules — order matters -->
+<script src="js/xapi.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/scenario.js"></script>
+<script src="js/video-modal.js"></script>
+<script src="js/hotspot.js"></script>
+<script src="js/pillars.js"></script>
+<script src="js/acp.js"></script>
+<script src="js/knowledge-check.js"></script>
+<script src="js/vendor/jspdf.umd.min.js"></script>
+<script src="js/record.js"></script>
+<script src="js/page-loader.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
