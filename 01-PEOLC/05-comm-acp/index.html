@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Communication &amp; Advance Care Planning | SBH Education</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Core styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/modals.css">
+
+  <!-- Component styles -->
+  <link rel="stylesheet" href="css/components/intro.css">
+  <link rel="stylesheet" href="css/components/content.css">
+  <link rel="stylesheet" href="css/components/activities.css">
+  <link rel="stylesheet" href="css/components/pages.css">
+  <link rel="stylesheet" href="css/components/scenario-branching.css">
+  <link rel="stylesheet" href="css/components/shell.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ══ LAUNCH GATE — shown once before the module content ══ -->
+<div id="launch-gate" class="launch-gate" role="dialog" aria-modal="true" aria-labelledby="launch-gate-title">
+  <div class="launch-gate-inner">
+    <img src="images/logo.png" alt="SBH Education" class="launch-gate-logo" onerror="this.style.display='none';">
+    <div class="launch-gate-eyebrow">Palliative &amp; End of Life Care · Module 5</div>
+    <h1 id="launch-gate-title" class="launch-gate-title">Communication &amp; Advance Care Planning</h1>
+    <p class="launch-gate-copy">
+      This module includes a branching "Best Interests" conversation with real consequences for the
+      choices you make, and works best with plenty of screen space. If this looks cramped inside your
+      LMS window, expand it first.
+    </p>
+    <div class="launch-gate-actions">
+      <button type="button" class="btn btn-primary launch-gate-btn" onclick="gateExpandAndStart()">
+        ⤢ Expand to fullscreen &amp; start
+      </button>
+      <button type="button" class="btn btn-secondary launch-gate-btn" onclick="gateNewTabAndStart()">
+        ↗ Open in a new tab &amp; start
+      </button>
+    </div>
+    <button type="button" class="launch-gate-skip" onclick="dismissLaunchGate();">
+      Continue here without expanding →
+    </button>
+  </div>
+</div>
+
+<header role="banner" inert>
+  <a href="index.html" class="brand" aria-label="SBH Education — return to home">
+    <div class="brand-logo-wrap">
+      <!--
+        Logo image: tagline sits beneath it automatically.
+        If the image fails to load, onerror hides it and shows
+        the .brand-logo-fallback text instead.
+      -->
+      <img
+        src="images/logo.png"
+        alt="SBH Education"
+        class="brand-logo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <span class="brand-logo-fallback" aria-hidden="true">SBH Education</span>
+      <span class="brand-tagline">Professional Clinical Development in Healthcare</span>
+    </div>
+  </a>
+  <div class="header-right">
+    <div class="header-expand-controls" role="group" aria-label="Display options">
+      <button type="button" class="header-icon-btn" id="expand-fullscreen-btn" onclick="toggleModuleFullscreen()" aria-label="Expand module to fill your screen" title="Expand to fill screen">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        <span class="header-icon-btn-label" id="expand-fullscreen-label">Expand</span>
+      </button>
+      <button type="button" class="header-icon-btn" id="expand-popout-btn" onclick="openModuleInNewTab()" aria-label="Open this module in a new browser tab" title="Open in new tab">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+        <span class="header-icon-btn-label">New tab</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="Module progress" class="progress-nav" inert>
+  <button class="nav-step current" id="nav-1" data-step="1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Introduction">
+    <div class="nav-step-num" aria-hidden="true">1</div>
+    <span class="nav-step-label">Introduction</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-2" data-step="2" onclick="navClick(2)" aria-label="Step 2: Communication" disabled>
+    <div class="nav-step-num" aria-hidden="true">2</div>
+    <span class="nav-step-label">Communication</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-3" data-step="3" onclick="navClick(3)" aria-label="Step 3: In Practice" disabled>
+    <div class="nav-step-num" aria-hidden="true">3</div>
+    <span class="nav-step-label">In Practice</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-4" data-step="4" onclick="navClick(4)" aria-label="Step 4: MCA Principles" disabled>
+    <div class="nav-step-num" aria-hidden="true">4</div>
+    <span class="nav-step-label">MCA Principles</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-5" data-step="5" onclick="navClick(5)" aria-label="Step 5: Capacity Test" disabled>
+    <div class="nav-step-num" aria-hidden="true">5</div>
+    <span class="nav-step-label">Capacity Test</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-6" data-step="6" onclick="navClick(6)" aria-label="Step 6: Legal Protections" disabled>
+    <div class="nav-step-num" aria-hidden="true">6</div>
+    <span class="nav-step-label">Legal</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-7" data-step="7" onclick="navClick(7)" aria-label="Step 7: Best Interests" disabled>
+    <div class="nav-step-num" aria-hidden="true">7</div>
+    <span class="nav-step-label">Best Interests</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-8" data-step="8" onclick="navClick(8)" aria-label="Step 8: Scenario" disabled>
+    <div class="nav-step-num" aria-hidden="true">8</div>
+    <span class="nav-step-label">Scenario</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-9" data-step="9" onclick="navClick(9)" aria-label="Step 9: Quiz" disabled>
+    <div class="nav-step-num" aria-hidden="true">9</div>
+    <span class="nav-step-label">Quiz</span>
+  </button>
+  <div class="nav-divider" aria-hidden="true"></div>
+  <button class="nav-step" id="nav-10" data-step="10" onclick="navClick(10)" aria-label="Step 10: My Record" disabled>
+    <div class="nav-step-num" aria-hidden="true">10</div>
+    <span class="nav-step-label">My Record</span>
+  </button>
+</nav>
+
+<!-- ══ Burger nav — replaces the bar above once it would squeeze ══ -->
+<div class="progress-nav-mobile" inert>
+  <button type="button" class="burger-btn" id="burger-btn" onclick="toggleProgressDrawer()" aria-expanded="false" aria-controls="progress-drawer" aria-label="Open section menu">
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span>Sections</span>
+  </button>
+  <div class="progress-nav-mobile-current" id="progress-nav-mobile-current" aria-live="polite">Step 1 of 10 — Introduction</div>
+</div>
+
+<div class="drawer-backdrop" id="progress-drawer-backdrop">
+  <nav class="drawer-inner" id="progress-drawer" aria-label="Module sections">
+    <div class="drawer-header">
+      <span class="drawer-title">Sections</span>
+      <button type="button" class="modal-close" onclick="closeProgressDrawer()" aria-label="Close section menu">✕</button>
+    </div>
+    <p class="drawer-note">
+      <span aria-hidden="true">🔒</span>
+      <span>Sections build on each other, so each unlocks once you've viewed the one before it.</span>
+    </p>
+    <div class="drawer-nav-list">
+      <button class="nav-step current" id="drawer-nav-1" data-step="1" aria-current="step" onclick="navClick(1)" aria-label="Step 1: Introduction"><div class="nav-step-num" aria-hidden="true">1</div><span class="nav-step-label">Introduction</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-2" data-step="2" onclick="navClick(2)" aria-label="Step 2: Communication" disabled><div class="nav-step-num" aria-hidden="true">2</div><span class="nav-step-label">Communication</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-3" data-step="3" onclick="navClick(3)" aria-label="Step 3: In Practice" disabled><div class="nav-step-num" aria-hidden="true">3</div><span class="nav-step-label">In Practice</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-4" data-step="4" onclick="navClick(4)" aria-label="Step 4: MCA Principles" disabled><div class="nav-step-num" aria-hidden="true">4</div><span class="nav-step-label">MCA Principles</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-5" data-step="5" onclick="navClick(5)" aria-label="Step 5: Capacity Test" disabled><div class="nav-step-num" aria-hidden="true">5</div><span class="nav-step-label">Capacity Test</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-6" data-step="6" onclick="navClick(6)" aria-label="Step 6: Legal Protections" disabled><div class="nav-step-num" aria-hidden="true">6</div><span class="nav-step-label">Legal</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-7" data-step="7" onclick="navClick(7)" aria-label="Step 7: Best Interests" disabled><div class="nav-step-num" aria-hidden="true">7</div><span class="nav-step-label">Best Interests</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-8" data-step="8" onclick="navClick(8)" aria-label="Step 8: Scenario" disabled><div class="nav-step-num" aria-hidden="true">8</div><span class="nav-step-label">Scenario</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-9" data-step="9" onclick="navClick(9)" aria-label="Step 9: Quiz" disabled><div class="nav-step-num" aria-hidden="true">9</div><span class="nav-step-label">Quiz</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+      <button class="nav-step" id="drawer-nav-10" data-step="10" onclick="navClick(10)" aria-label="Step 10: My Record" disabled><div class="nav-step-num" aria-hidden="true">10</div><span class="nav-step-label">My Record</span><span class="nav-step-lock" aria-hidden="true">🔒</span></button>
+    </div>
+  </nav>
+</div>
+
+<div class="module-progress-bar"
+     role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+     aria-label="Module completion progress" inert>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label" aria-live="polite">0% complete</div>
+</div>
+
+<main id="main-content" inert>
+  <!-- Page fragments injected by js/page-loader.js -->
+</main>
+
+<!-- ══ COMPLETION OVERLAY ════════════════════════════════════════ -->
+<div id="finish-overlay" class="finish-overlay" role="dialog" aria-modal="true" aria-label="Module complete">
+  <div class="finish-overlay-inner">
+    <div class="finish-overlay-icon" aria-hidden="true">🎓</div>
+    <div class="finish-overlay-eyebrow">Module Complete</div>
+    <h2 class="finish-overlay-title">Well done!</h2>
+    <p id="finish-overlay-msg" class="finish-overlay-msg">Your progress has been recorded. You may now close this window.</p>
+    <div class="finish-overlay-btns">
+      <button class="btn btn-secondary" style="font-size:.85rem;"
+              onclick="goToPage(1);document.getElementById('finish-overlay').classList.remove('show');">
+        ↩ Review from Start
+      </button>
+      <button class="finish-close-btn" onclick="closeOrRedirect()">Close Window</button>
+    </div>
+  </div>
+</div>
+
+<footer role="contentinfo" inert>
+  <div class="footer-left">
+    <div class="footer-module">Communication &amp; Advance Care Planning · Palliative &amp; End of Life Care, Module 5</div>
+    <div class="footer-copy">© 2026 St Barnabas Hospice · All rights reserved</div>
+  </div>
+  <div class="footer-wcag">
+    <svg class="wcag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" aria-label="W3C WCAG accessibility logo" role="img">
+      <rect width="55" height="55" rx="6" fill="#003366"/>
+      <text x="6" y="22" font-family="Arial,sans-serif" font-size="12" font-weight="bold" fill="white">W3C</text>
+      <text x="6" y="38" font-family="Arial,sans-serif" font-size="9" font-weight="bold" fill="#6af">WCAG</text>
+      <text x="6" y="50" font-family="Arial,sans-serif" font-size="8" fill="#adf">2.2 AA</text>
+    </svg>
+    <span class="footer-wcag-text">Accessible e-learning</span>
+  </div>
+</footer>
+
+<script src="js/vendor/jspdf.umd.min.js"></script>
+<script src="js/xapi.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/communication.js"></script>
+<script src="js/flashcards.js"></script>
+<script src="js/capacity.js"></script>
+<script src="js/scenario.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/record.js"></script>
+<script src="js/page-loader.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

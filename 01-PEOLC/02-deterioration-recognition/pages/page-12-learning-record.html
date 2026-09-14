@@ -1,0 +1,136 @@
+<section class="page" id="page-12" aria-label="My Learning Record">
+  <div class="record-wrap">
+    <div class="record-page-header">
+      <h2>My Learning Record</h2>
+      <p>A summary of your activity in this module. Export it as a PDF for your CPD portfolio or personal records.</p>
+    </div>
+
+    <!-- Module info -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(34,65,126,.1);" aria-hidden="true">📘</div>
+          <div class="record-section-title">Module Details</div>
+        </div>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Module</span>
+          <span class="record-data-value">Deterioration &amp; Recognition</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Series</span>
+          <span class="record-data-value">Palliative &amp; End of Life Care · Module 2</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Organisation</span>
+          <span class="record-data-value">St Barnabas Hospice</span>
+        </div>
+        <div class="record-data-item">
+          <span class="record-data-label">Date Completed</span>
+          <span class="record-data-value" id="export-date">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AKPS score -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(1,151,222,.1);" aria-hidden="true">📊</div>
+          <div class="record-section-title">Bob's Visit — AKPS Score</div>
+        </div>
+        <span class="record-badge" id="rec-akps-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Score for Bob</span>
+          <span class="record-data-value" id="export-akps-score">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bob visit — questions asked -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(253,202,15,.1);" aria-hidden="true">💬</div>
+          <div class="record-section-title">Bob's Visit — Questions You Would Ask</div>
+        </div>
+      </div>
+      <div id="export-bob-questions" class="record-reflection-text empty">No response recorded.</div>
+    </div>
+
+    <!-- MCQ result -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(124,110,245,.1);" aria-hidden="true">✅</div>
+          <div class="record-section-title">Case Study Assessment — What Would You Do?</div>
+        </div>
+        <span class="record-badge" id="rec-mcq-badge">—</span>
+      </div>
+      <div class="record-data-row">
+        <div class="record-data-item">
+          <span class="record-data-label">Score</span>
+          <span class="record-data-value" id="export-mcq-score">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity 1 — signs of deterioration -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(13,148,136,.1);" aria-hidden="true">🔍</div>
+          <div class="record-section-title">Signs of Deterioration You Identified in Bob</div>
+        </div>
+      </div>
+      <div id="export-bob4-q1" class="record-reflection-text empty">No response recorded.</div>
+    </div>
+
+    <!-- Activity 2 — care planning -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(5,150,105,.1);" aria-hidden="true">📝</div>
+          <div class="record-section-title">Your Care Plan for Bob</div>
+        </div>
+      </div>
+      <div id="export-bob4-q2" class="record-reflection-text empty">No response recorded.</div>
+    </div>
+
+    <!-- Additional notes -->
+    <div class="record-section">
+      <div class="record-section-header">
+        <div class="record-section-title-row">
+          <div class="record-section-icon" style="background:rgba(5,150,105,.1);" aria-hidden="true">🗒️</div>
+          <div class="record-section-title">Additional Reflections</div>
+        </div>
+      </div>
+      <p style="font-size:.84rem; color:var(--light-muted); margin-bottom:10px;">
+        Anything else you want to record — changes to your practice, questions for your supervisor, or key learning points.
+      </p>
+      <label for="export-extra-notes" class="sr-only">Additional reflections</label>
+      <textarea
+        id="export-extra-notes"
+        class="record-notes-textarea"
+        placeholder="Add any additional reflections here…"
+        aria-label="Additional reflections"
+      ></textarea>
+    </div>
+
+    <div class="record-actions">
+      <button class="btn-export-record" onclick="exportLearningRecordPDF()" aria-label="Export learning record as a PDF">
+        <span aria-hidden="true">⬇</span> Export as PDF
+      </button>
+      <button class="btn-finish-module" onclick="finishModule()" aria-label="Finish module">
+        🎓 Finish Module
+      </button>
+    </div>
+
+    <nav style="margin-top:24px;" aria-label="Page navigation">
+      <button class="btn btn-secondary btn-on-light" onclick="goToPage(11)">← Back</button>
+    </nav>
+  </div>
+</section>
