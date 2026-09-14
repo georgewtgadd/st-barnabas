@@ -1,0 +1,143 @@
+<section class="page" id="page-9" aria-label="Follow-up visit — Bob Evans">
+  <div class="scenario-wrap">
+
+    <!-- LEFT: video + context + AKPS slider -->
+    <div class="scenario-left">
+
+      <div class="scenario-video" role="figure" aria-label="Scene — arriving at Bob's home"
+           style="background:#000; border-radius:14px; overflow:hidden; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+        <video src="video/bob1.mp4" controls
+               aria-label="Bob sitting upright in his living room chair with his dog on his lap"
+               style="width:100%; max-height:100%; display:block;">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="scenario-context">
+        <div class="scenario-context-label" aria-hidden="true">📍 Setting the Scene</div>
+        <p>You are visiting Bob for a planned follow-up visit. This is the second time you have seen him. Bob answers the door himself and walks slowly to his chair in the living room. He is sitting upright, with his dog settled on his lap. He is dressed appropriately, makes eye contact, and chats politely. At first glance, he appears well.</p>
+        <p>While talking to Bob, you notice a <strong style="color:#fff;">yellowish tinge around his eyes</strong>, although you briefly wonder whether this could be due to the lighting in the room. You ask Bob how he has been.</p>
+        <p><strong>Bob replies:</strong><br><em>"I'm fine really. You know… plodding along."</em></p>
+        <p>He smiles slightly and changes the subject to his dog. Bob does not volunteer any specific concerns.</p>
+        <hr style="margin:20px 0; border:0; border-top:1px solid rgba(255,255,255,.1);">
+        <div class="scenario-context-label" aria-hidden="true">💡 Learning Focus</div>
+        <ul style="margin-top:8px; margin-bottom:0; padding-left:20px; line-height:1.7; color:rgba(255,255,255,.9);">
+          <li>People often minimise symptoms.</li>
+          <li>"I'm fine" does not equal "nothing is wrong".</li>
+          <li>Deterioration is frequently uncovered through curiosity, not observation alone.</li>
+        </ul>
+      </div>
+
+    </div>
+    <!-- /scenario-left -->
+
+    <!-- RIGHT: activity + nav — everything inside choices-panel -->
+    <div class="choices-panel" id="choices-panel-9" role="region" aria-label="Reflective activity">
+
+      <!-- AKPS SLIDER -->
+      <div class="akps-slider-block">
+        <div class="akps-block-eyebrow">Clinical Assessment Tool</div>
+        <div class="akps-block-title">Score Bob on the AKPS</div>
+        <p class="akps-block-desc">Based on what you've observed in the video and scene above — not what Bob says — where would you place him on the Australia-modified Karnofsky Performance Scale?</p>
+        <div class="akps-score-display">
+          <div class="akps-score-number" id="akps-num">70</div>
+          <div class="akps-score-label-wrap">
+            <div class="akps-score-label" id="akps-label">Limited self-care</div>
+            <div class="akps-score-sublabel" id="akps-sublabel">Cares for self; unable to carry on normal activity or work</div>
+          </div>
+        </div>
+        <div class="akps-track-labels">
+          <span class="akps-track-label">Most dependent ←</span>
+          <span class="akps-track-label">→ Fully active</span>
+        </div>
+        <input type="range" class="akps-range" id="akps-slider"
+               min="1" max="10" value="7" step="1"
+               aria-label="AKPS score — drag to select"
+               oninput="updateAKPSSlider(this.value)">
+        <div class="akps-colour-bar"></div>
+        <div class="akps-tick-row">
+          <span class="akps-tick">10</span><span class="akps-tick">20</span>
+          <span class="akps-tick">30</span><span class="akps-tick">40</span>
+          <span class="akps-tick">50</span><span class="akps-tick">60</span>
+          <span class="akps-tick">70</span><span class="akps-tick">80</span>
+          <span class="akps-tick">90</span><span class="akps-tick">100</span>
+        </div>
+        <div class="akps-interpretation amber" id="akps-interp">
+          <div class="akps-interp-title">
+            <span id="akps-interp-icon">⚠️</span>
+            <span id="akps-interp-title-text">Functional decline present</span>
+          </div>
+          <div class="akps-interp-body" id="akps-interp-body">
+            At AKPS 70, Bob is managing self-care but unable to sustain normal activity. His score is <strong>inconsistent with saying he is "fine"</strong> — this is a clinically significant gap that warrants probing.
+          </div>
+        </div>
+        <button class="akps-confirm-btn" id="akps-confirm-btn"
+                onclick="confirmAKPSScore(); checkPage9Gate();">
+          ✓ Confirm this score &amp; save to Learning Record
+        </button>
+        <div class="akps-confirmed-note" id="akps-confirmed-note">
+          ✓ Saved — adjust and re-confirm any time before finishing
+        </div>
+      </div>
+      <!-- /AKPS SLIDER -->
+
+
+      <p class="choices-hint">
+        <strong style="color:#fff; display:block; margin-bottom:4px;">Case Study — Part 3</strong>
+        Bob is not volunteering concerns, but your observations suggest otherwise. Score Bob on the AKPS (left panel), then complete the activity below.
+      </p>
+
+      <!-- Activity -->
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; margin-bottom:18px;">
+        <div style="font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--yellow); margin-bottom:10px;">Activity — Observations &amp; Questions</div>
+        <div class="cab-label">Reflect &amp; Respond</div>
+        <div class="cab-question">Based on the video and text, what specific clinical or non-verbal signs suggest Bob might be deteriorating despite saying he is "fine"? What questions would you ask him?</div>
+        <textarea class="cab-textarea" id="bob3-q1-input"
+                  placeholder="What did you notice about his appearance or movement? What would you ask next?…"
+                  rows="6"
+                  oninput="saveActivity9(); checkPage9Gate();"
+                  aria-label="Your observations and questions for Bob"></textarea>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:8px; flex-wrap:wrap;">
+          <button class="cab-reveal-btn" onclick="openAnswerModal('bob3-q1')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Reveal suggested answer
+          </button>
+          <span id="bob3-q1-saved-note" style="font-size:.75rem; color:#6ee7b7; display:none;" aria-live="polite">✓ Response saved</span>
+        </div>
+        <div class="cab-answer" id="bob3-q1-answer" style="display:none;">
+          <div class="cab-answer-inner">
+            <div class="cab-answer-title">Key observations &amp; questions to explore</div>
+            <ul>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Jaundice:</strong> The yellowish tinge suggests liver dysfunction or biliary obstruction — worth exploring directly.</li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Reduced mobility:</strong> He walked slowly — ask about energy levels and what a typical day looks like.</li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Subjective minimisation:</strong> "Plodding along" is vague. Probe gently: <em>"What does plodding along actually look like day to day?"</em></li>
+              <li><div class="caa-dot"></div><strong style="color:#fff;">Total Pain:</strong> Ask about appetite, sleep, pain, breathlessness, and emotional wellbeing — not just physical symptoms.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav — inside choices-panel, so it stays in the right column -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+        <button class="btn btn-secondary" onclick="goToPage(8)">← Back</button>
+        <div style="text-align:right;">
+          <button class="btn btn-primary"
+                  id="page9-continue-btn"
+                  disabled
+                  style="opacity:.4; cursor:not-allowed;"
+                  onclick="goToPage(10)"
+                  aria-label="Complete the AKPS and activity to continue">
+            Case Study Assessment →
+          </button>
+          <p id="page9-gate-nudge"
+             style="font-size:.76rem; color:rgba(253,202,15,.8); text-align:right; margin-top:6px; margin-bottom:0;">
+            Score the AKPS and complete the activity to continue
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <!-- /choices-panel -->
+
+  </div>
+</section>
